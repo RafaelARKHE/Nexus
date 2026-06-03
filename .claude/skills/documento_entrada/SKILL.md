@@ -2,17 +2,29 @@
 name: documento_entrada
 description: >
   Skill de entrada do sistema Nexus. Use sempre que o usuário disser "documento novo",
-  "chegou material", "novo PDF", ou qualquer variação indicando que há um arquivo novo
-  em _entradas/ para ser processado. Também acionar quando o usuário quiser apenas
-  classificar um documento sem processar ("só direcionar"). Esta skill é o portão
-  de entrada de todo o fluxo de estudo do Nexus — acione-a sempre que houver
-  qualquer menção a novo material de estudo chegando ao sistema.
+  "chegou material", "novo PDF", "novo arquivo", ou qualquer variação indicando que há
+  um arquivo novo em _entradas/ para ser processado. Também acionar quando o usuário
+  quiser apenas classificar um documento sem processar ("só direcionar"). Esta skill é
+  o portão de entrada de todo o fluxo de estudo do Nexus — acione-a sempre que houver
+  qualquer menção a novo material de estudo chegando ao sistema. Aceita PDF e PPTX.
 ---
 
 # DOCUMENTO_ENTRADA
 
 Skill de entrada do sistema Nexus. Classifica, direciona e opcionalmente processa
 novos documentos recebidos.
+
+---
+
+## Formatos suportados
+
+| Extensão | Ferramenta de leitura       |
+|----------|-----------------------------|
+| `.pdf`   | Skill nativa de leitura PDF |
+| `.pptx`  | Skill `pptx` do sistema     |
+
+Para qualquer outro formato encontrado em `_entradas/`, alertar o usuário e encerrar
+sem mover o arquivo. Informar os formatos suportados.
 
 ---
 
@@ -48,9 +60,11 @@ Usa a disciplina informada diretamente, sem etapa de identificação automática
 
 ### Passo 1 — Leitura superficial
 Para cada arquivo em `_entradas/`:
-- Lê título, subtítulos, primeiros e últimos parágrafos apenas
+- Detecta o formato do arquivo (`.pdf` ou `.pptx`)
+- Para `.pdf`: lê título, subtítulos, primeiros e últimos parágrafos
+- Para `.pptx`: usa a skill `pptx` para extrair títulos dos slides e texto dos primeiros e últimos slides
 - Objetivo único: identificar a disciplina e o período correspondente
-- Consulta `MOC_CFO.md` para verificar as disciplinas disponíveis por período
+- Consulta `indice_geral.md` para verificar as disciplinas disponíveis por período
 - Age com autonomia — não requer confirmação do usuário para prosseguir
 
 ### Passo 2 — Direcionamento autônomo

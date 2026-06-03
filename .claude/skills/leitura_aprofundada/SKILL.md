@@ -16,6 +16,17 @@ as skills RESUMO_GERAL e PONTOS_CHAVE em sequência.
 
 ---
 
+## Formatos suportados
+
+| Extensão | Ferramenta de leitura                                |
+|----------|------------------------------------------------------|
+| `.pdf`   | Skill nativa de leitura PDF — leitura integral       |
+| `.pptx`  | Skill `pptx` do sistema — extrai texto de todos os slides |
+
+A leitura integral do conteúdo é obrigatória independentemente do formato.
+
+---
+
 ## Caminhos do sistema
 
 - Materiais originais: `Nexus/Nexus_Materiais/Periodo0N/0N_[SIGLA]/`
@@ -39,7 +50,9 @@ Claude busca o arquivo em `Nexus_Materiais/Periodo0N/` e processa.
 ## Fluxo de execução
 
 ### Passo 1 — Carregamento do contexto
-- Lê o arquivo PDF indicado integralmente
+- Detecta o formato do arquivo (`.pdf` ou `.pptx`)
+- Para `.pdf`: lê o arquivo integralmente com a skill nativa de PDF
+- Para `.pptx`: usa a skill `pptx` para extrair o texto completo de todos os slides
 - Lê o `MOC_[SIGLA].md` da disciplina (se existir) para ter contexto do que já foi estudado
 - Lê o `resumo_[SIGLA].md` da disciplina (se existir) para não duplicar conteúdo
 
@@ -73,6 +86,6 @@ Ao final, emitir relatório com:
 
 ## Regras críticas
 
-- O PDF original é lido apenas uma vez nesta skill — todo o fluxo de prova trabalha sobre os arquivos gerados
+- O arquivo original (PDF ou PPTX) é lido apenas uma vez nesta skill — todo o fluxo de prova trabalha sobre os arquivos gerados
 - Nunca sobrescrever conteúdo existente — sempre acrescentar
 - Sempre verificar o MOC da disciplina antes de processar para evitar duplicação
