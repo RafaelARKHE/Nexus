@@ -11,10 +11,14 @@
             "id": "eb88f3adc1c50cab",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nova aba"
+              "title": "01_abordagem-da-cena"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos"
+              "title": "Links inversos para 01_abordagem-da-cena"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Links de saída"
+              "title": "Links de saída para 01_abordagem-da-cena"
             }
           },
           {
@@ -150,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário"
+              "title": "Sumário de 01_abordagem-da-cena"
             }
           }
         ]
@@ -178,6 +185,17 @@
   },
   "active": "eb88f3adc1c50cab",
   "lastOpenFiles": [
+    "Periodo01/01_APHR/MOC_APHR.md",
+    "Periodo01/01_APHR/pontos_chave/04_analise-secundaria.md",
+    "Periodo01/01_ANFI/resumo_ANFI.md",
+    "Periodo01/01_APHR/pontos_chave/03_avaliacao-neurologica.md",
+    "Periodo01/01_APHR/resumo_APHR.md",
+    "Periodo01/01_ANFI",
+    "Periodo01/01_APHR/pontos_chave/02_pesquisa-primaria-xabcde.md",
+    "Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena.md",
+    "Periodo01/01_APHR/pontos_chave",
+    "Periodo01/01_APHR",
+    "Periodo01",
     "indice_geral.md"
   ]
 }
