@@ -110,5 +110,6 @@ O que o Nexus identificou como crítico para prova ou aplicação prática.
 
 - Nunca criar arquivo sem prefixo numérico
 - Nunca sobrescrever arquivo existente — se assunto já existe, acrescentar nova seção com marcação de data e origem
-- Sempre inserir links internos do Obsidian quando identificar conexão com outro arquivo
+- **Links `[[...]]` do Obsidian apenas para arquivos que JÁ EXISTEM no sistema** — o Obsidian cria arquivos vazios automaticamente ao detectar links não resolvidos, violando a regra de não criar arquivos vazios
+- Para conexões com disciplinas ainda sem material processado, usar texto simples: `` `Periodo0N/??_SIGLA/arquivo` *(pendente — sem material processado)* ``
 - Nomear arquivos em kebab-case: `01_sistema-circulatorio.md`

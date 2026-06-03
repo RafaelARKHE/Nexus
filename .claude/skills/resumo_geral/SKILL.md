@@ -98,4 +98,5 @@ O que o Nexus identificou como crítico para retenção.
 
 - Nunca substituir conteúdo anterior — sempre acrescentar com marcação de data e origem
 - Manter o cabeçalho YAML atualizado a cada nova versão (campos `atualizado_em` e `versao`)
-- Inserir links internos do Obsidian sempre que identificar conexão com outro arquivo existente
+- **Links `[[...]]` do Obsidian apenas para arquivos que JÁ EXISTEM no sistema** — o Obsidian cria arquivos vazios automaticamente ao detectar links não resolvidos, violando a regra de não criar arquivos vazios
+- Para conexões com disciplinas ainda sem material processado, usar texto simples: `` `Periodo0N/??_SIGLA/arquivo` *(pendente — sem material processado)* ``

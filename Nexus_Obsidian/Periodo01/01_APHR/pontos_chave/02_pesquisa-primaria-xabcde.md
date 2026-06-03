@@ -127,7 +127,7 @@ Em ocorrências de acidente de trânsito — a mais comum no CBMPA —, o bombei
 - [[Periodo01/01_APHR/pontos_chave/03_avaliacao-neurologica]] — detalhamento do item D
 - [[Periodo01/01_APHR/pontos_chave/04_analise-secundaria]] — etapa seguinte após a primária
 - [[Periodo01/01_APHR/resumo_APHR]] — resumo completo da unidade
-- [[Periodo01/01_ANFI/resumo_ANFI]] — anatomia dos sistemas avaliados no XABCDE
+- `Periodo01/??_ANFI/resumo_ANFI` *(pendente — ANFI sem material processado)* — anatomia dos sistemas avaliados no XABCDE
 
 ## Pontos de Atenção
 - **X antes de A** — torniquete salva vida antes de qualquer manobra de via aérea; não inverter

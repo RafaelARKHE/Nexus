@@ -77,7 +77,7 @@ Em ocorrências do CBMPA com vítima de TCE (acidente de moto, queda de altura):
 ## Conexões
 - [[Periodo01/01_APHR/pontos_chave/02_pesquisa-primaria-xabcde]] — item D do XABCDE
 - [[Periodo01/01_APHR/pontos_chave/04_analise-secundaria]] — Glasgow é usado na secundária
-- [[Periodo01/01_ANFI/resumo_ANFI]] — anatomia do SNC relevante para interpretação dos achados
+- `Periodo01/??_ANFI/resumo_ANFI` *(pendente — ANFI sem material processado)* — anatomia do SNC relevante para interpretação dos achados
 
 ## Pontos de Atenção
 - **AVDI é para a primária — Glasgow para a secundária** — não confundir nas provas

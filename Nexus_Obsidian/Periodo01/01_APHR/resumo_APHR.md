@@ -192,7 +192,7 @@ Avaliação detalhada da cabeça aos pés, realizada **após** completar a prim�
 ---
 
 ### Conexões
-- [[Periodo01/01_ANFI/resumo_ANFI]] — anatomia dos sistemas avaliados no XABCDE (vias aéreas, circulatório, neurológico)
+- `Periodo01/??_ANFI/resumo_ANFI` *(pendente — disciplina ANFI ainda sem material processado)* — anatomia dos sistemas avaliados no XABCDE (vias aéreas, circulatório, neurológico)
 
 ### Pontos de Atenção
 - **X vem antes de A** — hemorragia exsanguinante mata antes da obstrução de via aérea; não pular esta etapa
