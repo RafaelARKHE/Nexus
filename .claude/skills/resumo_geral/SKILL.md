@@ -94,6 +94,19 @@ O que o Nexus identificou como crítico para retenção.
 
 ---
 
+## Sincronização com o Drive
+
+Após escrever o arquivo local, fazer upload para o Google Drive:
+- `parentId`: ID Drive da pasta `0N_[SIGLA]/` (consultar `CLAUDE.md → IDs do Google Drive`)
+- `title`: `resumo_[SIGLA].md`
+- `contentMimeType`: `text/markdown`
+- `disableConversionToGoogleType`: `true`
+- Se a pasta ainda não estiver no mapa do CLAUDE.md: buscar com `search_files` por nome + parentId do período
+
+Se o arquivo já existir no Drive, o novo é criado e o antigo recebe sufixo `(1)` — comportamento esperado.
+
+---
+
 ## Regras críticas
 
 - Nunca substituir conteúdo anterior — sempre acrescentar com marcação de data e origem

@@ -106,6 +106,19 @@ O que o Nexus identificou como crítico para prova ou aplicação prática.
 
 ---
 
+## Sincronização com o Drive
+
+Após criar cada arquivo local de pontos-chave, fazer upload para o Google Drive:
+- `parentId`: ID Drive da pasta `pontos_chave/` da disciplina (consultar `CLAUDE.md → IDs do Google Drive`)
+- Se a pasta `pontos_chave/` ainda não existir no Drive: criar com `create_file` (`mimeType: application/vnd.google-apps.folder`, `parentId` da pasta da disciplina)
+- Para cada arquivo:
+  - `title`: nome exato do arquivo (ex: `05_choque-fisiopatologia.md`)
+  - `contentMimeType`: `text/markdown`
+  - `disableConversionToGoogleType`: `true`
+- Pontos-chave são sempre arquivos NOVOS — não há duplicatas esperadas
+
+---
+
 ## Regras críticas
 
 - Nunca criar arquivo sem prefixo numérico

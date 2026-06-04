@@ -71,11 +71,12 @@ Para cada arquivo em `_entradas/`:
 Após identificação:
 
 1. Verifica o período da disciplina identificada
-2. Verifica se a pasta `Nexus_Materiais/Periodo0N/` existe — cria se necessário
+2. Verifica se a pasta `Nexus_Materiais/Periodo0N/` existe — cria se necessário (local e no Drive)
 3. Verifica se a pasta da disciplina existe em `Nexus_Materiais/Periodo0N/`
-4. Se não existe: cria com o próximo prefixo numérico disponível dentro do período (`0N_[SIGLA]/`)
-5. Move o arquivo para `Nexus_Materiais/Periodo0N/0N_[SIGLA]/`
-6. Atualiza `MOC_CFO.md` com as informações básicas do documento
+4. Se não existe: cria com o próximo prefixo numérico disponível dentro do período (`0N_[SIGLA]/`) — local e no Drive (`create_file` com `mimeType: application/vnd.google-apps.folder`)
+5. **Arquivo vindo do Drive `_entradas/`:** usar `copy_file` para copiar para a pasta correta em `Nexus_Materiais/` no Drive; baixar e salvar localmente também. Informar ao usuário que o arquivo original em `_entradas/` pode ser deletado manualmente.
+6. **Arquivo já local:** mover para `Nexus_Materiais/Periodo0N/0N_[SIGLA]/` e fazer upload para o Drive via `create_file` com base64 ou texto conforme o formato.
+7. Atualiza `MOC_CFO.md` / `indice_geral.md` com as informações básicas do documento e sincroniza com Drive
 
 ### Passo 3 — Processamento (Modalidade 2 apenas)
 Aciona automaticamente a skill **LEITURA_APROFUNDADA** passando:

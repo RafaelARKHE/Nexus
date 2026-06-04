@@ -48,6 +48,27 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 
 ---
 
+## IDs do Google Drive
+
+O Drive é a rota primária de entrega de arquivos. Os arquivos `.md` gerados pelas
+skills são escritos localmente e em seguida sincronizados com o Drive.
+
+**Regras de sincronização Drive:**
+- Arquivos novos: usar `create_file` com `contentMimeType: text/markdown` e `disableConversionToGoogleType: true`
+- Arquivos atualizados: criar novo arquivo no Drive (o antigo recebe sufixo `(1)` automaticamente) — limpar periodicamente
+- Pastas não mapeadas abaixo: buscar com `search_files` por `title` e `parentId`; criar com `create_file` se não existir (mimeType `application/vnd.google-apps.folder`)
+
+| Caminho | ID Drive |
+|---|---|
+| `_entradas/` | `1dFPUK4PSZ9OjVIxSu3PTtBcLRin39R9S` |
+| `Nexus_Obsidian/` | `137KEU7qOQ1aL8lwI1LlhEN2WxZN4MZNj` |
+| `Nexus_Obsidian/Periodo01/` | `1xCbwqfSMoyjT27bFFdqf0DioFBg6ALJs` |
+| `Nexus_Obsidian/Periodo01/01_APHR/` | `1EsjZFm6vthtkSPyCBOZ2pPo3qDWNfxjF` |
+| `Nexus_Obsidian/Periodo01/01_APHR/pontos_chave/` | `1MnBsvYXrEuA-johIO32_7QUbAwnvysCg` |
+| `Nexus_Materiais/` | `1Hi52eFNE8Cbv1tRcmKgDVZD9QRVrsW33` |
+
+---
+
 ## Quem sou eu
 
 - **Nome:** CAD BM Rafael
