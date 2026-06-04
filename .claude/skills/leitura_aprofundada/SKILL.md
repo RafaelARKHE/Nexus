@@ -72,23 +72,6 @@ Após geração dos arquivos:
 - Atualiza `MOC_[SIGLA].md` com os novos arquivos gerados
 - Atualiza `MOC_CFO.md` com o novo status da disciplina
 
-### Passo 5 — Sincronização com o Google Drive
-
-O Drive é a rota primária de entrega. Após todas as escritas locais, sincronizar
-cada arquivo gerado ou modificado neste fluxo.
-
-Para cada arquivo (resumo, pontos-chave, MOC, indice_geral):
-1. Ler o conteúdo completo do arquivo local
-2. Consultar `CLAUDE.md → IDs do Google Drive` para o `parentId` correto
-3. Se a pasta de destino não estiver mapeada no CLAUDE.md: usar `search_files` por `title` + `parentId` para localizá-la; criar com `create_file` (`mimeType: application/vnd.google-apps.folder`) se não existir
-4. Usar `create_file` com:
-   - `title`: nome exato do arquivo (ex: `resumo_APHR.md`)
-   - `parentId`: ID Drive da pasta correta
-   - `textContent`: conteúdo completo do arquivo local
-   - `contentMimeType`: `text/markdown`
-   - `disableConversionToGoogleType`: `true`
-5. Arquivos já existentes no Drive recebem sufixo `(1)` automaticamente — isso é esperado; versões antigas podem ser deletadas manualmente pelo usuário quando conveniente
-
 ---
 
 ## Relatório de encerramento
