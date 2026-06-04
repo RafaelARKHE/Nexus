@@ -17,7 +17,7 @@ Clique no link da disciplina para ver todos os tópicos criados.
 | TLTI   | Telecomunicações e TI                     | —      | 🔲 sem tópicos |
 | IM     | Instrução Militar I                       | —      | 🔲 sem tópicos |
 | ANFI   | Anatomia e Fisiologia                     | —      | 🔲 sem tópicos |
-| APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]] | ✅ Unidade VI |
+| APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]] | ✅ Unidade VI · Choque e Hemorragia |
 | DH     | Direitos Humanos                          | —      | 🔲 sem tópicos |
 | DC     | Direito Constitucional                    | —      | 🔲 sem tópicos |
 | DA     | Direito Administrativo I                  | —      | 🔲 sem tópicos |

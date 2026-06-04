@@ -5,7 +5,7 @@ disciplina: APH e Resgate I
 sigla: APHR
 periodo: Periodo01
 criado_em: 03/06/2026
-atualizado_em: 03/06/2026
+atualizado_em: 04/06/2026
 ---
 
 # MOC — APH e Resgate I (APHR)
@@ -26,6 +26,10 @@ atualizado_em: 03/06/2026
 | 02 | Pesquisa Primária — XABCDE | [[Periodo01/01_APHR/pontos_chave/02_pesquisa-primaria-xabcde]] |
 | 03 | Avaliação Neurológica — AVDI e Pupilas | [[Periodo01/01_APHR/pontos_chave/03_avaliacao-neurologica]] |
 | 04 | Análise Secundária e SAMPLER | [[Periodo01/01_APHR/pontos_chave/04_analise-secundaria]] |
+| 05 | Choque — Definição e Fisiopatologia | [[Periodo01/01_APHR/pontos_chave/05_choque-fisiopatologia]] |
+| 06 | Choque — Classificação e Diagnóstico Diferencial | [[Periodo01/01_APHR/pontos_chave/06_choque-classificacao-diferencial]] |
+| 07 | Hemorragia — Tipos, Sinais e Sintomas | [[Periodo01/01_APHR/pontos_chave/07_hemorragia-tipos-sinais]] |
+| 08 | Controle de Hemorragia — Técnicas e Torniquete | [[Periodo01/01_APHR/pontos_chave/08_controle-hemorragia-tecnicas]] |
 
 ---
 
@@ -34,6 +38,7 @@ atualizado_em: 03/06/2026
 | Arquivo | Localização | Unidade |
 |---|---|---|
 | APHR UNIDADE VI AVALIAÇÃO PRIMÁRIA E SECUNDÁRIA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Unidade VI |
+| APHR CHOQUE E HEMORRAGIA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Choque e Hemorragia |
 
 ---
 
@@ -44,4 +49,5 @@ atualizado_em: 03/06/2026
 
 ## Status
 - [x] Unidade VI — Avaliação Primária e Secundária
+- [x] Choque e Hemorragia
 - [ ] Demais unidades — pendentes de material
