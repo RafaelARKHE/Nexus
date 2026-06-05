@@ -16,7 +16,10 @@ Skill de geração de arquivos de pontos-chave por assunto de uma disciplina.
 
 ## Caminho dos arquivos gerados
 
-`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/pontos_chave/0N_[NOME_ASSUNTO].md`
+`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/pontos_chave/[NOME_DOCUMENTO]/0N_[NOME_ASSUNTO].md`
+
+O `[NOME_DOCUMENTO]` é o nome em kebab-case do documento de origem (ex: `codigo-etica`, `lob`, `decreto-123`).
+Cada documento processado ganha sua própria subpasta dentro de `pontos_chave/`.
 
 ---
 
@@ -35,12 +38,13 @@ Exemplos:
 
 ## Prefixo numérico — ordem lógica de estudo
 
-Cada arquivo recebe um prefixo que define a sequência ideal de estudo:
+Cada arquivo recebe um prefixo que define a sequência ideal de estudo **dentro do documento de origem**:
 - `01_[ASSUNTO].md` — deve ser estudado primeiro
 - `02_[ASSUNTO].md` — depende do anterior para fazer sentido pleno
 - E assim por diante...
 
 O Claude Code define a ordem com base na dependência conceitual entre os assuntos.
+A numeração reinicia em `01_` a cada nova subpasta/documento.
 
 ---
 
@@ -109,7 +113,8 @@ O que o Nexus identificou como crítico para prova ou aplicação prática.
 ## Regras críticas
 
 - Nunca criar arquivo sem prefixo numérico
+- Nunca criar arquivo sem subpasta de documento — todo ponto-chave fica dentro de `pontos_chave/[NOME_DOCUMENTO]/`
 - Nunca sobrescrever arquivo existente — se assunto já existe, acrescentar nova seção com marcação de data e origem
 - **Links `[[...]]` do Obsidian apenas para arquivos que JÁ EXISTEM no sistema** — o Obsidian cria arquivos vazios automaticamente ao detectar links não resolvidos, violando a regra de não criar arquivos vazios
 - Para conexões com disciplinas ainda sem material processado, usar texto simples: `` `Periodo0N/??_SIGLA/arquivo` *(pendente — sem material processado)* ``
-- Nomear arquivos em kebab-case: `01_sistema-circulatorio.md`
+- Nomear subpastas e arquivos em kebab-case: `lob/`, `codigo-etica/`, `01_sistema-circulatorio.md`
