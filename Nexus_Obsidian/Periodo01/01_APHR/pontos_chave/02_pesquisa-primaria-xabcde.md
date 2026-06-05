@@ -23,14 +23,14 @@ moc_materia: sim
 
 A pesquisa primária identifica e trata **ameaças imediatas à vida** em ordem de prioridade. O mnemônico **XABCDE** define a sequência:
 
-| Letra | Significado | Ação principal |
-|---|---|---|
-| **X** | Hemorragia Exsanguinante | Torniquete proximal / pressão direta + hemostático |
-| **A** | Airway — Vias Aéreas | Chin lift / jaw thrust / COF + restrição cervical |
-| **B** | Breathing — Respiração | BVM + O₂ / avaliar FR e SpO2 |
-| **C** | Circulation — Circulação | Pulso / pele / enchimento capilar / hemorragia interna |
-| **D** | Disability — Déficit Neurológico | AVDI + pupilas |
-| **E** | Exposure — Exposição | Expor lesões + prevenir hipotermia |
+| Letra | Significado                      | Ação principal                                         |
+| ----- | -------------------------------- | ------------------------------------------------------ |
+| **X** | Hemorragia Exsanguinante         | Torniquete proximal / pressão direta + hemostático     |
+| **A** | Airway — Vias Aéreas             | Chin lift / jaw thrust / COF + restrição cervical      |
+| **B** | Breathing — Respiração           | BVM + O₂ / avaliar FR e SpO2                           |
+| **C** | Circulation — Circulação         | Pulso / pele / enchimento capilar / hemorragia interna |
+| **D** | Disability — Déficit Neurológico | AVDI + pupilas + Escala de Glasgow                     |
+| **E** | Exposure — Exposição             | Expor lesões + prevenir hipotermia                     |
 
 > Etapas podem ser **simultâneas** quando há mais de um profissional. Etapas resolvíveis rapidamente (torniquete, aspiração) podem ser tratadas antes de avançar; etapas irresolvíveis no local (hemorragia interna) → completar avaliação e transportar.
 

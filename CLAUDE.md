@@ -18,6 +18,9 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 │
 ├── Nexus_Obsidian/             ← Vault do Obsidian (arquivos .md leves)
 │   ├── MOC_CFO.md              ← Mapa geral de todo o conhecimento
+│   ├── Pensamento/             ← Raciocínio consolidado (criada sob demanda)
+│   │   ├── MOC_Pensamentos.md  ← Mapa de todo raciocínio registrado
+│   │   └── AAAA-MM-DD_tema.md  ← Arquivos de pensamento consolidado
 │   └── Periodo0N/              ← Pastas por período do CFO
 │       └── 0N_[SIGLA]/         ← Pastas por disciplina (criadas sob demanda)
 │           ├── MOC_[SIGLA].md  ← Mapa da disciplina
@@ -105,6 +108,12 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 | `gerar_simulado` | Selecionado em revisao_prova | 30 questões interativas em HTML |
 | `gerar_flashcards` | Selecionado em revisao_prova | Cartões de memorização interativos em HTML |
 
+### Camada de Raciocínio
+| Skill | Gatilho | Função |
+|---|---|---|
+| `consulta_nexus` | "nexus, [dúvida]" · "me explica [conceito]" · "tenho dúvida sobre [tema]" | Busca inteligente em 3 camadas — responde dúvidas com contexto do CBMPA |
+| `consolidar` | "consolidar" · "salvar raciocínio" · "dúvida sanada" | Sintetiza sessão de consulta em arquivo permanente de Pensamento |
+
 ---
 
 ## Convenções do sistema
@@ -125,13 +134,14 @@ Todo arquivo gerado pelo sistema deve começar com:
 ```yaml
 ---
 sistema: Nexus
-tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard]
-disciplina: [NOME_COMPLETO]
-sigla: [SIGLA]
+tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | pensamento]
+disciplina: [NOME_COMPLETO]        # não usado no tipo pensamento
+sigla: [SIGLA]                     # não usado no tipo pensamento
 periodo: Periodo0N
 criado_em: [DATA DD/MM/AAAA]
 atualizado_em: [DATA DD/MM/AAAA]
 versao: 1.0
+pensamentos_relacionados: []       # opcional — preenchido quando existir raciocínio vinculado
 ---
 ```
 

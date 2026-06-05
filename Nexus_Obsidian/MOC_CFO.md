@@ -35,7 +35,7 @@ O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Per
 | —       | DH     | Direitos Humanos                          | —                                      | 🔲 sem material                                 |
 | —       | DC     | Direito Constitucional                    | —                                      | 🔲 sem material                                 |
 | —       | DA     | Direito Administrativo I                  | —                                      | 🔲 sem material                                 |
-| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | 📥 material recebido · leitura pendente         |
+| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ Lei nº 9.161/2021 — CEDCBMPA (6 pontos-chave) |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
 | —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
 | —       | FSV    | Fundamentos de Salvamento Veicular        | —                                      | 🔲 sem material                                 |

@@ -61,6 +61,7 @@ atualizado_em: [DATA DD/MM/AAAA]
 versao: 1.0
 moc_cfo: sim
 moc_materia: sim
+pensamentos_relacionados: []  # opcional — preenchido quando LEITURA_APROFUNDADA encontrar pensamentos vinculados
 ---
 ```
 
@@ -89,6 +90,8 @@ Exemplos operacionais e institucionais quando possível.
 ## Conexões
 Links para outros arquivos do Obsidian relacionados.
 Formato: [[Periodo0N/0N_SIGLA/nome-do-arquivo]]
+Se LEITURA_APROFUNDADA passou contexto de pensamentos relacionados, referenciar:
+[[Pensamento/AAAA-MM-DD_tema]] (apenas para arquivos que JÁ EXISTEM no sistema)
 
 ## Pontos de Atenção
 O que o Nexus identificou como crítico para prova ou aplicação prática.

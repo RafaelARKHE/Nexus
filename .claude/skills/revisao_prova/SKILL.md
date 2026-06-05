@@ -40,6 +40,12 @@ Usuário informa:
 - Mapeia o que está disponível vs. o que foi solicitado no escopo
 - Se necessário confirmar alguma informação específica, pode consultar o PDF original em `Nexus_Materiais/Periodo0N/0N_[SIGLA]/`
 
+### Passo 1.5 — Verificação de raciocínio consolidado
+- Lê `Nexus/Nexus_Obsidian/Pensamento/MOC_Pensamentos.md`
+- Verifica se existe pensamento consolidado relacionado ao escopo da prova (por tema ou disciplina)
+- Se sim: carrega os arquivos de Pensamento relevantes identificados no MOC
+- Guarda esse contexto para passar ao GERAR_REVISAO na etapa de execução
+
 ### Passo 2 — Criação da subpasta
 - Verifica o último número de VC usado na disciplina
 - Cria subpasta `VC0X/` dentro da pasta da disciplina no Nexus_Obsidian

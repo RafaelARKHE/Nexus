@@ -38,23 +38,23 @@ A avaliação neurológica no APH usa duas ferramentas:
 
 ### Escala AVDI
 
-| Nível | Nome | Descrição | Implicação |
-|---|---|---|---|
-| **A** | Acordado / Alerta | Responde com nome, endereço, detalhes do evento; contato visual presente; atende estímulos visuais, auditivos e táteis | Via aérea, ventilação e perfusão cerebral preservadas |
-| **V** | Verbal | Atende ao comando de voz, mas pode estar confuso; emite palavras desconexas | Risco de rebaixamento — estimular a manter-se acordado |
-| **D** | Doloroso | Responde apenas a estímulo doloroso (esterno / trapézio / leito ungueal): localiza, caretas, gemidos, movimentos | Situação crítica iminente |
-| **I** | Irresponsivo | Sem resposta a qualquer estímulo | Situação crítica — ação imediata |
+| Nível | Nome              | Descrição                                                                                                              | Implicação                                             |
+| ----- | ----------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **A** | Acordado / Alerta | Responde com nome, endereço, detalhes do evento; contato visual presente; atende estímulos visuais, auditivos e táteis | Via aérea, ventilação e perfusão cerebral preservadas  |
+| **V** | Verbal            | Atende ao comando de voz, mas pode estar confuso; emite palavras desconexas                                            | Risco de rebaixamento — estimular a manter-se acordado |
+| **D** | Doloroso          | Responde apenas a estímulo doloroso (esterno / trapézio / leito ungueal): localiza, caretas, gemidos, movimentos       | Situação crítica iminente                              |
+| **I** | Irresponsivo      | Sem resposta a qualquer estímulo                                                                                       | Situação crítica — ação imediata                       |
 
 > Paciente em nível **V** pode perder consciência a qualquer momento — deve ser monitorado continuamente e preparado para via aérea definitiva.
 
 ### Avaliação Pupilar
 
-| Achado | Denominação | Causa Provável |
-|---|---|---|
-| Pupilas contraídas e reativas | Miose | Drogas alucinógenas / estimulantes |
-| Pupilas assimétricas | Anisocoria | Lesão cerebral localizada — TCE, AVC |
-| Pupilas contraídas e **arreativas** | Miose paralítica | Lesão do SNC / medicamentos |
-| Pupilas dilatadas e **arreativas** | Midríase paralítica | Inconsciência, choque, PCR, medicamentos |
+| Achado                              | Denominação         | Causa Provável                           |
+| ----------------------------------- | ------------------- | ---------------------------------------- |
+| Pupilas contraídas e reativas       | Miose               | Drogas alucinógenas / estimulantes       |
+| Pupilas assimétricas                | Anisocoria          | Lesão cerebral localizada — TCE, AVC     |
+| Pupilas contraídas e **arreativas** | Miose paralítica    | Lesão do SNC / medicamentos              |
+| Pupilas dilatadas e **arreativas**  | Midríase paralítica | Inconsciência, choque, PCR, medicamentos |
 
 **Como avaliar:** expor ambos os olhos à mesma iluminação; comparar tamanho e reatividade à luz; anotar assimetria.
 
