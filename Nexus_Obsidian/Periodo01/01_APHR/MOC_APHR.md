@@ -18,23 +18,38 @@ atualizado_em: 04/06/2026
 
 ---
 
-## Pontos-Chave por Assunto
+## Pontos-Chave por Tema
 
-| Prefixo | Assunto | Arquivo |
+### 01 — Avaliação Primária e Secundária
+> Origem: `APHR UNIDADE VI AVALIAÇÃO PRIMÁRIA E SECUNDÁRIA.pptx`
+
+| # | Assunto | Arquivo |
 |---|---|---|
-| 01 | Abordagem da Cena e Impressão Geral | [[Periodo01/01_APHR/pontos_chave/01_abordagem-da-cena]] |
-| 02 | Pesquisa Primária — XABCDE | [[Periodo01/01_APHR/pontos_chave/02_pesquisa-primaria-xabcde]] |
-| 03 | Avaliação Neurológica — AVDI e Pupilas | [[Periodo01/01_APHR/pontos_chave/03_avaliacao-neurologica]] |
-| 04 | Análise Secundária e SAMPLER | [[Periodo01/01_APHR/pontos_chave/04_analise-secundaria]] |
-| 05 | Choque — Definição e Fisiopatologia | [[Periodo01/01_APHR/pontos_chave/05_choque-fisiopatologia]] |
-| 06 | Choque — Classificação e Diagnóstico Diferencial | [[Periodo01/01_APHR/pontos_chave/06_choque-classificacao-diferencial]] |
-| 07 | Hemorragia — Tipos, Sinais e Sintomas | [[Periodo01/01_APHR/pontos_chave/07_hemorragia-tipos-sinais]] |
-| 08 | Controle de Hemorragia — Técnicas e Torniquete | [[Periodo01/01_APHR/pontos_chave/08_controle-hemorragia-tecnicas]] |
-| 09 | Oxigenoterapia — Conceitos, Indicações e Cilindro | [[Periodo01/01_APHR/pontos_chave/09_oxigenoterapia-conceitos-indicacoes]] |
-| 10 | Anatomia das Vias Aéreas | [[Periodo01/01_APHR/pontos_chave/10_vias-aereas-anatomia]] |
-| 11 | Adjuntos de Via Aérea — Cânulas Oro e Nasofaríngea | [[Periodo01/01_APHR/pontos_chave/11_adjuntos-via-aerea]] |
-| 12 | Sistemas de Oferta de O2 — Dispositivos e Classificação | [[Periodo01/01_APHR/pontos_chave/12_sistemas-oferta-oxigenio]] |
-| 13 | Oxímetro de Pulso, Riscos da O2 e Aspiração | [[Periodo01/01_APHR/pontos_chave/13_oximetro-riscos-aspiracao]] |
+| 01 | Abordagem da Cena e Impressão Geral | [[Periodo01/01_APHR/pontos_chave/01_Avaliacao-Primaria-e-Secundaria/01_abordagem-da-cena]] |
+| 02 | Pesquisa Primária — XABCDE | [[Periodo01/01_APHR/pontos_chave/01_Avaliacao-Primaria-e-Secundaria/02_pesquisa-primaria-xabcde]] |
+| 03 | Avaliação Neurológica — AVDI e Pupilas | [[Periodo01/01_APHR/pontos_chave/01_Avaliacao-Primaria-e-Secundaria/03_avaliacao-neurologica]] |
+| 04 | Análise Secundária e SAMPLER | [[Periodo01/01_APHR/pontos_chave/01_Avaliacao-Primaria-e-Secundaria/04_analise-secundaria]] |
+
+### 02 — Choque e Hemorragia
+> Origem: `APHR CHOQUE E HEMORRAGIA.pptx`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Choque — Definição e Fisiopatologia | [[Periodo01/01_APHR/pontos_chave/02_Choque-e-Hemorragia/01_choque-fisiopatologia]] |
+| 02 | Choque — Classificação e Diagnóstico Diferencial | [[Periodo01/01_APHR/pontos_chave/02_Choque-e-Hemorragia/02_choque-classificacao-diferencial]] |
+| 03 | Hemorragia — Tipos, Sinais e Sintomas | [[Periodo01/01_APHR/pontos_chave/02_Choque-e-Hemorragia/03_hemorragia-tipos-sinais]] |
+| 04 | Controle de Hemorragia — Técnicas e Torniquete | [[Periodo01/01_APHR/pontos_chave/02_Choque-e-Hemorragia/04_controle-hemorragia-tecnicas]] |
+
+### 03 — Via Aérea e Oxigenoterapia
+> Origem: `APHR OXIGENOTERAPIA.pptx`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Oxigenoterapia — Conceitos, Indicações e Cilindro | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/01_oxigenoterapia-conceitos-indicacoes]] |
+| 02 | Anatomia das Vias Aéreas | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/02_vias-aereas-anatomia]] |
+| 03 | Adjuntos de Via Aérea — Cânulas Oro e Nasofaríngea | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/03_adjuntos-via-aerea]] |
+| 04 | Sistemas de Oferta de O2 — Dispositivos e Classificação | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/04_sistemas-oferta-oxigenio]] |
+| 05 | Oxímetro de Pulso, Riscos da O2 e Aspiração | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/05_oximetro-riscos-aspiracao]] |
 
 ---
 

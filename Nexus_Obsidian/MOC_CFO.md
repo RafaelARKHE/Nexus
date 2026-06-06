@@ -4,7 +4,7 @@ tipo: moc_geral
 curso: CFO T16
 periodo_atual: Periodo01
 criado_em: 05/06/2026
-atualizado_em: 05/06/2026
+atualizado_em: 06/06/2026
 ---
 
 # MOC — CFO T16 | CBMPA
@@ -34,8 +34,8 @@ O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Per
 | 01      | APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]]         | ✅ Unidade VI · Choque e Hemorragia · Oxigenoterapia |
 | —       | DH     | Direitos Humanos                          | —                                      | 🔲 sem material                                 |
 | —       | DC     | Direito Constitucional                    | —                                      | 🔲 sem material                                 |
-| —       | DA     | Direito Administrativo I                  | —                                      | 🔲 sem material                                 |
-| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ Lei nº 9.161/2021 — CEDCBMPA (6 pontos-chave) |
+| 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Apostila completa (25p) · Ato Administrativo (6p) |
+| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ⏳ +3 docs aguardando |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
 | —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
 | —       | FSV    | Fundamentos de Salvamento Veicular        | —                                      | 🔲 sem material                                 |

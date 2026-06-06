@@ -5,7 +5,7 @@ disciplina: História do Corpo de Bombeiros Militar do Pará
 sigla: HCBMPA
 periodo: Periodo01
 assunto: Legislação Nacional dos Corpos de Bombeiros
-prefixo: "04"
+prefixo: "02"
 arquivo_origem: UNIDADE-2-OS-CORPOS-DE-BOMBEIROS-NO-BRASIL - TCEL Matoso CFO imprimir.pdf
 criado_em: 05/06/2026
 atualizado_em: 05/06/2026

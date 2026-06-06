@@ -31,3 +31,10 @@ Ao receber um documento administrativo novo:
 | Arquivo | Conteúdo | Período referenciado |
 |---------|----------|----------------------|
 | CFO Turma 16 - Relação de Docentes selecionados_1(1).pdf | Quadro de instrutores e monitores · 20 disciplinas | 1º Ano / 2º Semestre (Período 02) |
+
+### Quadros_Instrucao/
+> Quadros semanais de instrução da Turma 16 — programação diária de aulas e atividades
+
+| Arquivo | Conteúdo | Período referenciado |
+|---------|----------|----------------------|
+| Quadro_Instrucao_T16_08a14jun2026.jpeg | Programação semanal · período matutino e vespertino · disciplinas EC, FSV, DA I, DC, ANFI, TFM I, IM I, ESPADIM | 08 a 14/06/2026 |

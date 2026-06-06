@@ -18,17 +18,32 @@ atualizado_em: 05/06/2026
 
 ---
 
-## Pontos-Chave por Assunto
+## Pontos-Chave por Tema
 
-| Prefixo | Assunto | Arquivo |
+### 01 — Bombeiros no Mundo
+> Origem: `UNIDADE-I-OS-CORPOS-DE-BOMBEIROS-NO-MUNDO - TCEL Matoso - CFO.pdf`
+
+| # | Assunto | Arquivo |
 |---|---|---|
-| 01 | O Fogo e as Civilizações Antigas | [[Periodo01/02_HCBMPA/pontos_chave/01_fogo-civilizacoes-antigas]] |
-| 02 | Grandes Incêndios Históricos e Evolução dos Bombeiros | [[Periodo01/02_HCBMPA/pontos_chave/02_grandes-incendios-historicos]] |
-| 03 | Criação do Corpo de Bombeiros no Brasil | [[Periodo01/02_HCBMPA/pontos_chave/03_criacao-corpo-bombeiros-brasil]] |
-| 04 | Legislação Nacional dos Corpos de Bombeiros | [[Periodo01/02_HCBMPA/pontos_chave/04_legislacao-nacional-cbm]] |
-| 05 | LIGABOM e Intercâmbio Técnico Nacional | [[Periodo01/02_HCBMPA/pontos_chave/05_ligabom-intercambio]] |
-| 06 | Patrono do CBMPA — Antônio José de Lemos | [[Periodo01/02_HCBMPA/pontos_chave/06_patrono-antonio-lemos]] |
-| 07 | Criação do CBMPA — 1882 | [[Periodo01/02_HCBMPA/pontos_chave/07_criacao-cbmpa-1882]] |
+| 01 | O Fogo e as Civilizações Antigas | [[Periodo01/02_HCBMPA/pontos_chave/01_Bombeiros-no-Mundo/01_fogo-civilizacoes-antigas]] |
+| 02 | Grandes Incêndios Históricos e Evolução dos Bombeiros | [[Periodo01/02_HCBMPA/pontos_chave/01_Bombeiros-no-Mundo/02_grandes-incendios-historicos]] |
+
+### 02 — Bombeiros no Brasil
+> Origem: `UNIDADE-2-OS-CORPOS-DE-BOMBEIROS-NO-BRASIL - TCEL Matoso CFO imprimir.pdf`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Criação do Corpo de Bombeiros no Brasil | [[Periodo01/02_HCBMPA/pontos_chave/02_Bombeiros-no-Brasil/01_criacao-corpo-bombeiros-brasil]] |
+| 02 | Legislação Nacional dos Corpos de Bombeiros | [[Periodo01/02_HCBMPA/pontos_chave/02_Bombeiros-no-Brasil/02_legislacao-nacional-cbm]] |
+| 03 | LIGABOM e Intercâmbio Técnico Nacional | [[Periodo01/02_HCBMPA/pontos_chave/02_Bombeiros-no-Brasil/03_ligabom-intercambio]] |
+
+### 03 — CBMPA
+> Origem: `UNIDADE-3-O-CORPO-DE-BOMBEIROS-MILITAR-NO-PARÁ - TCEL Matoso CFO imprimir.pdf`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Patrono do CBMPA — Antônio José de Lemos | [[Periodo01/02_HCBMPA/pontos_chave/03_CBMPA/01_patrono-antonio-lemos]] |
+| 02 | Criação do CBMPA — 1882 | [[Periodo01/02_HCBMPA/pontos_chave/03_CBMPA/02_criacao-cbmpa-1882]] |
 
 ---
 

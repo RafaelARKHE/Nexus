@@ -6,7 +6,8 @@ description: >
   um arquivo novo em _entradas/ para ser processado. Também acionar quando o usuário
   quiser apenas classificar um documento sem processar ("só direcionar"). Esta skill é
   o portão de entrada de todo o fluxo de estudo do Nexus — acione-a sempre que houver
-  qualquer menção a novo material de estudo chegando ao sistema. Aceita PDF e PPTX.
+  qualquer menção a novo material de estudo chegando ao sistema. Aceita PDF, PPTX e
+  imagens (JPEG/PNG) quando o documento for um Quadro de Instrução Semanal (QIS).
 ---
 
 # DOCUMENTO_ENTRADA
@@ -18,13 +19,15 @@ novos documentos recebidos.
 
 ## Formatos suportados
 
-| Extensão | Ferramenta de leitura       |
-|----------|-----------------------------|
-| `.pdf`   | Skill nativa de leitura PDF |
-| `.pptx`  | Skill `pptx` do sistema     |
+| Extensão               | Tipo de documento | Ferramenta de leitura       |
+|------------------------|-------------------|-----------------------------|
+| `.pdf`                 | Qualquer          | Skill nativa de leitura PDF |
+| `.pptx`                | Qualquer          | Skill `pptx` do sistema     |
+| `.jpeg` / `.jpg` / `.png` | **Somente QIS**   | Leitura de imagem (visão)   |
 
-Para qualquer outro formato encontrado em `_entradas/`, alertar o usuário e encerrar
-sem mover o arquivo. Informar os formatos suportados.
+Para qualquer outro formato, alertar o usuário e encerrar sem mover o arquivo.
+Para imagens que **não sejam QIS**, alertar que o formato só é suportado para
+Quadros de Instrução Semanal e encerrar.
 
 ---
 
@@ -41,21 +44,27 @@ sem mover o arquivo. Informar os formatos suportados.
 
 ## Passo 0 — Classificação do tipo de documento
 
-**Antes de qualquer outra etapa**, identificar se o documento é:
+**Antes de qualquer outra etapa**, identificar em qual tipo o documento se enquadra:
+
+### Tipo B1 — Quadro de Instrução Semanal (QIS) ← verificar PRIMEIRO
+Documento com grade horária semanal de aulas da Turma 16.
+**Sinais de identificação:** título contém "QUADRO DE INSTRUÇÃO", "TURMA 16", "CFO";
+presença de colunas por dia da semana com horários e siglas de disciplinas.
+→ Segue para a **Modalidade 5** abaixo. Não precisa ser PDF nem PPTX.
 
 ### Tipo A — Material de estudo
 Conteúdo pedagógico de uma disciplina específica do CFO.
 Exemplos: apostilas, slides de aula, notas de aula, roteiros de prática.
 → Segue para as **Modalidades 1, 2 ou 3** abaixo.
 
-### Tipo B — Documento administrativo/institucional
-Conteúdo institucional que não pertence a uma disciplina específica.
+### Tipo B — Documento administrativo/institucional genérico
+Conteúdo institucional que não pertence a uma disciplina específica e não é QIS.
 Exemplos: relações de docentes, calendários acadêmicos, portarias, boletins,
 matrizes curriculares, resultados de avaliação, regulamentos.
 → Segue para a **Modalidade 4** abaixo.
 
-**Como decidir:** se o documento serve para estudar uma disciplina → Tipo A.
-Se serve como referência institucional ou registro do curso → Tipo B.
+**Como decidir:** grade horária semanal → Tipo B1. Conteúdo para estudar uma
+disciplina → Tipo A. Referência institucional ou registro do curso → Tipo B.
 
 ---
 
@@ -76,10 +85,17 @@ Executa todos os passos (1 a 3). Aciona LEITURA_APROFUNDADA automaticamente ao f
 
 Usa a disciplina informada diretamente, sem etapa de identificação automática.
 
-### Modalidade 4 — Documento administrativo (Tipo B)
-**Gatilho:** detecção automática no Passo 0, ou "documento novo, é administrativo"
+### Modalidade 4 — Documento administrativo genérico (Tipo B)
+**Gatilho:** detecção automática no Passo 0 (Tipo B), ou "documento novo, é administrativo"
 
 Executa os Passos A1 e A2 abaixo. Não aciona LEITURA_APROFUNDADA.
+
+### Modalidade 5 — Quadro de Instrução Semanal (Tipo B1)
+**Gatilho:** detecção automática no Passo 0 (Tipo B1), ou "documento novo, é QIS"
+
+Executa os Passos A1 e A2 (arquivamento em `Quadros_Instrucao/`) e em seguida
+aciona automaticamente a skill **QIS_PARA_CALENDARIO** passando o caminho do
+arquivo recém-arquivado.
 
 ---
 
@@ -134,12 +150,12 @@ Aciona automaticamente a skill **LEITURA_APROFUNDADA** passando:
 ## Relatório de encerramento
 
 Ao final de qualquer modalidade, emitir relatório com:
-- Tipo do documento identificado (A — estudo ou B — administrativo)
+- Tipo do documento identificado (A — estudo | B — administrativo | B1 — QIS)
 - Arquivos processados e disciplina/categoria identificada
 - Período ou categoria atribuída
 - Pastas criadas (se houver)
 - MOCs atualizados
-- Próxima ação (leitura aprofundada pendente, já acionada, ou nenhuma)
+- Próxima ação (leitura aprofundada acionada | QIS_PARA_CALENDARIO acionado | nenhuma)
 
 ---
 

@@ -94,7 +94,8 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 ### Fluxo Diário
 | Skill | Gatilho | Função |
 |---|---|---|
-| `documento_entrada` | "documento novo" | Classifica e direciona PDFs novos |
+| `documento_entrada` | "documento novo" | Classifica e direciona novos documentos (PDF, PPTX, imagens QIS) |
+| `qis_para_calendario` | Automático via `documento_entrada` ou "qis calendário" | Converte QIS em eventos no Google Calendar |
 | `leitura_aprofundada` | Automático ou "leitura aprofundada [disciplina]" | Processa PDF e gera resumo e pontos-chave |
 | `resumo_geral` | Acionada pela leitura_aprofundada | Gera/atualiza resumo_[SIGLA].md |
 | `pontos_chave` | Acionada pela leitura_aprofundada | Gera arquivos de pontos-chave por assunto |
@@ -124,6 +125,17 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 - **Arquivos .md:** kebab-case — `01_hierarquia-disciplina.md`
 - **PDFs originais:** sempre em `Nexus_Materiais/` — nunca em `Nexus_Obsidian/`
 - **Arquivos de estudo:** sempre em `Nexus_Obsidian/` — nunca misturar com PDFs
+- **VC nos documentos e eventos** = Verificação Corrente (nunca "Verificação de Conhecimento")
+
+### Mapeamento QIS → Sigla Nexus
+Algumas abreviações usadas no QIS diferem das siglas do sistema:
+
+| Sigla no QIS | Sigla Nexus | Disciplina              |
+|--------------|-------------|-------------------------|
+| EC           | ETICA       | Ética e Cidadania       |
+| DA I         | DA          | Direito Administrativo I|
+| IM I         | IM          | Instrução Militar I     |
+| TFM I        | TFM         | TFM I                   |
 
 ---
 

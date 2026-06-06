@@ -5,7 +5,7 @@ disciplina: História do Corpo de Bombeiros Militar do Pará
 sigla: HCBMPA
 periodo: Periodo01
 assunto: Patrono do CBMPA — Antônio José de Lemos
-prefixo: "06"
+prefixo: "01"
 arquivo_origem: UNIDADE-3-O-CORPO-DE-BOMBEIROS-MILITAR-NO-PARÁ - TCEL Matoso CFO imprimir.pdf
 criado_em: 05/06/2026
 atualizado_em: 05/06/2026
