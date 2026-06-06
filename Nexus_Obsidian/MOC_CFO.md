@@ -34,8 +34,8 @@ O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Per
 | 01      | APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]]         | ✅ Unidade VI · Choque e Hemorragia · Oxigenoterapia |
 | —       | DH     | Direitos Humanos                          | —                                      | 🔲 sem material                                 |
 | —       | DC     | Direito Constitucional                    | —                                      | 🔲 sem material                                 |
-| 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Apostila completa (25p) · Ato Administrativo (6p) |
-| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ⏳ +3 docs aguardando |
+| 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Unidades I, III e IV · 11 PK · 2 docs processados |
+| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ✅ Lei 8.388/2016 (6 PK) · ⏳ +2 docs aguardando |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
 | —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
 | —       | FSV    | Fundamentos de Salvamento Veicular        | —                                      | 🔲 sem material                                 |

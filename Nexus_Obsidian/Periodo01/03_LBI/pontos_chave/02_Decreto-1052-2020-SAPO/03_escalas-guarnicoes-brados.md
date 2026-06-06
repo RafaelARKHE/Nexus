@@ -25,32 +25,32 @@ pensamentos_relacionados: []
 
 ### Escalas mínimas por função (Art. 20)
 
-| Função | Mínimo de militares |
-|---|---|
-| Superior de Dia | **7 oficiais** |
-| Oficial de Área/Tático | **4 oficiais** |
-| Coordenador de Operações | **6 oficiais** (2 por turno) |
-| Perito PIE | **4 oficiais** |
-| Oficial de Dia | **4 oficiais** |
-| Comandante de Socorro | **4 militares** |
-| Adjunto ao Oficial de Dia | 3 militares |
-| Comandante da Guarda | 3 militares |
-| Chefe de Guarnição | 3 militares |
-| Condutor/Operador de Viatura | 3 militares |
-| Comunicante/Operador de Rádio | 3 militares |
-| Auxiliar de Guarnição | 3 militares |
-| Componente de Guarnição | 3 militares |
-| Componente da Guarda | 3 militares |
-| Fiscal de Dia | **4 militares** |
-| Mergulhador de Resgate | **6 militares** |
-| Piloto de Embarcação | 3 militares |
-| Piloto de Motocicleta | 3 militares |
-| Resgatista/Socorrista | 3 militares |
-| Guarda-Vidas | 3 militares |
-| Acompanhante do Oficial | 3 militares |
-| Dia a Banda | 3 militares |
-| Condutor Militar | 3 militares |
-| Técnico de Proteção Defesa Civil | 3 militares |
+| Função                           | Mínimo de militares          |
+| -------------------------------- | ---------------------------- |
+| Superior de Dia                  | **7 oficiais**               |
+| Oficial de Área/Tático           | **4 oficiais**               |
+| Coordenador de Operações         | **6 oficiais** (2 por turno) |
+| Perito PIE                       | **4 oficiais**               |
+| Oficial de Dia                   | **4 oficiais**               |
+| Comandante de Socorro            | **4 militares**              |
+| Adjunto ao Oficial de Dia        | 3 militares                  |
+| Comandante da Guarda             | 3 militares                  |
+| Chefe de Guarnição               | 3 militares                  |
+| Condutor/Operador de Viatura     | 3 militares                  |
+| Comunicante/Operador de Rádio    | 3 militares                  |
+| Auxiliar de Guarnição            | 3 militares                  |
+| Componente de Guarnição          | 3 militares                  |
+| Componente da Guarda             | 3 militares                  |
+| Fiscal de Dia                    | **4 militares**              |
+| Mergulhador de Resgate           | **6 militares**              |
+| Piloto de Embarcação             | 3 militares                  |
+| Piloto de Motocicleta            | 3 militares                  |
+| Resgatista/Socorrista            | 3 militares                  |
+| Guarda-Vidas                     | 3 militares                  |
+| Acompanhante do Oficial          | 3 militares                  |
+| Dia a Banda                      | 3 militares                  |
+| Condutor Militar                 | 3 militares                  |
+| Técnico de Proteção Defesa Civil | 3 militares                  |
 
 **Regra padrão de turno:** 24h de serviço × **48h** fora da escala ordinária  
 **Exceção autorizada:** 24h × 24h — requer autorização do Cmd Operacional ou Regional  

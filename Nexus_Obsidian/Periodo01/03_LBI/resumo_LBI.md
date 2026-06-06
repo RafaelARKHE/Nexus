@@ -6,7 +6,7 @@ sigla: LBI
 periodo: Periodo01
 criado_em: 05/06/2026
 atualizado_em: 06/06/2026
-versao: 3.0
+versao: 5.0
 moc_cfo: sim
 moc_materia: sim
 pensamentos_relacionados: []
@@ -562,6 +562,256 @@ Elaborado pelo **1º Comandante de Socorro** a chegar ao local. Obrigatório par
 
 ---
 
+## Lei nº 11.060/2025 — Organização Básica e Efetivo do CBMPA
+> Adicionado em: 06/06/2026 | Origem: LEI-ESTADUAL-No-11.060_2025-DISPOE-SOBRE-A-ORGANIZACAO-BASICA-E-EFETIVO-DO-CBMPA-1.pdf
+
+### Pré-requisitos
+- Noção da hierarquia de postos e graduações do CBMPA
+- Conhecimento de que o CBMPA é força auxiliar do Exército (CF/88, arts. 42 e 144)
+- Familiaridade com os conceitos de órgãos de direção, apoio e execução em instituições militares
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| QOBM | Quadro de Oficiais Bombeiro Militar Combatente — oficiais com CFO |
+| QOCBM | Quadro de Oficiais Complementar — ingressam por concurso com nível superior em áreas específicas |
+| QOSBM | Quadro de Oficiais de Saúde — ingressam por concurso com formação na área de saúde |
+| QOABM | Quadro de Oficiais de Administração — provenientes de subtenentes/sargentos com CHO |
+| QOEBM | Quadro de Oficiais Especialista — músicos habilitados com CHO |
+| QOCABM | Quadro de Oficiais Capelães — ingresso por concurso com habilitação específica; máx. 2 vagas |
+| QPBM-C | Quadro de Praças Combatente — praças com curso de formação, qualificação combatente |
+| QPBM-M | Quadro de Praças Músico |
+| QPBM-COV | Quadro de Praças Condutor e Operador de Viaturas — em extinção |
+| QPBM-S | Quadro de Praças Auxiliar de Saúde |
+| CHO | Curso de Habilitação de Oficiais — porta de ingresso para QOABM e QOEBM |
+| EMG | Estado-Maior Geral — órgão de planejamento estratégico da corporação |
+| CEDEC | Coordenadoria Estadual de Proteção e Defesa Civil do Pará |
+| CORREG | Corregedoria-Geral — órgão correcional da corporação |
+| CEINT | Centro de Inteligência — inteligência bombeiro militar |
+| CONJUR | Consultoria Jurídica |
+| CRB | Comando Regional de Bombeiros de Proteção e Emergência Ambiental |
+| CME-BM | Comando de Missões Especiais Bombeiro Militar |
+| GBM | Grupamento Bombeiro Militar |
+| SGBM | Subgrupamento Bombeiro Militar |
+| SBM | Seção Bombeiro Militar |
+| PABM | Posto Avançado Bombeiro Militar |
+| PBM | Posto de Bombeiro Militar |
+| GMAF | Grupamento Marítimo e Fluvial |
+| GBS | Grupamento de Busca e Salvamento |
+| GSE | Grupamento de Socorro e Emergência |
+| GOA | Grupamento de Operações Aéreas |
+| NAC | Núcleo de Ações com Cães |
+| CPO | Comissão de Promoção de Oficiais |
+| CPP | Comissão de Promoção de Praças |
+| FEBOM | Fundo Especial de Bombeiros |
+| DGA | Departamento-Geral de Administração |
+| DGP | Departamento-Geral de Pessoal |
+| DGCEP | Departamento-Geral de Cultura, Educação e Pesquisa |
+| DGSCI | Departamento-Geral de Segurança contra Incêndios e Emergências |
+| ABM | Academia Bombeiro Militar "Cap BM Antônio Veríssimo Ivo de Abreu" |
+| CFAE | Centro de Formação, Aperfeiçoamento e Especialização "Maj BM Henrique Rubim" |
+| CCFD | Centro de Capacitação Física e Desporto |
+| CSMV/MOP | Centro de Suprimento e Manutenção de Viaturas e Material Operacional |
+
+---
+
+### Resumo
+
+#### TÍTULO I — Disposições Fundamentais (Arts. 1–4)
+
+**Natureza Jurídica (Art. 1)**
+O CBMPA é instituição permanente, força auxiliar e reserva do Exército, organizado com base na hierarquia e disciplina militares, subordinado ao Governador do Estado (Comandante Supremo). Destina-se a serviços específicos de Bombeiro Militar e de Proteção e Defesa Civil. Base constitucional: arts. 42 e 144 da CF/88 e art. 200 da CE/PA.
+
+**Vinculação (Art. 2)**
+Vinculado à SEGUP (Secretaria de Estado de Segurança Pública e Defesa Social). Órgão da administração direta com dotação orçamentária própria e autonomia administrativa e funcional.
+
+**12 Princípios Básicos (Art. 3)**
+
+| Nº | Princípio |
+|---|---|
+| I | Hierarquia |
+| II | Disciplina |
+| III | Proteção, promoção e respeito aos direitos humanos |
+| IV | Legalidade |
+| V | Impessoalidade |
+| VI | Publicidade, com transparência e prestação de contas |
+| VII | Moralidade |
+| VIII | Eficiência |
+| IX | Efetividade |
+| X | Razoabilidade e proporcionalidade |
+| XI | Universalidade na prestação do serviço |
+| XII | Participação e interação comunitária |
+
+**17 Competências do CBMPA (Art. 4)**
+
+| Nº | Competência |
+|---|---|
+| I | Proteção e defesa civil — planejar, coordenar e executar |
+| II | Prevenção/extinção de incêndios, emergências, busca e salvamento (terrestre, aquático e aéreo) |
+| III | Polícia judiciária militar no âmbito de sua competência |
+| IV | APH e socorros de urgência |
+| V | Perícias de incêndios e explosões (PIE) |
+| VI | Prevenção e proteção balneária |
+| VII | Proteção e prevenção de acidentes/incêndios na orla marítima e fluvial |
+| VIII | Proteção ambiental — incêndio florestal |
+| IX | Pesquisas técnico-científicas de segurança contra incêndios e emergências |
+| X | Análise de projetos, vistoria, licenciamento e fiscalização de edificações/eventos — privativamente |
+| XI | Editar atos normativos de prevenção e segurança |
+| XII | Regulamentar, credenciar e fiscalizar empresas, escolas e profissionais do setor |
+| XIII | Políticas de prevenção educativa e informativa |
+| XIV | Exercer poder de polícia para cumprimento das missões |
+| XV | Colaborar na formação de agentes de defesa civil municipal (via convênio) |
+| XVI | Supervisionar profissionais e instituições civis atuantes na área BM |
+| XVII | Atendimentos de emergência em acidentes de trânsito, traumáticos, afogamentos, tentativa de homicídio/suicídio, choque elétrico, queimaduras, partos de emergência |
+
+---
+
+#### TÍTULO II — Organização Básica (Arts. 5–56)
+
+**Estrutura Geral (Art. 5)**
+
+| Nível | Órgãos |
+|---|---|
+| **Direção-Geral** | Cmt-Geral · Alto Comando · EMG · CEDEC · Correg-Geral · Cmt Operações · DGA · DGP · DGCEP · DGSCI · CPO · CPP · Gabinete · Ajudância-Geral · Controladoria · CONJUR · CEINT |
+| **Direção Intermediária** | CRB I ao VI · CME-BM |
+| **Direção Setorial** | DAL · DF · DCA · DTIC · DS |
+| **Apoio** | ABM · CFAE · CCFD · CSMV/MOP · CP · CM · Capelania · Banda de Música · Colégio Militar |
+| **Execução** | GBM · SGBM · SBM · PABM · PBM (multiemprego) · GMAF · GBS · GSE · GOA · NAC (especializadas) |
+
+**Comandante-Geral (Arts. 7–8)**
+- Equiparado a Secretário de Estado; nomeado pelo Governador — último posto do QOBM, com Curso Superior de Bombeiros
+- Se não for o mais antigo: tem precedência hierárquica e funcional sobre os demais
+- **15 competências**: comando geral; presidência do Alto Comando e CPO; orçamento; convênios; nomeações; afastamentos; verbas; atos administrativos; incorporar praças; promover praças; férias/licenças; instaurar PADs; certificar porte de arma; lista de promoção ao Governador
+- Impedimentos/ausências: EMG → Coord-Adjunto CEDEC → Corregedor-Geral → Cmt Operacional → Chefe de Dept-Geral mais antigo
+- Deve apresentar **Plano de Comando em até 60 dias úteis** da posse
+
+**Alto Comando (Arts. 9–10)**
+- Órgão colegiado deliberativo e consultivo
+- Presidente: Cmt-Geral (sem voto, salvo empate)
+- Membros natos: Chefe EMG, Coord-Adjunto CEDEC, Corregedor-Geral, Cmt Operacional, Chefes dos 4 Depts-Gerais (7 membros natos)
+- Membros efetivos: 3 oficiais do último posto, designados pelo Cmt-Geral
+- Reunião ordinária: **semestral**; extraordinária por convocação do presidente ou 2/3 dos membros
+- Decisões por maioria relativa; publicadas como Resolução no DOE após homologação do Governador
+
+**Estado-Maior Geral — EMG (Arts. 11–12)**
+- Chefe: equiparado a Secretário-Adjunto; último posto do QOBM
+- 6 seções: BM/1 (Pessoal/Legislação) · BM/2 (Gestão do Conhecimento/Cultura) · BM/3 (Operações/Doutrina/Estatística) · BM/4 (Logística) · BM/5 (Gestão pela Qualidade) · BM/6 (Planejamento/Orçamento)
+
+**CEDEC (Arts. 13–14)**
+- Coordenador Estadual = Cmt-Geral; Coordenador-Adjunto = equiparado a Secretário-Adjunto, último posto do QOBM
+- 6 CRBs terão Coordenadorias Regionais de Proteção e Defesa Civil integradas
+
+**Corregedoria-Geral (Art. 15)**
+- Corregedor: último posto do QOBM, preferencialmente bacharel em direito
+- Precedência funcional/hierárquica sobre oficiais de mesmo posto (exceto Cmt-Geral, Chefe EMG, Coord-Adjunto CEDEC)
+- Vedado ingresso de BM com análises desfavoráveis nos assentamentos ou condenado criminalmente por órgão colegiado/trânsito em julgado
+
+**4 Departamentos-Gerais (Arts. 17–21)**
+
+| Dept | Sigla | Função Principal |
+|---|---|---|
+| Administração | DGA | Logística, finanças, contratações, TI |
+| Pessoal | DGP | Pessoal, promoções, saúde, veteranos/pensionistas |
+| Cultura, Educação e Pesquisa | DGCEP | Sistema de ensino, pesquisa, cultura |
+| Segurança contra Incêndios e Emergências | DGSCI | Diretrizes de segurança, fiscalização, vistoria, perícia, credenciamento |
+
+**6 Comandos Regionais (Anexo III)**
+
+| CRB | Sede | RISPs |
+|---|---|---|
+| CRB I | Belém | 1ª, 2ª, 5ª e 8ª (Região Metropolitana + Marajó) |
+| CRB II | Salinópolis | 3ª, 6ª e 7ª (Guamá, Caeté, Capim) |
+| CRB III | Barcarena | 4ª (Tocantins) |
+| CRB IV | Tucuruí | 9ª (Lago de Tucuruí) |
+| CRB V | Marabá | 10ª, 13ª e 14ª (Carajás, Araguaia, Alto Xingu) |
+| CRB VI | Santarém | 11ª, 12ª e 15ª (Xingu, Baixo Amazonas, Tapajós) |
+
+**UBMs Multiemprego — postos dos comandantes (Arts. 48–52)**
+
+| Unidade | Cmt | Subcmt |
+|---|---|---|
+| GBM | Ten-Cel | Major |
+| SGBM | Major | Capitão |
+| SBM | Oficial | — |
+| PABM | Oficial | — (acumula chefia da Seção de AT) |
+
+**UBMs Especializadas (Arts. 53–56)**
+
+| Unidade | Missão | Cmt | Subcmt |
+|---|---|---|---|
+| GMAF | Busca/resgate aquático, marítimo e fluvial | Ten-Cel | Major |
+| GBS | Busca, salvamento, resgate + produtos perigosos | Ten-Cel | Major |
+| GSE | Emergências médicas e APH | Ten-Cel | Major |
+| GOA | Operações aéreas (definidas no regulamento) | — | — |
+| NAC | Busca, resgate e salvamento com cães | Oficial | — |
+
+---
+
+#### TÍTULO III — Do Pessoal (Arts. 57–60)
+
+**Composição dos Quadros**
+
+| Quadro | Ingresso |
+|---|---|
+| QOBM | CFO |
+| QOCBM | Concurso — nível superior (17 áreas) |
+| QOSBM | Concurso — saúde (8 formações + especialidades médicas) |
+| QOABM | Subtenentes/Sargentos com CHO |
+| QOEBM | Subtenentes/Sargentos músicos com CHO |
+| QOCABM | Concurso específico por credo — máx. 2 vagas |
+| QPBM-C | Curso de Formação de Praças |
+| QPBM-M | Curso de Formação de Praças — qualif. músico |
+| QPBM-COV | Em extinção — vagas migram para QPBM-C |
+| QPBM-S | Curso de Formação de Praças — qualif. saúde |
+
+> QOBM tem **precedência hierárquica** sobre todos os demais quadros.
+
+**Efetivo Fixado (Art. 58) — Total: 6.770 BMs**
+
+| Quadro | Total |
+|---|---|
+| QOBM | 407 (Cel 23 · Ten-Cel 58 · Maj 72 · Cap 79 · 1º/2ºTen 175) |
+| QOCBM | 33 |
+| QOSBM | 29 |
+| QOABM | 107 |
+| QOEBM | 7 |
+| QOCABM | 4 |
+| QPBM-C | 5.849 |
+| QPBM-M | 153 |
+| QPBM-COV | 178 (extinção) |
+| QPBM-S | 3 |
+| **TOTAL** | **6.770** |
+
+> Aspirantes, alunos de formação, BMs da reserva no serviço ativo e BMs agregados **não** são computados no efetivo (Art. 59).
+
+**Leis revogadas (Art. 73):** Lei 5.731/1992 · Lei 5.774/1993 · Lei 6.910/2006 · Lei 9.881/2023
+
+---
+
+### Conexões
+
+- [[Periodo01/03_LBI/resumo_LBI]] — a organização básica desta lei é o "esqueleto institucional" que sustenta o CEDCBMPA (Lei 9.161/2021) e o SAPO (Decreto 1.052/2020)
+- `Periodo01/??_DA/resumo_DA` *(pendente)* — princípios do Art. 3 espelham os princípios constitucionais da Adm. Pública (Art. 37 CF/88)
+- `Periodo01/??_DC/resumo_DC` *(pendente)* — fundamento constitucional do CBMPA nos arts. 42, 144 CF/88 e 200 CE/PA
+
+---
+
+### Pontos de Atenção
+
+1. **Efetivo total: 6.770 BMs** — memorize o total e os subtotais principais (QOBM: 407; QPBM-C: 5.849).
+2. **17 competências (Art. 4)** — a fiscalização de segurança contra incêndios é exclusiva/privativa do CBMPA (inciso X).
+3. **Equiparações de cargo**: Cmt-Geral = Secretário de Estado; Chefe EMG e Coord-Adjunto CEDEC = Secretário-Adjunto.
+4. **Ordem de impedimentos do Cmt-Geral**: EMG → Coord-Adjunto CEDEC → Corregedor-Geral → Cmt Operacional → Chefe de Dept-Geral mais antigo.
+5. **Alto Comando**: reunião ordinária semestral; Cmt-Geral não vota (só desempate); decisão = Resolução publicada no DOE.
+6. **6 CRBs e suas sedes**: Belém · Salinópolis · Barcarena · Tucuruí · Marabá · Santarém.
+7. **QOBM tem precedência hierárquica** sobre todos os demais quadros.
+8. **QPBM-COV está em extinção** — vagas remanejadas para QPBM-C nas mesmas graduações.
+9. **Plano de Comando**: 60 dias úteis da posse para apresentar.
+10. **12 princípios básicos (Art. 3)** — note que vão além dos 5 princípios administrativos clássicos: incluem efetividade, razoabilidade, universalidade e participação comunitária.
+
+---
+
 ## Lei nº 8.388/2016 — Promoção dos Oficiais da PM do Pará (aplicável ao CBMPA)
 > Adicionado em: 06/06/2026 | Origem: LEI-No-8.388-DE-22-DE-SETEMBRO-DE-2016-Dispoe-sobre-a-promocao-dos-Oficiais-da-Policia-Militar-do-Para.pdf
 
@@ -788,3 +1038,269 @@ g) Buscar informações dos candidatos para composição dos QA
 7. **Prazo de 5 anos** para requerer ressarcimento de preterição — contado da data em que deveria ter ocorrido.
 8. **Prazo do requerimento de tempo de serviço**: 60 dias antes da data de promoção (não confundir com os 30 dias do QAM).
 9. **Ato de promoção = decreto do Governador** — não é portaria, não é boletim; é decreto publicado em DO.
+
+---
+
+## Lei nº 5.251/1985 — Estatuto dos Militares do Estado do Pará (alterado pela Lei nº 9.387/2021)
+> Adicionado em: 06/06/2026 | Origem: LEI-ESTADUAL-No-5.251_1985-–-DISPOE-SOBRE-O-ESTATUTO-DOS-MILITARES-DO-PARA-ALTERADO-PELA-LEI-ESTADUAL-No-9.387_2021.pdf
+
+### Pré-requisitos
+- Compreensão básica da estrutura hierárquica das corporações militares estaduais (PMPA e CBMPA)
+- Noção de carreira militar e distinção entre oficiais e praças
+- Familiaridade com os conceitos de ativo, inativo, reserva remunerada e reforma
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| Estatuto dos Militares | Lei nº 5.251/1985 — regula situação, obrigações, deveres, direitos e prerrogativas dos militares do Estado do Pará |
+| Militares do Estado do Pará | Membros da PMPA e do CBMPA (após inclusão pela Lei nº 9.387/2021) |
+| Posto | Grau hierárquico do oficial, conferido pelo Governador em Carta Patente |
+| Graduação | Grau hierárquico da praça, conferido pelo Comandante-Geral |
+| Praças especiais | Aspirante a Oficial PM/BM e Alunos Oficiais — frequentam o Círculo de Oficiais Subalternos |
+| Agregação | Situação em que o PM da ativa deixa de ocupar vaga na Escala Hierárquica sem ser desligado |
+| Reversão | Ato pelo qual o PM agregado retorna ao respectivo Quadro ao cessar o motivo da agregação |
+| Excedente | Situação transitória de PM promovido ou revertido quando o Quadro está com efetivo completo |
+| Ausente | PM que por mais de 24h consecutivas deixa de comparecer ou se ausenta sem licença |
+| Tempo efetivo de serviço | Espaço de tempo computado dia a dia desde a inclusão até o desligamento |
+| Anos de serviço | Tempo efetivo + acréscimos legais (serviço público anterior, atividade privada, licença especial e férias não gozadas contadas em dobro) |
+| Estabilidade | Direito assegurado à praça com ≥ 10 anos de efetivo serviço |
+| Licença especial | Autorização para afastamento de 6 meses por cada decênio de serviço prestado |
+| Demissão | Exclusão do serviço ativo aplicada exclusivamente a oficiais |
+| Licenciamento | Exclusão do serviço ativo aplicada exclusivamente a praças |
+| Exclusão a bem da disciplina | Aplicada ao aspirante a oficial PM/BM e às praças com estabilidade assegurada |
+
+---
+
+### Resumo
+
+#### TÍTULO I — Generalidades (Arts. 1–28)
+
+**Abrangência após 2021 (Arts. 1–2-B)**
+Com a alteração pela Lei nº 9.387/2021, o Estatuto passou a regular também os **bombeiros militares do CBMPA**. As expressões "policial militar" e "Polícia Militar" equivalem a "bombeiro militar" e "CBMPA". PMPA e CBMPA são forças auxiliares e reserva do Exército, organizadas com base na hierarquia e disciplina, subordinadas ao Governador. Ambas se vinculam operacionalmente à SEGUP.
+
+**Situações do militar (Art. 3)**
+
+| Situação | Enquadramento |
+|---|---|
+| **NA ATIVA** | PM de carreira; incluídos voluntariamente; reserva convocada; alunos de formação |
+| **NA INATIVIDADE** | Reserva remunerada (sujeita a convocação); reformados (dispensados definitivamente) |
+
+**Hierarquia e Disciplina (Arts. 13–15)**
+- **Hierarquia**: ordenação da autoridade por postos/graduações e antiguidade.
+- **Disciplina**: rigorosa observância da legislação que fundamenta o organismo PM; deve ser mantida **na ativa e na inatividade**.
+- **Posto** (oficiais) = conferido pelo Governador em Carta Patente. **Graduação** (praças) = conferida pelo Comandante-Geral.
+
+**Círculos hierárquicos e escala (Art. 15)**
+
+| Círculo | Postos/Graduações |
+|---|---|
+| Oficiais Superiores | Coronel PM/BM · Ten-Coronel PM/BM · Major PM/BM |
+| Oficiais Intermediários | Capitão PM/BM |
+| Oficiais Subalternos | 1º Tenente PM/BM · 2º Tenente PM/BM |
+| Praças Especiais | Aspirante a Oficial PM/BM · Aluno Oficial PM/BM · Aluno CFS PM · Aluno CFP |
+| Subtenentes e Sargentos | Subtenente PM/BM · 1º Sgt · 2º Sgt · 3º Sgt |
+| Cabos e Soldados | Cabo PM/BM · Soldado |
+
+**Precedência (Art. 16)**
+- Mesmo grau: por **antiguidade** no posto/graduação (a partir do ato de promoção/nomeação/inclusão).
+- Igualdade de antiguidade: escala numérica → grau anterior → data de praça → **data de nascimento** (mais velho = mais antigo).
+- PM em atividade > PM da inatividade (mesmo grau).
+
+**Hierarquia das praças especiais (Art. 17)**
+- Aspirante-a-Oficial PM/BM > demais praças; frequenta Círculo de Oficiais Subalternos.
+- Aluno da EFO > Subtenente PM/BM.
+- Cabo PM/BM > alunos do CFS (equiparados ao Cabo).
+
+**Ingresso no QO (Art. 20)**
+- QO Combatentes: por promoção do aspirante.
+- QO Especialistas/Administração: por concurso entre diplomados por faculdades reconhecidas.
+- PM não possuidor do CFO **não pode** exercer Comando, Chefia ou Direção sobre possuidor do CFO (ressalvados Quadros Técnicos no exercício de cargo privativo).
+
+---
+
+#### TÍTULO II — Obrigações e Deveres (Arts. 29–51)
+
+**6 Manifestações do Valor Policial-Militar (Art. 29)**
+
+| Nº | Manifestação |
+|---|---|
+| I | Sentimento de servir à comunidade — vontade inabalável de cumprir o dever, mesmo com risco de vida |
+| II | Civismo e culto das tradições históricas |
+| III | Fé na missão elevada da PM |
+| IV | Espírito de corpo — orgulho pela OPM onde serve |
+| V | Amor à profissão PM e entusiasmo com que é exercida |
+| VI | Aprimoramento técnico-profissional |
+
+**19 Preceitos Éticos (Art. 30)**
+Amar verdade e responsabilidade; exercer funções com autoridade, eficiência e probidade; respeitar dignidade da pessoa humana; acatar autoridades civis; cumprir e fazer cumprir leis e ordens; ser justo e imparcial; zelar pelo preparo moral, intelectual e físico; praticar camaradagem; empregar energias no serviço; ser discreto; não tratar matéria sigilosa fora do âmbito; cumprir deveres de cidadão; proceder de forma ilibada na vida pública e privada; observar normas de boa educação; garantir assistência ao lar; não prejudicar disciplina fora do serviço ou na inatividade; não usar posto/graduação para facilidades pessoais; na inatividade, abster-se de usar designações hierárquicas em atividade político-partidária, comercial/industrial, para discutir assuntos PM na imprensa ou em cargo civil; zelar pelo bom nome da PM.
+
+**9 Deveres Policiais-Militares (Art. 33)**
+
+| Nº | Dever |
+|---|---|
+| I | Dedicação integral ao serviço e fidelidade à instituição, mesmo com sacrifício da própria vida |
+| II | Culto aos símbolos nacionais |
+| III | Probidade e lealdade em todas as circunstâncias |
+| IV | Disciplina e respeito à hierarquia |
+| V | Rigoroso cumprimento das obrigações e ordens |
+| VI | Tratar o subordinado dignamente e com urbanidade |
+| VII | Trato urbano, cordial e educado para com os cidadãos |
+| VIII | Manutenção da ordem pública |
+| IX | Segurança da comunidade |
+
+**Compromisso de Honra (Arts. 34–35)**
+- Caráter solene, prestado na presença de tropa, após adquirida instrução compatível.
+- **Texto unificado** (praças e aspirantes): *"Ao ingressar na Polícia Militar do Pará / Corpo de Bombeiros Militar do Pará, prometo regular minha conduta pelos preceitos da moral, cumprir rigorosamente as ordens das autoridades a que estiver subordinado e dedicar-me, inteiramente, ao serviço Policial-Militar / Bombeiro Militar, à preservação da ordem pública e à segurança da comunidade, mesmo com o risco da própria vida."*
+- **Aspirante a Oficial** (solenidade de declaração): *"Perante a Bandeira do Brasil e pela minha honra, prometo cumprir os deveres de Oficial da Polícia Militar do Pará / Corpo de Bombeiros Militar do Pará e dedicar-me inteiramente ao seu serviço."*
+
+> ⚠️ **Diferença crítica com o CEDCBMPA**: no Estatuto, o texto das praças e dos aspirantes é **idêntico** — no CEDCBMPA, os textos são **distintos** para praças/aspirantes e para oficiais.
+
+**Funções por nível hierárquico (Arts. 38–41)**
+- **Oficiais**: preparados para Comando, Chefia e Direção de OPM.
+- **Subtenentes e Sargentos**: auxiliam oficiais; adestramento, instrução, administração, policiamento ostensivo fardado.
+- **Cabos e Soldados**: elementos de execução.
+- **Praças especiais**: rigorosa observância dos regulamentos do estabelecimento de ensino; dedicação integral ao estudo.
+
+**Violação de obrigações (Art. 43)**: constitui transgressão disciplinar. Quanto mais elevado o grau hierárquico, **mais grave** a violação.
+
+**Conselhos (Arts. 50–51)**
+
+| Conselho | Quem julga | Para quem |
+|---|---|---|
+| CJ (Conselho de Justificação) | **Tribunal de Justiça do Estado** | Oficiais presumivelmente incapazes |
+| CD (Conselho de Disciplina) | **Cmt-Geral ou Corregedor-Geral** | Aspirante a oficial e praças com estabilidade presumivelmente incapazes |
+
+---
+
+#### TÍTULO III — Direitos, Promoção, Férias e Licenças (Arts. 52–80)
+
+**Principais direitos (Art. 52)**
+Garantia da patente; estabilidade (praça ≥ **10 anos** de efetivo serviço); remuneração; assistência médico-hospitalar para si e dependentes; fardamento (graduação inferior a 3º Sgt + casos especiais); moradia; porte de arma (oficial: ativo/inativo, salvo exceções; praça: restrições do Cmt-Geral); promoção; férias e licenças; pensão; transferência a pedido para reserva; demissão/licenciamento voluntários.
+
+**Elegibilidade eleitoral (Art. 54)**
+- < 10 anos de serviço → deve **afastar-se** da atividade para candidatar-se.
+- ≥ 10 anos de serviço → será **agregado** e, se eleito, passa automaticamente à **inatividade na diplomação**.
+
+**Remuneração (Arts. 55–57)**
+Vencimentos (soldo + gratificações) + indenizações + outros. **Soldo é irredutível** e não sujeito a penhora, sequestro ou arresto (salvo exceções legais).
+
+**Promoção (Arts. 62–65)**
+Acesso seletivo, gradual e sucessivo. Critérios: **antiguidade**, **merecimento**, **bravura** e ***post mortem***.
+- Para Major combatente: exige **CAO** — exceto Saúde e Quadros Técnicos.
+- QO de Administração e Especialistas: **vedada** matrícula no CAO.
+- Sem promoção por ocasião de transferência para reserva remunerada ou reforma.
+
+**Férias e afastamentos (Arts. 66–69)**
+
+| Tipo | Duração |
+|---|---|
+| Férias anuais | **30 dias** — todos os PM |
+| Núpcias | **8 dias** |
+| Luto (ascendente, descendente, cônjuge, sogro ou irmão) | **8 dias** |
+| Instalação | Até **10 dias** |
+| Trânsito (curso ou OPM fora da capital) | Até **30 dias** |
+
+Férias interrompidas apenas em: Segurança Nacional, ordem pública, necessidade do serviço, transferência para inatividade, punição disciplinar grave, baixa a hospital.
+
+**Licenças (Arts. 70–74)**
+
+| Tipo | Requisito | Duração | Remuneração |
+|---|---|---|---|
+| Especial | Por decênio de serviço | **6 meses** (parcelável em 2–3 meses/ano civil) | Mantida |
+| Interesse particular | > 10 anos de serviço | A critério do Cmt-Geral | **Sem remuneração** e sem contagem de tempo |
+| Tratamento de saúde própria | — | Legislação específica | Específica |
+| Saúde da família | — | Legislação específica | Específica |
+| Maternidade (parto, adoção, guarda judicial) | — | **180 dias** (início a partir do 8º mês) | Mantida |
+| Paternidade (nascimento, adoção, guarda judicial) | — | **20 dias** consecutivos — vedada prorrogação | Mantida |
+
+---
+
+#### TÍTULO IV — Situações Especiais e Exclusão do Serviço Ativo (Arts. 88–129)
+
+**Agregação (Art. 88)** — PM da ativa deixa de ocupar vaga na Escala Hierárquica permanecendo sem número. Principais motivos: cargo não previsto no QO; aguardando reserva ex-offício; saúde > 1 ano; incapaz definitivo em processo de reforma; licença especial > 6 meses; licença interesse particular > 6 meses; licença saúde da família > 6 meses; extraviado; desertor em processo; condenado > 6 meses; à disposição de outro órgão; cargo civil temporário; candidato a cargo eletivo (≥ 10 anos). **Ato: Governador** (oficiais) / **Cmt-Geral** (praças).
+
+**Reversão (Arts. 91–92)** — PM agregado retorna ao Quadro ao cessar o motivo; ocupa a primeira vaga disponível. **Ato: Governador** (oficiais) / **Cmt-Geral** (praças).
+
+**Excedente (Art. 93)** — situação transitória quando o PM reverte/é promovido mas o Quadro está com efetivo completo. Considerado em efetivo serviço para todos os efeitos.
+
+| Prazo | Situação |
+|---|---|
+| > **24h** consecutivas sem comparecer/ausentar-se sem licença | **Ausente** |
+| > **8 dias** ignorado no desempenho de serviço/operação/calamidade | **Desaparecido** |
+| > **30 dias** desaparecido | **Extraviado** (oficialmente declarado) |
+
+**9 Motivos de exclusão do serviço ativo (Art. 98)**
+
+| Nº | Motivo |
+|---|---|
+| I | Transferência para a reserva remunerada |
+| II | Reforma |
+| III | Demissão |
+| IV | Perda de posto e patente |
+| V | Licenciamento |
+| VI | Exclusão a bem da disciplina |
+| VII | Deserção |
+| VIII | Falecimento |
+| IX | Extravio |
+
+**Demissão de oficiais (Arts. 114–115)**
+- A pedido **sem indenização**: ≥ 5 anos de oficialato.
+- A pedido **com indenização**: < 5 anos de oficialato.
+- Indenização adicional por curso/estágio: 2 anos (curso ≥ 6 meses); 3 anos (6–18 meses); 5 anos (> 18 meses).
+
+**Perda de posto e patente (Arts. 117–119)** — declaração de indignidade ou incompatibilidade pelo **Tribunal de Justiça do Estado**. Motivos: condenação > 2 anos; crimes de segurança do Estado; culpado no CJ; perda da nacionalidade.
+
+**Licenciamento (Art. 120)** — exclusivamente às **praças**. Ex-offício: conveniência, a bem da disciplina, conclusão do tempo de serviço, outros casos em lei. **Sem remuneração ou indenização**.
+
+**Exclusão a bem da disciplina (Arts. 123–125)** — aspirante a oficial ou praça com estabilidade assegurada. Competência: **Cmt-Geral**. Perda do grau hierárquico; sem indenização ou remuneração.
+
+---
+
+#### TÍTULO IV — Tempo de Serviço (Arts. 130–139)
+
+**Tempo efetivo de serviço (Art. 132)** — computado dia a dia desde a inclusão até o desligamento. Inclui: serviço nas Forças Armadas ou outras PM; PM da reserva convocada.
+
+**Anos de serviço (Art. 133)** = tempo efetivo + acréscimos:
+
+| Acréscimo | Quando computa |
+|---|---|
+| Serviço público federal/estadual/municipal anterior | Só na passagem à inatividade |
+| Atividade privada (lei específica) | Só na inatividade |
+| Oficial de Saúde com curso universitário: +1 ano/5 anos de serviço | Só na inatividade |
+| **Licença especial não gozada**: contada em **dobro** | Só na inatividade |
+| **Férias não gozadas**: contadas em **dobro** | Só na inatividade |
+
+**Tempo NÃO computável (Art. 133, §4º)**
+- Licença para saúde da família > 1 ano (cumulativo ou não)
+- Licença para tratar de interesse particular
+- Período como desertor
+- Cumprimento de pena de suspensão do posto/graduação/cargo/função
+- Cumprimento de pena restritiva da liberdade (sentença transitada em julgado)
+
+---
+
+### Conexões
+
+- [[Periodo01/03_LBI/resumo_LBI#Lei nº 9.161/2021 — CEDCBMPA]] — os preceitos éticos do Estatuto (Art. 30) e os 26 valores BM do CEDCBMPA se complementam; o Compromisso de Honra do Estatuto (Art. 35) é equivalente ao do CEDCBMPA (Arts. 21–22), com diferença importante: no Estatuto o texto das praças e aspirantes é **idêntico**, enquanto no CEDCBMPA são **distintos**.
+- [[Periodo01/03_LBI/resumo_LBI#Lei nº 8.388/2016 — Promoção dos Oficiais]] — o Estatuto é referenciado na Lei 8.388/2016 (Arts. 10–11) para os critérios de reserva remunerada; os institutos de agregação/reversão do Estatuto impactam diretamente o Quadro de Acesso da Lei de Promoções.
+- `Periodo01/??_DC/resumo_DC` *(pendente)* — Arts. 50–51: CJ julgado pelo TJ e CD julgado pelo Cmt-Geral refletem o devido processo legal e separação de funções constitucionais.
+- `Periodo01/??_DA/resumo_DA` *(pendente)* — agregação, reversão e excedente são atos administrativos regidos pela legalidade e hierarquia.
+
+---
+
+### Pontos de Atenção
+
+1. **Aplicação ao CBMPA**: após a Lei 9.387/2021, "policial militar" = "bombeiro militar" para todos os efeitos deste Estatuto.
+2. **Compromisso de honra**: no Estatuto, o texto é **único** para praças e aspirantes — diferente do CEDCBMPA, que tem textos distintos.
+3. **Promoção a Major**: exige **CAO** — exceto Saúde e Técnicos. QO de Administração e Especialistas **não podem** matricular no CAO.
+4. **9 motivos de exclusão (Art. 98)**: memorize a lista completa; extravio e perda de posto aparecem como pegadinha.
+5. **Demissão × Licenciamento × Exclusão a bem da disciplina**: demissão = oficiais; licenciamento = praças (sem estabilidade); exclusão a bem da disciplina = aspirante e praças **com** estabilidade.
+6. **Férias**: 30 dias para todos; núpcias 8 dias; luto 8 dias; instalação até 10 dias; trânsito até 30 dias.
+7. **Licença especial**: **6 meses por decênio** — não por quinquênio. Parcelável em 2–3 meses/ano civil.
+8. **Licença para interesse particular**: só com > 10 anos de serviço, **sem remuneração** e sem contagem de tempo.
+9. **Estabilidade da praça**: **10 anos** de efetivo serviço.
+10. **Perda de posto e patente**: competência do **Tribunal de Justiça** — não do Cmt-Geral nem do Governador.
+11. **Soldo irredutível** e impenhorável — ponto claro e frequente em questões objetivas.
+12. **Precedência por data de nascimento**: quando há igualdade em todos os critérios anteriores, o **mais velho** é o mais antigo.
+13. **Elegibilidade**: < 10 anos → afastar-se; ≥ 10 anos → agregado + inatividade automática se eleito na diplomação.

@@ -6,6 +6,7 @@ sigla: DA
 periodo: Periodo01
 criado_em: 06/06/2026
 atualizado_em: 06/06/2026
+versao: 1.1
 ---
 
 # MOC — Direito Administrativo I (DA)
@@ -48,6 +49,14 @@ atualizado_em: 06/06/2026
 | 01 | Conceito, Atributos e Tipos (Administrativa x Judiciária) | [[Periodo01/04_DA/pontos_chave/03_Poder-de-Policia/01_conceito-atributos-e-tipos]] |
 | 02 | Ciclo de Polícia, Delegação, Abuso de Poder e Taxa de Polícia | [[Periodo01/04_DA/pontos_chave/03_Poder-de-Policia/02_ciclo-delegacao-abuso-e-taxa]] |
 
+### 04 — Atos Administrativos
+> Origem: `Ato_Administrativo_Revisado.pdf`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Conceito, Distinções, Classificação e Espécies | [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/01_conceito-classificacao-e-especies]] |
+| 02 | Elementos de Validade (COFIM), Atributos, Fases e Desfazimento | [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/02_elementos-atributos-e-desfazimento]] |
+
 ---
 
 ## Materiais Originais
@@ -55,7 +64,7 @@ atualizado_em: 06/06/2026
 | Arquivo | Páginas | Unidades cobertas | Status |
 |---|---|---|---|
 | `APOSTILA DA.pdf` | 25 | I (Generalidades/Princípios) · III (Poderes Administrativos) | ✅ Processado |
-| `Ato_Administrativo_Revisado.pdf` | 6 | IV (Atos Administrativos) | ⏳ Aguardando leitura aprofundada |
+| `Ato_Administrativo_Revisado.pdf` | 6 | IV (Atos Administrativos) | ✅ Processado |
 
 ---
 
@@ -66,6 +75,6 @@ atualizado_em: 06/06/2026
 | I | Generalidades do Direito Administrativo | ✅ Coberto |
 | II | Serviços Públicos | 🔲 Sem material |
 | III | Poderes Administrativos (incl. Poder de Polícia) | ✅ Coberto |
-| IV | Atos Administrativos | ⏳ Material chegou — aguarda leitura |
+| IV | Atos Administrativos | ✅ Coberto |
 | V | Agentes Públicos | 🔲 Sem material |
 | VI | Responsabilidade Objetiva | 🔲 Sem material |

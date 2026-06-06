@@ -6,7 +6,7 @@ sigla: DA
 periodo: Periodo01
 criado_em: 06/06/2026
 atualizado_em: 06/06/2026
-versao: 1.0
+versao: 1.1
 moc_cfo: sim
 moc_materia: sim
 pensamentos_relacionados: []
@@ -279,3 +279,140 @@ O abuso de poder pode caracterizar ilícito penal, civil e administrativo. É co
 8. **Independência das esferas** — bis in idem proibido dentro da mesma esfera; absolvição penal por negativa de autoria/inexistência do fato/excludente repercute no admin.
 9. **CLCB** — renovação anual; declaração do proprietário; taxa devida mesmo sem vistoria in loco (STF RE 416.601)
 10. **CBMPA** — exerce poder de polícia **administrativa** (fiscalização de incêndio) e **judiciária militar** (IPM)
+
+---
+
+## Ato Administrativo — Conceito, Espécies, Elementos e Desfazimento
+> Adicionado em: 06/06/2026 | Origem: Ato_Administrativo_Revisado.pdf (6p)
+
+### Pré-requisitos
+- Princípios do DA (LIMPE, supremacia do interesse público)
+- Noção de poder vinculado e discricionário
+- Autotutela e desfazimento de atos
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| **Ato Administrativo** | Manifestação volitiva unilateral da Administração, regida pelo regime jurídico público, capaz de gerar efeitos jurídicos imediatos (Abreu, 2010) |
+| **Competência** | Círculo de poder atribuído por lei ao agente — sempre vinculada, irrenunciável, imprescritível |
+| **Finalidade** | Resultado de interesse público esperado pela lei — sempre vinculada |
+| **Motivo** | Pressuposto de fato e de direito que impulsiona a prática do ato |
+| **Objeto** | Efeito jurídico imediato do ato (conteúdo dispositivo) — deve ser lícito, possível, determinado e moral |
+| **Teoria dos Motivos Determinantes** | O motivo declarado vincula a validade do ato — se o motivo for falso, o ato é nulo |
+| **Presunção juris tantum** | Relativa — admite prova em contrário; inverte o ônus da prova para o administrado |
+| **Anulação** | Desfazimento por ilegalidade — efeito ex tunc (retroativo) |
+| **Revogação** | Desfazimento por conveniência/oportunidade — efeito ex nunc (prospectivo) |
+| **Licença** | Ato negocial vinculado — cumpridos os requisitos, a Adm. é obrigada a conceder |
+| **Autorização** | Ato negocial discricionário e precário — pode ser revogado a qualquer tempo |
+
+### Resumo
+
+#### 1. Conceito e Distinções
+
+**Ato Administrativo (Carvalho, 2020):** atos praticados no exercício da função administrativa sob o regime de direito público, que modificam, transferem ou extinguem direitos.
+
+**Nem tudo que a Administração faz é ato administrativo *stricto sensu*:**
+
+| Tipo | O que é | Exemplo |
+|---|---|---|
+| **Atos privados** | Adm. age como particular, sem prerrogativas de supremacia | Contrato de locação em que a Adm. é locatária |
+| **Atos políticos** | Função política/governamental com ampla discricionariedade constitucional | Veto presidencial, declaração de guerra, indicação de ministros |
+| **Atos materiais** | Execução física — sem conteúdo decisório | Demolição de prédio condenado pela Defesa Civil |
+
+---
+
+#### 2. Classificação quanto aos Destinatários
+
+- **Gerais (normativos):** situação abstrata — grupo indeterminado de pessoas. Ex: Portarias Normativas, POP do CBMPA
+- **Individuais (concretos):** destinatários determinados. Ex: nomeação, exoneração, ato de agregação
+
+---
+
+#### 3. Espécies de Atos Administrativos
+
+| Espécie | O que são | Exemplos no CBMPA |
+|---|---|---|
+| **Normativos** | Normas gerais e abstratas para detalhar a lei — dentro dos seus limites | Decreto, resolução, regimento, portaria normativa |
+| **Ordinatórios** | Ordenação interna — poder hierárquico; sem efeito externo para particulares | Portaria, circular, ordem de serviço, despacho, memorando, ofício |
+| **Negociais** | Consentimento ou faculdade ao particular para exercer atividade | Licença (vinculada), autorização e permissão (discricionárias e precárias) — manifestam-se via **alvará** |
+| **Enunciativos** | Atestam situação de fato ou emitem opinião técnica — sem imposição de vontade | Certidão, atestado, apostila/averbação, parecer |
+| **Punitivos** | Penalidades por infrações administrativas | Poder disciplinar (servidores) ou poder de polícia (particulares) |
+
+**Atos Negociais — distinções:**
+- **Licença**: vinculada — cumpridos os requisitos, a Adm. deve conceder (ex: licença para construir)
+- **Autorização**: discricionária e precária — pode ser revogada a qualquer tempo (ex: porte de arma)
+- **Permissão**: discricionária e precária — mas há interesse público; exige licitação prévia (ex: restaurante no Parque da Cidade)
+
+**Atos Ordinatórios — distinções:**
+- **Memorando**: comunicação interna entre agentes do mesmo órgão (mesmos setores)
+- **Ofício**: comunicação entre órgãos diferentes ou entre autoridade pública e particular
+
+---
+
+#### 4. Elementos (Requisitos de Validade) — COFIM
+
+Base: art. 2º da Lei nº 4.717/1965 (Lei de Ação Popular)
+
+| Elemento | Natureza | Essência |
+|---|---|---|
+| **C**ompetência | Sempre vinculada | Poder atribuído por lei ao agente; irrenunciável e imprescritível; admite delegação/avocação |
+| **O**bjeto | Vinculado ou discricionário | Efeito jurídico imediato — deve ser lícito, possível, determinado e moral |
+| **F**inalidade | Sempre vinculada | Resultado de interesse público previsto em lei; desvio = abuso de poder + nulidade |
+| **F**orma | Sempre vinculada | Modo de exteriorização — regra: forma escrita; exceções previstas em lei |
+| **M**otivo | Vinculado ou discricionário | Pressuposto fático e jurídico; vincula a validade pela **Teoria dos Motivos Determinantes** |
+
+> **Mnemônico:** **COFIM** — Competência · Objeto · Finalidade · Forma · Motivo
+
+---
+
+#### 5. Atributos do Ato Administrativo
+
+| Atributo | O que é |
+|---|---|
+| **Presunção de Legitimidade e Veracidade** | Presunção *juris tantum* (relativa) de conformidade com a lei e com os fatos — inverte o ônus da prova |
+| **Imperatividade** | Impõe obrigações unilateralmente, independente da concordância do particular |
+| **Exigibilidade** | Coerção **indireta** — multas, restrições de direitos |
+| **Executoriedade** | Coerção **direta** — Adm. executa por suas próprias forças sem autorização judicial (urgência ou previsão legal) |
+| **Tipicidade** | O ato deve corresponder a figura prevista em lei — veda atos arbitrários ou inominados |
+
+---
+
+#### 6. Fases de Constituição e Desfazimento
+
+**Planos de análise:**
+- **Perfeição (Existência):** cumprimento de todas as etapas de formação previstas em lei
+- **Validade:** todos os elementos (COFIM) em conformidade com o ordenamento
+- **Eficácia:** aptidão para produzir efeitos — a **publicação é condição de eficácia**
+
+**Desfazimento dos atos:**
+
+| Forma | Motivo | Efeito | Quem pode |
+|---|---|---|---|
+| **Anulação** | Ilegalidade (vício) | *Ex tunc* — retroage ao nascedouro (ressalva: terceiros de boa-fé) | Administração (autotutela) ou Judiciário |
+| **Revogação** | Conveniência e oportunidade (mérito) | *Ex nunc* — só para frente; respeita o passado | Exclusivamente a Administração |
+| **Extinção Natural** | Cumprimento dos efeitos ou término do prazo | — | — |
+| **Desaparecimento** | Morte do beneficiário ou destruição da coisa | — | — |
+| **Renúncia** | Beneficiário abdica do direito (atos ampliativos) | — | Particular |
+
+> **Súmula STF 473**: a Administração pode anular seus atos ilegais ou revogá-los por conveniência/oportunidade, respeitados os direitos adquiridos e ressalvada a apreciação judicial.
+
+### Conexões
+
+- [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/01_conceito-classificacao-e-especies]]
+- [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/02_elementos-atributos-e-desfazimento]]
+- [[Periodo01/04_DA/pontos_chave/01_Generalidades-e-Principios/03_principios-reconhecidos]] — autotutela: anulação e revogação
+- [[Periodo01/04_DA/pontos_chave/02_Poderes-Administrativos/01_poderes-vinculado-e-discricionario]] — vinculação/discricionariedade dos elementos COFIM
+
+### Pontos de Atenção
+
+1. **COFIM** — decorar os 5 elementos e quais são sempre vinculados (Competência, Finalidade, Forma)
+2. **Teoria dos Motivos Determinantes** — motivo falso = ato nulo, mesmo que não fosse obrigatório declará-lo
+3. **Licença** (vinculada) ≠ **Autorização** (discricionária/precária) ≠ **Permissão** (discricionária/precária + interesse público + licitação)
+4. **Alvará** = forma de manifestação dos atos negociais (licença, autorização, permissão)
+5. **Memorando** (interno, mesmo órgão) ≠ **Ofício** (entre órgãos diferentes ou autoridade x particular)
+6. **Anulação** (ilegal = *ex tunc*) ≠ **Revogação** (inconveniente = *ex nunc*) — revogação é competência exclusiva da Adm.
+7. **Presunção de legitimidade** é *juris tantum* — o particular que contestar precisa provar o vício
+8. **Executoriedade** ≠ **Exigibilidade** — executoriedade é coerção direta (age sem Judiciário); exigibilidade é indireta (multa)
+9. **Publicação** = condição de **eficácia** (não de validade)
+10. Atos políticos (veto, guerra) e atos materiais (demolição física) **não são** atos administrativos *stricto sensu*
