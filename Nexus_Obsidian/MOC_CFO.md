@@ -30,15 +30,15 @@ O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Per
 | —       | ETICA  | Ética e Cidadania                         | —                                      | 🔲 sem material                                 |
 | —       | TLTI   | Telecomunicações e TI                     | —                                      | 🔲 sem material                                 |
 | —       | IM     | Instrução Militar I                       | —                                      | 🔲 sem material                                 |
-| —       | ANFI   | Anatomia e Fisiologia                     | —                                      | 🔲 sem material                                 |
+| 05      | ANFI   | Anatomia e Fisiologia                     | [[Periodo01/05_ANFI/MOC_ANFI]]         | ✅ Aulas 01–03 · Introdução + Osteologia + Miologia · 12 PK · 3 docs processados |
 | 01      | APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]]         | ✅ Unidade VI · Choque e Hemorragia · Oxigenoterapia |
 | —       | DH     | Direitos Humanos                          | —                                      | 🔲 sem material                                 |
 | —       | DC     | Direito Constitucional                    | —                                      | 🔲 sem material                                 |
 | 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Unidades I, III e IV · 11 PK · 2 docs processados |
-| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ✅ Lei 8.388/2016 (6 PK) · ⏳ +2 docs aguardando |
+| 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ✅ Lei 8.388/2016 (6 PK) · ✅ Lei 11.060/2025 (4 PK) · ✅ Lei 5.251/1985 (5 PK) · 5 docs processados |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
 | —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
-| —       | FSV    | Fundamentos de Salvamento Veicular        | —                                      | 🔲 sem material                                 |
+| 06      | FSV    | Fundamentos de Salvamento Veicular        | [[Periodo01/06_FSV/MOC_FSV]]           | ✅ Aulas 01–02 · 8 PK · 5 temas · 2 docs processados |
 | —       | FSAL   | Fundamentos de Salvamento em Altura       | —                                      | 🔲 sem material                                 |
 | —       | FSAQ   | Fundamentos de Salvamento Aquático        | —                                      | 🔲 sem material                                 |
 | —       | OAC    | OAC                                       | —                                      | 🔲 sem material                                 |
