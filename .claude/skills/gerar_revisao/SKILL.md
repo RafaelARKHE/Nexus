@@ -24,6 +24,7 @@ Sub-skill geradora do documento de revisão para avaliação.
 
 - `resumo_[SIGLA].md` da disciplina
 - Arquivos de `pontos_chave/` relevantes ao escopo informado
+- Arquivos de `Pensamento/` relacionados ao escopo (passados pela REVISAO_PROVA quando encontrados)
 - PDF original em `Nexus_Materiais/` apenas se necessário confirmar informação específica
 
 ---
@@ -68,6 +69,9 @@ Baseado na análise do material + escopo informado pelo usuário.
 
 ## Conexões com Outras Disciplinas
 Apenas quando diretamente relevante para a prova.
+Se REVISAO_PROVA identificou arquivos de Pensamento relacionados, incorporá-los aqui:
+referencias explícitas ao raciocínio já construído sobre o tema.
+Formato: [[Pensamento/AAAA-MM-DD_tema]] (apenas para arquivos que já existem)
 ```
 
 ---

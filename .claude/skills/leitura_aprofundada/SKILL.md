@@ -56,6 +56,12 @@ Claude busca o arquivo em `Nexus_Materiais/Periodo0N/` e processa.
 - Lê o `MOC_[SIGLA].md` da disciplina (se existir) para ter contexto do que já foi estudado
 - Lê o `resumo_[SIGLA].md` da disciplina (se existir) para não duplicar conteúdo
 
+### Passo 1.5 — Verificação de raciocínio consolidado
+- Lê `Nexus/Nexus_Obsidian/Pensamento/MOC_Pensamentos.md`
+- Verifica se existe pensamento consolidado relacionado à disciplina sendo processada
+- Se sim: carrega os arquivos de Pensamento relevantes identificados no MOC
+- Guarda esse contexto para passar a RESUMO_GERAL e PONTOS_CHAVE na orquestração do Passo 3
+
 ### Passo 2 — Verificação da pasta de destino
 - Verifica se a pasta do período existe em `Nexus_Obsidian/` — cria se necessário
 - Verifica se a pasta da disciplina existe em `Nexus_Obsidian/Periodo0N/`
@@ -63,7 +69,7 @@ Claude busca o arquivo em `Nexus_Materiais/Periodo0N/` e processa.
 - O prefixo numérico deve ser idêntico ao da pasta correspondente em `Nexus_Materiais/`
 
 ### Passo 3 — Orquestração
-Aciona em sequência:
+Aciona em sequência, passando o contexto de pensamentos encontrados no Passo 1.5:
 1. Skill **RESUMO_GERAL** — cria ou atualiza o resumo da disciplina
 2. Skill **PONTOS_CHAVE** — cria arquivos de pontos-chave do conteúdo processado
 

@@ -14,25 +14,34 @@ em conhecimento estruturado e persistente, acessível em qualquer dispositivo.
 Nexus/                          ← Raiz do projeto (você está aqui)
 ├── CLAUDE.md                   ← Este arquivo
 ├── _entradas/                  ← PDFs novos chegam aqui
+├── _modelos/                   ← Templates institucionais (.pptx etc. — nunca alterar)
 ├── .claude/skills/             ← Skills do sistema
 │
 ├── Nexus_Obsidian/             ← Vault do Obsidian (arquivos .md leves)
 │   ├── MOC_CFO.md              ← Mapa geral de todo o conhecimento
+│   ├── Pensamento/             ← Raciocínio consolidado (criada sob demanda)
+│   │   ├── MOC_Pensamentos.md  ← Mapa de todo raciocínio registrado
+│   │   └── AAAA-MM-DD_tema.md  ← Arquivos de pensamento consolidado
 │   └── Periodo0N/              ← Pastas por período do CFO
 │       └── 0N_[SIGLA]/         ← Pastas por disciplina (criadas sob demanda)
 │           ├── MOC_[SIGLA].md  ← Mapa da disciplina
 │           ├── resumo_[SIGLA].md
 │           ├── pontos_chave/
 │           │   └── 0N_[assunto].md
+│           ├── Apresentacoes/  ← Roteiros de trabalhos/seminários (criada sob demanda)
+│           │   └── roteiro_[tema].md
 │           └── VC0X/           ← Materiais de prova (criados sob demanda)
 │               ├── revisao_VC0X.md
 │               ├── audio_VC0X.txt
 │               ├── simulado_VC0X.html
 │               └── flashcard_VC0X.html
 │
-└── Nexus_Materiais/            ← PDFs originais (fora do Obsidian)
+└── Nexus_Materiais/            ← PDFs originais e binários gerados (fora do Obsidian)
     └── Periodo0N/
         └── 0N_[SIGLA]/
+            └── Apresentacoes/  ← .pptx finais de trabalhos/seminários (criada sob demanda)
+                └── [tema]/
+                    └── apresentacao_[tema].pptx
 ```
 
 ---
@@ -91,7 +100,8 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 ### Fluxo Diário
 | Skill | Gatilho | Função |
 |---|---|---|
-| `documento_entrada` | "documento novo" | Classifica e direciona PDFs novos |
+| `documento_entrada` | "documento novo" | Classifica e direciona novos documentos (PDF, PPTX, imagens QIS) |
+| `qis_para_calendario` | Automático via `documento_entrada` ou "qis calendário" | Converte QIS em eventos no Google Calendar |
 | `leitura_aprofundada` | Automático ou "leitura aprofundada [disciplina]" | Processa PDF e gera resumo e pontos-chave |
 | `resumo_geral` | Acionada pela leitura_aprofundada | Gera/atualiza resumo_[SIGLA].md |
 | `pontos_chave` | Acionada pela leitura_aprofundada | Gera arquivos de pontos-chave por assunto |
@@ -105,6 +115,17 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 | `gerar_simulado` | Selecionado em revisao_prova | 30 questões interativas em HTML |
 | `gerar_flashcards` | Selecionado em revisao_prova | Cartões de memorização interativos em HTML |
 
+### Camada de Raciocínio
+| Skill | Gatilho | Função |
+|---|---|---|
+| `consulta_nexus` | "nexus, [dúvida]" · "me explica [conceito]" · "tenho dúvida sobre [tema]" | Busca inteligente em 3 camadas — responde dúvidas com contexto do CBMPA |
+| `consolidar` | "consolidar" · "salvar raciocínio" · "dúvida sanada" | Sintetiza sessão de consulta em arquivo permanente de Pensamento |
+
+### Trabalhos e Apresentações
+| Skill | Gatilho | Função |
+|---|---|---|
+| `slides_cfo` | "fazer slides", "criar apresentação", "trabalho em grupo", "seminário" | Gera apresentação `.pptx` institucional (modelo ABM) + roteiro rastreável em `Apresentacoes/` |
+
 ---
 
 ## Convenções do sistema
@@ -115,6 +136,23 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 - **Arquivos .md:** kebab-case — `01_hierarquia-disciplina.md`
 - **PDFs originais:** sempre em `Nexus_Materiais/` — nunca em `Nexus_Obsidian/`
 - **Arquivos de estudo:** sempre em `Nexus_Obsidian/` — nunca misturar com PDFs
+- **VC nos documentos e eventos** = Verificação Corrente (nunca "Verificação de Conhecimento")
+- **Templates institucionais:** sempre em `_modelos/` — nunca alterar estrutura, cores ou fontes
+- **Apresentações (`.pptx`):** par binário/rastreável espelhando PDF↔resumo —
+  o `.pptx` final fica em `Nexus_Materiais/.../Apresentacoes/[tema]/apresentacao_[tema].pptx`,
+  o roteiro vivo e linkável ao MOC fica em `Nexus_Obsidian/.../Apresentacoes/roteiro_[tema].md`.
+  Em caso de retrabalho, o roteiro ganha nova versão (`versao: 2.0` + histórico de
+  versões) — o `.pptx` é substituído como entregável corrente, mas o roteiro preserva o histórico
+
+### Mapeamento QIS → Sigla Nexus
+Algumas abreviações usadas no QIS diferem das siglas do sistema:
+
+| Sigla no QIS | Sigla Nexus | Disciplina              |
+|--------------|-------------|-------------------------|
+| EC           | ETICA       | Ética e Cidadania       |
+| DA I         | DA          | Direito Administrativo I|
+| IM I         | IM          | Instrução Militar I     |
+| TFM I        | TFM         | TFM I                   |
 
 ---
 
@@ -125,13 +163,14 @@ Todo arquivo gerado pelo sistema deve começar com:
 ```yaml
 ---
 sistema: Nexus
-tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard]
-disciplina: [NOME_COMPLETO]
-sigla: [SIGLA]
+tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | pensamento | apresentacao]
+disciplina: [NOME_COMPLETO]        # não usado no tipo pensamento
+sigla: [SIGLA]                     # não usado no tipo pensamento
 periodo: Periodo0N
 criado_em: [DATA DD/MM/AAAA]
 atualizado_em: [DATA DD/MM/AAAA]
 versao: 1.0
+pensamentos_relacionados: []       # opcional — preenchido quando existir raciocínio vinculado
 ---
 ```
 

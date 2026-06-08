@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards — Direito Administrativo I | VC01</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
+  header { padding: 14px 16px 6px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 14px; color: #6b6a66; margin: 0; }
+  .meta { display:flex; justify-content: space-between; font-size: 13px; color:#6b6a66; margin: 14px 2px 8px; }
+  .progress-bar { height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; margin-bottom: 16px;}
+  .progress-bar > div { height: 100%; background: #8a3324; transition: width .25s ease; }
+
+  .scene { perspective: 1400px; margin-bottom: 16px; }
+  .card3d {
+    position: relative; width: 100%; min-height: 240px;
+    transform-style: preserve-3d; transition: transform .5s;
+    cursor: pointer;
+  }
+  .card3d.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,.1);
+  }
+  .face.front { background: #fff; }
+  .face.back { background: #fbf3e6; transform: rotateY(180deg); border: 1.5px solid #d9a441; }
+  .face .label {
+    font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: #9a988f; margin-bottom: 10px;
+  }
+  .face.back .label { color: #9a6b1a; }
+  .face .term { font-size: 19px; font-weight: 700; line-height: 1.4; }
+  .face .def { font-size: 16px; line-height: 1.55; }
+  .face .hint { font-size: 13px; color: #9a988f; margin-top: 14px; }
+
+  .actions { display: flex; gap: 10px; margin-bottom: 10px; }
+  .btn {
+    flex: 1; text-align: center; border: none; border-radius: 10px;
+    padding: 14px; font-size: 15px; font-weight: 700; min-height: 48px; cursor: pointer;
+  }
+  .btn.know { background: #4a8f5b; color: #fff; }
+  .btn.know:active { background: #3c7549; }
+  .btn.later { background: #fff; color: #8a3324; border: 1.5px solid #8a3324; }
+  .btn.later:active { background: #f8e9e7; }
+  .btn.full { width: 100%; background: #8a3324; color: #fff; margin-top: 6px; }
+  .btn.full:active { background: #6f2a1d; }
+  .btn.ghost { width: 100%; background: #fff; color: #6b6a66; border: 1.5px solid #e3e1da; margin-top: 8px; }
+
+  .summary { background:#fff; border-radius:14px; padding:22px; text-align:center; box-shadow: 0 1px 4px rgba(0,0,0,.08);}
+  .summary .num { font-size: 40px; font-weight: 800; color:#8a3324; margin: 6px 0;}
+  .summary .row { display:flex; justify-content:space-around; margin: 16px 0; }
+  .summary .row .item .n { font-size: 26px; font-weight: 800; }
+  .summary .row .item .l { font-size: 13px; color:#6b6a66; }
+  .summary .row .item.know .n { color:#4a8f5b; }
+  .summary .row .item.later .n { color:#8a3324; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 22px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Flashcards — Direito Administrativo I</h1>
+    <p>VC01 · Quinta-feira, 11/06/2026 · termos técnicos, definições e dados de memorização — escopo: Generalidades/Princípios, Poderes Administrativos, Poder de Polícia, Atos Administrativos</p>
+  </header>
+  <div id="app"></div>
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — gerado a partir de pontos_chave/ e resumo_DA</p>
+</div>
+
+<script>
+const CARDS_RAW = [
+  { front: "Direito Administrativo (conceito)", back: "Conjunto harmônico de princípios jurídicos que regem os órgãos, agentes e atividades públicas para realizar os fins do Estado (Hely Lopes Meirelles). É ramo do Direito Público." },
+  { front: "Regime Jurídico Administrativo", back: "Conjunto de prerrogativas (expropriar, rescindir contratos unilateralmente, autotutela, presunção de legitimidade) e restrições que colocam a Administração em posição de supremacia sobre o particular." },
+  { front: "Princípio (no DA)", back: "Postulado que norteia o modo de agir da Administração, definindo prerrogativas e restrições — funciona como o 'DNA' de toda atuação administrativa." },
+  { front: "As três premissas do Direito Administrativo", back: "1) Desigualdade jurídica — Administração tem supremacia; 2) Presunção de legitimidade — atos presumidos legítimos até prova em contrário; 3) Discricionariedade — Administração pode sopesar a lei no caso concreto." },
+  { front: "Mérito Administrativo", back: "Esfera de conveniência e oportunidade do administrador — não controlável pelo Poder Judiciário, que avalia apenas a legalidade." },
+  { front: "Discricionariedade", back: "Liberdade do administrador de escolher, dentro dos limites legais, a solução mais adequada ao caso concreto. Atenção: discricionariedade ≠ arbitrariedade." },
+  { front: "Vinculação (poder/ato vinculado)", back: "Ausência de margem de escolha — a lei define o único comportamento possível. Ex.: limite de 35 anos no serviço ativo (art. 69, LC nº 142/2021)." },
+  { front: "LIMPE — o que cada letra representa (art. 37, CF/88)", back: "L — Legalidade; I — Impessoalidade; M — Moralidade; P — Publicidade; E — Eficiência. São os princípios constitucionais da Administração Pública." },
+  { front: "Legalidade — Administração x particular", back: "Particular: pode tudo o que a lei NÃO proíbe. Administração: só pode fazer o que a lei AUTORIZA." },
+  { front: "Publicidade — qual sua função em relação à eficácia do ato?", back: "A publicação é condição de EFICÁCIA do ato administrativo — sem ela, o ato pode estar perfeito e válido, mas não produz efeitos." },
+  { front: "Eficiência (EC nº 19/1998) — o que abrange além da presteza no serviço?", back: "Abrange também a duração razoável do processo (art. 5º, LXXVIII, CF — incluído pela EC nº 45/2004)." },
+  { front: "Princípios Gerais do Direito Administrativo", back: "Supremacia do Interesse Público (o interesse público prevalece sobre o privado) e Indisponibilidade do Interesse Público (a Administração não pode abrir mão do interesse coletivo)." },
+  { front: "Autotutela", back: "Poder da Administração de, independentemente do Judiciário, anular atos ilegais ou revogar atos inconvenientes/inoportunos. Fundamento: Súmulas STF 346 e 473." },
+  { front: "Súmula STF 346", back: "\"A Administração pode anular seus próprios atos.\"" },
+  { front: "Súmula STF 473", back: "A Administração pode anular seus atos quando eivados de vícios que os tornem ilegais, ou revogá-los por conveniência/oportunidade — respeitados os direitos adquiridos e ressalvada a apreciação judicial." },
+  { front: "Anulação", back: "Desfazimento de ato por ILEGALIDADE. Efeito ex tunc (retroativo, ressalvados terceiros de boa-fé). Pode ser feita pela Administração (autotutela) ou pelo Judiciário." },
+  { front: "Revogação", back: "Desfazimento de ato por CONVENIÊNCIA e OPORTUNIDADE (mérito). Efeito ex nunc (só para frente). Competência EXCLUSIVA da Administração — o Judiciário não revoga." },
+  { front: "Prazo da autotutela para anular atos favoráveis ao destinatário", back: "5 anos (Lei nº 8.972/2020, art. 67), salvo má-fé do beneficiário — nesse caso, o prazo não corre da mesma forma." },
+  { front: "Continuidade dos Serviços Públicos", back: "Exige prestação ininterrupta. É por isso que militares não podem fazer greve nem se sindicalizar — garantia em favor da sociedade." },
+  { front: "Segurança Jurídica / Princípio da Confiança", back: "Veda a aplicação retroativa de nova interpretação normativa (art. 30, LINDB). Protege quem agiu de boa-fé conforme atos oficiais anteriores." },
+  { front: "Poder Vinculado — exemplo prático no CBMPA", back: "Limite máximo de 35 anos no serviço ativo (art. 69, LC nº 142/2021) — a lei define o único comportamento possível, sem margem de escolha." },
+  { front: "Poder Discricionário — conveniência e oportunidade", back: "Conveniência = condições em que o ato é praticado. Oportunidade = momento em que é praticado. Juntas formam o mérito administrativo." },
+  { front: "Poder Normativo (Regulamentar)", back: "Permite expedir normas gerais com efeito erga omnes, SEM inovar na ordem jurídica — sempre inferiores à lei. Ex.: decretos, resoluções, portarias, instruções técnicas, regimentos." },
+  { front: "Poder Hierárquico", back: "Decorre da estrutura verticalizada da Administração: dar ordens, controlar subordinados, avocar/delegar funções, editar atos de efeito interno. Só existe DENTRO da mesma estrutura — não há hierarquia entre pessoas jurídicas diferentes." },
+  { front: "Poder Disciplinar — marco de transição a partir do Poder Hierárquico", back: "A abertura do processo administrativo é o marco que caracteriza o exercício do poder disciplinar, decorrente do poder hierárquico." },
+  { front: "Sanções do CEDCBMPA (art. 39) — quais são?", back: "Repreensão, suspensão, reforma administrativa disciplinar, licenciamento a bem da disciplina, exclusão a bem da disciplina e demissão (esta última exclusiva para oficiais)." },
+  { front: "Independência das esferas — consequência de cada uma", back: "Penal → restrição da liberdade; Civil → indenização/reparação do dano; Administrativa → perda do cargo. O mesmo fato pode gerar punição nas três; bis in idem só é vedado DENTRO da mesma esfera." },
+  { front: "Quando a absolvição penal repercute na esfera administrativa?", back: "Quando fundamentada em: negativa de autoria, inexistência do fato, ou excludente de ilicitude." },
+  { front: "Súmula STJ 611", back: "Processo disciplinar com base em denúncia anônima é PERMITIDO, desde que haja motivação e respaldo em investigação." },
+  { front: "Súmula STJ 641", back: "A portaria de instauração do processo disciplinar prescinde (dispensa) de exposição detalhada dos fatos." },
+  { front: "Súmula STJ 635", back: "O prazo prescricional inicia com o conhecimento do fato pela autoridade; interrompe-se com a instauração de sindicância/PAD; volta a correr após 140 dias." },
+  { front: "Súmula Vinculante nº 5", back: "A falta de advogado no processo administrativo disciplinar (PAD) NÃO ofende a Constituição." },
+  { front: "Poder de Polícia (conceito — CTN, art. 78)", back: "Atividade da Administração que limita ou disciplina direito, interesse ou liberdade em razão do interesse público (segurança, higiene, ordem, costumes etc.). É atividade típica de Estado — só exercida por pessoas jurídicas de direito público." },
+  { front: "Atributos do Poder de Polícia", back: "Discricionariedade (em regra discricionário, vinculado quando há requisitos cumpridos), Coercibilidade (obrigatoriedade independente da vontade do particular) e Autoexecutoriedade (execução sem intervenção judicial prévia — quando a lei autoriza ou há urgência; NÃO é absoluta)." },
+  { front: "Polícia Administrativa x Polícia Judiciária", back: "Administrativa: incide sobre bens/direitos/atividades, caráter preventivo, impede atos lesivos, exercida por diversos órgãos (inclui CBMPA). Judiciária: incide sobre pessoas, caráter repressivo, apura ilícitos penais, exercida por corporações especializadas." },
+  { front: "CBMPA e PMPA — que tipo de polícia exercem ao apurar ilícitos penais militares?", back: "Polícia judiciária militar — por meio do Inquérito Policial Militar (IPM)." },
+  { front: "Ciclo de Polícia — as 4 fases, em ordem", back: "Ordem de Polícia (norma legal que impõe restrições) → Consentimento (anuência prévia — licenças, alvarás, autorizações) → Fiscalização (verificação do cumprimento) → Sanção (penalidade — só prevista em lei)." },
+  { front: "Delegação do Poder de Polícia — STF, RE 633782", back: "É constitucional delegar o poder de polícia (exceto a ORDEM DE POLÍCIA) a pessoas jurídicas de direito privado da Administração Indireta, de capital majoritariamente público, em regime não concorrencial. A ordem de polícia é absolutamente indelegável." },
+  { front: "Excesso de Poder x Desvio de Poder", back: "Excesso de Poder = vício de COMPETÊNCIA (agente extrapola seus limites). Desvio de Poder = vício de FINALIDADE (agente competente busca fim diverso do legal)." },
+  { front: "Taxa de Polícia — qual é o fato gerador?", back: "A FISCALIZAÇÃO em si — não a prestação de serviço. É cobrada periodicamente; cada nova fiscalização gera novo fato gerador (base: art. 145, II, CF; arts. 77 e 78, CTN)." },
+  { front: "STF — RE 416.601 (taxa de polícia)", back: "Presume-se o exercício do poder de polícia quando existe órgão fiscalizador estruturado — não se exige fiscalização individualizada porta a porta." },
+  { front: "CLCB — Certificado de Licenciamento do Corpo de Bombeiros", back: "Renovação ANUAL obrigatória (art. 62, Lei nº 9.234/2021), mediante declaração de manutenção das medidas de segurança (dispensa vistoria, mas permite fiscalização a qualquer tempo); condicionada ao pagamento da taxa." },
+  { front: "Ato Administrativo (conceito)", back: "Manifestação de vontade unilateral da Administração, regida pelo regime jurídico de direito público, capaz de produzir efeitos jurídicos imediatos (Abreu, 2010 / Carvalho, 2020)." },
+  { front: "O que NÃO é ato administrativo em sentido estrito? (3 categorias)", back: "Atos privados (Adm. age como particular — ex.: contrato de locação como locatária), Atos políticos (veto, declaração de guerra, indicação de ministros) e Atos materiais (execução física — ex.: demolição)." },
+  { front: "As 5 espécies de Atos Administrativos", back: "Normativos (decretos, portarias normativas), Ordinatórios (memorando, ofício, circular), Negociais (licença, autorização, permissão — via alvará), Enunciativos (certidão, atestado, parecer) e Punitivos (sanções disciplinares ou de polícia)." },
+  { front: "Atos Negociais — Licença x Autorização x Permissão", back: "Licença = vinculada (cumpridos os requisitos, Adm. deve conceder). Autorização = discricionária e precária (revogável a qualquer tempo). Permissão = discricionária e precária + interesse público + exige licitação prévia." },
+  { front: "Memorando x Ofício", back: "Memorando = comunicação interna entre agentes do MESMO órgão. Ofício = comunicação entre órgãos DIFERENTES, ou entre autoridade pública e particular." },
+  { front: "COFIM — os 5 elementos do ato administrativo", back: "Competência (sempre vinculada), Objeto (vinculado ou discricionário), Finalidade (sempre vinculada), Forma (sempre vinculada) e Motivo (vinculado ou discricionário). Base: art. 2º, Lei nº 4.717/1965." },
+  { front: "Teoria dos Motivos Determinantes", back: "O motivo declarado vincula a validade do ato — se o motivo for falso, o ato é NULO, mesmo que a lei não exigisse sua declaração." },
+  { front: "Presunção juris tantum", back: "Presunção relativa — admite prova em contrário; inverte o ônus da prova para quem contesta o ato (o administrado)." },
+  { front: "Atributos do Ato Administrativo (5)", back: "Presunção de Legitimidade e Veracidade, Imperatividade, Exigibilidade (coerção indireta — multas), Executoriedade (coerção direta — Adm. age sem o Judiciário) e Tipicidade (corresponder a figura prevista em lei)." },
+  { front: "Exigibilidade x Executoriedade", back: "Exigibilidade = coerção INDIRETA (multas, restrições de direitos). Executoriedade = coerção DIRETA (a Administração executa por suas próprias forças, sem autorização judicial — quando há urgência ou previsão legal)." },
+  { front: "Fases de constituição do ato administrativo (3 planos)", back: "Perfeição/Existência (cumprimento das etapas de formação), Validade (todos os elementos do COFIM em conformidade) e Eficácia (aptidão para produzir efeitos — a publicação é condição de eficácia)." },
+  { front: "Formas de desfazimento/extinção do ato administrativo", back: "Anulação (ilegalidade, ex tunc), Revogação (conveniência/oportunidade, ex nunc), Extinção natural (cumprimento dos efeitos/prazo), Desaparecimento (morte do beneficiário/destruição da coisa) e Renúncia (o próprio beneficiário abdica do direito)." },
+  { front: "Súmula STF 473 — qual sua relação com o desfazimento dos atos?", back: "Reforça que a Administração pode anular atos ilegais (ex tunc) ou revogar atos por conveniência/oportunidade (ex nunc), respeitados os direitos adquiridos e ressalvada, em todos os casos, a apreciação judicial." }
+];
+
+let order = [];
+let idx = 0;
+let know = 0;
+let later = [];
+let flipped = false;
+let reviewMode = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildDeck(cards){
+  order = shuffle(cards);
+  idx = 0;
+  know = 0;
+  later = [];
+  flipped = false;
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(idx >= order.length){
+    app.innerHTML = `
+      <div class="summary">
+        <div class="term" style="font-size:18px;">Baralho concluído</div>
+        <div class="num">${order.length} cartões</div>
+        <div class="row">
+          <div class="item know"><div class="n">${know}</div><div class="l">Sei</div></div>
+          <div class="item later"><div class="n">${later.length}</div><div class="l">Revisar depois</div></div>
+        </div>
+        ${later.length > 0 ? '<button class="btn full" onclick="reviewLater()">Refazer apenas os pendentes</button>' : ''}
+        <button class="btn ghost" onclick="buildDeck(CARDS_RAW)">Embaralhar e recomeçar tudo</button>
+      </div>`;
+    return;
+  }
+  flipped = false;
+  const c = order[idx];
+  const pct = Math.round((idx/order.length)*100);
+  app.innerHTML = `
+    <div class="meta"><span>${reviewMode ? 'Revisão dos pendentes' : 'Baralho completo'} — cartão ${idx+1} de ${order.length}</span><span>Sei: ${know} · Revisar: ${later.length}</span></div>
+    <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    <div class="scene">
+      <div class="card3d" id="card3d" onclick="flip()">
+        <div class="face front">
+          <span class="label">Termo</span>
+          <div class="term">${c.front}</div>
+          <div class="hint">Toque no cartão para ver a definição</div>
+        </div>
+        <div class="face back">
+          <span class="label">Definição</span>
+          <div class="def">${c.back}</div>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn later" onclick="mark(false)">Revisar depois</button>
+      <button class="btn know" onclick="mark(true)">Sei</button>
+    </div>
+    <button class="btn ghost" onclick="buildDeck(CARDS_RAW)">Embaralhar tudo e recomeçar</button>`;
+}
+
+function flip(){
+  flipped = !flipped;
+  document.getElementById('card3d').classList.toggle('flipped', flipped);
+}
+
+function mark(knewIt){
+  const c = order[idx];
+  if(knewIt) know++;
+  else later.push(c);
+  idx++;
+  render();
+}
+
+function reviewLater(){
+  reviewMode = true;
+  buildDeck(later);
+}
+
+buildDeck(CARDS_RAW);
+</script>
+</body>
+</html>

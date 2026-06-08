@@ -40,6 +40,12 @@ Usuário informa:
 - Mapeia o que está disponível vs. o que foi solicitado no escopo
 - Se necessário confirmar alguma informação específica, pode consultar o PDF original em `Nexus_Materiais/Periodo0N/0N_[SIGLA]/`
 
+### Passo 1.5 — Verificação de raciocínio consolidado
+- Lê `Nexus/Nexus_Obsidian/Pensamento/MOC_Pensamentos.md`
+- Verifica se existe pensamento consolidado relacionado ao escopo da prova (por tema ou disciplina)
+- Se sim: carrega os arquivos de Pensamento relevantes identificados no MOC
+- Guarda esse contexto para passar ao GERAR_REVISAO na etapa de execução
+
 ### Passo 2 — Criação da subpasta
 - Verifica o último número de VC usado na disciplina
 - Cria subpasta `VC0X/` dentro da pasta da disciplina no Nexus_Obsidian
@@ -52,7 +58,7 @@ Tenho prova de [DISCIPLINA] preparada. O que deseja gerar?
 
 1. GERAR_REVISAO     — documento unificado focado no escopo da prova
 2. GERAR_AUDIO       — roteiro de áudio (~30 min) para escuta no deslocamento
-3. GERAR_SIMULADO    — 30 questões interativas em HTML
+3. GERAR_SIMULADO    — 15 questões comentadas e interativas em HTML
 4. GERAR_FLASHCARDS  — cartões de memorização interativos em HTML
 5. Todos
 

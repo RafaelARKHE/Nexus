@@ -4,22 +4,51 @@ description: >
   Skill de geração de arquivos de pontos-chave por assunto no sistema Nexus.
   Acionada automaticamente pela skill LEITURA_APROFUNDADA. Também acionar quando
   o usuário pedir "pontos-chave de [assunto]", "criar pontos-chave", "destacar
-  pontos importantes". Gera um arquivo .md separado para cada assunto autônomo
-  identificado no material, com prefixo numérico definindo a ordem lógica de estudo.
+  pontos importantes". Gera arquivos organizados em subpastas temáticas dentro de
+  pontos_chave/, com prefixo numérico definindo a ordem lógica de estudo dentro
+  de cada tema.
 ---
 
 # PONTOS_CHAVE
 
-Skill de geração de arquivos de pontos-chave por assunto de uma disciplina.
+Skill de geração de arquivos de pontos-chave por assunto de uma disciplina,
+organizados em subpastas por tema.
 
 ---
 
-## Caminho dos arquivos gerados
+## Estrutura de pastas
 
-`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/pontos_chave/[NOME_DOCUMENTO]/0N_[NOME_ASSUNTO].md`
+```
+pontos_chave/
+├── 01_[TEMA-A]/
+│   ├── 01_[assunto].md
+│   └── 02_[assunto].md
+├── 02_[TEMA-B]/
+│   └── 01_[assunto].md
+└── 03_[TEMA-C]/
+    ├── 01_[assunto].md
+    └── 02_[assunto].md
+```
 
-O `[NOME_DOCUMENTO]` é o nome em kebab-case do documento de origem (ex: `codigo-etica`, `lob`, `decreto-123`).
-Cada documento processado ganha sua própria subpasta dentro de `pontos_chave/`.
+**O "tema" é determinado pela natureza da disciplina:**
+- Para disciplinas com múltiplos documentos/leis (ex: LBI) → uma subpasta por documento/lei
+- Para disciplinas com um único documento mas múltiplos temas (ex: APHR) → uma subpasta por tema clínico/conceitual
+- Para disciplinas com apenas 1 tema identificável → arquivos direto em `pontos_chave/` sem subpasta
+
+**Caminho completo:**
+`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/pontos_chave/0N_[TEMA]/0N_[NOME_ASSUNTO].md`
+
+---
+
+## Nomenclatura das subpastas de tema
+
+- Prefixo numérico sequencial dentro de `pontos_chave/`: `01_`, `02_`, `03_`...
+- Nome descritivo em kebab-case, com maiúscula inicial: `01_Choque-e-Hemorragia/`
+- Para leis: incluir número e sigla — ex: `01_Lei-9161-2021-CEDCBMPA/`
+- Para unidades: incluir título da unidade — ex: `02_Bombeiros-no-Brasil/`
+
+**Prefixo numérico dentro de cada subpasta:** reinicia em `01` para cada tema.
+Os arquivos dentro de `02_Choque-e-Hemorragia/` começam em `01_`, não em `05_`.
 
 ---
 
@@ -36,18 +65,6 @@ Exemplos:
 
 ---
 
-## Prefixo numérico — ordem lógica de estudo
-
-Cada arquivo recebe um prefixo que define a sequência ideal de estudo **dentro do documento de origem**:
-- `01_[ASSUNTO].md` — deve ser estudado primeiro
-- `02_[ASSUNTO].md` — depende do anterior para fazer sentido pleno
-- E assim por diante...
-
-O Claude Code define a ordem com base na dependência conceitual entre os assuntos.
-A numeração reinicia em `01_` a cada nova subpasta/documento.
-
----
-
 ## Cabeçalho padrão Nexus (YAML frontmatter)
 
 ```yaml
@@ -57,14 +74,16 @@ tipo: pontos_chave
 disciplina: [NOME_COMPLETO_DA_DISCIPLINA]
 sigla: [SIGLA]
 periodo: Periodo0N
+tema: [NOME_DA_SUBPASTA_SEM_PREFIXO]
 assunto: [NOME_DO_ASSUNTO]
-prefixo: [01, 02, 03...]
-arquivo_origem: [NOME_DO_PDF]
+prefixo: "[01]"
+arquivo_origem: [NOME_DO_PDF_OU_LEI]
 criado_em: [DATA DD/MM/AAAA]
 atualizado_em: [DATA DD/MM/AAAA]
 versao: 1.0
 moc_cfo: sim
 moc_materia: sim
+pensamentos_relacionados: []
 ---
 ```
 
@@ -74,7 +93,7 @@ moc_materia: sim
 
 ```markdown
 # [Nome do Assunto]
-> Disciplina: [SIGLA] | Período: Periodo0N | Origem: [NOME_DO_PDF] | Criado em: [DATA]
+> Disciplina: [SIGLA] | Tema: [TEMA] | Origem: [NOME_DO_PDF] | Criado em: [DATA]
 
 ---
 
@@ -92,10 +111,32 @@ Exemplos operacionais e institucionais quando possível.
 
 ## Conexões
 Links para outros arquivos do Obsidian relacionados.
-Formato: [[Periodo0N/0N_SIGLA/nome-do-arquivo]]
+Formato: [[Periodo0N/0N_SIGLA/pontos_chave/0N_TEMA/arquivo]]
+Se LEITURA_APROFUNDADA passou contexto de pensamentos relacionados, referenciar:
+[[Pensamento/AAAA-MM-DD_tema]] (apenas para arquivos que JÁ EXISTEM no sistema)
 
 ## Pontos de Atenção
 O que o Nexus identificou como crítico para prova ou aplicação prática.
+```
+
+---
+
+## Atualização do MOC da disciplina
+
+O MOC deve refletir a estrutura por tema, com uma seção `###` por subpasta:
+
+```markdown
+## Pontos-Chave por Tema
+
+### 01 — [Nome do Tema]
+> Origem: `nome-do-arquivo-fonte`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | [Assunto] | [[...pontos_chave/01_TEMA/01_assunto]] |
+
+### 02 — [Outro Tema]
+...
 ```
 
 ---
@@ -113,8 +154,10 @@ O que o Nexus identificou como crítico para prova ou aplicação prática.
 ## Regras críticas
 
 - Nunca criar arquivo sem prefixo numérico
-- Nunca criar arquivo sem subpasta de documento — todo ponto-chave fica dentro de `pontos_chave/[NOME_DOCUMENTO]/`
+- O prefixo dentro de cada subpasta de tema **reinicia em 01** — não é global
+- Se o material tiver apenas 1 tema identificável → criar arquivos direto em `pontos_chave/` sem subpasta
 - Nunca sobrescrever arquivo existente — se assunto já existe, acrescentar nova seção com marcação de data e origem
-- **Links `[[...]]` do Obsidian apenas para arquivos que JÁ EXISTEM no sistema** — o Obsidian cria arquivos vazios automaticamente ao detectar links não resolvidos, violando a regra de não criar arquivos vazios
-- Para conexões com disciplinas ainda sem material processado, usar texto simples: `` `Periodo0N/??_SIGLA/arquivo` *(pendente — sem material processado)* ``
-- Nomear subpastas e arquivos em kebab-case: `lob/`, `codigo-etica/`, `01_sistema-circulatorio.md`
+- **Links `[[...]]` do Obsidian apenas para arquivos que JÁ EXISTEM no sistema**
+- Para conexões com disciplinas ainda sem material, usar texto simples: `` `Periodo0N/??_SIGLA/arquivo` *(pendente)* ``
+- Nomear arquivos em kebab-case: `01_sistema-circulatorio.md`
+- Nomear subpastas em PascalKebab: `01_Choque-e-Hemorragia/`
