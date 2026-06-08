@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — Direito Administrativo I | VC01</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+  header { padding: 18px 16px 8px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 14px; color: #6b6a66; margin: 0; }
+  .progress { font-size: 14px; color: #6b6a66; margin: 14px 0 6px; }
+  .progress-bar { height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; }
+  .progress-bar > div { height: 100%; background: #8a3324; transition: width .25s ease; }
+  .card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-top: 14px;
+  }
+  .question { font-size: 17px; line-height: 1.5; margin: 0 0 16px; font-weight: 600; }
+  .opt {
+    display: block; width: 100%; text-align: left;
+    background: #faf9f6; border: 1.5px solid #e3e1da; border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px; font-size: 18px; line-height: 1.4;
+    min-height: 44px; cursor: pointer; color: #2b2a28;
+  }
+  .opt:active { background: #efeee8; }
+  .opt[disabled] { cursor: default; }
+  .opt.correct { background: #e7f3e9; border-color: #4a8f5b; }
+  .opt.wrong { background: #f8e9e7; border-color: #b5453a; }
+  .opt .tag {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 8px; border-radius: 6px; margin-bottom: 6px;
+  }
+  .opt.correct .tag { background: #4a8f5b; color: #fff; }
+  .opt.wrong .tag { background: #b5453a; color: #fff; }
+  .review { margin-top: 16px; }
+  .banner {
+    border-radius: 10px; padding: 14px 16px; font-size: 16px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .banner.ok { background: #e7f3e9; color: #2c5e38; border: 1.5px solid #4a8f5b; }
+  .banner.no { background: #f8e9e7; color: #7a2c22; border: 1.5px solid #b5453a; }
+  .analysis { margin-bottom: 14px; }
+  .analysis .item {
+    font-size: 15px; line-height: 1.5; padding: 10px 12px; border-radius: 8px;
+    margin-bottom: 8px; border-left: 4px solid #d8d6cf; background: #faf9f6;
+  }
+  .analysis .item.is-correct { border-left-color: #4a8f5b; background: #f0f7f1; }
+  .analysis .item.is-chosen-wrong { border-left-color: #b5453a; background: #fbf1f0; }
+  .analysis .item b { font-weight: 700; }
+  .block {
+    border-radius: 10px; padding: 14px 16px; font-size: 14.5px; line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .block.fixar { background: #fbf3e6; border: 1.5px solid #d9a441; }
+  .block.alem { background: #eaf0f7; border: 1.5px solid #5d7fa6; }
+  .block .label {
+    display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .block.fixar .label { color: #9a6b1a; }
+  .block.alem .label { color: #3b5a80; }
+  .btn {
+    display: inline-block; width: 100%; text-align: center;
+    background: #8a3324; color: #fff; border: none; border-radius: 10px;
+    padding: 14px; font-size: 16px; font-weight: 700; min-height: 48px;
+    margin-top: 14px; cursor: pointer;
+  }
+  .btn:active { background: #6f2a1d; }
+  .btn.secondary { background: #fff; color: #8a3324; border: 1.5px solid #8a3324; }
+  .score { text-align: center; }
+  .score .num { font-size: 44px; font-weight: 800; color: #8a3324; margin: 6px 0; }
+  .score .pct { font-size: 18px; color: #6b6a66; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 22px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Simulado — Direito Administrativo I</h1>
+    <p>VC01 · Quinta-feira, 11/06/2026 · 15 questões comentadas — escopo: Generalidades e Princípios, Poderes Administrativos, Poder de Polícia, Atos Administrativos</p>
+  </header>
+  <div id="app"></div>
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — gerado a partir de revisao_VC01.md</p>
+</div>
+
+<script>
+const QUESTIONS_RAW = [
+{
+  q: "Hely Lopes Meirelles define o Direito Administrativo como o conjunto harmônico de princípios jurídicos que regem órgãos, agentes e atividades públicas para realizar os fins do Estado. Sobre a posição desse ramo no ordenamento, é correto afirmar que:",
+  opts: [
+    { text: "O Direito Administrativo é ramo do Direito Privado, pois regula relações entre a Administração e os particulares em pé de igualdade.", correct:false, comment:"Errada. Ela inverte a classificação: o traço que define o Direito Privado é exatamente a igualdade jurídica e a autonomia da vontade entre as partes — o oposto do que ocorre quando o Estado atua como Administração." },
+    { text: "O Direito Administrativo é ramo do Direito Público, marcado pela supremacia e indisponibilidade do interesse público, com o Estado ocupando posição de superioridade em relação ao particular.", correct:true, comment:"Certa. É exatamente essa a classificação do material: Direito Público é o ramo em que o Estado é parte, prevalecem a supremacia e a indisponibilidade do interesse público, e a Administração ocupa posição de superioridade — diferente do Direito Privado, que se baseia em igualdade jurídica e autonomia da vontade." },
+    { text: "O Direito Administrativo regula apenas as relações internas da Administração, não alcançando os particulares em nenhuma hipótese.", correct:false, comment:"Errada. Essa afirmação restringe demais o alcance do ramo: o Direito Administrativo rege órgãos, agentes E atividades públicas — e essas atividades constantemente produzem efeitos sobre os particulares, como ocorre no exercício do poder de polícia." },
+    { text: "Por integrar o Direito Público, o Direito Administrativo coloca Estado e particular em relação de igualdade jurídica plena.", correct:false, comment:"Errada. Essa alternativa mistura as duas classificações: a igualdade jurídica plena é justamente a marca do Direito Privado. No Direito Público — onde está o Direito Administrativo — vigora a desigualdade proposital em favor do interesse coletivo." },
+    { text: "O Direito Administrativo dispensa qualquer fundamentação principiológica, bastando a aplicação literal da lei pelo agente público.", correct:false, comment:"Errada. A própria definição de Hely Lopes Meirelles usada no material já contradiz isso: trata-se de um conjunto harmônico de PRINCÍPIOS jurídicos — os princípios são o eixo estruturante de todo o ramo, não um acessório dispensável." }
+  ],
+  referencia: "“Direito Administrativo: conjunto harmônico de princípios jurídicos que regem os órgãos, agentes e atividades públicas para realizar os fins do Estado” (Hely Lopes Meirelles). Direito Público: Estado como parte; supremacia e indisponibilidade do interesse público. Direito Privado: igualdade jurídica; autonomia da vontade.",
+  aprofundamento: "Essa supremacy do interesse público não é um fim em si — ela é o que justifica todo o Regime Jurídico Administrativo (prerrogativas como desapropriar e rescindir contratos unilateralmente, de um lado; restrições como subordinação à lei e controle, de outro). É esse regime que vai sustentar, mais à frente, as três premissas do DA e toda a lógica dos princípios, dos poderes e dos atos administrativos."
+},
+{
+  q: "O regime jurídico administrativo se apoia em três premissas interpretativas fundamentais. Assinale a alternativa que apresenta corretamente essas premissas:",
+  opts: [
+    { text: "Igualdade jurídica, presunção de inocência e vinculação plena.", correct:false, comment:"Errada. Nenhum desses três é premissa do DA: 'igualdade jurídica' é justamente o oposto da 'desigualdade jurídica' que caracteriza a relação Administração-particular, e 'presunção de inocência' é instituto de outro ramo (penal/processual), não do Direito Administrativo." },
+    { text: "Desigualdade jurídica, presunção de legitimidade e discricionariedade.", correct:true, comment:"Certa. São exatamente essas as três premissas indicadas no material: a desigualdade jurídica (a Administração tem supremacia sobre o particular), a presunção de legitimidade (os atos administrativos são presumidos legítimos até prova em contrário) e a discricionariedade (a Administração pode sopesar a lei para decidir no caso concreto)." },
+    { text: "Subordinação hierárquica, taxatividade legal e indisponibilidade processual.", correct:false, comment:"Errada. Esses termos não correspondem às premissas do DA — misturam vocabulário de outros institutos (hierarquia administrativa, legalidade estrita, processo) sem reproduzir o conteúdo específico das três premissas estudadas." },
+    { text: "Desigualdade jurídica, presunção de veracidade absoluta e vinculação total dos atos.", correct:false, comment:"Errada. O distrator troca 'presunção de legitimidade' (relativa, juris tantum) por uma 'presunção de veracidade absoluta' que não existe no material — a presunção é sempre relativa, admitindo prova em contrário — e ainda generaliza indevidamente a vinculação, ignorando que a discricionariedade também é premissa do DA." },
+    { text: "Autonomia da vontade, igualdade processual e mérito vinculado.", correct:false, comment:"Errada. 'Autonomia da vontade' e 'igualdade processual' são típicas do Direito Privado/processual civil, não premissas do DA; e 'mérito vinculado' é uma contradição em termos — o mérito administrativo (conveniência e oportunidade) só existe no espaço da discricionariedade." }
+  ],
+  referencia: "“Três premissas do DA: 1. Desigualdade jurídica — Administração tem supremacia sobre o particular; 2. Presunção de legitimidade — atos da Administração são presumidos legítimos até prova em contrário; 3. Discricionariedade — Administração pode sopesar a lei para decidir no caso concreto.”",
+  aprofundamento: "Vale observar que a 'presunção de legitimidade', aqui apresentada como premissa geral do DA, reaparece adiante como atributo específico do ato administrativo — só que com um nome mais completo: 'presunção de legitimidade e veracidade', de natureza juris tantum (relativa), que inverte o ônus da prova em favor da Administração. É o mesmo fio condutor aparecendo em dois níveis diferentes da matéria."
+},
+{
+  q: "Sobre os princípios constitucionais reunidos na sigla LIMPE (art. 37, CF/88), é correto afirmar que:",
+  opts: [
+    { text: "A Legalidade, para a Administração, segue a mesma lógica aplicável ao particular: pode-se fazer tudo o que a lei não proíbe.", correct:false, comment:"Errada. Essa alternativa inverte exatamente a distinção mais cobrada sobre legalidade: para o particular vale a lógica de que tudo que não é proibido é permitido; já para a Administração vale o oposto — ela só pode fazer o que a lei expressamente autoriza." },
+    { text: "A Publicidade é um princípio essencialmente protocolar, sem qualquer relação com a produção de efeitos jurídicos do ato administrativo.", correct:false, comment:"Errada. A alternativa reduz a publicidade a mero formalismo, mas o material é enfático: a publicação é condição de EFICÁCIA do ato — sem ela, o ato pode estar perfeito e válido, mas não produz efeitos. Não se trata de protocolo, mas de pressuposto para que o ato opere no mundo jurídico." },
+    { text: "A Impessoalidade explica por que a conduta do agente público é imputada ao Estado, e não à pessoa física que a praticou.", correct:true, comment:"Certa. É precisamente essa a essência da impessoalidade trazida no material: veda discriminações e favorecimentos, e atribui ao Estado — não ao indivíduo — a responsabilidade pela conduta do agente (o exemplo dado é o da colisão de viatura, cuja responsabilidade recai sobre o Estado, não sobre o motorista isoladamente)." },
+    { text: "A Eficiência, incluída pela EC nº 19/1998, refere-se apenas à rapidez na prestação dos serviços, não guardando relação com a duração razoável do processo.", correct:false, comment:"Errada. O material faz questão de destacar a 'atenção': a eficiência também abrange a duração razoável do processo (art. 5º, LXXVIII, CF — incluído pela EC nº 45/2004). A alternativa tenta separar dois institutos que o próprio material conecta expressamente." },
+    { text: "A Moralidade equivale, em conteúdo e rigor, à moral comum aplicável às relações entre particulares.", correct:false, comment:"Errada. O material é claro ao diferenciar: a moralidade administrativa pauta-se em boa-fé, lealdade e probidade, e constitui um padrão PRÓPRIO — distinto e mais rigoroso do que a moral comum aplicável aos particulares." }
+  ],
+  referencia: "LIMPE (art. 37, CF/88): Legalidade — “a Administração só pode fazer o que a lei autoriza (≠ particular, que pode tudo que não é proibido)”; Impessoalidade — “conduta do agente é imputada ao Estado”; Publicidade — “publicação = condição de eficácia”; Eficiência — abrange também a duração razoável do processo (art. 5º, LXXVIII — EC nº 45/2004).",
+  aprofundamento: "A publicidade como condição de eficácia é o elo perfeito entre este tópico e as 'fases de constituição do ato administrativo': um ato pode estar perfeito (cumpriu todas as etapas de formação) e válido (todos os elementos do COFIM em ordem), mas só produzirá efeitos — só será eficaz — depois de publicado. É exatamente esse encadeamento que costuma aparecer em questões que cruzam princípios com atos administrativos."
+},
+{
+  q: "Em relação à autotutela administrativa, assinale a alternativa correta:",
+  opts: [
+    { text: "Anulação e revogação produzem o mesmo efeito temporal — ambas retroagem à origem do ato (efeito ex tunc).", correct:false, comment:"Errada. A alternativa anula a distinção mais cobrada do tópico: a anulação tem efeito ex tunc (retroativo), mas a revogação tem efeito ex nunc (só para frente, respeitando o passado) — são efeitos temporais opostos, não equivalentes." },
+    { text: "A revogação pode ser realizada tanto pela Administração quanto pelo Poder Judiciário, desde que fundamentada em razões de conveniência e oportunidade.", correct:false, comment:"Errada. A revogação é competência EXCLUSIVA da Administração — precisamente porque envolve juízo de mérito (conveniência e oportunidade), e o material é categórico: o Judiciário nunca avalia o mérito administrativo, apenas a legalidade. Quem pode revogar por conveniência é só quem pode avaliar a conveniência: a própria Administração." },
+    { text: "A anulação é o desfazimento do ato por ilegalidade, com efeito retroativo (ex tunc), podendo ser promovida pela Administração, por autotutela, ou pelo Poder Judiciário.", correct:true, comment:"Certa. Reproduz com exatidão o material: a anulação decorre de ilegalidade, tem efeito ex tunc (retroage ao nascedouro do ato, ressalvados terceiros de boa-fé) e pode ser feita tanto pela Administração — exercendo a autotutela, com respaldo nas Súmulas STF 346 e 473 — quanto pelo Poder Judiciário, já que ambos controlam a legalidade dos atos." },
+    { text: "O prazo para a Administração anular atos que produziram efeitos favoráveis ao destinatário é de 10 anos, contados da prática do ato, mesmo havendo má-fé do beneficiário.", correct:false, comment:"Errada. O prazo correto é de 5 anos (Lei nº 8.972/2020, art. 67) — o distrator dobra o número — e, além disso, o material é expresso ao ressalvar que esse prazo não se aplica em caso de má-fé, situação na qual a contagem não opera da mesma forma." },
+    { text: "A Súmula 473 do STF dispõe que a Administração só pode anular ou revogar seus atos mediante prévia autorização do Poder Judiciário.", correct:false, comment:"Errada. A súmula afirma exatamente o contrário do que a alternativa propõe: ela reconhece que a Administração PODE anular ou revogar seus próprios atos por iniciativa própria (respeitados os direitos adquiridos), apenas ressalvando que isso não afasta uma posterior apreciação judicial — não exige autorização prévia do Judiciário." }
+  ],
+  referencia: "Súmula STF 346: “A Administração pode anular seus próprios atos”. Súmula STF 473: “(...) pode anulá-los, por motivo de ilegalidade (...) ou revogá-los, por motivo de conveniência ou oportunidade, respeitados os direitos adquiridos, e ressalvada, em todos os casos, a apreciação judicial”. Prazo para anulação de atos com efeitos favoráveis: 5 anos (Lei nº 8.972/2020, art. 67), salvo má-fé.",
+  aprofundamento: "Essa distinção entre anulação e revogação é o eixo que conecta autotutela, poderes administrativos e atos administrativos: a revogação só é possível em atos válidos e DISCRICIONÁRIOS (porque exige juízo de mérito — conveniência e oportunidade), enquanto a anulação alcança qualquer ato ilegal, vinculado ou discricionário. Dominar essa ponte é, segundo a própria revisão da disciplina, a chave para o bloco mais conectado da prova."
+},
+{
+  q: "Sobre os princípios da continuidade dos serviços públicos e da segurança jurídica (princípio da confiança), é correto afirmar:",
+  opts: [
+    { text: "O princípio da continuidade fundamenta a vedação ao direito de greve e de sindicalização para os militares, como garantia de que o serviço prestado à sociedade não seja interrompido.", correct:true, comment:"Certa. É exatamente essa a relação estabelecida no material: a continuidade exige prestação ininterrupta dos serviços públicos, e é justamente por isso que militares não podem fazer greve nem se sindicalizar — trata-se de garantia em favor da sociedade, não de restrição arbitrária." },
+    { text: "O princípio da segurança jurídica autoriza a Administração a aplicar retroativamente uma nova interpretação normativa sempre que isso for mais favorável ao interesse público.", correct:false, comment:"Errada. A alternativa inverte o sentido do princípio: a segurança jurídica (art. 30, LINDB) veda a aplicação retroativa de nova interpretação normativa — ela existe justamente para proteger quem agiu de boa-fé conforme a interpretação oficial vigente à época, e não para abrir uma exceção em nome do interesse público." },
+    { text: "A continuidade dos serviços públicos é um princípio absoluto, que impede qualquer interrupção de atividade administrativa, inclusive para fins de manutenção ou reorganização interna.", correct:false, comment:"Errada. O material não atribui esse caráter absoluto e irrestrito ao princípio — ele trata da garantia de que o serviço essencial à coletividade não seja interrompido (com reflexo direto, por exemplo, na vedação à greve militar), e não de uma proibição genérica a qualquer movimentação interna da Administração." },
+    { text: "A segurança jurídica está prevista no art. 37 da Constituição Federal, ao lado dos princípios do LIMPE.", correct:false, comment:"Errada. A segurança jurídica — também chamada de princípio da confiança — está prevista no art. 30 da LINDB (Lei de Introdução às Normas do Direito Brasileiro), e o material a classifica entre os 'princípios reconhecidos', em separado do LIMPE, que decorre do art. 37 da CF." },
+    { text: "A continuidade e a segurança jurídica integram o grupo dos princípios gerais, ao lado da supremacia e da indisponibilidade do interesse público.", correct:false, comment:"Errada. O material organiza os princípios em três grupos distintos: gerais (supremacia e indisponibilidade do interesse público), constitucionais — LIMPE (art. 37, CF) e reconhecidos (autotutela, continuidade dos serviços públicos e segurança jurídica). A alternativa mistura categorias que o material trata separadamente." }
+  ],
+  referencia: "“Continuidade dos Serviços Públicos: prestação ininterrupta. Por isso, militares não podem fazer greve nem sindicalizar-se (garantia à sociedade)”. “Segurança Jurídica/Confiança: veda aplicação retroativa de nova interpretação normativa (art. 30, LINDB). Protege quem agiu de boa-fé conforme atos oficiais anteriores.”",
+  aprofundamento: null
+},
+{
+  q: "A respeito da distinção entre Poder Vinculado e Poder Discricionário, assinale a alternativa correta:",
+  opts: [
+    { text: "No Poder Discricionário, o administrador pode agir livremente, inclusive contrariando os limites legais, desde que justifique a decisão por razões de conveniência e oportunidade.", correct:false, comment:"Errada. Essa alternativa confunde discricionariedade com arbitrariedade — distinção que o material destaca expressamente: 'discricionariedade ≠ arbitrariedade'. Mesmo no espaço discricionário, toda atuação administrativa deve respeitar os limites da lei; o que muda é apenas a existência de mais de uma solução legalmente possível." },
+    { text: "O mérito administrativo — formado pela conveniência e pela oportunidade — pode ser livremente reexaminado pelo Poder Judiciário sempre que a decisão administrativa parecer inadequada.", correct:false, comment:"Errada. O material é categórico: 'o Judiciário não avalia mérito — apenas a legalidade'. O reexame do mérito (conveniência e oportunidade) é prerrogativa exclusiva da própria Administração, por meio da autotutela." },
+    { text: "No Poder Vinculado, todos os elementos do ato são determinados pela lei, não havendo margem de liberdade para o administrador, como no exemplo do limite de 35 anos de serviço ativo previsto na LC nº 142/2021.", correct:true, comment:"Certa. Reproduz fielmente o conceito do material: no poder vinculado a lei já define o único comportamento possível, e todos os elementos do ato são vinculados — o exemplo dado é justamente o limite máximo de 35 anos no serviço ativo (art. 69, LC nº 142/2021)." },
+    { text: "Conveniência refere-se ao momento em que o ato é praticado, e oportunidade refere-se às condições em que ele é praticado.", correct:false, comment:"Errada. A alternativa troca os dois conceitos entre si: segundo o material, conveniência são as condições em que o ato é praticado, e oportunidade é o momento em que ele é praticado — exatamente o inverso do que a alternativa apresenta." },
+    { text: "Tanto o Poder Vinculado quanto o Poder Discricionário dispensam fundamentação legal, bastando a manifestação de vontade do agente público.", correct:false, comment:"Errada. Essa afirmação contraria a própria lógica da legalidade (Administração só pode fazer o que a lei autoriza): tanto o ato vinculado (em que a lei define o único comportamento possível) quanto o discricionário (em que a lei admite mais de uma solução possível, dentro de seus limites) dependem de previsão legal — nenhum dos dois prescinde dela." }
+  ],
+  referencia: "“Poder Vinculado: sem margem de liberdade — a lei define o único comportamento possível. Todos os elementos do ato são vinculados. Ex: Limite máximo de 35 anos no serviço ativo (art. 69, LC nº 142/2021)”. “Poder Discricionário: a lei prevê mais de um comportamento possível. Conveniência: condições em que o ato é praticado. Oportunidade: momento em que é praticado.”",
+  aprofundamento: "A divisão vinculado/discricionário não fica restrita aos poderes administrativos — ela 'reaparece' nos elementos do ato administrativo (o mnemônico COFIM): Competência, Finalidade e Forma são SEMPRE vinculados, enquanto Motivo e Objeto podem ser vinculados ou discricionários. Quem domina essa lógica nos poderes já entra na questão de atos administrativos com metade do raciocínio pronto."
+},
+{
+  q: "Sobre os Poderes Normativo e Hierárquico, é correto afirmar que:",
+  opts: [
+    { text: "O Poder Normativo permite à Administração inovar livremente na ordem jurídica, criando obrigações e direitos não previstos em lei, desde que por meio de decreto.", correct:false, comment:"Errada. O material afirma justamente o contrário: o poder normativo permite expedir normas gerais com efeito erga omnes, mas SEM inovar na ordem jurídica — essas normas são sempre inferiores à lei e servem para facilitar sua execução, não para substituí-la ou ampliá-la livremente." },
+    { text: "O Poder Hierárquico permite ao superior dar ordens, controlar atividades dos subordinados, avocar e delegar funções, manifestando-se inclusive entre pessoas jurídicas distintas, como entre o CBMPA e a Polícia Militar.", correct:false, comment:"Errada. A primeira parte da alternativa está correta, mas ela erra ao estender o poder hierárquico a 'pessoas jurídicas distintas': o material é expresso — esse poder só se manifesta DENTRO da estrutura interna de uma mesma Administração, pois 'não existe hierarquia entre pessoas jurídicas diferentes'." },
+    { text: "O Poder Normativo se manifesta por meio de atos como decretos, resoluções, portarias e instruções técnicas, expedidos sempre dentro dos limites da lei e com efeito erga omnes.", correct:true, comment:"Certa. Está em perfeita conformidade com o material: o poder normativo (ou regulamentar) permite a expedição de normas gerais com efeito erga omnes — decretos, resoluções, portarias, instruções técnicas, regimentos — sempre inferiores à lei e destinadas a facilitar sua execução, sem inovar na ordem jurídica." },
+    { text: "O Poder Hierárquico é a fonte direta dos atos negociais, como licenças, autorizações e permissões.", correct:false, comment:"Errada. A alternativa atribui ao poder hierárquico uma origem que pertence a outro poder: os atos negociais (licença, autorização, permissão) decorrem do exercício do PODER DE POLÍCIA — mais especificamente, do 'consentimento de polícia' dentro do ciclo de polícia — e não do poder hierárquico, que dá origem aos atos ordinatórios." },
+    { text: "O Poder Normativo é exercido exclusivamente pelo chefe do Poder Executivo, não podendo ser delegado a outras autoridades administrativas.", correct:false, comment:"Errada. O material não traz essa restrição — ao contrário, apresenta como exemplos de manifestação do poder normativo instrumentos expedidos por diferentes autoridades e órgãos da Administração (resoluções, portarias, instruções técnicas, regimentos), sem limitar seu exercício a uma única autoridade." }
+  ],
+  referencia: "“Poder Normativo (Regulamentar): permite à Administração expedir normas gerais com efeito erga omnes, sem inovar na ordem jurídica. São inferiores à lei e visam facilitar sua execução. Ex: Decretos, resoluções, portarias, instruções técnicas, regimentos.” “Poder Hierárquico: (...) Só se manifesta dentro da estrutura interna — não existe hierarquia entre pessoas jurídicas diferentes.”",
+  aprofundamento: "Vale fixar o encadeamento poder → ato: o Poder Normativo dá origem aos Atos Normativos (decretos, regulamentos, portarias); o Poder Hierárquico dá origem aos Atos Ordinatórios (portarias internas, ordens de serviço, memorandos, ofícios — sem efeito externo); e é justamente dentro dos atos ordinatórios que mora a distinção cobrada entre memorando (comunicação interna, mesmo órgão) e ofício (entre órgãos diferentes, ou entre autoridade e particular)."
+},
+{
+  q: "Quanto ao Poder Disciplinar e à independência das instâncias (penal, civil e administrativa), assinale a alternativa correta:",
+  opts: [
+    { text: "Um mesmo fato pode gerar consequências simultâneas nas esferas penal, civil e administrativa, sem que isso configure bis in idem, já que essa vedação se aplica apenas dentro de uma mesma esfera.", correct:true, comment:"Certa. Está exatamente conforme o material: as três esferas são independentes (penal — restrição da liberdade; civil — indenização; administrativa — perda do cargo), de modo que o mesmo fato pode gerar punição nas três ao mesmo tempo; o que é vedado é o bis in idem DENTRO da mesma esfera, não entre esferas distintas." },
+    { text: "A absolvição na esfera penal sempre repercute automaticamente na esfera administrativa, qualquer que seja o seu fundamento.", correct:false, comment:"Errada. O material estabelece uma regra mais específica: a repercussão automática na esfera administrativa só ocorre quando a absolvição penal se fundamenta em negativa de autoria, inexistência do fato ou excludente de ilicitude — não 'sempre' e 'qualquer que seja o fundamento', como propõe a alternativa." },
+    { text: "Segundo a Súmula STJ 611, é vedada a instauração de processo disciplinar com base em denúncia anônima, ainda que existam motivação e investigação que a respaldem.", correct:false, comment:"Errada. A súmula diz o oposto: o processo disciplinar instaurado com base em denúncia anônima é PERMITIDO, desde que haja motivação e respaldo em investigação — a alternativa transforma uma autorização condicionada em uma vedação absoluta." },
+    { text:"O marco que separa o Poder Hierárquico do Poder Disciplinar é a publicação do ato no Diário Oficial.", correct:false, comment:"Errada. O material indica outro marco: o poder disciplinar decorre do poder hierárquico, e a transição entre eles é marcada pela ABERTURA DO PROCESSO ADMINISTRATIVO — não pela publicação no Diário Oficial, que é, isso sim, condição de eficácia dos atos administrativos em geral." },
+    { text: "Segundo a Súmula Vinculante nº 5, a ausência de advogado constituído no processo administrativo disciplinar viola a Constituição Federal e torna o processo nulo.", correct:false, comment:"Errada. A Súmula Vinculante nº 5 afirma justamente o contrário: a falta de advogado no PAD NÃO ofende a Constituição — a alternativa inverte o sentido do enunciado sumular." }
+  ],
+  referencia: "“Independência das esferas: Penal — restrição da liberdade; Civil — indenização/reparação do dano; Administrativa — perda do cargo. Mesmo fato → pode haver punição nas três esferas. Proibido o bis in idem dentro da mesma esfera. Absolvição penal por negativa de autoria, inexistência do fato ou excludente de ilicitude repercute na esfera administrativa.”",
+  aprofundamento: "Esse tópico é uma das pontes expressas entre DA e LBI: as sanções aplicáveis no exercício do poder disciplinar do CBMPA estão previstas no art. 39 do CEDCBMPA (Lei nº 9.161/2021) — repreensão, suspensão, reforma administrativa disciplinar, licenciamento e exclusão a bem da disciplina, e demissão (para oficiais) — e os processos correspondentes são o PADSU, o PADS, o Conselho de Disciplina e o Conselho de Justificação."
+},
+{
+  q: "Sobre o conceito e os atributos do Poder de Polícia (CTN, art. 78), é correto afirmar que:",
+  opts: [
+    { text: "A autoexecutoriedade é um atributo absoluto do Poder de Polícia, permitindo à Administração executar qualquer medida restritiva sem necessidade de previsão legal ou situação de urgência.", correct:false, comment:"Errada. O material destaca expressamente que a autoexecutoriedade NÃO é absoluta: a Administração só pode executar diretamente suas decisões 'quando a lei autoriza ou há urgência' — a alternativa retira essa condicionante, transformando uma exceção balizada em uma regra geral irrestrita." },
+    { text: "O exercício do Poder de Polícia, por restringir o exercício de um direito, gera automaticamente o dever de indenizar o particular afetado.", correct:false, comment:"Errada. O material afirma exatamente o oposto: 'o poder de polícia não gera dever de indenizar — não retira um direito, define como exercê-lo'. A alternativa cria uma consequência jurídica que o próprio material descarta de forma expressa." },
+    { text: "O Poder de Polícia é atividade típica de Estado, podendo ser exercido por pessoas jurídicas de direito público da Administração Direta ou Indireta, e caracteriza-se pelos atributos da discricionariedade, da coercibilidade e da autoexecutoriedade.", correct:true, comment:"Certa. Reproduz com fidelidade o conceito do material: atividade típica de Estado, exercida por pessoas jurídicas de direito público (Direta ou Indireta), com três atributos centrais — discricionariedade (em regra discricionário, podendo ser vinculado quando cumpridos os requisitos legais, como na licença), coercibilidade (obrigatoriedade de cumprimento independente da vontade do particular) e autoexecutoriedade (execução sem intervenção judicial prévia, quando a lei autoriza ou há urgência)." },
+    { text: "A coercibilidade é o atributo segundo o qual o Estado pode executar suas decisões por meios próprios, sem recorrer ao Judiciário, sempre que entender conveniente.", correct:false, comment:"Errada. A definição apresentada corresponde, na verdade, à AUTOEXECUTORIEDADE (e ainda de forma equivocada, ao retirar a condicionante da urgência ou previsão legal). A coercibilidade, segundo o material, é outro atributo: significa que o particular é obrigado a cumprir a determinação, independentemente de sua vontade." },
+    { text: "O Poder de Polícia pode ser exercido por qualquer pessoa jurídica, inclusive de direito privado, desde que mantenha contrato de prestação de serviços com o Poder Público.", correct:false, comment:"Errada. O material é expresso: o poder de polícia é atividade típica de Estado, e só pode ser exercido por pessoas jurídicas de DIREITO PÚBLICO (Administração Direta ou Indireta) — a possibilidade de relação com pessoas de direito privado aparece apenas no tema da delegação, e ainda assim com condições e exceções específicas (não simplesmente por haver 'contrato de prestação de serviços')." }
+  ],
+  referencia: "“Conceito (CTN, art. 78): atividade da Administração que limita ou disciplina direito, interesse ou liberdade em razão do interesse público (...). O poder de polícia é atividade típica de Estado — só pode ser exercida por pessoas jurídicas de direito público da Administração Direta ou Indireta. Atributos: Discricionariedade, Coercibilidade, Autoexecutoriedade.”",
+  aprofundamento: "Vale comparar este conjunto de atributos com os atributos do ato administrativo (presunção de legitimidade e veracidade, imperatividade, exigibilidade, executoriedade, tipicidade): a revisão da disciplina chama atenção para o paralelismo — discricionariedade ↔ presunção de legitimidade; coercibilidade ↔ imperatividade/exigibilidade; autoexecutoriedade ↔ executoriedade — ambos os conjuntos fundamentados na mesma ideia: a supremacia do interesse público."
+},
+{
+  q: "Em relação à distinção entre Polícia Administrativa e Polícia Judiciária, assinale a alternativa correta:",
+  opts: [
+    { text: "A Polícia Administrativa incide sobre pessoas e tem caráter repressivo, enquanto a Polícia Judiciária incide sobre bens, direitos e atividades, com caráter preventivo.", correct:false, comment:"Errada. A alternativa inverte completamente as características de cada uma: segundo o material, é a Polícia Administrativa que incide sobre bens, direitos e atividades, com caráter preventivo (impedir atos lesivos), e a Polícia Judiciária que incide sobre pessoas, com caráter repressivo (apurar ilícitos penais)." },
+    { text: "O CBMPA e a PMPA exercem polícia judiciária militar ao apurarem ilícitos penais militares por meio do Inquérito Policial Militar (IPM).", correct:true, comment:"Certa. Reproduz exatamente o que o material destaca: 'CBMPA e PMPA exercem polícia judiciária militar ao apurar ilícitos penais militares via IPM' — um ponto de aplicação prática direta da distinção entre polícia administrativa e judiciária para a realidade da corporação." },
+    { text: "A vistoria realizada pelo CBMPA em uma edificação, para verificar o cumprimento das normas de segurança contra incêndio, é um exemplo de exercício de polícia judiciária.", correct:false, comment:"Errada. A vistoria de segurança contra incêndio é um exemplo típico de FISCALIZAÇÃO dentro do ciclo de polícia administrativa — tem caráter preventivo e incide sobre uma atividade/edificação (bem), não sobre pessoas com finalidade repressiva de apuração de ilícito penal, que é o que caracteriza a polícia judiciária." },
+    { text: "A Polícia Judiciária é exercida por diversos órgãos da Administração, incluindo o CBMPA, sempre que estes realizam atividades de fiscalização preventiva.", correct:false, comment:"Errada. É a Polícia ADMINISTRATIVA — não a judiciária — que, segundo o material, 'é exercida por diversos órgãos da Administração (inclui CBMPA)'; a polícia judiciária, por sua vez, é exercida por corporações policiais especializadas, com finalidade de apuração de ilícitos penais." },
+    { text: "Não há distinção prática entre Polícia Administrativa e Polícia Judiciária, sendo ambas expressões equivalentes do mesmo poder de polícia estatal.", correct:false, comment:"Errada. O material apresenta uma tabela comparativa justamente para evidenciar que se trata de institutos distintos — diferem quanto ao que incidem (bens/direitos/atividades x pessoas), quanto ao caráter (preventivo x repressivo), quanto ao objetivo (impedir atos lesivos x apurar ilícitos penais) e quanto a quem exerce (diversos órgãos da Administração x corporações policiais especializadas)." }
+  ],
+  referencia: "Quadro comparativo do material: Polícia Administrativa — incide sobre bens/direitos/atividades; caráter preventivo; objetivo de impedir atos lesivos; exercida por diversos órgãos (inclui CBMPA). Polícia Judiciária — incide sobre pessoas; caráter repressivo; objetivo de apurar ilícitos penais; exercida por corporações policiais especializadas. “CBMPA e PMPA exercem polícia judiciária militar ao apurar ilícitos penais militares via IPM.”",
+  aprofundamento: "Essa distinção dialoga diretamente com o conteúdo 'pendente' apontado nas Conexões com Outras Disciplinas: a independência das esferas (penal, civil, administrativa) e o conceito de IPM, vistos em DPIBM, ajudam a explicar por que o CBMPA, mesmo sendo essencialmente um órgão de segurança e socorro, também exerce — em situações específicas — função de polícia judiciária militar."
+},
+{
+  q: "Sobre o ciclo de polícia e a delegação do poder de polícia, é correto afirmar que:",
+  opts: [
+    { text: "O ciclo de polícia é composto, na ordem correta, pelas fases de Ordem de Polícia, Consentimento, Fiscalização e Sanção.", correct:true, comment:"Certa. É exatamente essa a sequência apresentada no material: Ordem de Polícia (norma legal que impõe restrições) → Consentimento (anuência prévia para atividade condicionada) → Fiscalização (verificação do cumprimento) → Sanção (penalidade pelo descumprimento, prevista apenas em lei)." },
+    { text: "Segundo o STF (RE 633782), todas as quatro fases do ciclo de polícia podem ser delegadas a pessoas jurídicas de direito privado integrantes da Administração Indireta, sem qualquer exceção.", correct:false, comment:"Errada. O próprio julgado citado pelo material estabelece uma exceção expressa: a Ordem de Polícia — por consistir em função legislativa — é absolutamente indelegável a pessoas de direito privado. A alternativa apaga justamente essa ressalva ao afirmar 'sem qualquer exceção'." },
+    { text: "A fase de 'Consentimento', dentro do ciclo de polícia, corresponde exatamente ao momento em que a Administração aplica a penalidade pelo descumprimento de uma norma.", correct:false, comment:"Errada. A descrição apresentada corresponde à fase de SANÇÃO, não à de Consentimento. O Consentimento é a anuência prévia da Administração para que o particular exerça uma atividade condicionada — manifestando-se por meio de licenças, alvarás e autorizações — e ocorre antes, não depois, da fiscalização e da eventual sanção." },
+    { text: "A fiscalização, dentro do ciclo de polícia, possui caráter exclusivamente repressivo, servindo apenas para identificar infrações já consumadas.", correct:false, comment:"Errada. O material descreve a fiscalização como tendo 'aspecto preventivo e repressivo' — cita como exemplo justamente a vistoria do CBMPA, que busca tanto verificar a conformidade preventivamente quanto identificar eventuais descumprimentos." },
+    { text: "A 'Ordem de Polícia' corresponde à anuência prévia da Administração para que o particular desenvolva uma atividade condicionada, como ocorre na emissão de alvarás.", correct:false, comment:"Errada. Essa descrição corresponde à fase de Consentimento, não à de Ordem de Polícia. A Ordem de Polícia é a norma legal que impõe as restrições em si (como o CTB, os requisitos para a CNH ou os preventivos contra incêndio em edificações) — é o fundamento legal que antecede o consentimento, e não o ato de anuência." }
+  ],
+  referencia: "Ciclo de polícia: “Ordem de Polícia → Consentimento → Fiscalização → Sanção”. STF, RE 633782: é constitucional delegar o poder de polícia (exceto a ordem de polícia) a pessoas jurídicas de direito privado da Administração Indireta, de capital majoritariamente público, que prestem exclusivamente serviço público típico do Estado em regime não concorrencial. “A ordem de polícia (função legislativa) é absolutamente indelegável a pessoas de direito privado.”",
+  aprofundamento: "O ciclo de polícia se conecta diretamente com os atos negociais: o 'consentimento de polícia' É a licença, a autorização ou a permissão — todas manifestadas por meio do alvará. Ou seja, a mesma fase do ciclo de polícia que aparece aqui reaparece, mais à frente, sob a roupagem de espécie de ato administrativo — outro ponto de cruzamento que costuma ser cobrado de forma combinada."
+},
+{
+  q: "A respeito do abuso de poder e da taxa de polícia, assinale a alternativa correta:",
+  opts: [
+    { text: "O desvio de poder caracteriza-se por vício de competência, ocorrendo quando o agente extrapola os limites daquilo que a lei lhe permite fazer.", correct:false, comment:"Errada. A descrição apresentada corresponde ao EXCESSO de poder (vício de competência), não ao desvio. O desvio de poder é vício de FINALIDADE: o agente até possui competência para agir, mas busca um fim diverso daquele previsto em lei (ex.: remoção de servidor usada como punição disfarçada)." },
+    { text: "A taxa de polícia tem como fato gerador a prestação de um serviço público específico e divisível ao contribuinte, e não o exercício da fiscalização.", correct:false, comment:"Errada. O material é expresso ao afirmar que 'o fato gerador é a fiscalização, não a prestação de serviço' — a alternativa atribui à taxa de polícia o fato gerador típico de outra espécie tributária (a taxa de serviço), invertendo a base sobre a qual ela incide." },
+    { text: "Segundo entendimento do STF (RE 416.601), a cobrança da taxa de polícia exige a comprovação de fiscalização individualizada e porta a porta em cada estabelecimento.", correct:false, comment:"Errada. O STF decidiu o oposto: basta a existência de um órgão fiscalizador estruturado para que se PRESUMA o exercício do poder de polícia, dispensando a comprovação de fiscalização individualizada — a alternativa exige exatamente aquilo que o precedente dispensa." },
+    { text: "O excesso de poder é vício de competência (o agente extrapola seus limites legais) e o desvio de poder é vício de finalidade (o agente busca fim diverso do previsto em lei); ambos podem caracterizar ilícito penal, civil e administrativo.", correct:true, comment:"Certa. Corresponde com precisão ao material: excesso de poder = vício de competência (ex.: militar punido com pena de prisão administrativa indevida); desvio de poder = vício de finalidade (ex.: remoção de servidor como punição disfarçada); e ambas as modalidades podem configurar ilícito nas três esferas — penal, civil e administrativa — sendo controláveis por autotutela ou por via judicial." },
+    { text: "O CLCB — Certificado de Licenciamento do Corpo de Bombeiros — tem validade indeterminada, dispensando qualquer renovação após sua primeira emissão.", correct:false, comment:"Errada. O material é claro: o CLCB exige renovação ANUAL obrigatória (art. 62, Lei nº 9.234/2021), mediante declaração de manutenção das medidas de segurança — a alternativa elimina justamente essa periodicidade que é um dos pontos mais cobrados sobre o tema." }
+  ],
+  referencia: "“Excesso de Poder — vício de Competência: agente extrapola o limite da competência legal. Desvio de Poder — vício de Finalidade: agente tem competência, mas busca fim diverso do legal.” Taxa de polícia: “tributo vinculado ao exercício regular do poder de polícia. O fato gerador é a fiscalização, não a prestação de serviço (...) STF presume o exercício do poder de polícia quando existe órgão fiscalizador criado (RE 416.601)”. CLCB: renovação anual obrigatória (art. 62, Lei nº 9.234/2021).",
+  aprofundamento: "O abuso de poder se conecta diretamente com o elemento Finalidade do ato administrativo (sempre vinculado): quando o agente desvia-se da finalidade legal, o ato nasce viciado e está sujeito à anulação por ilegalidade — fechando o círculo entre poderes administrativos, princípios (legalidade) e desfazimento dos atos (autotutela)."
+},
+{
+  q: "Sobre a classificação e as espécies de atos administrativos, é correto afirmar que:",
+  opts: [
+    { text: "A licença é um ato negocial discricionário e precário, podendo ser revogada pela Administração a qualquer tempo, mesmo quando o interessado já cumpriu todos os requisitos legais.", correct:false, comment:"Errada. A descrição corresponde à AUTORIZAÇÃO, não à licença. Segundo o material, a licença é um ato negocial VINCULADO: uma vez cumpridos os requisitos legais, a Administração é OBRIGADA a concedê-la (ex.: licença para construir) — não há aqui espaço para revogação discricionária a qualquer tempo." },
+    { text: "Memorando e ofício são espécies de atos negociais, manifestando-se ambos por meio de alvará.", correct:false, comment:"Errada. Memorando e ofício são espécies de ATOS ORDINATÓRIOS (decorrentes do poder hierárquico, sem efeito externo para particulares) — não de atos negociais. O alvará é a forma de manifestação dos atos negociais (licença, autorização, permissão), e não tem relação com memorando ou ofício." },
+    { text: "Os atos enunciativos atestam uma situação de fato ou emitem opinião técnica, sem impor a vontade da Administração — são exemplos a certidão, o atestado, a apostila/averbação e o parecer.", correct:true, comment:"Certa. Reproduz fielmente a definição do material: os atos enunciativos têm natureza declaratória — atestam situações de fato ou trazem opiniões técnicas, sem caráter impositivo —, e seus exemplos são exatamente certidão, atestado, apostila/averbação e parecer." },
+    { text: "A permissão é um ato negocial vinculado, que dispensa licitação prévia em razão do interesse público envolvido.", correct:false, comment:"Errada. A permissão é discricionária e precária — não vinculada — e, justamente por envolver interesse público relevante, EXIGE licitação prévia (ex.: permissão para explorar um restaurante em parque público). A alternativa atribui à permissão características que pertencem, em parte, à licença (vinculação) e nega uma exigência (licitação) que o material confirma expressamente." },
+    { text: "Os atos punitivos somente podem ser aplicados a particulares, no exercício do poder de polícia, jamais a servidores no âmbito do poder disciplinar.", correct:false, comment:"Errada. O material indica que os atos punitivos podem derivar tanto do poder disciplinar (quando o destinatário é um servidor) quanto do poder de polícia (quando o destinatário é um particular) — a alternativa exclui indevidamente uma das duas hipóteses expressamente previstas." }
+  ],
+  referencia: "“Atos Negociais — distinções: Licença: vinculada — cumpridos os requisitos, a Adm. deve conceder; Autorização: discricionária e precária — pode ser revogada a qualquer tempo; Permissão: discricionária e precária — mas há interesse público; exige licitação prévia.” “Enunciativos: Atestam situação de fato ou emitem opinião técnica — sem imposição de vontade. Ex.: certidão, atestado, apostila/averbação, parecer.”",
+  aprofundamento: "Vale lembrar que essas cinco espécies (normativos, ordinatórios, negociais, enunciativos, punitivos) não são compartimentos isolados — elas são a expressão concreta de cada poder administrativo já estudado: normativos ← poder normativo; ordinatórios ← poder hierárquico; negociais ← poder de polícia (consentimento); punitivos ← poder disciplinar ou poder de polícia. Reconhecer essa correspondência poder→ato costuma resolver questões que, à primeira vista, parecem cobrar decoreba pura."
+},
+{
+  q: "Quanto aos elementos do ato administrativo, reunidos no mnemônico COFIM, assinale a alternativa correta:",
+  opts: [
+    { text: "Competência, Finalidade e Forma são elementos sempre vinculados; Motivo e Objeto podem ser vinculados ou discricionários, conforme o caso concreto.", correct:true, comment:"Certa. É exatamente essa a sistematização trazida pelo material: dos cinco elementos do COFIM (Competência, Objeto, Finalidade, Forma, Motivo), três são SEMPRE vinculados — Competência, Finalidade e Forma — e dois podem variar entre vinculados e discricionários — Motivo e Objeto, a depender da hipótese legal aplicável ao caso." },
+    { text: "Pela Teoria dos Motivos Determinantes, o motivo de um ato administrativo só vincula sua validade quando a lei expressamente exige sua declaração; se a lei dispensa essa declaração, um motivo falso não compromete o ato.", correct:false, comment:"Errada. O material afirma o oposto dessa condicionante: o motivo declarado vincula a validade do ato — se for falso, o ato é nulo, MESMO que a lei não exigisse sua declaração. A Teoria dos Motivos Determinantes não depende de obrigatoriedade legal de declaração para operar seus efeitos." },
+    { text: "A Competência, elemento do ato administrativo, é renunciável e prescritível, podendo ser transferida definitivamente entre agentes por simples acordo verbal.", correct:false, comment:"Errada. O material caracteriza a competência exatamente ao contrário: é irrenunciável e imprescritível — admite apenas delegação e avocação (formas específicas e regradas de movimentação, não 'transferência definitiva por acordo verbal')." },
+    { text: "O Objeto do ato administrativo é sempre vinculado, devendo necessariamente ser lícito, possível, determinado e moral, sob pena de nulidade.", correct:false, comment:"Errada. A descrição das qualidades do objeto (lícito, possível, determinado e moral) está correta, mas a alternativa erra ao afirmar que ele é 'sempre vinculado' — segundo o COFIM, o Objeto é um dos dois elementos que PODEM ser vinculados OU discricionários, dependendo da situação prevista em lei." },
+    { text: "A Finalidade do ato administrativo pode ser discricionária, cabendo ao agente escolher livremente o resultado de interesse público que pretende alcançar.", correct:false, comment:"Errada. A Finalidade é elemento SEMPRE vinculado — é o resultado de interesse público já definido pela própria lei, e não uma escolha livre do agente. Quando o agente se desvia dessa finalidade legalmente prevista, configura-se o desvio de poder (abuso de poder), e o ato se torna nulo." }
+  ],
+  referencia: "COFIM (art. 2º, Lei nº 4.717/1965): “Competência — sempre vinculada; Objeto — vinculado ou discricionário; Finalidade — sempre vinculada; Forma — sempre vinculada; Motivo — vinculado ou discricionário; vincula a validade pela Teoria dos Motivos Determinantes.” “Teoria dos Motivos Determinantes: o motivo declarado vincula a validade do ato — se o motivo for falso, o ato é nulo.”",
+  aprofundamento: "O elemento Motivo e a Teoria dos Motivos Determinantes formam um dos pares mais cobrados da disciplina, porque conectam três blocos: o motivo pode ser discricionário (poder discricionário/mérito administrativo), mas se o motivo declarado for falso, o ato torna-se nulo por ILEGALIDADE — abrindo caminho para a anulação (autotutela ou via judicial), com efeito ex tunc. Em uma única cadeia de raciocínio, você percorre poderes, elementos do ato e desfazimento."
+},
+{
+  q: "Sobre os atributos e o desfazimento dos atos administrativos, assinale a alternativa correta:",
+  opts: [
+    { text: "A executoriedade é uma forma de coerção indireta, exercida por meio da aplicação de multas e da restrição de direitos do particular.", correct:false, comment:"Errada. Essa descrição corresponde à EXIGIBILIDADE (coerção indireta), não à executoriedade. A executoriedade, segundo o material, é a coerção DIRETA: a Administração executa o ato por suas próprias forças, sem necessidade de autorização judicial, quando há urgência ou previsão legal." },
+    { text: "Atos políticos — como o veto presidencial e a declaração de guerra — e atos materiais — como a demolição de um prédio condenado — são, segundo o material, espécies de atos administrativos em sentido estrito.", correct:false, comment:"Errada. O material é categórico ao afastar essas três categorias do conceito de ato administrativo stricto sensu: atos privados, atos políticos (veto, guerra, indicação de ministros) e atos materiais (execução física, como a demolição) NÃO são considerados atos administrativos em sentido estrito — é uma das 'pegadinhas clássicas' apontadas na revisão." },
+    { text: "A revogação é o desfazimento do ato por motivo de ilegalidade, com efeito retroativo (ex tunc), podendo ser realizada tanto pela Administração quanto pelo Poder Judiciário.", correct:false, comment:"Errada. A descrição apresentada corresponde à ANULAÇÃO, não à revogação. A revogação tem fundamento na conveniência e na oportunidade (mérito), produz efeito ex nunc (somente para frente) e é de competência EXCLUSIVA da Administração — o Judiciário não pode revogar atos administrativos, pois isso implicaria avaliar o mérito, o que lhe é vedado." },
+    { text: "A presunção de legitimidade e veracidade do ato administrativo é relativa (juris tantum), o que significa que admite prova em contrário e inverte o ônus da prova em favor do particular que pretende contestar o ato.", correct:true, comment:"Certa. Está em conformidade exata com o material: trata-se de presunção juris tantum — relativa, admite prova em contrário — e tem o efeito prático de inverter o ônus da prova, de modo que cabe ao particular que contesta o ato demonstrar a existência do vício alegado." },
+    { text: "A renúncia é uma forma de desfazimento do ato administrativo que pode ser promovida tanto pela Administração quanto pelo beneficiário, conforme a conveniência de cada parte.", correct:false, comment:"Errada. Segundo o material, a renúncia ocorre quando o BENEFICIÁRIO abdica do direito (em atos que ampliam sua esfera jurídica) — é prerrogativa do particular, e não uma faculdade que a Administração possa exercer por conveniência própria; isso a diferencia claramente da revogação, que é exclusiva da Administração." }
+  ],
+  referencia: "Atributos: “Exigibilidade — Coerção indireta — multas, restrições de direitos; Executoriedade — Coerção direta — Adm. executa por suas próprias forças sem autorização judicial.” “Presunção de Legitimidade e Veracidade: presunção juris tantum (relativa) (...) inverte o ônus da prova.” Desfazimento: “Anulação — ilegalidade — ex tunc — Administração ou Judiciário; Revogação — conveniência/oportunidade — ex nunc — exclusivamente a Administração; Renúncia — beneficiário abdica do direito — Particular.”",
+  aprofundamento: "Essa questão amarra o fio condutor de toda a disciplina: a presunção de legitimidade nasceu lá nas premissas do Direito Administrativo, reapareceu como atributo específico do ato administrativo, e seu reverso — a possibilidade de o ato ser viciado e desfeito — devolve o raciocínio à autotutela (Súmulas STF 346 e 473) e ao binômio anulação/revogação. Memorizar esse encadeamento é, segundo a própria revisão, o caminho mais seguro para resolver questões que cruzam blocos diferentes da prova."
+}
+];
+
+let order = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildSession(){
+  order = shuffle(QUESTIONS_RAW.map((q,i)=>i)).map(i=>{
+    const q = QUESTIONS_RAW[i];
+    const opts = shuffle(q.opts.map((o,k)=>({...o, _k:k})));
+    return { ...q, opts };
+  });
+  current = 0;
+  score = 0;
+  answered = false;
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(current >= order.length){
+    const pct = Math.round((score/order.length)*100);
+    app.innerHTML = `
+      <div class="card score">
+        <div class="question">Simulado concluído</div>
+        <div class="num">${score} / ${order.length}</div>
+        <div class="pct">${pct}% de acertos</div>
+        <button class="btn" onclick="buildSession()">Refazer simulado</button>
+      </div>`;
+    return;
+  }
+  const q = order[current];
+  answered = false;
+  const pct = Math.round((current/order.length)*100);
+  let optsHtml = '';
+  q.opts.forEach((o, idx) => {
+    optsHtml += `<button class="opt" data-idx="${idx}" onclick="choose(${idx})">${o.text}</button>`;
+  });
+  app.innerHTML = `
+    <div class="progress">Questão ${current+1} de ${order.length} · acertos até aqui: ${score}</div>
+    <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    <div class="card">
+      <p class="question">${q.q}</p>
+      <div id="opts">${optsHtml}</div>
+      <div id="reviewArea"></div>
+    </div>`;
+}
+
+function choose(idx){
+  if(answered) return;
+  answered = true;
+  const q = order[current];
+  const chosen = q.opts[idx];
+  if(chosen.correct) score++;
+
+  const buttons = document.querySelectorAll('#opts .opt');
+  buttons.forEach((btn,i)=>{
+    btn.disabled = true;
+    if(q.opts[i].correct) btn.classList.add('correct');
+    else if(i===idx) btn.classList.add('wrong');
+  });
+
+  let analysisHtml = '';
+  q.opts.forEach((o,i)=>{
+    let cls = '';
+    let tag = '';
+    if(o.correct){ cls='is-correct'; tag='<b>Correta — </b>'; }
+    else if(i===idx){ cls='is-chosen-wrong'; tag='<b>Sua resposta — </b>'; }
+    analysisHtml += `<div class="item ${cls}">${tag}${o.comment}</div>`;
+  });
+
+  let blocksHtml = '';
+  if(q.referencia){
+    blocksHtml += `<div class="block fixar"><span class="label">Para fixar</span>${q.referencia}</div>`;
+  }
+  if(q.aprofundamento){
+    blocksHtml += `<div class="block alem"><span class="label">Indo além desta questão</span>${q.aprofundamento}</div>`;
+  }
+
+  const bannerCls = chosen.correct ? 'ok' : 'no';
+  const bannerTxt = chosen.correct
+    ? 'Você acertou! A alternativa marcada está correta.'
+    : 'Você errou. Veja abaixo qual era a alternativa correta e por quê.';
+
+  document.getElementById('reviewArea').innerHTML = `
+    <div class="review">
+      <div class="banner ${bannerCls}">${bannerTxt}</div>
+      <div class="analysis">${analysisHtml}</div>
+      ${blocksHtml}
+      <button class="btn" onclick="next()">Próxima questão</button>
+    </div>`;
+}
+
+function next(){
+  current++;
+  render();
+}
+
+buildSession();
+</script>
+</body>
+</html>

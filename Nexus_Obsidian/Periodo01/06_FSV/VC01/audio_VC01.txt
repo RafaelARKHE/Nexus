@@ -1,0 +1,112 @@
+---
+sistema: Nexus
+tipo: audio_prova
+disciplina: Fundamentos do Salvamento Veicular
+sigla: FSV
+periodo: Periodo01
+avaliacao: VC01
+duracao_estimada: 30min
+palavras_alvo: 4000
+criado_em: 06/06/2026
+versao: 1.0
+---
+
+Bom dia, cadete. Vamos revisar Fundamentos do Salvamento Veicular para a sua VC01. O conteúdo cobre as duas primeiras aulas: conceitos iniciais, estatísticas de sinistros, segurança nas ocorrências, ações iniciais, ferramentas e equipamentos, anatomia veicular, fases do atendimento e estabilização. São bastante coisas, mas tudo se conecta em uma lógica operacional clara. Vamos por partes.
+
+Começando pelos conceitos fundamentais. O Salvamento Veicular, que você vai ver abreviado como SV, é o conjunto de procedimentos para atender ocorrências em que uma ou mais vítimas estejam presas em veículos sinistrados. Essa definição é mais abrangente do que parece. O SV começa no reconhecimento da cena e só termina no encerramento formal da ocorrência, passando por controle de riscos, estabilização do veículo, criação de acessos, desencarceramento e retirada da vítima. Cada uma dessas etapas tem lugar certo na sequência.
+
+Dentro do SV, há um conceito específico chamado desencarceramento. Muita gente confunde os dois, então preste atenção: o desencarceramento não é o salvamento inteiro, é apenas uma das etapas dentro dele. O desencarceramento é o conjunto de ações para criar o espaço necessário para retirar a vítima de forma mais segura, movimentando-a o mínimo possível. A movimentação mínima é o princípio central, porque qualquer movimentação desnecessária pode agravar lesões da coluna, do pescoço ou dos membros.
+
+Seguindo essa linha de raciocínio, vamos falar sobre os tipos de ocorrência que levam a essas situações. Em 2023, o Código de Trânsito Brasileiro foi alterado e trocou o termo acidente de trânsito por sinistro de trânsito. Essa mudança não é só vocabular: ela reforça que o evento tem causas, tem responsabilidades, e não é algo que simplesmente acontece por acaso. Sinistro de trânsito é qualquer evento em vias terrestres ou áreas públicas, envolvendo pelo menos um veículo em movimento, que resulte em danos a pessoas, veículos, carga, animais, à via ou ao meio ambiente.
+
+Os tipos de sinistros mais importantes para você diferenciar são a colisão e o choque. Colisão é o impacto entre dois objetos que estão em movimento, seja frontal, traseira ou lateral. Já o choque é o impacto de um veículo em movimento contra um objeto fixo ou imóvel. A diferença está no estado do segundo objeto: em movimento é colisão, parado é choque. Além desses, temos o tombamento, quando o veículo cai sobre a lateral, e o capotamento, quando o veículo gira sobre o próprio eixo. Cada um desses cenários exige uma abordagem de estabilização diferente, algo que vamos revisitar mais à frente.
+
+Agora vamos aos números, porque as estatísticas de sinistros de trânsito aparecem em prova com frequência. De acordo com a Organização Mundial da Saúde, em 2024, o trânsito mata aproximadamente 1 vírgula 19 milhão de pessoas no mundo a cada ano. Além dos mortos, são 20 a 50 milhões de pessoas com ferimentos não fatais. Esses números colocam os sinistros de trânsito como a principal causa de morte entre pessoas de 5 a 29 anos. Dois terços de todas as mortes ocorrem em pessoas em idade produtiva, ou seja, entre 18 e 59 anos.
+
+No Brasil, o maior grupo de risco são os ocupantes de motocicletas com idade entre 20 e 24 anos, de acordo com o Observatório Nacional de Segurança Viária de 2024. No Pará especificamente, o estado ocupa a 7ª posição no ranking nacional de óbitos por sinistros de trânsito, com 1793 mortes registradas pelo DATASUS em 2024. Isso coloca o SV como uma das atividades mais relevantes do CBMPA operacionalmente.
+
+O principal fator de risco identificado é a velocidade. Para cada aumento de 1 por cento na velocidade média, o risco de sinistro fatal aumenta em 4 por cento. Pense nisso: um por cento a mais de velocidade, quatro por cento a mais de risco de morte. E no atropelamento, um pedestre atingido a 65 quilômetros por hora tem 4 vírgula 5 vezes mais probabilidade de morrer do que um atingido a 50 quilômetros por hora. A meta da ONU é reduzir mortes no trânsito em pelo menos 50 por cento até 2030, dentro da Década de Ação para a Segurança no Trânsito 2021 a 2030.
+
+Voltando ao que vimos antes, a posição em que o veículo se encontra define muito do que o bombeiro vai fazer. O veículo pode estar sobre as quatro rodas, tombado sobre a lateral, capotado sobre o teto, ou em uma configuração complexa, envolvendo múltiplos veículos ou outros elementos. Essa classificação vai determinar como a estabilização será feita, e a estabilização é o que vem antes de qualquer intervenção direta no veículo.
+
+Antes de chegar à estabilização, precisamos falar sobre segurança. No salvamento veicular, a segurança é organizada em três pilares hierárquicos: segurança do bombeiro em primeiro lugar, segurança do local em segundo e segurança da vítima em terceiro. Essa ordem não é opcional. Bombeiro que vira vítima agrava a ocorrência e retira recursos da operação.
+
+O primeiro pilar, a segurança do bombeiro, envolve o uso de EPI completo antes de qualquer intervenção, condicionamento físico adequado, treinamento constante e comunicação eficiente entre os membros da equipe.
+
+O segundo pilar, a segurança do local, é o mais extenso e o mais crítico para a prova. Cada tipo de risco tem sua ação específica. Se houver tráfego e populares na cena, a resposta é isolamento. Se houver vazamento de combustível, a equipe deve isolar a cena, posicionar extintores ou linhas de combate, eliminar as fontes de ignição e desligar a bateria do veículo. Se veículos ou objetos estiverem instáveis, a ação é estabilizar antes de qualquer manobra.
+
+Outros riscos do local: inclinação do terreno exige avaliação antes de posicionar a equipe. Carga perigosa exige consulta à FISPQ, a Ficha de Informações de Segurança de Produto Químico. Condições climáticas adversas exigem ajuste do isolamento e garantia de conforto mínimo para a vítima. Risco de colapso de estruturas no entorno exige avaliação antes de posicionar a equipe. E quando há risco de corte e perfuração durante o manejo de vidros, o bombeiro usa protetor de quina, máscara N95 ou PFF2 e óculos de proteção.
+
+O risco elétrico merece destaque especial porque é o único que é absolutamente bloqueante. Se houver risco elétrico de rede, a equipe não atua antes da desenergização pela concessionária de energia. Não há exceção a essa regra. Os airbags também merecem atenção: antes de operar no habitáculo do veículo, o bombeiro deve identificar os airbags e posicionar o protetor de airbag para evitar acionamento acidental durante a operação. Um airbag disparado durante o trabalho pode lesionar fatalmente tanto o bombeiro quanto a vítima. Veículos híbridos e elétricos exigem identificação específica e procedimento diferenciado desde a chegada à cena.
+
+O terceiro pilar, a segurança da vítima, envolve proteção flexível para cobrir a vítima durante os cortes, proteção rígida como barreira física entre as ferramentas e a vítima, e primeiros atendimentos pela equipe de APH de forma integrada.
+
+Isso se conecta com as ações iniciais que a equipe realiza ao chegar na cena. A primeira providência é verificar a FISPQ se houver suspeita de carga perigosa. A segunda é o posicionamento da viatura a 45 graus em relação ao veículo sinistrado. Esse ângulo não é aleatório: coloca a viatura como barreira de sacrifício entre o tráfego da via e a zona de trabalho, e o desembarque da equipe é feito pelo lado oposto ao tráfego.
+
+Em seguida vem o isolamento e a definição das três zonas. A zona quente é onde estão os veículos envolvidos, de acesso restrito à equipe com EPI completo. A zona morna é destinada ao palco de ferramentas, que deve estar preferencialmente sobre uma lona resistente para acomodar os equipamentos, e à área de descarte, onde ficam as estruturas removidas como portas, vidros e painéis. A zona fria é de livre acesso para outros recursos operacionais como guinchos, viaturas policiais e ambulâncias em espera.
+
+Depois do isolamento, a equipe realiza a avaliação de 360 graus. Essa avaliação tem dois círculos: o círculo interno, que percorre o interior do veículo, a área abaixo e o entorno próximo, e o círculo externo, que percorre o entorno de toda a zona quente. Só após essa avaliação o bombeiro tem condições de planejar a intervenção com segurança.
+
+Para consolidar o que vimos até aqui: temos o conceito de SV e desencarceramento, os tipos de sinistros, as estatísticas com os números específicos, os três pilares de segurança e as ações iniciais incluindo posicionamento da viatura, zonas e avaliação de 360 graus. Agora vamos falar das ferramentas.
+
+As FEAs, Ferramentas, Equipamentos e Acessórios, são divididas por função. Para estabilização, temos os calços, que são feitos de polietileno reciclado e suportam 100 quilos por centímetro quadrado em todas as direções, os estabilizadores de tração, com carga axial máxima de 1 vírgula 6 toneladas e comprimento máximo de 1 vírgula 80 metro, as fitas com catraca e as cordas e cabos da vida.
+
+Para abertura de acesso e manobras manuais, temos a talha tirfor para movimentação de cargas, o hooligan para alavancagem e abertura forçada, o quebra-vidro e corta-cinto para acesso rápido à vítima, a machadinha, o corta-a-frio que é específico para corte sem produzir faísca, e o saca-válvulas para remoção de válvulas do veículo.
+
+Para proteção, temos a proteção flexível que cobre a vítima durante toda a operação, a proteção rígida como barreira física direta, a proteção de quina para bordas cortantes expostas, o cano PVC para fixar as proteções e o protetor de airbag.
+
+O sistema hidráulico funciona a partir da motobomba, que pode ter dois tipos de linha. O sistema twin line tem duas mangueiras separadas, uma de alta pressão e uma de baixa pressão. O sistema core tem uma única mangueira, com a linha de alta pressão contida dentro da mangueira de baixa pressão. A manutenção da motobomba segue prazos específicos: o óleo lubrificante deve ser trocado a cada 6 meses, e o fluido hidráulico deve ser trocado a cada 12 meses. Antes desses prazos, os fluidos podem ser apenas completados sem necessidade de troca total.
+
+As ferramentas hidráulicas de corte e expansão incluem o cortador para estruturas metálicas, o alargador para expansão de espaços, o extensor para ampliar o alcance do alargador em espaços mais profundos, e a combinada que realiza tanto corte quanto expansão em uma única ferramenta. O cortador de pedal é específico para liberar os pés da vítima na área dos pedais. As ferramentas hidráulicas movidas a bateria têm a vantagem de serem portáteis, poderem ser usadas simultaneamente, gerarem menos ruído, exigirem menos manutenção e ocuparem menos espaço na viatura, mas têm como desvantagem serem mais pesadas.
+
+Duas ferramentas especiais merecem atenção particular. A serra-sabre é usada para corte de colunas, remoção de estruturas em chapa e retirada de vidro laminado. O moto abrasivo é reservado para uma situação específica: quando há uma estrutura que não pode ser movimentada ou torcida, como uma ferragem que esteja transfixando uma vítima. Nesses casos, a vibração e os fragmentos do corte exigem proteção máxima da vítima e da equipe. As correntes, por outro lado, são utilizadas apenas em casos excepcionais e não fazem parte da primeira linha de intervenção.
+
+Voltando ao que vimos antes para conectar com a anatomia: as FEAs são usadas conforme a estrutura do veículo, então conhecer a anatomia veicular é fundamental para saber qual ferramenta usar em qual ponto.
+
+O veículo tem duas grandes zonas estruturais. A célula de segurança é o compartimento dos passageiros, a parte mais rígida do veículo, projetada para preservar o espaço vital das pessoas dentro. As zonas de deformação, dianteira e traseira, são feitas de aço menos resistente justamente para absorver a energia do impacto e proteger a célula de segurança. O problema é que essas zonas de deformação colapsam, e é nelas que a vítima frequentemente fica presa.
+
+As barras de reforço lateral são feitas de aço muito resistente e servem para espalhar as forças de um impacto lateral. Por essa razão, o bombeiro deve evitar manobras envolvendo essas estruturas: a resistência é excessiva para as FEAs, e tentar intervir ali danifica a ferramenta sem produzir o acesso desejado.
+
+As colunas são os suportes verticais do teto do veículo. A coluna A fica entre o para-brisa e a porta dianteira. A coluna B fica entre a porta dianteira e a traseira, e é o alvo mais comum de corte no desencarceramento lateral. A coluna C fica entre a porta traseira e a janela traseira. Alguns veículos com terceira fileira ainda têm a coluna D.
+
+Para as portas, a regra fundamental é evitar intervenção direta nas dobradiças. Quando cortadas ou separadas por ferramentas hidráulicas, as dobradiças podem sair violentamente, representando risco grave para a equipe e para a vítima. A alternativa correta é intervir nos pontos de solda entre a dobradiça e a estrutura do veículo, que têm menor resistência e não apresentam esse risco de ejeção.
+
+A bateria exige uma sequência específica de desconexão. Após garantir o desbloqueio de vidros e portas elétricas, o bombeiro localiza a bateria, cria acesso, desconecta primeiro o polo negativo e depois o polo positivo, e em seguida isola os cabos. Inverter essa sequência pode gerar faísca, o que é especialmente crítico quando há combustível vazado. Em veículos elétricos e híbridos, a bateria principal opera em tensões muito superiores, podendo chegar a 800 volts em veículos totalmente elétricos, exigindo EPI específico e procedimento diferenciado.
+
+Os vidros do veículo se dividem em dois tipos com comportamentos completamente opostos. O vidro laminado, normalmente usado no para-brisa dianteiro, mantém os estilhaços unidos quando quebrado, porque tem uma faixa de plástico no interior. Ele também é colado à estrutura do veículo, o que exige uma abordagem diferente para remoção. O vidro temperado, encontrado nas janelas laterais e no para-brisa traseiro, se desprendে em pequenos pedaços quando quebrado, gerando uma nuvem de partículas que exige máscara e óculos de proteção.
+
+Seguindo essa linha de raciocínio, chegamos ao conteúdo mais específico da segunda aula: as fases do atendimento e a estabilização veicular.
+
+Todo atendimento de SV percorre quatro fases em sequência obrigatória. A primeira fase é a Preparação, que acontece antes de qualquer acionamento. É o estado permanente de prontidão da equipe: conferência de material da viatura, treinamento contínuo e articulação prévia com recursos complementares como concessionárias de energia, guinchos e serviços médicos. A Preparação não começa quando chega o chamado. Ela existe o tempo todo entre as ocorrências.
+
+A segunda fase é o Acionamento, que começa com o chamado e vai até a chegada à cena. Nessa fase, a equipe realiza a triagem da ocorrência, coleta o máximo de informações possíveis, como tipo de veículo, número de vítimas, presença de carga perigosa ou veículo elétrico, e define quais recursos serão empenhados. Essas informações coletadas no acionamento já mudam o planejamento durante o deslocamento.
+
+A terceira fase é a Resposta, que é a atuação direta na cena. Ela tem 13 etapas em sequência: posicionamento da viatura como barreira de sacrifício e isolamento da cena, organização das zonas de trabalho, montagem do palco de ferramentas, delimitação da área de descarte, avaliação da cena e gerenciamento de riscos, avaliação de 360 graus nos dois círculos, estabilização do veículo, acesso ao interior, criação de espaço interno, técnicas de desencarceramento, extração da vítima, deixar a cena segura e coletar os dados da ocorrência.
+
+A quarta fase é a Finalização. Após o encerramento, a equipe desmobiliza os recursos, realiza o debriefing, que é uma análise estruturada e coletiva do que funcionou e do que falhou na ocorrência, e usa os pontos fracos identificados como pauta de treinamento futuro. O debriefing não é conversa informal, é etapa formal obrigatória da fase de finalização.
+
+Para consolidar: quatro fases, Preparação, Acionamento, Resposta e Finalização. A Resposta tem 13 etapas em sequência. A estabilização é a oitava etapa da Resposta e precede obrigatoriamente o acesso ao interior do veículo.
+
+E falando em estabilização, vamos detalhar esse ponto porque é o tema central da segunda aula. A estabilização veicular é um processo contínuo que busca prevenir qualquer movimentação inesperada durante as ações de salvamento. Seu objetivo é duplo: garantir acesso rápido à vítima e tornar o cenário seguro para vítima e bombeiros.
+
+A estabilização tem três princípios que você precisa fixar. Primeiro: estabilizar a vítima e o veículo da maneira encontrada, nunca mover antes de estabilizar. Segundo: preencher todo o espaço entre o veículo e o solo, outros veículos ou obstáculos. Terceiro: ajustar e verificar constantemente durante toda a operação.
+
+Isso se conecta com os três tipos de estabilização. A estabilização primária é a mínima necessária para que a equipe acesse o interior do veículo e inicie os primeiros atendimentos. Ela precisa ser rápida e segura, porque quanto mais cedo a equipe de APH acessa a vítima, melhor o prognóstico. A estabilização secundária é a continuação da primária e representa a estabilização total do veículo, inibindo movimentações indesejadas de todos os veículos e objetos envolvidos, viabilizando a extração segura. A estabilização progressiva é a revisão sistemática ao longo de toda a operação. Ela deve estar alinhada ao Plano de Ação, considerando as técnicas de desencarceramento que serão realizadas e as rotas de extração principal e emergencial.
+
+As formas de estabilização variam conforme a posição do veículo. Para veículo sobre quatro rodas, os pneus são calçados com cunhas de forma alternada, em lados opostos, para anular a movimentação horizontal e vertical. Essa alternância é fundamental: calçar todos do mesmo lado deixa o veículo livre para rolar na direção oposta. São três pontos de calçamento, e a prioridade é o lado em que a vítima se encontra.
+
+Para complementar, existem variações técnicas. Os calços escalonados invertidos, que são grandes cunhas, permitem posicionamento rápido e fácil. O quinto ponto é um calçamento adicional na parte traseira do veículo, obrigatório quando a extração será feita pela traseira, como em veículos hatch. A combinação de calços escalonados com cunha é posicionada entre a caixa de ar e o solo.
+
+Para veículo tombado, o cenário é mais instável e exige maior atenção da equipe, mas as técnicas de estabilização tendem a ser mais rápidas de executar. Para veículo capotado, seguem-se os princípios gerais de estabilizar como encontrado e preencher os espaços vazios, com atenção especial ao planejamento das rotas de extração antes de iniciar qualquer manobra. Pode ser necessário o uso de um estabilizador artesanal improvisado com materiais disponíveis na cena.
+
+Para cenários complexos, como pesado sobre leve ou leve sobre leve, mesmo utilizando estabilizadores de tração, é obrigatório adicionar uma fita com catraca ou uma corda cruzando os veículos. Os estabilizadores de tração sozinhos não são suficientes para impedir o deslocamento do conjunto.
+
+Para encerrar, vamos recapitular os pontos mais críticos da matéria. Colisão e choque são diferentes: colisão é dois objetos em movimento, choque é um em movimento e um fixo. Sinistro é o termo correto desde 2023. A bateria é desconectada com o polo negativo primeiro, nunca ao contrário. O risco elétrico é bloqueante total, sem concessionária não há atuação. As dobradiças das portas nunca devem ser cortadas diretamente, preferindo-se os pontos de solda. As barras de reforço lateral são de aço altamente resistente e as manobras devem ser evitadas nelas.
+
+O vidro laminado fica no para-brisa dianteiro e mantém os estilhaços unidos. O vidro temperado fica nas janelas e traseiro e fragmenta em pequenos pedaços. Os calços são calçados de forma alternada, em três pontos, priorizando o lado da vítima. O quinto ponto é obrigatório em extrações pela traseira. Em cenários complexos, a fita com catraca ou corda é obrigatória além dos estabilizadores.
+
+A motobomba tem troca de óleo a cada seis meses e troca de fluido hidráulico a cada doze meses. Twin line tem duas mangueiras, core tem a alta dentro da baixa. O moto abrasivo é o único indicado quando não se pode mover a estrutura. São quatro fases de atendimento: Preparação, Acionamento, Resposta e Finalização. A Fase 3 tem 13 etapas em sequência e a estabilização precede o acesso. A estabilização primária viabiliza o APH, a secundária viabiliza a extração, e a progressiva é revisada ao longo de toda a operação.
+
+E os números: 1 vírgula 19 milhão de mortes por ano no mundo, Pará em 7º lugar com 1793 óbitos, velocidade aumenta em 4 por cento o risco para cada 1 por cento a mais, e a meta da ONU é reduzir 50 por cento das mortes até 2030.
+
+Boa prova, cadete.

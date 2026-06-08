@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado — FSV | VC01</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .container { max-width: 760px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      padding: 28px 20px 20px;
+      border-bottom: 1px solid #2d3748;
+      margin-bottom: 28px;
+    }
+    header .badge {
+      display: inline-block;
+      background: #1a2a4a;
+      color: #63b3ed;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    header h1 { font-size: 22px; font-weight: 700; color: #f7fafc; margin-bottom: 6px; }
+    header p { font-size: 14px; color: #718096; }
+
+    #progress-bar-wrap {
+      background: #2d3748;
+      border-radius: 8px;
+      height: 6px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    #progress-bar { height: 100%; background: #4299e1; border-radius: 8px; transition: width 0.4s ease; width: 0%; }
+
+    #status-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #1a202c;
+      border: 1px solid #2d3748;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .question-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #63b3ed;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.55;
+      color: #f0f4f8;
+      margin-bottom: 22px;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #2d3748;
+      border: 2px solid #2d3748;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 16px;
+      line-height: 1.45;
+      min-height: 44px;
+      text-align: left;
+      color: #e2e8f0;
+    }
+    .option:active { opacity: 0.85; }
+    .option .letra {
+      font-weight: 700;
+      color: #63b3ed;
+      min-width: 20px;
+      padding-top: 1px;
+    }
+    .option.correct { background: #1a3a2a; border-color: #48bb78; color: #c6f6d5; }
+    .option.correct .letra { color: #48bb78; }
+    .option.wrong { background: #3a1a1a; border-color: #fc8181; color: #fed7d7; }
+    .option.wrong .letra { color: #fc8181; }
+    .option.disabled { cursor: default; pointer-events: none; }
+
+    /* ── Painel de revisão pós-resposta ───────────────────────────── */
+    .review {
+      margin-top: 18px;
+      display: none;
+    }
+    .review.show { display: block; }
+
+    .review-banner {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .review-banner.ok { background: #1a3a2a; border-left: 4px solid #48bb78; color: #c6f6d5; }
+    .review-banner.no { background: #3a1a1a; border-left: 4px solid #fc8181; color: #fed7d7; }
+
+    .review-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #718096;
+      margin: 18px 0 10px;
+    }
+
+    .alt-analysis { display: flex; flex-direction: column; gap: 8px; }
+    .alt-row {
+      display: flex;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #232b3a;
+      border-left: 3px solid #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #cbd5e0;
+    }
+    .alt-row .alt-letra {
+      font-weight: 700;
+      min-width: 18px;
+      flex-shrink: 0;
+    }
+    .alt-row.is-correct { border-left-color: #48bb78; background: #16261c; }
+    .alt-row.is-correct .alt-letra { color: #48bb78; }
+    .alt-row.is-chosen-wrong { border-left-color: #fc8181; background: #2a1818; }
+    .alt-row.is-chosen-wrong .alt-letra { color: #fc8181; }
+    .alt-row .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 5px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .alt-row.is-correct .tag { background: #1a3a2a; color: #48bb78; }
+    .alt-row.is-chosen-wrong .tag { background: #3a1a1a; color: #fc8181; }
+
+    .ref-box {
+      background: #16202e;
+      border: 1px solid #2c5282;
+      border-left: 4px solid #4299e1;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #bee3f8;
+      margin-top: 4px;
+    }
+    .ref-box .ref-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #63b3ed;
+      margin-bottom: 6px;
+    }
+
+    .deepen-box {
+      background: #1f1a2e;
+      border: 1px solid #553c9a;
+      border-left: 4px solid #9f7aea;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #e9d8fd;
+      margin-top: 4px;
+    }
+    .deepen-box .deepen-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #b794f4;
+      margin-bottom: 6px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+      transition: opacity 0.15s;
+    }
+    .btn:active { opacity: 0.8; }
+    .btn-next { background: #3182ce; color: #fff; display: none; }
+    .btn-next.show { display: block; }
+    .btn-restart { background: #2d3748; color: #e2e8f0; margin-top: 16px; }
+
+    #result-screen {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    #result-screen.show { display: block; }
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 8px solid #3182ce;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .score-num { font-size: 38px; font-weight: 800; color: #f7fafc; }
+    .score-den { font-size: 14px; color: #718096; }
+    .score-pct { font-size: 20px; font-weight: 700; color: #63b3ed; margin-bottom: 8px; }
+    .score-msg { font-size: 15px; color: #a0aec0; line-height: 1.5; margin-bottom: 28px; }
+
+    #question-screen { display: block; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge">CFO T16 · CBMPA · Revisão comentada</div>
+    <h1>Simulado — FSV | VC01</h1>
+    <p>15 questões · cada alternativa comentada — acerte ou erre, a revisão continua</p>
+  </header>
+
+  <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+  <div id="status-line">
+    <span id="status-q">Questão 1 de 15</span>
+    <span id="status-score">Acertos: 0</span>
+  </div>
+
+  <div id="question-screen">
+    <div class="card">
+      <div class="question-number" id="q-number">QUESTÃO 01</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+
+      <div class="review" id="q-review">
+        <div class="review-banner" id="review-banner"></div>
+
+        <div class="review-section-title">Análise de cada alternativa</div>
+        <div class="alt-analysis" id="alt-analysis"></div>
+
+        <div id="ref-wrap"></div>
+        <div id="deepen-wrap"></div>
+      </div>
+
+      <button class="btn btn-next" id="btn-next">Próxima questão →</button>
+    </div>
+  </div>
+
+  <div id="result-screen">
+    <div class="score-circle">
+      <div class="score-num" id="res-num">0</div>
+      <div class="score-den" id="res-den">de 15</div>
+    </div>
+    <div class="score-pct" id="res-pct">0%</div>
+    <div class="score-msg" id="res-msg"></div>
+    <button class="btn btn-restart" onclick="restart()">↺ Refazer simulado</button>
+  </div>
+</div>
+
+<script>
+const LETRAS = ['A','B','C','D','E'];
+
+/*
+  Cada questão carrega, em cada alternativa, seu próprio comentário (certa ou errada),
+  permitindo revisar as 5 ao final — não só a escolhida. referencia = dado técnico/definição
+  fechada do material; aprofundamento = conexão com assunto vizinho do mesmo escopo.
+*/
+const QUESTIONS_RAW = [
+  {
+    q: "Um motorista perde o controle do veículo em uma curva e colide contra um muro de contenção fixo, à margem da via. Segundo a classificação de tipos de sinistro estudada em FSV, esse evento é:",
+    opts: [
+      {
+        text: "Colisão lateral — pois o impacto atingiu a lateral do veículo.",
+        correct: false,
+        comment: "Errada. Colisão e choque não são definidos pela região da carroceria atingida (frontal, lateral, traseira), e sim pela natureza do segundo objeto envolvido. \"Lateral\" descreve onde o impacto ocorreu — não muda a classificação central: aqui o segundo objeto (o muro) está fixo."
+      },
+      {
+        text: "Choque — porque envolve um veículo em movimento colidindo contra um objeto fixo.",
+        correct: true,
+        comment: "Certa. Choque é exatamente isso: veículo em movimento contra objeto fixo ou imóvel (poste, muro, árvore). Colisão, por contraste, exige dois objetos em movimento — geralmente veículo contra veículo."
+      },
+      {
+        text: "Colisão frontal — pois o impacto se deu na frente do veículo.",
+        correct: false,
+        comment: "Errada. \"Frontal\" descreve a direção do impacto na carroceria — característica que pode estar presente tanto em colisões quanto em choques. O que define \"choque\" não é o ângulo do impacto, mas o muro estar fixo e imóvel."
+      },
+      {
+        text: "Tombamento — já que o veículo provavelmente tombou após bater no muro.",
+        correct: false,
+        comment: "Errada. Tombamento é definido pelo movimento do próprio veículo (giro sobre o eixo longitudinal), não pela natureza do objeto atingido. Um choque pode até ser seguido de um tombamento, mas são classificações independentes — descrevem momentos diferentes do mesmo sinistro."
+      },
+      {
+        text: "Capotamento — pois houve perda de controle antes do impacto.",
+        correct: false,
+        comment: "Errada. Mesma lógica do tombamento: capotamento descreve o giro do veículo sobre o eixo transversal — é uma classificação do movimento do próprio veículo, não do tipo de impacto contra outro objeto."
+      }
+    ],
+    referencia: "Choque = veículo em movimento + objeto fixo/imóvel (poste, muro, árvore). Colisão = dois objetos em movimento (ex: veículo × veículo).",
+    aprofundamento: "Vale separar duas classificações que a prova gosta de misturar: o <strong>tipo de sinistro</strong> (colisão / choque / tombamento / capotamento) descreve como o evento começou; a <strong>posição final do veículo</strong> (sobre 4 rodas / tombado / capotado / complexo) descreve como a equipe vai encontrá-lo — e é essa segunda classificação que define a estratégia de estabilização. Um choque, por exemplo, pode terminar em qualquer uma das quatro posições."
+  },
+  {
+    q: "Em 2023, o Código de Trânsito Brasileiro (CTB) passou a adotar oficialmente o termo \"sinistro de trânsito\" no lugar de \"acidente de trânsito\". Segundo essa alteração, o que justifica tecnicamente essa substituição terminológica?",
+    opts: [
+      {
+        text: "O termo \"sinistro\" reforça que o evento decorre de causas identificáveis e envolve responsabilidade — diferente de \"acidente\", que sugere fatalidade inevitável.",
+        correct: true,
+        comment: "Certa. A troca de termo não é apenas estilística: \"acidente\" carrega a ideia de evento fortuito, sem causa identificável; \"sinistro\" reconhece que há uma cadeia de causas (excesso de velocidade, falha mecânica, infração) e, portanto, responsabilidade a apurar. É essa mudança de perspectiva — de fatalidade para causalidade — que a alteração do CTB pretende consolidar."
+      },
+      {
+        text: "\"Sinistro\" é o termo técnico usado exclusivamente para eventos com vítimas fatais, enquanto \"acidente\" continua válido para casos sem mortes.",
+        correct: false,
+        comment: "Errada. A definição de sinistro de trânsito não distingue eventos por gravidade ou existência de vítimas fatais — ela se aplica a qualquer evento em vias/áreas públicas envolvendo ao menos um veículo em movimento que resulte em danos, fatais ou não. Vincular o termo apenas a mortes é uma restrição que o conceito não prevê."
+      },
+      {
+        text: "A mudança apenas atualiza a nomenclatura para se alinhar a termos usados internacionalmente, sem alterar o conceito jurídico do evento.",
+        correct: false,
+        comment: "Errada. Essa alternativa minimiza a mudança como puramente cosmética — mas o sentido da alteração é justamente o oposto: ela reposiciona o conceito do evento, deslocando-o de \"fatalidade sem causa\" para \"evento com causa e responsabilidade\". Não é uma troca de rótulo neutra."
+      },
+      {
+        text: "\"Sinistro de trânsito\" passou a abranger apenas eventos entre dois ou mais veículos em movimento, excluindo choques contra objetos fixos.",
+        correct: false,
+        comment: "Errada. Essa alternativa confunde a definição de sinistro de trânsito com a definição de colisão (que exige dois objetos em movimento). O conceito de sinistro de trânsito é mais amplo: basta um veículo em movimento envolvido — o que inclui tanto colisões quanto choques contra objetos fixos."
+      },
+      {
+        text: "O novo termo elimina a necessidade de perícia técnica em ocorrências de menor gravidade, simplificando o registro administrativo.",
+        correct: false,
+        comment: "Errada. A alteração terminológica não tem relação com procedimentos periciais ou administrativos de registro — ela atua no plano conceitual, redefinindo como o evento é nomeado e compreendido. Associá-la a uma simplificação processual é uma extrapolação sem base no conceito estudado."
+      }
+    ],
+    referencia: "Sinistro de trânsito (CTB, alteração 2023): evento em vias/áreas públicas com pelo menos um veículo em movimento, que resulte em danos. A troca do termo \"acidente\" por \"sinistro\" é intencional — reforça que há causa e responsabilidade.",
+    aprofundamento: "Essa mudança terminológica é a porta de entrada conceitual para o resto da disciplina: se o sinistro tem causa identificável, faz sentido que a prevenção (Fase 1 — Preparação) e a análise pós-ocorrência (debriefing, na Fase 4 — Finalização) sejam tratadas como parte do mesmo ciclo, não como apêndices. A terminologia não é só formalidade — ela sustenta a lógica de que cada ocorrência gera aprendizado para a próxima."
+  },
+  {
+    q: "Durante o reconhecimento da cena em uma ocorrência de SV, a equipe constata que um poste caiu sobre o veículo sinistrado e há fios de alta tensão em contato com a carroceria. A vítima está consciente e sem sinais de gravidade extrema. Qual é a conduta tecnicamente correta da guarnição?",
+    opts: [
+      {
+        text: "Iniciar o atendimento com luvas de borracha isolantes, já que a vítima está consciente e o tempo de resposta é crítico.",
+        correct: false,
+        comment: "Errada. Não existe EPI de bombeiro certificado para as tensões de uma rede elétrica — luvas de uso geral não oferecem isolamento suficiente. Essa é exatamente a armadilha do risco elétrico: ele parece \"controlável com EPI\", mas não é."
+      },
+      {
+        text: "Aguardar a desenergização da rede pela concessionária de energia antes de qualquer atuação na zona quente, mesmo sem sinais de gravidade extrema na vítima.",
+        correct: true,
+        comment: "Certa. O risco elétrico é o único item da lista de riscos da cena classificado como bloqueante total — a regra não admite exceção, nem diante de vítima consciente, nem sob pressão de tempo. A equipe aguarda a concessionária desenergizar a rede antes de qualquer intervenção na zona quente."
+      },
+      {
+        text: "Acionar um eletricista da própria guarnição para cortar os fios com ferramenta isolada.",
+        correct: false,
+        comment: "Errada. \"Eletricista\" não é uma função prevista no protocolo de SV para esse risco — a autoridade técnica e legal para desenergizar a rede é exclusivamente da concessionária de energia, não de terceiros, ainda que tecnicamente capacitados."
+      },
+      {
+        text: "Reclassificar o risco elétrico como \"atenuável\", já que a vítima está clinicamente estável, e seguir com a abordagem padrão.",
+        correct: false,
+        comment: "Errada. A classificação do risco elétrico como bloqueante não depende do estado clínico da vítima — é uma característica do próprio risco (alta letalidade e ausência de EPI adequado), não da gravidade do caso atendido."
+      },
+      {
+        text: "Isolar a zona quente e autorizar a entrada da equipe com EPI completo e proteção extra contra choque elétrico.",
+        correct: false,
+        comment: "Errada. Essa alternativa reproduz a lógica usada para outros riscos da cena (vidros, airbags etc.), em que \"isolar + EPI + proteção extra\" libera a operação. O risco elétrico é a exceção que rompe esse padrão: nenhuma combinação de isolamento e proteção autoriza a atuação antes da desenergização pela concessionária."
+      }
+    ],
+    referencia: "Risco elétrico = bloqueante total. Não existe EPI de bombeiro certificado para tensões de rede. Não há atuação na zona quente antes da desenergização pela concessionária de energia.",
+    aprofundamento: "Esse é o único item da tabela de riscos da cena (combustível, rede elétrica, airbags, vidros, veículo elétrico/híbrido, incêndio) que <strong>bloqueia totalmente</strong> a operação. Todos os outros têm uma ação de mitigação que permite seguir (isolar, trocar EPI, proteger etc.) — o risco elétrico costuma ser usado pela banca justamente para testar se o candidato sabe diferenciar \"risco mitigável\" de \"risco bloqueante\"."
+  },
+  {
+    q: "Uma guarnição de SV é acionada para uma ocorrência. Ao chegar ao local, ela posiciona a viatura a 45° em relação ao veículo sinistrado, inicia o isolamento da área e organiza as zonas de trabalho. Considerando o ciclo de quatro fases do atendimento em SV, essas ações fazem parte de qual fase — e qual etapa, dentro dela, normalmente vem em seguida?",
+    opts: [
+      {
+        text: "Fase de Resposta; em seguida vem a montagem do palco de ferramentas, sobre lona resistente, na zona morna.",
+        correct: true,
+        comment: "Certa. Posicionamento da viatura, isolamento e organização das zonas são as primeiras etapas da fase de Resposta — a mais extensa, com 13 etapas em sequência obrigatória. Logo depois delas vem a montagem do palco de ferramentas sobre lona resistente, na zona morna, antes mesmo da avaliação da cena e da estabilização."
+      },
+      {
+        text: "Fase de Acionamento; em seguida vem o deslocamento da guarnição até o local da ocorrência.",
+        correct: false,
+        comment: "Errada. O deslocamento — junto da triagem e da coleta de informações sobre o sinistro — é próprio da fase de Acionamento, que ocorre antes da chegada ao local. As ações descritas (posicionar viatura, isolar, organizar zonas) só são possíveis depois que a guarnição já chegou — ou seja, já estão na fase seguinte."
+      },
+      {
+        text: "Fase de Preparação; em seguida vem a conferência do material e o treinamento contínuo da equipe.",
+        correct: false,
+        comment: "Errada. Conferência de material e treinamento contínuo são atividades permanentes da fase de Preparação — que ocorre antes de qualquer acionamento, não durante o atendimento de uma ocorrência específica. As ações do enunciado já pressupõem que a guarnição está na cena, atendendo ao chamado."
+      },
+      {
+        text: "Fase de Resposta; em seguida vem diretamente o desencarceramento da vítima, etapa central dessa fase.",
+        correct: false,
+        comment: "Errada. O desencarceramento é, de fato, central na fase de Resposta — mas está longe de ser a etapa seguinte ao isolamento e à organização das zonas. Entre uma e outra, a sequência obrigatória ainda passa por palco de ferramentas, área de descarte, avaliação da cena, avaliação 360° e estabilização. Pular essas etapas na resposta da questão reproduz o erro mais perigoso do protocolo: pular etapas na prática."
+      },
+      {
+        text: "Fase de Finalização; em seguida vem o debriefing e a análise estruturada da ocorrência.",
+        correct: false,
+        comment: "Errada. Debriefing e análise estruturada acontecem na fase de Finalização — a última do ciclo, voltada à desmobilização e ao aprendizado pós-ocorrência. As ações descritas (posicionamento, isolamento, zonas) acontecem no início do atendimento propriamente dito, fase de Resposta — etapa muito anterior à finalização."
+      }
+    ],
+    referencia: "4 fases: Preparação → Acionamento → Resposta → Finalização. A Resposta tem 13 etapas em sequência obrigatória: posicionamento da viatura (45°) → isolamento → organização das zonas → palco de ferramentas (sobre lona, na zona morna) → área de descarte → avaliação da cena → avaliação 360° → estabilização → acesso ao interior → criação de espaço → desencarceramento → extração → cena segura + coleta de dados.",
+    aprofundamento: "A lógica por trás dessa sequência é que cada etapa cria as condições físicas ou de segurança para a etapa seguinte — por isso pular uma delas (especialmente a estabilização, para \"ganhar tempo\") é apontado pelo material como o principal vetor de acidente com bombeiros no SV. Vale revisar essa cadeia como uma história contínua, não como uma lista solta para decorar."
+  },
+  {
+    q: "Durante uma ocorrência de SV, um membro da guarnição precisa montar o palco de ferramentas e organizar a área de descarte de estruturas removidas do veículo. Em qual zona essas atividades devem ocorrer, e sobre qual superfície o palco de ferramentas deve ser montado?",
+    opts: [
+      {
+        text: "Na zona morna, com o palco de ferramentas montado sobre lona resistente.",
+        correct: true,
+        comment: "Certa. A zona morna é exatamente o espaço destinado ao palco de ferramentas — montado sobre lona resistente — e à área de descarte de estruturas removidas. Ela funciona como zona de apoio operacional, intermediária entre a zona quente (onde está o veículo) e a zona fria (acesso livre para guinchos, polícia e ambulâncias)."
+      },
+      {
+        text: "Na zona quente, já que é onde a equipe atua diretamente sobre o veículo sinistrado.",
+        correct: false,
+        comment: "Errada. A zona quente é reservada exclusivamente para a equipe com EPI atuando diretamente sobre o veículo — não é o espaço de apoio onde se organizam ferramentas e descarte. Misturar essas funções na mesma zona aumentaria o risco e a desorganização exatamente no ponto mais crítico da cena."
+      },
+      {
+        text: "Na zona fria, diretamente sobre o solo, para manter o acesso livre dos demais recursos na zona morna.",
+        correct: false,
+        comment: "Errada. A zona fria é a de acesso livre para guinchos, polícia e ambulâncias em espera — não o espaço de apoio operacional da equipe de SV. Além disso, a alternativa erra ao dispensar a lona resistente, que é parte da especificação do palco de ferramentas, não um detalhe acessório."
+      },
+      {
+        text: "Na zona quente, sobre lona resistente, para manter as ferramentas próximas da área de operação.",
+        correct: false,
+        comment: "Errada. A especificação da lona resistente está correta — mas associada à zona errada. O palco de ferramentas fica na zona morna, justamente para que o acesso a ferramentas e o descarte de estruturas não interfiram na operação restrita à equipe com EPI na zona quente."
+      },
+      {
+        text: "Em qualquer zona, desde que isolada do tráfego de pessoas — a posição exata é definida caso a caso pelo comandante da guarnição.",
+        correct: false,
+        comment: "Errada. O material não trata essa organização como decisão discricionária e variável: zona morna, palco sobre lona resistente e área de descarte são especificações fixas do protocolo — parte da padronização que permite a qualquer guarnição reconhecer rapidamente a estrutura da cena, mesmo em ocorrências diferentes."
+      }
+    ],
+    referencia: "Zona morna → palco de ferramentas (sobre lona resistente) + área de descarte de estruturas removidas. Zona quente → apenas equipe com EPI, onde estão os veículos. Zona fria → livre acesso para guinchos, polícia, ambulâncias em espera.",
+    aprofundamento: "Essas três zonas formam um filtro de acesso — cada uma define quem pode estar ali e o que pode ser feito. Vale ligar esse conceito à avaliação 360°: é justamente após avaliar a cena (círculo interno e externo) que a equipe consegue demarcar essas zonas com segurança, considerando riscos identificados como vazamento de combustível ou cargas perigosas (com apoio da FISPQ, quando suspeitas)."
+  },
+  {
+    q: "Ao iniciar a desconexão da bateria de um veículo sinistrado com suspeita de vazamento de combustível, a equipe deve seguir uma sequência obrigatória. Qual é a ordem correta dos procedimentos, e por que essa ordem é especialmente crítica nesse cenário?",
+    opts: [
+      {
+        text: "Desconectar primeiro o polo negativo (−), depois o positivo (+) e isolar os cabos — porque inverter a ordem pode gerar faísca, o que é crítico diante de combustível vazado.",
+        correct: true,
+        comment: "Certa. A sequência obrigatória é negativo primeiro, positivo depois, com isolamento dos cabos ao final. A razão técnica é exatamente essa: inverter a ordem aumenta o risco de gerar faísca durante a desconexão — e, num cenário com combustível vazado, uma faísca pode iniciar um incêndio. É a combinação de \"sequência errada + vazamento\" que torna esse erro potencialmente fatal."
+      },
+      {
+        text: "Desconectar primeiro o polo positivo (+), depois o negativo (−), isolando os cabos antes de iniciar — porque essa ordem reduz a tensão residual no sistema mais rapidamente.",
+        correct: false,
+        comment: "Errada. A ordem está invertida em relação ao procedimento correto, e a justificativa apresentada (\"reduzir tensão residual mais rapidamente\") não corresponde à razão real da sequência — que é evitar a geração de faísca, não acelerar a queda de tensão no sistema."
+      },
+      {
+        text: "Isolar os cabos antes de qualquer desconexão e, em seguida, remover os polos simultaneamente, para minimizar o tempo de exposição da equipe.",
+        correct: false,
+        comment: "Errada. O procedimento não prevê isolar antes de desconectar, nem remover os polos simultaneamente — a sequência é deliberadamente escalonada (negativo, depois positivo, depois isolamento) exatamente para controlar o momento de maior risco de faísca, e não para reduzir o tempo total da operação."
+      },
+      {
+        text: "A ordem de desconexão (negativo ou positivo primeiro) é indiferente em veículos convencionais — a sequência só passa a importar em veículos elétricos ou híbridos.",
+        correct: false,
+        comment: "Errada. A sequência obrigatória (negativo primeiro) vale exatamente para a desconexão de baterias convencionais. Em veículos elétricos/híbridos, a diferença não é \"a ordem passar a importar\", mas sim a existência de um procedimento totalmente diferenciado, dada a tensão muito superior (até 800V) da bateria principal."
+      },
+      {
+        text: "Desconectar qualquer um dos polos primeiro, desde que a equipe esteja utilizando luvas isolantes de borracha, que eliminam o risco de faísca.",
+        correct: false,
+        comment: "Errada. Luvas isolantes protegem a equipe do contato elétrico — mas não eliminam o risco de faísca na própria conexão/desconexão dos terminais, que é o que a sequência obrigatória busca controlar. Tratar o EPI como substituto da sequência correta é uma troca perigosa entre dois tipos de proteção que não se equivalem."
+      }
+    ],
+    referencia: "Sequência obrigatória de desconexão da bateria: 1) polo negativo (−) primeiro; 2) polo positivo (+) depois; 3) isolar os cabos. Inverter a sequência pode gerar faísca — crítico com combustível vazado. Em veículos elétricos/híbridos, a bateria principal opera em tensões muito superiores (até 800V) — procedimento diferenciado.",
+    aprofundamento: "Vale conectar esse procedimento ao Pilar 2 da segurança (segurança do local): a desconexão da bateria aparece como uma das ações recomendadas diante do risco de combustível vazando — ao lado de isolar a área, posicionar extintores/linhas e eliminar fontes de ignição. A sequência da bateria não é um procedimento isolado: é uma peça dentro de uma estratégia maior de controle de risco de incêndio na cena."
+  },
+  {
+    q: "Para abrir uma porta de um veículo sinistrado que está travada, um bombeiro avalia cortar diretamente as dobradiças com a ferramenta hidráulica disponível. Por que essa não é a conduta tecnicamente recomendada, e qual seria a alternativa correta?",
+    opts: [
+      {
+        text: "Cortar diretamente as dobradiças pode fazer a porta sair violentamente; a conduta correta é atuar sobre os pontos de solda entre a dobradiça e a estrutura, que oferecem menor resistência e não geram esse risco de ejeção.",
+        correct: true,
+        comment: "Certa. O material é direto: nunca intervir diretamente nas dobradiças, porque elas podem ceder de forma abrupta e violenta sob corte, projetando a porta. A alternativa tecnicamente correta é localizar os pontos de solda entre a dobradiça e a estrutura — região de menor resistência que permite remover a porta sem o risco de ejeção repentina."
+      },
+      {
+        text: "Cortar diretamente as dobradiças é tecnicamente correto e recomendado — o cuidado nesse procedimento está apenas em utilizar EPI adequado contra projeção de fragmentos.",
+        correct: false,
+        comment: "Errada. A alternativa trata como \"correto com cuidado\" justamente o procedimento que o material classifica como o que nunca deve ser feito diretamente. O risco aqui não é de fragmentos pequenos (como em vidros), mas da própria porta sair com violência — um risco estrutural, não apenas de projeção de partículas, que EPI não neutraliza."
+      },
+      {
+        text: "A conduta correta é remover toda a porta junto com a estrutura lateral adjacente, evitando qualquer corte localizado na região das dobradiças.",
+        correct: false,
+        comment: "Errada. Essa alternativa propõe uma solução desproporcional — remover estrutura adicional (que pode incluir as barras de reforço lateral, igualmente desaconselhadas para manobras) em vez da solução pontual e tecnicamente prevista: localizar e cortar nos pontos de solda entre dobradiça e estrutura, sem mexer em mais nada do que o necessário."
+      },
+      {
+        text: "O cuidado com as dobradiças se aplica apenas a veículos antigos, com estruturas metálicas mais frágeis — em veículos modernos, o corte direto é seguro.",
+        correct: false,
+        comment: "Errada. O material não condiciona essa orientação à idade ou ao tipo de estrutura do veículo — a recomendação de nunca intervir diretamente nas dobradiças é apresentada como princípio geral de anatomia veicular e técnica de acesso, não como cuidado específico para modelos antigos."
+      },
+      {
+        text: "A alternativa correta é utilizar o moto abrasivo, ferramenta indicada especificamente para o corte de dobradiças sem risco de ejeção da porta.",
+        correct: false,
+        comment: "Errada. O moto abrasivo tem indicação bem mais restrita: é a ferramenta de escolha quando a estrutura não pode ser movimentada — por exemplo, ferragem transfixando a vítima. Associá-lo ao corte de dobradiças é misturar duas situações e duas ferramentas com finalidades distintas dentro do escopo de FEAs."
+      }
+    ],
+    referencia: "Portas: nunca intervir diretamente nas dobradiças — podem sair violentamente ao ser cortadas. A alternativa correta são os pontos de solda entre dobradiça e estrutura (menor resistência, sem risco de ejeção).",
+    aprofundamento: "Esse cuidado com as dobradiças tem o mesmo espírito da orientação sobre as barras de reforço lateral: em ambos os casos, o material orienta a equipe a reconhecer estruturas que reagem mal a manobras diretas — seja por ejeção violenta (dobradiças), seja por desperdício de esforço sem produzir acesso (barras de reforço). Reconhecer \"onde não cortar\" é tão parte da anatomia veicular quanto saber onde cortar — e ambas aparecem com frequência como pegadinha em prova."
+  },
+  {
+    q: "A equipe chega a uma ocorrência com vítima consciente, presa pelas pernas no compartimento dianteiro de um veículo sobre 4 rodas. Após a avaliação 360°, ela aplica calços nos quatro pneus de forma alternada — o mínimo necessário para acessar o interior com segurança e iniciar o APH. Essa ação corresponde a:",
+    opts: [
+      {
+        text: "Estabilização secundária, pois qualquer aplicação de calços já inibe toda a movimentação do veículo.",
+        correct: false,
+        comment: "Errada. A diferença entre primária e secundária não está em \"quantos calços foram usados\", e sim no objetivo da ação naquele momento: a primária busca o mínimo necessário para acesso e início do APH; a secundária busca inibir toda a movimentação para viabilizar a extração."
+      },
+      {
+        text: "Estabilização progressiva, já que está sendo revisada ao longo da operação.",
+        correct: false,
+        comment: "Errada. \"Progressiva\" não é um terceiro tipo no mesmo nível de \"primária/secundária\" quanto à finalidade — é a dimensão temporal da estabilização: a revisão e o ajuste constantes que acompanham toda a operação, garantindo que primária e secundária continuem válidas conforme a cena muda."
+      },
+      {
+        text: "Estabilização primária, pois seu objetivo é viabilizar o acesso ao interior e o início do APH com rapidez e segurança — não a extração.",
+        correct: true,
+        comment: "Certa. A estabilização primária é, por definição, o mínimo necessário para acessar o interior do veículo e iniciar o atendimento pré-hospitalar — deve ser rápida e segura. A descrição do enunciado é, na prática, a própria definição do conceito."
+      },
+      {
+        text: "Estabilização primária apenas se o veículo estiver tombado ou capotado — em veículo sobre 4 rodas, ela já nasce secundária.",
+        correct: false,
+        comment: "Errada. A classificação primária/secundária se aplica a qualquer posição do veículo (sobre 4 rodas, tombado, capotado, complexo) — o que muda entre as posições são as técnicas específicas empregadas, não a existência das duas fases de estabilização."
+      },
+      {
+        text: "Uma etapa preparatória que antecede a avaliação 360°, e não uma forma de estabilização propriamente dita.",
+        correct: false,
+        comment: "Errada. A ordem é inversa: primeiro a equipe avalia a cena (avaliação 360° — círculo interno e externo) para identificar riscos e pontos de apoio, e só então estabiliza com base no que encontrou. Estabilização — em qualquer uma de suas formas — é posterior à avaliação, não anterior."
+      }
+    ],
+    referencia: "Estabilização primária = mínimo necessário para acesso ao interior + início do APH (rápida e segura). Estabilização secundária = estabilização total, inibe toda movimentação, viabiliza a extração.",
+    aprofundamento: "Essa dupla (primária/secundária) costuma aparecer combinada com a <strong>estabilização progressiva</strong> — que não é um terceiro \"tipo\" concorrente, mas a camada que atravessa as outras duas: a revisão constante que garante que a estabilização aplicada continua válida conforme a operação avança. Exemplo prático: ao remover uma porta, o centro de gravidade do veículo muda — e a estabilização precisa ser reavaliada nesse momento, não só no início."
+  },
+  {
+    q: "Sobre as especificações técnicas das FEAs de estabilização estudadas, qual das afirmações abaixo está correta?",
+    opts: [
+      {
+        text: "Os calços são feitos de polietileno reciclado e suportam 100 kg/cm² em todas as direções; os estabilizadores de tração têm carga axial máxima de 1,6 T e comprimento máximo de 1,80 m.",
+        correct: true,
+        comment: "Certa. São exatamente essas as especificações registradas: calços — polietileno reciclado, suportam 100 kg/cm² em todas as direções; estabilizadores de tração — carga axial máxima de 1,6 T e comprimento máximo de 1,80 m. São equipamentos com funções e especificações distintas — não versões um do outro."
+      },
+      {
+        text: "Os calços têm carga axial máxima de 1,6 T e comprimento de até 1,80 m; os estabilizadores de tração suportam 100 kg/cm² em todas as direções.",
+        correct: false,
+        comment: "Errada. Essa alternativa troca as especificações entre os dois equipamentos: carga axial e comprimento máximo são dados dos estabilizadores de tração, e a resistência em kg/cm² é dado dos calços. Distrator clássico por inversão — testa se o candidato realmente associou cada número ao seu equipamento."
+      },
+      {
+        text: "Calços e estabilizadores de tração são fabricados com o mesmo material — polietileno reciclado — e diferem apenas no formato e na forma de aplicação na cena.",
+        correct: false,
+        comment: "Errada. O material especifica o polietileno reciclado como característica dos calços — não generaliza esse dado para os estabilizadores de tração, que são apresentados com especificações próprias de carga e comprimento, sem menção a material de fabricação equivalente ao dos calços."
+      },
+      {
+        text: "Os calços suportam até 1,6 T de carga e os estabilizadores de tração até 100 kg/cm², ambos podendo ser aplicados em qualquer direção de força.",
+        correct: false,
+        comment: "Errada. Além de inverter as unidades de medida entre os equipamentos (toneladas para um, kg/cm² para o outro, atribuídas ao equipamento errado), a alternativa generaliza \"aplicação em qualquer direção\" para ambos — quando essa característica é especificamente atribuída aos calços."
+      },
+      {
+        text: "Ambos os equipamentos têm comprimento máximo de 1,80 m, variando apenas na carga máxima suportada — 100 kg/cm² para os calços e 1,6 T para os estabilizadores.",
+        correct: false,
+        comment: "Errada. O dado de comprimento máximo (1,80 m) é específico dos estabilizadores de tração — não há, no material, especificação equivalente de comprimento para os calços, que são caracterizados por material e capacidade de suportar carga em todas as direções, não por dimensão linear máxima."
+      }
+    ],
+    referencia: "Calços: polietileno reciclado — suportam 100 kg/cm² em todas as direções. Estabilizadores de tração: carga axial máxima 1,6 T / comprimento máximo 1,80 m.",
+    aprofundamento: "Esses dados técnicos das FEAs de estabilização se conectam diretamente ao processo de estabilização: é o conhecimento dessas capacidades que permite à equipe decidir, por exemplo, quando os estabilizadores de tração precisam ser reforçados com fita de catraca ou corda — como ocorre obrigatoriamente em cenários complexos, onde a carga e a instabilidade do conjunto superam o que o equipamento sozinho consegue conter."
+  },
+  {
+    q: "Um instrutor pede que os cadetes diferenciem os dois sistemas de mangueira utilizados na motobomba do SV. Qual descrição apresenta corretamente essa diferença?",
+    opts: [
+      {
+        text: "No sistema twin line, as mangueiras de alta e baixa pressão são separadas; no sistema core, uma única mangueira contém a de alta pressão dentro da de baixa.",
+        correct: true,
+        comment: "Certa. É exatamente essa a distinção estudada: twin line = duas mangueiras independentes, uma de alta e outra de baixa pressão; core = uma mangueira só, com a linha de alta pressão posicionada dentro da linha de baixa pressão — uma solução mais compacta para o mesmo par de funções."
+      },
+      {
+        text: "No sistema core, as mangueiras de alta e baixa pressão são separadas; no twin line, a de alta pressão fica dentro da de baixa.",
+        correct: false,
+        comment: "Errada. A alternativa apresenta a distinção correta entre \"mangueiras separadas\" e \"uma dentro da outra\" — mas inverte os nomes dos sistemas aos quais cada configuração pertence. O conceito está certo, o rótulo está errado."
+      },
+      {
+        text: "Twin line é o sistema usado em motobombas mais antigas, enquanto core é o sistema padrão das motobombas modernas adotadas atualmente pelo CBMPA.",
+        correct: false,
+        comment: "Errada. O material não classifica os dois sistemas por critério de antiguidade ou atualidade de equipamento — apresenta-os como duas configurações distintas de organização das mangueiras de alta e baixa pressão, sem hierarquia cronológica entre elas."
+      },
+      {
+        text: "A diferença entre twin line e core está na pressão máxima que cada sistema suporta, sendo o core o sistema de maior capacidade.",
+        correct: false,
+        comment: "Errada. A distinção estudada entre os dois sistemas é estrutural — como as mangueiras de alta e baixa pressão estão organizadas (separadas ou uma dentro da outra) — e não uma comparação de capacidade ou pressão máxima suportada por cada configuração."
+      },
+      {
+        text: "Twin line e core são, na verdade, dois nomes para o mesmo sistema de mangueiras, variando apenas conforme o fabricante da motobomba.",
+        correct: false,
+        comment: "Errada. São apresentados como dois sistemas tecnicamente distintos — com arranjos físicos diferentes das mangueiras de alta e baixa pressão — e não como sinônimos ou variações de nomenclatura comercial entre fabricantes."
+      }
+    ],
+    referencia: "Motobomba — sistemas de linha: Twin line = duas mangueiras separadas (alta pressão + baixa pressão). Core = uma mangueira — alta pressão dentro da de baixa.",
+    aprofundamento: "Vale revisar esse par junto dos prazos de manutenção da motobomba (óleo lubrificante a cada 6 meses, fluido hidráulico a cada 12 meses, podendo ser completado antes do prazo) — são dois blocos de dados técnicos do mesmo equipamento que costumam aparecer próximos na prova, justamente por testarem se o candidato sabe separar \"como o sistema é organizado\" de \"como o sistema é mantido\"."
+  },
+  {
+    q: "Durante a criação de acessos, a equipe precisa remover o vidro do para-brisas dianteiro de um veículo sinistrado. Em comparação com o procedimento aplicado às janelas laterais, essa remoção exige atenção redobrada porque o vidro do para-brisas dianteiro é do tipo:",
+    opts: [
+      {
+        text: "Temperado — fragmenta-se em pequenos pedaços e exige uso obrigatório de máscara N95/PFF2.",
+        correct: false,
+        comment: "Errada. A descrição (\"fragmenta em pequenos pedaços\") corresponde, de fato, ao vidro temperado — mas esse é o tipo presente nas janelas laterais e no para-brisas traseiro, não no dianteiro. A alternativa troca a posição dos dois tipos de vidro no veículo."
+      },
+      {
+        text: "Laminado — mantém os estilhaços unidos por uma faixa plástica interna e está colado à estrutura, exigindo técnica e ferramenta específicas para sua remoção.",
+        correct: true,
+        comment: "Certa. O para-brisas dianteiro usa vidro laminado: uma faixa plástica interna mantém os estilhaços coesos mesmo após a quebra, e o vidro é colado — não apenas encaixado — à estrutura. Por isso a remoção exige técnica de corte específica, diferente da simples fragmentação aplicada ao temperado."
+      },
+      {
+        text: "Temperado — colado à estrutura do veículo, o que dificulta sua remoção rápida em situação de emergência.",
+        correct: false,
+        comment: "Errada. \"Colado à estrutura\" é, de fato, característica do para-brisas dianteiro — mas o vidro que recebe esse tratamento é o laminado, não o temperado. A alternativa acerta uma característica e erra o tipo associado a ela: combinação clássica de distrator."
+      },
+      {
+        text: "Laminado — fragmenta-se instantaneamente ao receber qualquer impacto pontual da ferramenta de corte.",
+        correct: false,
+        comment: "Errada. É justamente o contrário: a faixa plástica interna do laminado é o que evita a fragmentação instantânea — é o vidro temperado que se estilhaça ao receber impacto pontual. Atribuir ao laminado o comportamento do temperado inverte a lógica que justifica o cuidado redobrado com o para-brisas dianteiro."
+      },
+      {
+        text: "O mesmo tipo de vidro utilizado nas janelas laterais e no para-brisas traseiro, variando apenas a espessura conforme a posição no veículo.",
+        correct: false,
+        comment: "Errada. Os dois tipos de vidro têm comportamentos físicos distintos — um mantém os estilhaços unidos, o outro se fragmenta em pedaços pequenos. A diferença entre eles está na composição e na reação ao impacto e ao corte, não na espessura."
+      }
+    ],
+    referencia: "Laminado → para-brisas DIANTEIRO. Mantém estilhaços unidos (faixa plástica interna), colado à estrutura. Temperado → janelas laterais + para-brisas TRASEIRO. Fragmenta em pequenos pedaços.",
+    aprofundamento: "Essa distinção tem efeito direto sobre a escolha de ferramenta e técnica: o vidro temperado costuma ser fragmentado com ferramenta de ponta a partir de um canto da janela; o laminado, por manter os estilhaços coesos e estar colado, normalmente exige corte ao longo de toda a moldura com ferramenta específica. Confundir os dois pode atrasar a criação do acesso ou aumentar o risco de lesão por estilhaços maiores na vítima e na equipe."
+  },
+  {
+    q: "Durante uma ocorrência complexa, a equipe se depara com uma estrutura metálica que transfixou parte do corpo da vítima — qualquer movimentação da peça agravaria a lesão. Das ferramentas disponíveis no SV, qual é a indicada para essa situação específica, e por quê?",
+    opts: [
+      {
+        text: "Moto abrasivo — porque é a ferramenta indicada justamente quando a estrutura não pode ser movimentada, permitindo o corte sem deslocar a peça transfixada.",
+        correct: true,
+        comment: "Certa. Essa é a indicação específica do moto abrasivo no material: ele é a ferramenta de escolha exatamente quando a estrutura não pode ser movimentada — o exemplo citado é precisamente esse, ferragem transfixando a vítima. Outras ferramentas (hidráulicas, serra-sabre) tendem a deslocar ou vibrar a estrutura durante o corte, o que seria perigoso nesse cenário."
+      },
+      {
+        text: "Serra-sabre — porque é a ferramenta padrão para corte de colunas, remoção de chapa e retirada de vidro laminado, cobrindo também esse tipo de situação.",
+        correct: false,
+        comment: "Errada. A serra-sabre tem indicações específicas — corte de colunas, remoção de chapa e retirada de vidro laminado — mas nenhuma delas trata de estruturas que não podem ser movimentadas. Estender sua aplicação a esse cenário ignora justamente a característica que torna a situação especial: o risco de deslocar a peça transfixada."
+      },
+      {
+        text: "Corta-a-frio — porque é a única ferramenta que realiza cortes sem produzir faíscas, o que é prioridade absoluta em qualquer cenário com vítima presa.",
+        correct: false,
+        comment: "Errada. A ausência de faísca é, de fato, a característica central do corta-a-frio — mas sua indicação é para cenários com combustível vazado, não para estruturas que não podem ser movimentadas. A alternativa generaliza uma vantagem real para um contexto ao qual ela não se aplica como critério decisivo."
+      },
+      {
+        text: "Ferramentas hidráulicas a bateria — porque, sendo portáteis e silenciosas, minimizam a vibração transmitida à estrutura durante o corte.",
+        correct: false,
+        comment: "Errada. As vantagens reais das ferramentas hidráulicas a bateria (portabilidade, operação simultânea, menos ruído e manutenção, menos espaço na viatura) não incluem \"menor vibração\" como critério para lidar com estruturas imóveis — aliás, sua desvantagem registrada é justamente o maior peso, não um diferencial de precisão para esse cenário."
+      },
+      {
+        text: "Correntes — porque são a ferramenta padrão do SV para imobilizar estruturas instáveis antes de qualquer corte ser realizado.",
+        correct: false,
+        comment: "Errada. O material classifica as correntes como ferramenta de uso apenas em casos excepcionais — explicitamente, não é ferramenta padrão. Apresentá-las como solução-padrão para imobilização contraria a própria descrição do seu papel dentro do conjunto de FEAs."
+      }
+    ],
+    referencia: "Moto abrasivo: único indicado quando a estrutura não pode ser movimentada (ex: ferragem transfixando a vítima).",
+    aprofundamento: "Vale montar um quadro mental com as quatro ferramentas de corte e suas indicações específicas — serra-sabre (colunas, chapa, vidro laminado), moto abrasivo (estrutura imóvel), corta-a-frio (combustível vazado, sem faísca) e correntes (uso excepcional, não padrão). A prova costuma testar exatamente a troca entre essas indicações — por isso vale menos decorar \"o que cada ferramenta faz\" e mais fixar \"em qual situação específica cada uma se torna a escolha certa\"."
+  },
+  {
+    q: "Em uma ocorrência envolvendo um veículo modelo hatch sobre 4 rodas, a equipe planeja extrair a vítima pela parte traseira. Além do calçamento alternado nos quatro pneus, qual cuidado adicional de estabilização é obrigatório nesse cenário específico?",
+    opts: [
+      {
+        text: "Aplicar o estabilizador de tração nas quatro extremidades do veículo, totalizando oito pontos de apoio.",
+        correct: false,
+        comment: "Errada. Estabilizadores de tração têm especificação e aplicação próprias (carga axial máx. 1,6 T / comprimento máx. 1,80 m) e não substituem nem se confundem com o \"5º ponto\" — que é, por definição, um calçamento adicional, não um estabilizador de tração."
+      },
+      {
+        text: "Posicionar o 5º ponto: um calçamento adicional na parte traseira do veículo, específico para extrações pela traseira (hatch).",
+        correct: true,
+        comment: "Certa. O 5º ponto é exatamente isso — um calçamento adicional posicionado na parte traseira do veículo, que se torna obrigatório quando a extração da vítima ocorrerá por ali, como em veículos hatch, cujo acesso traseiro amplo é uma rota de extração comum."
+      },
+      {
+        text: "Substituir o calçamento alternado por calçamento unilateral, concentrando o apoio do lado da extração planejada.",
+        correct: false,
+        comment: "Errada. Essa alternativa inverte um princípio central da estabilização sobre 4 rodas: o calçamento deve ser alternado (lados opostos) justamente para anular a movimentação horizontal e vertical. Calçar de um único lado deixaria o veículo livre para se mover na direção oposta — o oposto do que se busca ao reforçar a estabilização."
+      },
+      {
+        text: "Cruzar uma fita com catraca ou corda entre o veículo sinistrado e a viatura de apoio, como em qualquer estabilização secundária.",
+        correct: false,
+        comment: "Errada. Fita com catraca ou corda cruzando os veículos é exigência específica de cenários complexos (veículo pesado sobre veículo leve, por exemplo), não do cenário descrito — um único veículo sobre 4 rodas com extração planejada pela traseira. Aplicar essa medida aqui seria importar um procedimento de outro contexto."
+      },
+      {
+        text: "Realizar a estabilização somente após o início da extração, já que o foco nesse cenário é a velocidade de remoção da vítima.",
+        correct: false,
+        comment: "Errada. Contraria o princípio de \"estabilizar como encontrado — nunca mover [ou extrair] antes de estabilizar\". A estabilização, incluindo o 5º ponto quando aplicável, precede a extração, não o contrário: extrair antes de estabilizar é o tipo de atalho que mais expõe vítima e equipe a risco."
+      }
+    ],
+    referencia: "5º ponto = calçamento adicional na parte traseira do veículo, obrigatório quando a extração ocorrerá pela traseira (ex: veículos hatch). Soma-se ao calçamento alternado dos 4 pneus — não o substitui.",
+    aprofundamento: "Vale conectar esse ponto ao princípio da estabilização progressiva, que exige alinhamento com o Plano de Ação e com as rotas de extração principal e emergencial: o tipo de estabilização aplicada não depende só da posição do veículo, mas também de <strong>por onde a vítima vai sair</strong>. O 5º ponto é o exemplo mais direto dessa lógica — ele só entra em cena porque a rota de saída passa pela traseira do veículo."
+  },
+  {
+    q: "A guarnição chega a uma ocorrência em que um veículo de carga tombou sobre um veículo de passeio menor, formando um cenário de \"pesado sobre leve\". Além de aplicar os estabilizadores de tração, que medida adicional é obrigatória nesse tipo de cenário, e por quê?",
+    opts: [
+      {
+        text: "Cruzar fita com catraca ou corda entre os veículos — porque, nesse tipo de cenário, os estabilizadores de tração sozinhos não impedem o deslocamento do conjunto.",
+        correct: true,
+        comment: "Certa. O material é específico: em cenários complexos (pesado sobre leve ou leve sobre leve), os estabilizadores de tração devem obrigatoriamente vir acompanhados de fita com catraca ou corda cruzando os veículos — porque, isoladamente, os estabilizadores não impedem que o conjunto se desloque como um todo."
+      },
+      {
+        text: "Posicionar um 5º ponto de calçamento entre os dois veículos — mesma medida usada em extrações pela traseira de veículos hatch.",
+        correct: false,
+        comment: "Errada. O 5º ponto tem indicação própria e específica — calçamento adicional na parte traseira de um veículo, obrigatório quando a extração ocorrerá por ali (caso típico do hatch). Aplicar esse conceito a um cenário de dois veículos sobrepostos é misturar duas situações e duas soluções de contextos diferentes."
+      },
+      {
+        text: "Substituir os estabilizadores de tração por calços escalonados invertidos, mais adequados para conjuntos de veículos sobrepostos.",
+        correct: false,
+        comment: "Errada. Calços escalonados invertidos são descritos como técnica para veículos sobre 4 rodas — grandes cunhas, de aplicação rápida e fácil — não como alternativa aos estabilizadores de tração em cenários complexos. A obrigatoriedade nesse tipo de cenário é reforçar os estabilizadores com fita ou corda, não substituí-los por outra técnica."
+      },
+      {
+        text: "Aguardar a chegada de uma segunda guarnição antes de iniciar qualquer estabilização, dado o nível de risco envolvido.",
+        correct: false,
+        comment: "Errada. O princípio que rege a estabilização é \"estabilizar como encontrado — nunca mover antes de estabilizar\", e não \"aguardar reforços antes de estabilizar\". O material trata o cenário complexo como situação que exige medidas adicionais específicas (estabilizadores + fita/corda), não uma pausa na atuação até a chegada de mais recursos."
+      },
+      {
+        text: "Reclassificar a ocorrência como estabilização primária, já que o foco nesse cenário passa a ser o acesso rápido às vítimas de ambos os veículos.",
+        correct: false,
+        comment: "Errada. Essa alternativa confunde dois eixos diferentes de classificação: o tipo de estabilização (primária/secundária/progressiva, definido pelo objetivo da ação) e o tipo de cenário (simples ou complexo, definido pela configuração dos veículos envolvidos). Um cenário complexo não \"reclassifica\" o tipo de estabilização — ele exige medidas adicionais dentro da lógica já estudada."
+      }
+    ],
+    referencia: "Cenário complexo (pesado sobre leve | leve sobre leve): estabilizadores de tração obrigatoriamente acompanhados de fita com catraca ou corda cruzando os veículos — os estabilizadores sozinhos não impedem o deslocamento do conjunto.",
+    aprofundamento: "Esse cenário é um bom ponto para revisar a estabilização progressiva: num conjunto de dois veículos sobrepostos, qualquer intervenção em um deles (por exemplo, remover uma porta do veículo de baixo) tende a alterar o equilíbrio de todo o conjunto — exigindo reavaliação constante da fita, da corda e dos estabilizadores ao longo de toda a operação, não apenas na montagem inicial."
+  },
+  {
+    q: "Em uma apresentação sobre estatísticas de sinistros de trânsito, um cadete precisa citar dois dados: a posição do Pará no ranking nacional de óbitos por sinistros de trânsito e o efeito do aumento de velocidade sobre o risco de morte. Quais são os dados corretos, segundo as fontes estudadas?",
+    opts: [
+      {
+        text: "O Pará ocupa a 7ª posição nacional, com 1.793 óbitos (DATASUS, 2024); e cada aumento de 1% na velocidade média eleva em 4% o risco de sinistro fatal.",
+        correct: true,
+        comment: "Certa. São exatamente esses os dois dados registrados: o Pará aparece em 7º lugar no ranking nacional de óbitos por sinistros de trânsito, com 1.793 mortes (DATASUS, 2024); e a relação entre velocidade e risco é de +1% na velocidade média para +4% no risco de sinistro fatal — proporção que a prova frequentemente cobra de forma isolada e combinada."
+      },
+      {
+        text: "O Pará ocupa a 4ª posição nacional, com 1.793 óbitos; e cada aumento de 4% na velocidade média eleva em 1% o risco de sinistro fatal.",
+        correct: false,
+        comment: "Errada. A alternativa preserva os números 1.793, 4 e 1 — mas os realoca incorretamente: troca a posição do Pará (7º, não 4º) e inverte a proporção entre velocidade e risco (o aumento pequeno é na velocidade — 1% — e o efeito amplificado é no risco — 4% —, não o contrário)."
+      },
+      {
+        text: "O Pará ocupa a 7ª posição nacional, com 1.793 óbitos; e o principal grupo de risco em sinistros de trânsito no Brasil são os motociclistas de 20 a 24 anos.",
+        correct: false,
+        comment: "Errada. Os dois dados sobre o Pará estão corretos — mas a alternativa substitui o dado sobre velocidade por outro dado real do material (o perfil do principal grupo de risco no Brasil), que é verdadeiro em si, porém não responde ao que foi perguntado sobre o efeito da velocidade no risco de sinistro fatal."
+      },
+      {
+        text: "O Pará ocupa a 7ª posição nacional, com aproximadamente 1,19 milhão de óbitos; e cada aumento de 1% na velocidade média eleva o risco de sinistro fatal em 50%.",
+        correct: false,
+        comment: "Errada. O número de 1,19 milhão refere-se a um dado completamente diferente — o total de mortes por sinistros de trânsito no mundo por ano (OMS, 2024) — e não aos óbitos no Pará. Da mesma forma, os 50% pertencem a outro dado (a meta da ONU de redução de mortes até 2030), não ao efeito da velocidade sobre o risco."
+      },
+      {
+        text: "O Pará ocupa a 7ª posição nacional, com 1.793 óbitos; e um atropelamento a 65 km/h representa 4 vezes mais risco de morte do que a 50 km/h.",
+        correct: false,
+        comment: "Errada. Os dados sobre o Pará estão corretos — e a comparação de risco em atropelamentos (65 km/h × 50 km/h) é, de fato, real no material, porém o valor exato é 4,5 vezes, não 4 vezes — e, principalmente, esse dado não responde à pergunta sobre o efeito do aumento percentual da velocidade média no risco de sinistro fatal, que é outro dado distinto."
+      }
+    ],
+    referencia: "Pará: 7º lugar nacional — 1.793 óbitos (DATASUS, 2024). Velocidade: +1% na velocidade média → +4% no risco de sinistros fatais.",
+    aprofundamento: "Essas estatísticas ganham mais sentido quando lidas como justificativa para o resto da disciplina: é porque a velocidade tem esse efeito amplificado sobre o risco — e porque o Pará está entre os estados com mais óbitos — que protocolos como o posicionamento da viatura a 45° (barreira de sacrifício) e o isolamento rigoroso da cena fazem tanto sentido. Os números não são decoração estatística: eles explicam por que o protocolo é tão rígido."
+  }
+];
+
+let questions = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildQuestion(raw) {
+  const shuffledOpts = shuffle(raw.opts);
+  return {
+    q: raw.q,
+    opts: shuffledOpts,
+    correctIndex: shuffledOpts.findIndex(o => o.correct),
+    referencia: raw.referencia,
+    aprofundamento: raw.aprofundamento
+  };
+}
+
+function init() {
+  questions = shuffle(QUESTIONS_RAW).map(buildQuestion);
+  current = 0;
+  score = 0;
+  answered = false;
+  document.getElementById('question-screen').style.display = 'block';
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('result-screen').classList.remove('show');
+  render();
+}
+
+function render() {
+  const q = questions[current];
+  answered = false;
+  document.getElementById('q-number').textContent = `QUESTÃO ${String(current + 1).padStart(2, '0')}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('status-q').textContent = `Questão ${current + 1} de ${questions.length}`;
+  document.getElementById('status-score').textContent = `Acertos: ${score}`;
+  document.getElementById('progress-bar').style.width = `${(current / questions.length) * 100}%`;
+
+  const review = document.getElementById('q-review');
+  review.classList.remove('show');
+  document.getElementById('alt-analysis').innerHTML = '';
+  document.getElementById('ref-wrap').innerHTML = '';
+  document.getElementById('deepen-wrap').innerHTML = '';
+
+  const btnNext = document.getElementById('btn-next');
+  btnNext.className = 'btn btn-next';
+
+  const container = document.getElementById('q-options');
+  container.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="letra">${LETRAS[i]}</span><span>${opt.text}</span>`;
+    btn.onclick = () => choose(i);
+    container.appendChild(btn);
+  });
+}
+
+function choose(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const opts = document.querySelectorAll('.option');
+  const btnNext = document.getElementById('btn-next');
+
+  opts.forEach(o => o.classList.add('disabled'));
+
+  const acertou = idx === q.correctIndex;
+  if (acertou) score++;
+
+  opts[q.correctIndex].classList.add('correct');
+  if (!acertou) opts[idx].classList.add('wrong');
+
+  document.getElementById('status-score').textContent = `Acertos: ${score}`;
+
+  // Banner
+  const banner = document.getElementById('review-banner');
+  if (acertou) {
+    banner.textContent = `✓ Você acertou — alternativa ${LETRAS[idx]}.`;
+    banner.className = 'review-banner ok';
+  } else {
+    banner.textContent = `✗ Você marcou ${LETRAS[idx]} — a alternativa correta é ${LETRAS[q.correctIndex]}. Veja por quê abaixo:`;
+    banner.className = 'review-banner no';
+  }
+
+  // Varredura de todas as alternativas (não só a escolhida)
+  const altWrap = document.getElementById('alt-analysis');
+  altWrap.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const row = document.createElement('div');
+    let cls = 'alt-row';
+    let tag = '';
+    if (i === q.correctIndex) {
+      cls += ' is-correct';
+      tag = '<span class="tag">Correta</span>';
+    } else if (i === idx) {
+      cls += ' is-chosen-wrong';
+      tag = '<span class="tag">Sua escolha</span>';
+    }
+    row.className = cls;
+    row.innerHTML = `<span class="alt-letra">${LETRAS[i]}${tag}</span><span>${opt.comment}</span>`;
+    altWrap.appendChild(row);
+  });
+
+  // Bloco de referência técnica
+  const refWrap = document.getElementById('ref-wrap');
+  if (q.referencia) {
+    refWrap.innerHTML = `
+      <div class="review-section-title">Para fixar</div>
+      <div class="ref-box"><span class="ref-label">Definição / dado técnico</span>${q.referencia}</div>
+    `;
+  }
+
+  // Aprofundamento — conexão com assunto vizinho
+  const deepenWrap = document.getElementById('deepen-wrap');
+  if (q.aprofundamento) {
+    deepenWrap.innerHTML = `
+      <div class="review-section-title">Indo além desta questão</div>
+      <div class="deepen-box"><span class="deepen-label">Conexão com outro ponto do conteúdo</span>${q.aprofundamento}</div>
+    `;
+  }
+
+  document.getElementById('q-review').classList.add('show');
+
+  if (current < questions.length - 1) {
+    btnNext.textContent = 'Próxima questão →';
+  } else {
+    btnNext.textContent = 'Ver resultado →';
+  }
+  btnNext.className = 'btn btn-next show';
+}
+
+document.getElementById('btn-next').onclick = function() {
+  current++;
+  if (current < questions.length) {
+    render();
+  } else {
+    showResult();
+  }
+};
+
+function showResult() {
+  document.getElementById('question-screen').style.display = 'none';
+  document.getElementById('progress-bar').style.width = '100%';
+  const pct = Math.round((score / questions.length) * 100);
+  document.getElementById('res-num').textContent = score;
+  document.getElementById('res-den').textContent = `de ${questions.length}`;
+  document.getElementById('res-pct').textContent = `${pct}%`;
+  let msg = '';
+  if (pct >= 90) msg = 'Excelente! Domínio sólido do conteúdo. Continue assim para a prova.';
+  else if (pct >= 70) msg = 'Bom desempenho. Revise os pontos errados antes da prova.';
+  else if (pct >= 50) msg = 'Desempenho mediano. Retorne ao material e refaça o simulado.';
+  else msg = 'Atenção: pontuação abaixo do esperado. Revise o resumo e os pontos-chave antes de tentar novamente.';
+  document.getElementById('res-msg').textContent = msg;
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('result-screen').classList.add('show');
+}
+
+function restart() {
+  init();
+  window.scrollTo(0, 0);
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards — FSV | VC01</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      padding: 24px 16px 18px;
+      border-bottom: 1px solid #2d3748;
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      background: #1a2a4a;
+      color: #63b3ed;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    header h1 { font-size: 20px; font-weight: 700; color: #f7fafc; margin-bottom: 4px; }
+    header p { font-size: 13px; color: #718096; }
+
+    #deck-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 18px;
+    }
+    #counter { font-weight: 600; color: #a0aec0; }
+    #pile-info { font-size: 12px; }
+
+    #progress-wrap {
+      background: #2d3748;
+      border-radius: 6px;
+      height: 4px;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+    #progress-bar { height: 100%; background: #4299e1; border-radius: 6px; transition: width 0.35s ease; }
+
+    /* FLIP CARD */
+    .scene {
+      width: 100%;
+      perspective: 1000px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .card-3d {
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-3d.flipped { transform: rotateY(180deg); }
+
+    .face {
+      position: absolute;
+      width: 100%;
+      min-height: 220px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .face-front {
+      background: #1a202c;
+      border: 1px solid #2d3748;
+    }
+    .face-back {
+      background: #162032;
+      border: 1px solid #2c4a6e;
+      transform: rotateY(180deg);
+    }
+
+    .face-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .face-front .face-label { color: #718096; }
+    .face-back .face-label { color: #63b3ed; }
+
+    .face-front .term {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f7fafc;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .face-front .hint {
+      font-size: 13px;
+      color: #4a5568;
+    }
+    .face-back .definition {
+      font-size: 16px;
+      color: #e2e8f0;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .face-back .context {
+      font-size: 13px;
+      color: #63b3ed;
+      line-height: 1.4;
+      padding-top: 10px;
+      border-top: 1px solid #2c4a6e;
+    }
+
+    /* Placeholder card height */
+    .card-placeholder { height: 220px; }
+
+    .tap-hint {
+      text-align: center;
+      font-size: 13px;
+      color: #4a5568;
+      margin-bottom: 18px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      flex: 1;
+      padding: 14px 10px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+      transition: opacity 0.15s;
+    }
+    .btn:active { opacity: 0.75; }
+    .btn-know { background: #276749; color: #c6f6d5; }
+    .btn-review { background: #7b341e; color: #feebc8; }
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      background: transparent;
+      color: #a0aec0;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+      transition: background 0.15s;
+      margin-bottom: 10px;
+    }
+    .btn-secondary:active { background: #2d3748; }
+
+    #done-screen, #retry-screen { display: none; text-align: center; padding: 40px 20px; }
+    #done-screen.show, #retry-screen.show { display: block; }
+    .done-icon { font-size: 48px; margin-bottom: 16px; }
+    .done-title { font-size: 22px; font-weight: 700; color: #f7fafc; margin-bottom: 8px; }
+    .done-sub { font-size: 15px; color: #a0aec0; margin-bottom: 28px; line-height: 1.5; }
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 32px; font-weight: 800; }
+    .stat-label { font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-num.green { color: #48bb78; }
+    .stat-num.orange { color: #ed8936; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge">CFO T16 · CBMPA · Periodo01</div>
+    <h1>Flashcards — FSV | VC01</h1>
+    <p id="header-sub">Fundamentos do Salvamento Veicular</p>
+  </header>
+
+  <div id="main-deck">
+    <div id="deck-info">
+      <span id="counter">1 / 48</span>
+      <span id="pile-info"></span>
+    </div>
+    <div id="progress-wrap"><div id="progress-bar" style="width:0%"></div></div>
+
+    <div class="scene" id="scene" onclick="flipCard()">
+      <div class="card-3d" id="card3d">
+        <div class="face face-front">
+          <div class="face-label">Conceito</div>
+          <div class="term" id="card-term"></div>
+          <div class="hint" id="card-hint"></div>
+        </div>
+        <div class="face face-back">
+          <div class="face-label">Definição</div>
+          <div class="definition" id="card-def"></div>
+          <div class="context" id="card-ctx"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="tap-hint">Toque no cartão para ver a resposta</p>
+
+    <div class="action-row">
+      <button class="btn btn-know" onclick="markKnow()">✓ Sei</button>
+      <button class="btn btn-review" onclick="markReview()">↺ Revisar depois</button>
+    </div>
+    <button class="btn-secondary" onclick="shuffleAndRestart()">⇄ Embaralhar e reiniciar</button>
+  </div>
+
+  <div id="done-screen">
+    <div class="done-icon">🎯</div>
+    <div class="done-title">Baralho concluído!</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num green" id="stat-know">0</div><div class="stat-label">Sei</div></div>
+      <div class="stat"><div class="stat-num orange" id="stat-rev">0</div><div class="stat-label">Revisar</div></div>
+    </div>
+    <div class="done-sub" id="done-msg"></div>
+    <button class="btn btn-review" style="width:100%;margin-bottom:12px;font-size:16px;" onclick="retryReview()">↺ Revisar cartões pendentes</button>
+    <button class="btn-secondary" onclick="shuffleAndRestart()">⇄ Reiniciar tudo</button>
+  </div>
+</div>
+
+<script>
+const ALL_CARDS = [
+  {
+    term: "Salvamento Veicular (SV)",
+    hint: "Definição geral",
+    def: "Conjunto de procedimentos para atender ocorrências em que uma ou mais vítimas estejam presas em veículos sinistrados — do reconhecimento da cena até o encerramento formal.",
+    ctx: "Ciclo completo: reconhecimento → controle de riscos → estabilização → criação de acessos → desencarceramento → retirada segura → encerramento formal."
+  },
+  {
+    term: "Desencarceramento",
+    hint: "Etapa específica do SV",
+    def: "Ações realizadas para criar o espaço necessário para a retirada mais segura da vítima, movimentando-a o mínimo possível.",
+    ctx: "Não é sinônimo de SV — é apenas uma das etapas. A movimentação mínima evita agravamento de lesões da coluna e membros."
+  },
+  {
+    term: "Sinistro de trânsito",
+    hint: "Alteração do CTB em 2023",
+    def: "Evento ocorrido em vias terrestres ou áreas públicas, envolvendo pelo menos um veículo em movimento, que resulte em danos a veículos, cargas, pessoas, animais, à via ou ao meio ambiente.",
+    ctx: "Substituiu 'acidente de trânsito' em 2023 para reforçar que o evento tem causas e responsabilidades."
+  },
+  {
+    term: "Colisão vs Choque",
+    hint: "Distinção fundamental",
+    def: "Colisão: impacto entre dois objetos EM MOVIMENTO (frontal, traseira ou lateral). Choque: impacto de veículo em movimento contra objeto FIXO ou imóvel.",
+    ctx: "A diferença está no estado do segundo objeto. É uma das distinções mais cobradas em provas de FSV."
+  },
+  {
+    term: "Tombamento",
+    hint: "Posição / tipo de sinistro",
+    def: "O veículo cai lateralmente — fica sobre uma das laterais.",
+    ctx: "Cenário mais instável — requer maior atenção. Técnicas de estabilização tendem a ser mais rápidas de executar."
+  },
+  {
+    term: "Capotamento",
+    hint: "Posição / tipo de sinistro",
+    def: "O veículo gira sobre o próprio eixo longitudinal — fica sobre o teto.",
+    ctx: "Estabilizar como encontrado, preencher espaços vazios e planejar rotas de extração antes de iniciar qualquer manobra."
+  },
+  {
+    term: "Célula de segurança",
+    hint: "Anatomia veicular",
+    def: "Compartimento dos passageiros — a estrutura mais rígida do veículo, projetada para preservar o espaço vital das pessoas.",
+    ctx: "Se a célula de segurança colapsou, a gravidade das lesões é presumivelmente alta. Referência de integridade do habitáculo."
+  },
+  {
+    term: "Zonas de deformação",
+    hint: "Anatomia veicular / zonas colapsáveis",
+    def: "Regiões dianteira e traseira do veículo, feitas de aço menos resistente para absorver a energia do impacto e proteger a célula de segurança.",
+    ctx: "É nessas zonas que a vítima mais frequentemente fica presa — área de maior atenção no reconhecimento da cena."
+  },
+  {
+    term: "Barras de reforço lateral",
+    hint: "Anatomia veicular — atenção especial",
+    def: "Estruturas de aço muito resistente que espalham as forças de impacto lateral. O bombeiro deve EVITAR manobras nessas estruturas.",
+    ctx: "A resistência é excessiva para as FEAs — aplicar forças ali pode danificar as ferramentas sem produzir o acesso desejado."
+  },
+  {
+    term: "Colunas A, B, C, D",
+    hint: "Anatomia veicular",
+    def: "Suportes verticais do teto. A: entre para-brisas e porta dianteira. B: entre porta dianteira e traseira (alvo mais comum de corte). C: entre porta traseira e janela traseira. D: presente em veículos com 3ª fileira.",
+    ctx: "A coluna B é o alvo mais frequente no desencarceramento lateral — quando abatida, permite remover as portas dianteira e traseira simultaneamente."
+  },
+  {
+    term: "Dobradiças das portas",
+    hint: "Anatomia veicular — regra de segurança",
+    def: "Nunca intervir diretamente nas dobradiças. Ao serem cortadas ou separadas por ferramentas hidráulicas, podem sair violentamente.",
+    ctx: "Alternativa correta: intervir nos PONTOS DE SOLDA entre a dobradiça e a estrutura do veículo — menor resistência, sem risco de ejeção."
+  },
+  {
+    term: "Bateria — sequência de desconexão",
+    hint: "Procedimento obrigatório",
+    def: "1. Localizar e criar acesso. 2. Desconectar POLO NEGATIVO (−) primeiro. 3. Desconectar polo positivo (+). 4. Isolar os cabos.",
+    ctx: "Inverter a sequência pode gerar faísca — crítico em presença de combustível vazado. Em elétricos/híbridos: tensão pode chegar a 800V."
+  },
+  {
+    term: "Vidro laminado",
+    hint: "Anatomia veicular",
+    def: "Encontrado normalmente no para-brisas DIANTEIRO. Mantém os estilhaços unidos quando quebrado (faixa de plástico interna). Colado à estrutura do veículo.",
+    ctx: "Remoção exige abordagem diferente (corte pelo contorno ou serra-sabre). Não pulveriza sobre a vítima."
+  },
+  {
+    term: "Vidro temperado",
+    hint: "Anatomia veicular",
+    def: "Encontrado nas JANELAS LATERAIS e no para-brisas TRASEIRO. Fragmenta em pequenos pedaços ao quebrar.",
+    ctx: "Um único golpe no canto faz o vidro inteiro fragmentar — rápido, mas gera nuvem de partículas. Exige máscara N95/PFF2 e óculos."
+  },
+  {
+    term: "3 pilares de segurança",
+    hint: "Hierarquia obrigatória",
+    def: "1º Segurança do bombeiro. 2º Segurança do local. 3º Segurança da vítima.",
+    ctx: "A ordem é hierárquica: bombeiro que vira vítima agrava a ocorrência e retira recursos da operação."
+  },
+  {
+    term: "Risco elétrico — regra",
+    hint: "Segurança do local",
+    def: "A equipe NÃO atua antes da desenergização da rede elétrica pela concessionária de energia.",
+    ctx: "É o único risco BLOQUEANTE TOTAL no SV. Não há EPI de bombeiro certificado para tensões de rede — sem exceção."
+  },
+  {
+    term: "Protetor de airbag",
+    hint: "FEA — proteção",
+    def: "Impede o acionamento acidental do airbag durante a operação de salvamento.",
+    ctx: "Deve ser posicionado ANTES de qualquer manobra no habitáculo. Um airbag disparado durante o trabalho pode ser fatal para bombeiro e vítima."
+  },
+  {
+    term: "Zona quente",
+    hint: "Definição de zonas",
+    def: "Local onde estão os veículos sinistrados. Acesso restrito à equipe com EPI completo.",
+    ctx: "Nenhum acesso sem EPI. É onde ocorrem todas as intervenções diretas nos veículos."
+  },
+  {
+    term: "Zona morna",
+    hint: "Definição de zonas",
+    def: "Destinada ao palco de ferramentas (preferencialmente sobre lona resistente) e à área de descarte de estruturas removidas.",
+    ctx: "Palco e área de descarte são espaços SEPARADOS na zona morna. A lona protege as FEAs e organiza o material."
+  },
+  {
+    term: "Zona fria",
+    hint: "Definição de zonas",
+    def: "Área de livre acesso para recursos de apoio: guinchos, viaturas policiais, ambulâncias em espera e outros.",
+    ctx: "Não há restrição de acesso na zona fria. É onde ficam os recursos que não estão atuando diretamente na intervenção."
+  },
+  {
+    term: "Viatura a 45° — barreira de sacrifício",
+    hint: "Ações iniciais",
+    def: "Posicionamento da viatura a 45° em relação ao veículo sinistrado, funcionando como barreira entre o tráfego da via e a zona de trabalho.",
+    ctx: "Em caso de impacto por veículo desatento, a viatura absorve o choque. O desembarque da equipe é feito pelo lado oposto ao tráfego."
+  },
+  {
+    term: "Avaliação 360°",
+    hint: "Ações iniciais",
+    def: "Dois círculos: INTERNO (interior do veículo, abaixo e próximo) e EXTERNO (entorno da zona quente).",
+    ctx: "Realizada antes de qualquer intervenção. Mapeia todos os riscos e define o planejamento da operação."
+  },
+  {
+    term: "FISPQ",
+    hint: "Ações iniciais — carga perigosa",
+    def: "Ficha de Informações de Segurança de Produto Químico. Consultada sempre que há suspeita de carga perigosa no veículo.",
+    ctx: "Verificada nas ações iniciais, antes de qualquer aproximação quando há carga perigosa. Informa classe de risco, EPIs e distância de isolamento."
+  },
+  {
+    term: "FEA",
+    hint: "Sigla",
+    def: "Ferramentas, Equipamentos e Acessórios utilizados nas operações de Salvamento Veicular.",
+    ctx: "Organizados no palco de ferramentas (zona morna, sobre lona resistente) durante a operação."
+  },
+  {
+    term: "Calços — especificações",
+    hint: "FEA de estabilização",
+    def: "Material: polietileno reciclado. Suporta 100 kg/cm² em TODAS AS DIREÇÕES (horizontal e vertical).",
+    ctx: "O 'todas as direções' é diferencial em prova — não é apenas carga vertical."
+  },
+  {
+    term: "Estabilizadores de tração — especificações",
+    hint: "FEA de estabilização",
+    def: "Carga axial máxima: 1,6 T. Comprimento máximo: 1,80 m.",
+    ctx: "Em cenários complexos, o estabilizador de tração sozinho não é suficiente — obrigatório adicionar fita com catraca ou corda."
+  },
+  {
+    term: "Motobomba — manutenção",
+    hint: "FEA hidráulica",
+    def: "Óleo lubrificante: trocar a cada 6 MESES. Fluido hidráulico: trocar a cada 12 MESES. Antes do prazo, pode-se apenas completar.",
+    ctx: "Os prazos diferentes (6 e 12 meses) são frequentemente cobrados em prova. Não confundir a ordem."
+  },
+  {
+    term: "Twin line vs Core",
+    hint: "Sistemas de mangueira da motobomba",
+    def: "Twin line: DUAS mangueiras separadas (alta pressão + baixa pressão). Core: UMA mangueira única — a de alta pressão está CONTIDA dentro da de baixa.",
+    ctx: "Twin = dupla separada. Core = única / embutida."
+  },
+  {
+    term: "Cortador hidráulico",
+    hint: "FEA de corte",
+    def: "Realiza o corte de estruturas metálicas do veículo.",
+    ctx: "Parte do conjunto hidráulico da motobomba. Pode ser em versão a bateria (mais pesada, porém portátil)."
+  },
+  {
+    term: "Alargador hidráulico",
+    hint: "FEA de expansão",
+    def: "Realiza a expansão de espaços para criação de acessos.",
+    ctx: "Combinado com o extensor para alcançar espaços mais profundos. A combinada realiza corte E expansão em uma ferramenta."
+  },
+  {
+    term: "Combinada",
+    hint: "FEA hidráulica",
+    def: "Ferramenta que realiza as funções de CORTADOR e ALARGADOR em uma única ferramenta.",
+    ctx: "Vantajosa quando a equipe é reduzida ou o espaço de trabalho é limitado."
+  },
+  {
+    term: "Ferramentas hidráulicas a bateria",
+    hint: "FEA — vantagens e desvantagem",
+    def: "Vantagens: portáteis, uso simultâneo, menos ruído, menos manutenção, menos espaço na viatura. Desvantagem: mais PESADAS.",
+    ctx: "A desvantagem (mais pesadas) é frequentemente cobrada em prova junto com as vantagens."
+  },
+  {
+    term: "Serra-sabre",
+    hint: "FEA de corte",
+    def: "Usada para: corte de colunas, remoção de estruturas em chapa e retirada de vidro laminado.",
+    ctx: "Diferente do moto abrasivo — a serra-sabre é para cortes gerais de colunas e chapas, não para estruturas que não podem ser movidas."
+  },
+  {
+    term: "Moto abrasivo",
+    hint: "FEA especial — uso específico",
+    def: "Único equipamento indicado quando há necessidade de cortar estruturas que NÃO PODEM SER MOVIMENTADAS ou torcidas — ex: ferragem transfixando vítima.",
+    ctx: "A vibração e os fragmentos exigem proteção máxima da vítima e da equipe. Uso reservado para casos extremos."
+  },
+  {
+    term: "Corta-a-frio",
+    hint: "FEA manual",
+    def: "Realiza cortes de estruturas SEM PRODUZIR FAÍSCA.",
+    ctx: "Indicado quando há combustível vazado — a faísca poderia causar ignição."
+  },
+  {
+    term: "Talha tirfor",
+    hint: "FEA manual",
+    def: "Ferramenta para movimentação e tração de cargas.",
+    ctx: "Usada para puxar ou mover elementos do veículo ou objetos no cenário da ocorrência."
+  },
+  {
+    term: "Hooligan / Haligan",
+    hint: "FEA manual",
+    def: "Ferramenta para alavancagem e abertura forçada de acessos.",
+    ctx: "Ferramenta manual de uso inicial — pode criar o primeiro acesso antes do uso das ferramentas hidráulicas."
+  },
+  {
+    term: "Cortador de pedal",
+    hint: "FEA hidráulica específica",
+    def: "Realiza o corte específico da área dos pedais para liberação dos pés da vítima.",
+    ctx: "Usado quando os pés da vítima estão presos na área dos pedais após deformação da parte dianteira do veículo."
+  },
+  {
+    term: "Proteção flexível e rígida",
+    hint: "FEA — proteção da vítima",
+    def: "Flexível: cobre a vítima durante toda a operação de corte (estilhaços, faíscas, fluidos). Rígida: barreira física direta entre ferramentas e a vítima.",
+    ctx: "Ambas são colocadas ANTES de acionar qualquer ferramenta hidráulica ou de corte."
+  },
+  {
+    term: "Proteção de quina",
+    hint: "FEA — proteção",
+    def: "Reveste bordas cortantes expostas após a remoção de estruturas do veículo.",
+    ctx: "Sempre instalar após qualquer corte que exponha borda metálica — antes de qualquer manobra adicional naquela área."
+  },
+  {
+    term: "4 fases do atendimento",
+    hint: "Sequência operacional",
+    def: "1. Preparação (permanente — antes do chamado). 2. Acionamento (chamado ao deslocamento). 3. Resposta (atuação na cena — 13 etapas). 4. Finalização (desmobilização, debriefing, treinamento).",
+    ctx: "A Preparação não começa com o chamado — é o estado permanente de prontidão entre ocorrências."
+  },
+  {
+    term: "Fase 3 — Resposta (13 etapas)",
+    hint: "Sequência obrigatória na cena",
+    def: "1-Posicionamento viatura, 2-Isolamento, 3-Zonas, 4-Palco ferramentas, 5-Área descarte, 6-Avaliação cena, 7-Avaliação 360°, 8-Estabilização, 9-Acesso interior, 10-Criação de espaço, 11-Desencarceramento, 12-Extração, 13-Cena segura + dados.",
+    ctx: "Estabilização (etapa 8) PRECEDE o acesso ao interior (etapa 9). Pular essa ordem é a principal causa de acidentes com bombeiros no SV."
+  },
+  {
+    term: "Debriefing",
+    hint: "Fase 4 — Finalização",
+    def: "Análise coletiva e estruturada após a ocorrência: o que funcionou e o que falhou. Gera insumo para treinamento futuro.",
+    ctx: "É etapa FORMAL da Fase 4 — não é conversa informal. O resultado do debriefing alimenta diretamente o treinamento da equipe."
+  },
+  {
+    term: "Estabilização veicular — definição",
+    hint: "Conceito central da Aula 02",
+    def: "Processo CONTÍNUO que busca prevenir qualquer movimentação inesperada durante as ações de salvamento, impedindo que a situação se agrave.",
+    ctx: "Objetivo duplo: garantir acesso rápido à vítima + tornar o cenário seguro para vítima e bombeiros."
+  },
+  {
+    term: "Princípios da estabilização",
+    hint: "3 princípios",
+    def: "1. Estabilizar a vítima e o veículo DA MANEIRA ENCONTRADA — nunca mover antes de estabilizar. 2. Preencher TODO o espaço entre veículo e solo/obstáculos. 3. Ajustar e verificar CONSTANTEMENTE.",
+    ctx: "A estabilização é contínua e progressiva — não é feita uma vez e esquecida."
+  },
+  {
+    term: "Estabilização primária",
+    hint: "Tipo de estabilização",
+    def: "Estabilização MÍNIMA necessária para que os socorristas acessem o interior e realizem os primeiros atendimentos. Deve ser rápida e segura.",
+    ctx: "Quanto mais rápida a primária, mais cedo o APH acessa a vítima — melhora o prognóstico."
+  },
+  {
+    term: "Estabilização secundária",
+    hint: "Tipo de estabilização",
+    def: "Estabilização TOTAL do veículo, inibindo todas as movimentações indesejadas dos veículos e objetos envolvidos. Viabiliza a extração segura.",
+    ctx: "É a sequência da primária — ocorre após o acesso inicial e o APH estarem estabelecidos."
+  },
+  {
+    term: "Estabilização progressiva",
+    hint: "Tipo de estabilização",
+    def: "Revisão SISTEMÁTICA da estabilização ao longo de toda a operação, alinhada ao Plano de Ação e às rotas de extração principal e emergencial.",
+    ctx: "Cada nova técnica de desencarceramento pode alterar o equilíbrio do veículo — revisar antes de cada nova manobra."
+  },
+  {
+    term: "Calçamento alternado — 3 pontos",
+    hint: "Estabilização sobre 4 rodas",
+    def: "Pneus calçados de forma ALTERNADA (lados opostos) para anular movimentação horizontal e vertical. 3 pontos, priorizando o lado da vítima.",
+    ctx: "Calçar do mesmo lado deixa o veículo livre para rolar na direção oposta. A prioridade do lado da vítima não é simétrica."
+  },
+  {
+    term: "5º ponto de estabilização",
+    hint: "Estabilização sobre 4 rodas — situação específica",
+    def: "Ponto adicional de estabilização posicionado na PARTE TRASEIRA do veículo. OBRIGATÓRIO quando a extração será feita pela traseira (hatch).",
+    ctx: "Sem o 5º ponto, o veículo pode deslizar durante a extração pela traseira. É um detalhe frequentemente esquecido em campo."
+  },
+  {
+    term: "Cenário complexo — fita obrigatória",
+    hint: "Estabilização em cenários especiais",
+    def: "Em cenários pesado sobre leve ou leve sobre leve, mesmo com estabilizadores de tração, é OBRIGATÓRIO usar fita com catraca OU corda cruzando os veículos.",
+    ctx: "Os estabilizadores de tração sozinhos não impedem o deslocamento do conjunto — a fita/corda é complemento obrigatório."
+  },
+  {
+    term: "Dados OMS (2024)",
+    hint: "Estatísticas — prova",
+    def: "~1,19 milhão de mortes/ano. 20 a 50 milhões de feridos não fatais. Principal causa de morte entre 5 e 29 anos. 2/3 das mortes entre 18 e 59 anos.",
+    ctx: "No Brasil: motociclistas 20-24 anos são o maior grupo de risco (ONSV, 2024)."
+  },
+  {
+    term: "Pará — dados DATASUS (2024)",
+    hint: "Estatísticas regionais",
+    def: "7º lugar no ranking nacional de óbitos por sinistros de trânsito. 1.793 mortes registradas.",
+    ctx: "Esses dados contextualizam a relevância operacional do FSV para o CBMPA — um dos estados com maior índice."
+  },
+  {
+    term: "Velocidade — fator de risco",
+    hint: "Estatística crítica",
+    def: "+1% na velocidade média → +4% no risco de sinistros fatais. Atropelamento a 65 km/h = 4,5× mais risco de morte que a 50 km/h.",
+    ctx: "Meta ONU: reduzir mortes em 50% até 2030 (Década de Ação 2021-2030)."
+  }
+];
+
+let deck = [];
+let reviewPile = [];
+let current = 0;
+let knownCount = 0;
+let reviewCount = 0;
+let isFlipped = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function init(cards) {
+  deck = [...cards];
+  reviewPile = [];
+  current = 0;
+  knownCount = 0;
+  reviewCount = 0;
+  isFlipped = false;
+  document.getElementById('main-deck').style.display = 'block';
+  document.getElementById('done-screen').style.display = 'none';
+  render();
+}
+
+function render() {
+  if (current >= deck.length) { showDone(); return; }
+  const c = deck[current];
+  isFlipped = false;
+  document.getElementById('card3d').classList.remove('flipped');
+  document.getElementById('card-term').textContent = c.term;
+  document.getElementById('card-hint').textContent = c.hint;
+  document.getElementById('card-def').textContent = c.def;
+  document.getElementById('card-ctx').textContent = c.ctx;
+  document.getElementById('counter').textContent = `${current + 1} / ${deck.length}`;
+  document.getElementById('pile-info').textContent = reviewPile.length > 0 ? `${reviewPile.length} para revisar` : '';
+  const pct = (current / deck.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('card3d').classList.toggle('flipped', isFlipped);
+}
+
+function markKnow() {
+  knownCount++;
+  current++;
+  render();
+}
+
+function markReview() {
+  reviewPile.push(deck[current]);
+  reviewCount++;
+  current++;
+  render();
+}
+
+function showDone() {
+  document.getElementById('main-deck').style.display = 'none';
+  document.getElementById('stat-know').textContent = knownCount;
+  document.getElementById('stat-rev').textContent = reviewCount;
+  let msg = '';
+  if (reviewCount === 0) msg = 'Excelente! Você dominou todos os cartões. Revise o simulado para reforçar o conteúdo.';
+  else if (reviewCount <= 5) msg = `Bom trabalho! ${reviewCount} cartões para revisar. Foque nesses antes da prova.`;
+  else msg = `${reviewCount} cartões precisam de revisão. Clique em "Revisar cartões pendentes" para focar neles.`;
+  document.getElementById('done-msg').textContent = msg;
+  document.getElementById('done-screen').style.display = 'block';
+  document.getElementById('done-screen').classList.add('show');
+}
+
+function retryReview() {
+  if (reviewPile.length === 0) { shuffleAndRestart(); return; }
+  init(shuffle(reviewPile));
+}
+
+function shuffleAndRestart() {
+  init(shuffle(ALL_CARDS));
+}
+
+init(shuffle(ALL_CARDS));
+</script>
+</body>
+</html>

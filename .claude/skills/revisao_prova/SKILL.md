@@ -58,7 +58,7 @@ Tenho prova de [DISCIPLINA] preparada. O que deseja gerar?
 
 1. GERAR_REVISAO     — documento unificado focado no escopo da prova
 2. GERAR_AUDIO       — roteiro de áudio (~30 min) para escuta no deslocamento
-3. GERAR_SIMULADO    — 30 questões interativas em HTML
+3. GERAR_SIMULADO    — 15 questões comentadas e interativas em HTML
 4. GERAR_FLASHCARDS  — cartões de memorização interativos em HTML
 5. Todos
 

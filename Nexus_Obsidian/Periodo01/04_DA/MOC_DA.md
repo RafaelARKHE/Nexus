@@ -5,8 +5,8 @@ disciplina: Direito Administrativo I
 sigla: DA
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 06/06/2026
-versao: 1.1
+atualizado_em: 07/06/2026
+versao: 1.2
 ---
 
 # MOC — Direito Administrativo I (DA)
@@ -56,6 +56,20 @@ versao: 1.1
 |---|---|---|
 | 01 | Conceito, Distinções, Classificação e Espécies | [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/01_conceito-classificacao-e-especies]] |
 | 02 | Elementos de Validade (COFIM), Atributos, Fases e Desfazimento | [[Periodo01/04_DA/pontos_chave/04_Atos-Administrativos/02_elementos-atributos-e-desfazimento]] |
+
+---
+
+## Avaliações (VC)
+
+### VC01 — Quinta-feira, 11/06/2026, 11h10–12h00 (VC Teórica)
+> Escopo: todo o conteúdo disponível — Unidades I, III e IV (Generalidades/Princípios, Poderes Administrativos incl. Poder de Polícia, Atos Administrativos)
+
+| Artefato | Arquivo | Status |
+|---|---|---|
+| Revisão unificada | [[Periodo01/04_DA/VC01/revisao_VC01]] | ✅ Gerado |
+| Áudio (~30min) | `VC01/audio_VC01.txt` | ✅ Gerado |
+| Simulado (15 questões comentadas) | `VC01/simulado_VC01.html` | ✅ Gerado |
+| Flashcards (55 cartões) | `VC01/flashcard_VC01.html` | ✅ Gerado |
 
 ---
 
