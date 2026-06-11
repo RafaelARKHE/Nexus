@@ -10,3 +10,6 @@ __pycache__/
 
 # Obsidian — estado de janela por dispositivo
 Nexus_Obsidian/.obsidian/workspace.json
+
+# Log da sincronização automática
+.claude/hooks/sync.log
