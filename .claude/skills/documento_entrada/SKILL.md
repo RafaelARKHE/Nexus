@@ -7,7 +7,8 @@ description: >
   quiser apenas classificar um documento sem processar ("só direcionar"). Esta skill é
   o portão de entrada de todo o fluxo de estudo do Nexus — acione-a sempre que houver
   qualquer menção a novo material de estudo chegando ao sistema. Aceita PDF, PPTX e
-  imagens (JPEG/PNG) quando o documento for um Quadro de Instrução Semanal (QIS).
+  imagens (JPEG/PNG) quando o documento for um Quadro de Instrução Semanal (QIS) ou
+  um print de anotação disciplinar da plataforma livro.cfo-cbmpa.com.br.
 ---
 
 # DOCUMENTO_ENTRADA
@@ -23,11 +24,11 @@ novos documentos recebidos.
 |------------------------|-------------------|-----------------------------|
 | `.pdf`                 | Qualquer          | Skill nativa de leitura PDF |
 | `.pptx`                | Qualquer          | Skill `pptx` do sistema     |
-| `.jpeg` / `.jpg` / `.png` | **Somente QIS**   | Leitura de imagem (visão)   |
+| `.jpeg` / `.jpg` / `.png` | **QIS ou print de anotação disciplinar** | Leitura de imagem (visão) |
 
 Para qualquer outro formato, alertar o usuário e encerrar sem mover o arquivo.
-Para imagens que **não sejam QIS**, alertar que o formato só é suportado para
-Quadros de Instrução Semanal e encerrar.
+Para imagens que **não sejam QIS nem anotação disciplinar**, alertar que o formato
+só é suportado para esses dois casos e encerrar.
 
 ---
 
@@ -51,6 +52,14 @@ Documento com grade horária semanal de aulas da Turma 16.
 **Sinais de identificação:** título contém "QUADRO DE INSTRUÇÃO", "TURMA 16", "CFO";
 presença de colunas por dia da semana com horários e siglas de disciplinas.
 → Segue para a **Modalidade 5** abaixo. Não precisa ser PDF nem PPTX.
+
+### Tipo B2 — Print de anotação disciplinar ← verificar em seguida
+Captura de tela da plataforma `livro.cfo-cbmpa.com.br` com anotação de
+comportamento escolar do cadete.
+**Sinais de identificação:** campos "ID DA ANOTAÇÃO", "INFRAÇÃO" (código tipo
+A1-M2 + desconto em pontos), "DATA DO FATO", "DESCRIÇÃO DO FATO", "SUA
+JUSTIFICATIVA"; URL `livro.cfo-cbmpa.com.br` visível.
+→ Segue para a **Modalidade 6** abaixo.
 
 ### Tipo A — Material de estudo
 Conteúdo pedagógico de uma disciplina específica do CFO.
@@ -96,6 +105,13 @@ Executa os Passos A1 e A2 abaixo. Não aciona LEITURA_APROFUNDADA.
 Executa os Passos A1 e A2 (arquivamento em `Quadros_Instrucao/`) e em seguida
 aciona automaticamente a skill **QIS_PARA_CALENDARIO** passando o caminho do
 arquivo recém-arquivado.
+
+### Modalidade 6 — Anotação disciplinar (Tipo B2)
+**Gatilho:** detecção automática no Passo 0 (Tipo B2), ou "documento novo, é anotação"
+
+Não executa os passos A1/A2. Aciona diretamente a skill **ANOTACAO_DISCIPLINAR**
+passando o caminho do print em `_entradas/` — é ela quem move o arquivo para
+`Nexus_Materiais/Disciplinar/anotacoes/` e conduz verificação, entrevista e justificativa.
 
 ---
 

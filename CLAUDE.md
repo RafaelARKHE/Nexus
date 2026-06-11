@@ -22,6 +22,10 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 │   ├── Pensamento/             ← Raciocínio consolidado (criada sob demanda)
 │   │   ├── MOC_Pensamentos.md  ← Mapa de todo raciocínio registrado
 │   │   └── AAAA-MM-DD_tema.md  ← Arquivos de pensamento consolidado
+│   ├── Disciplinar/            ← Anotações de comportamento escolar e justificativas
+│   │   ├── MOC_Disciplinar.md  ← Painel: anotações, descontos, padrões de reincidência
+│   │   ├── base/               ← CEDCBMPA Livro IV, Anexo I (descontos), Manual do Aluno, guia de justificativa
+│   │   └── anotacoes/          ← Uma anotação por arquivo: AAAA-MM-DD_CODIGO_anotacao-NNN.md
 │   └── Periodo0N/              ← Pastas por período do CFO
 │       └── 0N_[SIGLA]/         ← Pastas por disciplina (criadas sob demanda)
 │           ├── MOC_[SIGLA].md  ← Mapa da disciplina
@@ -37,6 +41,8 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 │               └── flashcard_VC0X.html
 │
 └── Nexus_Materiais/            ← PDFs originais e binários gerados (fora do Obsidian)
+    ├── Disciplinar/            ← Manual do Aluno (PDF) e prints originais de anotações
+    │   └── anotacoes/          ← AAAA-MM-DD_CODIGO_anotacao-NNN.png
     └── Periodo0N/
         └── 0N_[SIGLA]/
             └── Apresentacoes/  ← .pptx finais de trabalhos/seminários (criada sob demanda)
@@ -126,6 +132,11 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 |---|---|---|
 | `slides_cfo` | "fazer slides", "criar apresentação", "trabalho em grupo", "seminário" | Gera apresentação `.pptx` institucional (modelo ABM) + roteiro rastreável em `Apresentacoes/` |
 
+### Vida Disciplinar
+| Skill | Gatilho | Função |
+|---|---|---|
+| `anotacao_disciplinar` | "fui anotado" · "justificar anotação" · print de anotação detectado pela `documento_entrada` | Verifica enquadramento/desconto no Anexo I do CEDCBMPA, entrevista sobre os fatos, classifica (justificável/atenuável/assumir) e redige justificativa no padrão e-mail militar |
+
 ---
 
 ## Convenções do sistema
@@ -143,6 +154,21 @@ Nexus/                          ← Raiz do projeto (você está aqui)
   o roteiro vivo e linkável ao MOC fica em `Nexus_Obsidian/.../Apresentacoes/roteiro_[tema].md`.
   Em caso de retrabalho, o roteiro ganha nova versão (`versao: 2.0` + histórico de
   versões) — o `.pptx` é substituído como entregável corrente, mas o roteiro preserva o histórico
+
+### Sincronização com GitHub
+
+O Nexus trabalha **sempre direto na `main`** — não criar branches `feat/`.
+
+- **Todo fluxo que modifica arquivos termina com commit e push:** ao concluir
+  qualquer skill ou tarefa que crie/altere arquivos, fazer commit com mensagem
+  semântica no padrão do histórico (`feat(SIGLA): ...`, `fix: ...`, `docs: ...`)
+  e em seguida `git push origin main`. O relatório final do fluxo confirma o push.
+- **Prefixo `sync:` é reservado** ao hook automático — nunca usar em commits manuais.
+- **Rede de segurança:** os hooks `SessionStart`/`SessionEnd` executam
+  `.claude/hooks/sync_github.sh`, que commita restos não commitados com timestamp,
+  faz `pull --rebase` e push. É contingência, não o caminho normal. Em caso de
+  conflito o script aborta e registra em `.claude/hooks/sync.log` — avisar o
+  usuário se isso aparecer.
 
 ### Mapeamento QIS → Sigla Nexus
 Algumas abreviações usadas no QIS diferem das siglas do sistema:
@@ -163,9 +189,9 @@ Todo arquivo gerado pelo sistema deve começar com:
 ```yaml
 ---
 sistema: Nexus
-tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | pensamento | apresentacao]
-disciplina: [NOME_COMPLETO]        # não usado no tipo pensamento
-sigla: [SIGLA]                     # não usado no tipo pensamento
+tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | pensamento | apresentacao | disciplinar]
+disciplina: [NOME_COMPLETO]        # não usado nos tipos pensamento e disciplinar
+sigla: [SIGLA]                     # não usado nos tipos pensamento e disciplinar
 periodo: Periodo0N
 criado_em: [DATA DD/MM/AAAA]
 atualizado_em: [DATA DD/MM/AAAA]
@@ -183,7 +209,7 @@ pensamentos_relacionados: []       # opcional — preenchido quando existir raci
 - **Material incompleto ou ambíguo** — perguntar antes de prosseguir
 - **Nunca alucinar** — sinalizar incerteza explicitamente em vez de afirmar com falsa segurança
 - **Nunca sobrescrever** — sempre acrescentar ao existente
-- **Relatório ao final** — sempre informar o que foi feito em cada fluxo
+- **Relatório ao final** — sempre informar o que foi feito em cada fluxo, incluindo a confirmação do commit + push para o GitHub
 
 ---
 

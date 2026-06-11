@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Obsidian — estado de janela por dispositivo
+Nexus_Obsidian/.obsidian/workspace.json

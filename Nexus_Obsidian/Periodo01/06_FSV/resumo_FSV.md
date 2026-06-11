@@ -5,8 +5,8 @@ disciplina: Fundamentos do Salvamento Veicular
 sigla: FSV
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 06/06/2026
-versao: 1.1
+atualizado_em: 09/06/2026
+versao: 1.2
 moc_cfo: sim
 moc_materia: sim
 pensamentos_relacionados: []
@@ -328,5 +328,156 @@ Sequência operacional:
 6. **Estabilização progressiva**: deve considerar o Plano de Ação e as rotas de extração — não é independente do desencarceramento
 7. **Debriefing**: é etapa formal da Fase 4 — não é opcional; gera insumo para treinamento futuro
 8. **Estabilizar como encontrado**: não tentar "endireitar" o veículo antes de estabilizá-lo
+
+---
+
+## Aula 03 — Considerações com a Vítima, Avaliação, Abordagem, Acesso e Extração
+> Adicionado em: 09/06/2026 | Origem: FSV CFO - Aula 03.pdf
+
+### Pré-requisitos
+- Aula 02: tipos de estabilização (primária, secundária, progressiva) — a Aula 03 revisita e aplica
+- Noções de APH: avaliação primária, RMC (Restrição de Movimento da Coluna), Escala de Coma de Glasgow
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| **Hora de ouro** | Período em que o atendimento ao paciente gravemente ferido aumenta significativamente a chance de sobrevida — a duração depende da gravidade das lesões |
+| **Ângulo de extração** | Relação entre a coluna vertebral da vítima e a via de acesso criada pelos cortes/aberturas no veículo — priorizar sempre **0°** |
+| **XABCDE** | Sequência de avaliação da vítima: X-hemorragias, A-vias aéreas + RMC, B-respiração, C-circulação, D-neurológico, E-exposição |
+| **Plano principal** | Rota e técnica de extração ideais, com alinhamento de coluna e criação de espaço adequada |
+| **Plano emergencial** | Rota de extração rápida garantida ANTES do plano principal — usada se o quadro clínico piorar |
+| **Reunião tripartida** | Repasse de informações entre socorrista, comandante e técnicos após a avaliação primária — define rota e técnica de extração |
+| **TF1 / TF2** | Classificação da condição da vítima citada na aula — após definir o plano de ação, o objetivo é alterar a vítima de TF2 para TF1 *(definição apresentada em figura no slide — confirmar significado exato com a instrutora)* |
+
+### Resumo
+
+#### 1. Estabilização — revisão e princípios (reforço da Aula 02)
+
+A aula reapresenta os princípios (estabilizar como encontrado, preencher todo o espaço, ajustar e verificar constantemente — contínua e progressiva) e os três tipos:
+- **Primária**: necessária para os socorristas acessarem o interior e realizarem os primeiros atendimentos — rápida e segura
+- **Secundária**: sequência da primária — estabilização total, inibe movimentações indesejadas e garante extração mais segura
+- **Progressiva**: estabilizar a área à medida que o atendimento progride, com revisão sistemática
+
+#### 2. Considerações com a Vítima
+
+**A vítima é o foco principal da ocorrência** — é ela quem determina:
+1. O **tempo disponível** para atuar
+2. A **rota de extração**
+3. A **técnica de desencarceramento** necessária
+
+**Princípios básicos da extração veicular:**
+- Evitar o **giro do corpo**
+- Manter o **alinhamento da coluna** — retirar com o menor ângulo de rotação possível
+
+**Hora de ouro:** vítima com hemorragia ativa (interna ou externa) sofre oxigenação inadequada dos tecidos pela diminuição da perfusão. Se o paciente gravemente ferido obtiver cuidados **dentro do período dourado**, a chance de sobrevida aumenta significativamente. A duração do período **depende da gravidade das lesões**.
+
+**Ângulos de extração:** relação entre a coluna vertebral da vítima e a via de acesso criada. A equipe deve **sempre priorizar a extração a 0°** — evita giros e torções, mantendo a posição anatômica do paciente.
+
+**TF2 → TF1:** após a definição do plano de ação, o objetivo principal é alterar a vítima de TF2 para TF1.
+
+#### 3. Avaliação da Vítima
+
+**Sequência XABCDE:**
+
+| Letra | Avaliação |
+|---|---|
+| **X** | Hemorragias |
+| **A** | Vias Aéreas + Restrição de Movimento da Coluna (RMC) |
+| **B** | Respiração |
+| **C** | Circulação — *aqui ocorre a decisão de retirada: plano principal e plano emergencial* |
+| **D** | Neurológico |
+| **E** | Exposição |
+
+Observar a **cinemática do trauma** é fundamental para antecipar as lesões esperadas conforme o tipo de colisão.
+
+**Classificação da vítima e tempo de atuação:**
+
+| Vítima | Critério | Tempo de extração | Conduta |
+|---|---|---|---|
+| **Crítica** | ECG ≤ 13, grandes hemorragias, comprometimento circulatório/respiratório sério ou risco externo elevado | **10 minutos** | Acesso rápido + espaço suficiente, menor tempo — **plano emergencial** |
+| **Estável** | ECG ≥ 14 | **25 minutos** | Imobilização + criação de espaço com alinhamento da coluna, evitando giros e torções |
+
+**Tipos de retirada:**
+- **RETIRADA CONTROLADA**: vítima estável
+- **RETIRADA RÁPIDA**: vítima instável (dificuldade respiratória, inconsciente, hemorragia etc.)
+- **RETIRADA IMEDIATA**: evento de risco imediato (incêndio/explosão, hemorragia incontrolável, PR/PCR)
+
+**Planos de ação:**
+- O **plano emergencial deve sempre ser garantido ANTES** de seguir com o plano principal — se o quadro piorar, a extração pode ser feita rapidamente
+- É desejável que o emergencial seja **parte do caminho** para o principal — alinhamento de ações e ganho de agilidade
+
+**Durante a avaliação 360° (itens relativos à vítima):**
+- Quantidade de vítimas no interior do(s) veículo(s)
+- Vítimas ejetadas / indícios de ejeção
+- Gravidade (conforme prioridades do protocolo de APH)
+- Utilização do cinto de segurança
+- Deformação do volante
+- Acionamento de airbags
+
+#### 4. Abordagem da Vítima
+
+Em geral **2 socorristas** — funções **não taxativas** (podem ser alteradas ao comando do Socorrista 1):
+- A abordagem inicial começa assim que o socorrista **visualiza a vítima**; se não puder terminar o giro ao redor do veículo, equipe e auxiliar completam de forma independente
+- **Socorrista 1**: direciona cuidados à vítima, posiciona-se **frontalmente** e inicia a **verbalização** — evita que a vítima gire a coluna cervical. Se possível, ministrar **oxigênio antes mesmo da estabilização primária**
+- **Socorrista 2**: procura espaço para acessar o interior do veículo
+
+**Comunicação — avaliação simples por perguntas:**
+| Pergunta | O que avalia |
+|---|---|
+| "Você se lembra do que aconteceu?" | Cinemática |
+| "Está sentindo o corpo molhado / vendo sangue?" | Possível hemorragia |
+| "Lembra que dia é hoje?" | Nível de consciência |
+| "Alguma parte do corpo está presa?" | Grau de encarceramento |
+| "Onde sente dor?" | Nível de consciência |
+
+#### 5. Acesso ao Veículo
+
+- Tentar **acessos simples primeiro** — abertura manual de porta, janela
+- Após estabilização, se possível **entram os 2 socorristas**: o 1 realiza os procedimentos internos de criação de espaço; o 2 retira as luvas de salvamento para a **avaliação primária** da vítima
+- Se só um socorrista acessar: procedimentos internos mais urgentes **antes de tocar na vítima**
+- Um dos socorristas realiza a **RMC na cervical** da vítima
+
+**Procedimentos internos de criação de espaço:**
+1. Acionar o **freio estacionário** (veículo sobre 4 rodas)
+2. Realizar procedimentos que dependam dos **controles elétricos** (bancos, volante, portas, porta-malas, capô, vidros)
+3. **Desligar o veículo**, retirar a chave e **entregá-la ao comandante** da operação
+4. Colocar o **protetor de airbag**
+5. Movimentação **manual** de bancos/volante, liberar portas e tampa do motor, abaixar vidros
+6. Retirar os **encostos de cabeça**
+7. Entregar ao comandante **celulares, objetos de valor e documentos** — identificação das vítimas e salvaguarda de bens
+
+**Proteção e comunicação:**
+- Atenção aos procedimentos externos dos técnicos — proteger vítima e a si com **proteções flexível e rígida**
+- Após a avaliação primária: **reunião tripartida** (socorrista + comandante + técnicos) para definir rota e técnica de extração — pode repetir conforme a evolução da ocorrência
+
+#### 6. Extração da Vítima
+
+Checklist antes/durante a extração:
+1. **Desligar a motobomba** do conjunto desencarcerador à combustão (se for o caso)
+2. Coordenação da extração pelo **militar responsável da equipe de resgate ou profissional de saúde** na cena
+3. **Trocar luvas de salvamento por luvas de procedimento**
+4. **Evitar movimentos de giro**
+5. **Manter o alinhamento da coluna**
+
+### Conexões
+- [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/01_consideracoes-e-avaliacao-da-vitima]] — hora de ouro, XABCDE, tempos e planos
+- [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/02_abordagem-acesso-e-extracao]] — abordagem, acesso e extração
+- [[Periodo01/06_FSV/pontos_chave/05_Fases-e-Estabilizacao/02_estabilizacao-veicular]] — estabilização revisada nesta aula
+- [[Periodo01/01_APHR/MOC_APHR]] — XABCDE, ECG, RMC e hora de ouro são conteúdo direto de APH aplicado ao SV
+
+### Pontos de Atenção
+1. **Vítima crítica (ECG ≤ 13) = 10 minutos** | **vítima estável (ECG ≥ 14) = 25 minutos** — números de prova
+2. **Extração a 0°** — sempre priorizar; ângulo entre coluna vertebral e via de acesso
+3. **Plano emergencial é garantido ANTES do principal** — e idealmente é parte do caminho dele
+4. **A decisão de retirada ocorre no C** (circulação) do XABCDE
+5. **X vem antes do A**: hemorragias primeiro — XABCDE, não ABCDE
+6. **Retirada controlada / rápida / imediata** — estável / instável / risco imediato (incêndio, hemorragia incontrolável, PR/PCR)
+7. **Oxigênio pode ser ministrado antes mesmo da estabilização primária** — exceção notável na sequência
+8. **Chave do veículo, celulares e objetos de valor → comandante da operação**
+9. **Troca de luvas** (salvamento → procedimento) antes da extração
+10. **Hora de ouro não tem duração fixa** — depende da gravidade das lesões
+11. **Reunião tripartida**: socorrista + comandante + técnicos — pode ocorrer mais de uma vez
+12. **TF2 → TF1**: objetivo após o plano de ação *(significado exato das siglas em figura — confirmar com a instrutora)*
 
 ---

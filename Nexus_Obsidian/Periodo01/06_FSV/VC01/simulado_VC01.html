@@ -258,12 +258,12 @@
   <header>
     <div class="badge">CFO T16 · CBMPA · Revisão comentada</div>
     <h1>Simulado — FSV | VC01</h1>
-    <p>15 questões · cada alternativa comentada — acerte ou erre, a revisão continua</p>
+    <p>20 questões · cada alternativa comentada — acerte ou erre, a revisão continua</p>
   </header>
 
   <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
   <div id="status-line">
-    <span id="status-q">Questão 1 de 15</span>
+    <span id="status-q">Questão 1 de 20</span>
     <span id="status-score">Acertos: 0</span>
   </div>
 
@@ -290,7 +290,7 @@
   <div id="result-screen">
     <div class="score-circle">
       <div class="score-num" id="res-num">0</div>
-      <div class="score-den" id="res-den">de 15</div>
+      <div class="score-den" id="res-den">de 20</div>
     </div>
     <div class="score-pct" id="res-pct">0%</div>
     <div class="score-msg" id="res-msg"></div>
@@ -786,6 +786,166 @@ const QUESTIONS_RAW = [
     ],
     referencia: "Pará: 7º lugar nacional — 1.793 óbitos (DATASUS, 2024). Velocidade: +1% na velocidade média → +4% no risco de sinistros fatais.",
     aprofundamento: "Essas estatísticas ganham mais sentido quando lidas como justificativa para o resto da disciplina: é porque a velocidade tem esse efeito amplificado sobre o risco — e porque o Pará está entre os estados com mais óbitos — que protocolos como o posicionamento da viatura a 45° (barreira de sacrifício) e o isolamento rigoroso da cena fazem tanto sentido. Os números não são decoração estatística: eles explicam por que o protocolo é tão rígido."
+  },
+  {
+    q: "Após a avaliação primária, uma vítima de colisão frontal apresenta Escala de Coma de Glasgow (ECG) igual a 12 e sinais de grande hemorragia. Segundo o protocolo de avaliação da vítima em SV, de quanto tempo a equipe dispõe para realizar a extração, e qual plano rege a atuação nesse cenário?",
+    opts: [
+      {
+        text: "10 minutos — situação de plano emergencial, priorizando acesso rápido e criação de espaço suficiente para extração segura no menor tempo possível.",
+        correct: true,
+        comment: "Certa. ECG menor ou igual a 13 (aqui, 12), grandes hemorragias, sério comprometimento circulatório/respiratório ou risco externo elevado caracterizam a vítima crítica — e o tempo da equipe cai para 10 minutos. É exatamente a situação para execução do plano emergencial: acesso rápido e espaço suficiente para a extração mais segura possível, com menor tempo de execução."
+      },
+      {
+        text: "25 minutos — tempo padrão de atuação, priorizando a imobilização e a criação de espaço com alinhamento da coluna vertebral.",
+        correct: false,
+        comment: "Errada. Os 25 minutos — com prioridade para imobilização e alinhamento da coluna — são o tempo das vítimas estáveis, definidas por ECG maior ou igual a 14. A vítima do enunciado tem ECG 12 e grande hemorragia: dois critérios que a colocam na categoria crítica, com janela de apenas 10 minutos."
+      },
+      {
+        text: "60 minutos — correspondentes à \"hora de ouro\", período fixo dentro do qual a sobrevida da vítima está garantida.",
+        correct: false,
+        comment: "Errada. A hora de ouro não é um cronômetro fixo de 60 minutos nem uma garantia de sobrevida: é o período em que o atendimento ao paciente gravemente ferido aumenta significativamente a chance de sobreviver — e sua duração depende da gravidade das lesões. Os tempos operacionais de extração do protocolo são outros: 10 minutos (crítica) e 25 minutos (estável)."
+      },
+      {
+        text: "10 minutos — situação de plano principal, já que a gravidade exige a rota de extração ideal com alinhamento perfeito da coluna.",
+        correct: false,
+        comment: "Errada. O tempo está correto (10 minutos), mas o plano está trocado: a vítima crítica é a situação típica do plano emergencial, que privilegia rapidez e segurança mínima viável. O plano principal — com a rota ideal e o melhor alinhamento de coluna — é o caminho construído para a vítima estável ou quando há tempo para executá-lo."
+      },
+      {
+        text: "O tempo é indeterminado — a ECG não influencia o tempo de extração, apenas a escolha da técnica de desencarceramento.",
+        correct: false,
+        comment: "Errada. A ECG é justamente o critério numérico que divide as duas categorias operacionais: menor ou igual a 13, vítima crítica e 10 minutos; maior ou igual a 14, vítima estável e 25 minutos. Dizer que ela não influencia o tempo inverte o papel central que a escala tem na decisão de retirada."
+      }
+    ],
+    referencia: "Vítima crítica: ECG ≤ 13, grandes hemorragias, sério comprometimento circulatório/respiratório ou risco externo elevado → 10 minutos (plano emergencial). Vítima estável: ECG ≥ 14 → 25 minutos (imobilização + alinhamento da coluna).",
+    aprofundamento: "Esse par de tempos conversa diretamente com os <strong>tipos de retirada</strong>: a vítima estável pede retirada controlada; a instável (dificuldade respiratória, inconsciência, hemorragia) pede retirada rápida; e o evento de risco imediato (incêndio/explosão, hemorragia incontrolável, PR/PCR) pede retirada imediata. ECG, tempo e tipo de retirada são três faces da mesma decisão — a prova pode cobrar qualquer uma delas isoladamente."
+  },
+  {
+    q: "Durante a avaliação de uma vítima encarcerada, a equipe segue a sequência XABCDE. Em qual etapa dessa sequência ocorre a decisão de retirada — com a definição do plano principal e do plano emergencial — e o que é avaliado na etapa X?",
+    opts: [
+      {
+        text: "A decisão de retirada ocorre no C (circulação); o X, primeira etapa da sequência, avalia as hemorragias.",
+        correct: true,
+        comment: "Certa. A sequência é X (hemorragias) → A (vias aéreas + RMC) → B (respiração) → C (circulação — onde se toma a decisão de retirada, com plano principal e plano emergencial) → D (neurológico) → E (exposição). O X antes do A é a marca do protocolo: hemorragia ativa mata antes de via aérea obstruída em boa parte dos traumas veiculares."
+      },
+      {
+        text: "A decisão de retirada ocorre no E (exposição), última etapa, quando a vítima já foi completamente avaliada; o X avalia o grau de encarceramento.",
+        correct: false,
+        comment: "Errada. Esperar a última etapa para decidir a retirada atrasaria a definição dos planos justamente nos casos mais graves. A decisão é tomada no C (circulação) — e o X avalia hemorragias, não o grau de encarceramento, que é levantado na comunicação verbal com a vítima (\"existe alguma parte do seu corpo presa no veículo?\")."
+      },
+      {
+        text: "A decisão de retirada ocorre no A (vias aéreas), pois é a primeira avaliação clínica; o X representa o exame físico externo do veículo.",
+        correct: false,
+        comment: "Errada. O A não é a primeira etapa — o X (hemorragias) vem antes — e a decisão de retirada não ocorre nele, e sim no C. Além disso, o X é uma avaliação da vítima (hemorragias), não do veículo: a sequência XABCDE é inteiramente clínica, aplicada ao paciente."
+      },
+      {
+        text: "A decisão de retirada ocorre no D (neurológico), quando se mede a Escala de Coma de Glasgow; o X avalia as vias aéreas com restrição de movimento da coluna.",
+        correct: false,
+        comment: "Errada. A alternativa desloca a decisão para o D e troca o conteúdo do X pelo do A (vias aéreas + RMC). Na sequência estudada, a decisão de retirada — plano principal e emergencial — está ancorada no C (circulação), e o X cuida das hemorragias, antes de qualquer outra etapa."
+      },
+      {
+        text: "Não há um momento definido: a decisão de retirada pode ocorrer em qualquer etapa da sequência, a critério do socorrista responsável.",
+        correct: false,
+        comment: "Errada. O protocolo ancora a decisão de retirada em um ponto específico — o C (circulação) — exatamente para que ela não fique difusa nem tardia. Padronizar o momento da decisão é o que permite que comandante e técnicos recebam a informação na reunião tripartida com a operação ainda em andamento."
+      }
+    ],
+    referencia: "XABCDE: X — hemorragias; A — vias aéreas + Restrição de Movimento da Coluna (RMC); B — respiração; C — circulação (DECISÃO DE RETIRADA: plano principal e plano emergencial); D — neurológico; E — exposição.",
+    aprofundamento: "Vale ligar o XABCDE à <strong>cinemática do trauma</strong>: observar como foi a colisão orienta quais lesões esperar em cada etapa da sequência. E os indícios de cinemática estão na própria avaliação 360° — uso do cinto, deformação do volante e acionamento de airbags são os três itens relativos à vítima que a equipe registra antes mesmo de tocá-la."
+  },
+  {
+    q: "Ao planejar a retirada de uma vítima, a equipe discute qual abertura criar no veículo. Segundo o conceito de ângulo de extração estudado na disciplina, o que esse ângulo representa e qual valor a equipe deve sempre priorizar?",
+    opts: [
+      {
+        text: "É a relação entre a coluna vertebral da vítima e a via de acesso criada pelos cortes/aberturas no veículo; a equipe deve priorizar a extração a 0°.",
+        correct: true,
+        comment: "Certa. O ângulo de extração relaciona a coluna vertebral da vítima com a via de acesso criada no veículo — e a extração a 0° é a prioridade, porque evita giros e torções, mantendo a posição anatômica do paciente. É a tradução geométrica dos dois princípios básicos da extração: evitar o giro do corpo e manter o alinhamento da coluna."
+      },
+      {
+        text: "É o ângulo entre a viatura e o veículo sinistrado no posicionamento inicial; o valor a priorizar é 45°.",
+        correct: false,
+        comment: "Errada. Os 45° pertencem a outro conceito do escopo: o posicionamento da viatura como barreira de sacrifício, nas ações iniciais. O ângulo de extração não envolve a viatura — envolve a coluna vertebral da vítima e a abertura por onde ela vai sair. Misturar os dois ângulos é um distrator clássico."
+      },
+      {
+        text: "É a inclinação máxima do terreno em que a estabilização ainda é segura; o valor a priorizar é o menor possível, idealmente 0°.",
+        correct: false,
+        comment: "Errada. A inclinação do terreno é um dos riscos avaliados na segurança do local (Pilar 2), sem valor numérico fixado no material — e não tem relação com o conceito de ângulo de extração, que é uma medida entre a coluna da vítima e a via de acesso criada no veículo."
+      },
+      {
+        text: "É a relação entre a coluna vertebral da vítima e o solo; deve-se priorizar 90°, mantendo a vítima sentada durante toda a retirada.",
+        correct: false,
+        comment: "Errada. A referência do ângulo não é o solo, e sim a via de acesso criada pelos cortes e aberturas. E a prioridade é 0° — o menor ângulo de rotação possível entre a coluna e a rota de saída — justamente para que a vítima saia alinhada, não sentada ou girada."
+      },
+      {
+        text: "É o ângulo de abertura das portas após o corte das dobradiças; priorizam-se aberturas superiores a 90° para criar espaço suficiente.",
+        correct: false,
+        comment: "Errada. O conceito não trata da geometria das portas — além de a intervenção direta nas dobradiças ser justamente o que o material manda evitar (preferindo os pontos de solda). O ângulo de extração mede o quanto a coluna da vítima precisaria rotacionar para percorrer a via de saída: quanto mais perto de 0°, melhor."
+      }
+    ],
+    referencia: "Ângulo de extração: relação entre a coluna vertebral da vítima e a via de acesso criada pelos cortes e/ou aberturas no veículo. Priorizar SEMPRE a extração a 0° — evita giros e torções, mantendo a posição anatômica do paciente.",
+    aprofundamento: "O 0° explica por que a vítima \"determina a rota de extração\": a abertura escolhida não é a mais fácil de criar, e sim a que alinha a saída com a coluna do paciente — às vezes exigindo mais cortes (como a remoção do teto) do que uma rota lateral conveniente. Esse conceito também se conecta à estabilização progressiva da Aula 02: a rota de extração escolhida define onde reforçar a estabilização, como no 5º ponto para saídas pela traseira."
+  },
+  {
+    q: "Dois socorristas iniciam a abordagem de uma vítima consciente presa em um veículo estabilizado. Sobre a divisão de funções nessa abordagem, qual alternativa descreve corretamente o papel do Socorrista 1?",
+    opts: [
+      {
+        text: "Posicionar-se frontalmente à vítima e iniciar a verbalização — evitando que ela gire a coluna cervical — podendo ministrar oxigênio antes mesmo da estabilização primária.",
+        correct: true,
+        comment: "Certa. O Socorrista 1 direciona os cuidados à vítima posicionando-se frontalmente, para que a verbalização aconteça sem que ela gire a cervical ou faça movimento indesejado. E o material registra a exceção notável: se possível, o oxigênio pode ser ministrado antes mesmo da estabilização primária. Enquanto isso, o Socorrista 2 procura espaço para acessar o interior do veículo."
+      },
+      {
+        text: "Procurar imediatamente um espaço para acessar o interior do veículo, deixando a comunicação com a vítima a cargo do Socorrista 2.",
+        correct: false,
+        comment: "Errada. A alternativa inverte os papéis: quem procura o espaço de acesso ao interior é o Socorrista 2, enquanto o Socorrista 1 aborda a vítima frontalmente e conduz a verbalização. A inversão simples de funções entre os dois socorristas é o distrator mais provável nesse tema."
+      },
+      {
+        text: "Posicionar-se atrás da vítima para realizar de imediato a restrição de movimento da coluna, sem estabelecer comunicação verbal que possa agitá-la.",
+        correct: false,
+        comment: "Errada. O posicionamento do Socorrista 1 é frontal justamente para que a comunicação aconteça sem fazer a vítima virar a cabeça — a verbalização não é dispensável, é a ferramenta que impede o giro da cervical. A RMC cervical é realizada por um dos socorristas após o acesso, não substitui a abordagem frontal com diálogo."
+      },
+      {
+        text: "Comandar exclusivamente os técnicos nas operações externas de corte, já que as funções dos socorristas são fixas e intransferíveis durante a ocorrência.",
+        correct: false,
+        comment: "Errada. Além de atribuir ao Socorrista 1 uma função que não é dele (o contato com os técnicos se dá na reunião tripartida, junto ao comandante), a alternativa contradiz uma característica explícita do protocolo: as funções não são taxativas — podem ser alteradas conforme o desenvolvimento da ocorrência, ao comando do Socorrista 1."
+      },
+      {
+        text: "Aguardar a estabilização secundária completa do veículo antes de qualquer contato verbal ou visual com a vítima.",
+        correct: false,
+        comment: "Errada. A abordagem inicial deve ser realizada assim que o socorrista visualiza a vítima — não espera a estabilização secundária, nem mesmo a primária no caso da verbalização e, se possível, do oxigênio. Atrasar o contato até a estabilização total desperdiçaria exatamente o tempo que a classificação da vítima (10 ou 25 minutos) torna precioso."
+      }
+    ],
+    referencia: "Abordagem: em geral 2 socorristas, funções NÃO taxativas (alteradas ao comando do Socorrista 1). Socorrista 1 — posicionamento frontal + verbalização (evita giro da cervical); se possível, oxigênio antes mesmo da estabilização primária. Socorrista 2 — procura espaço para acessar o interior do veículo.",
+    aprofundamento: "A verbalização do Socorrista 1 é também avaliação disfarçada de conversa: \"lembra do que aconteceu?\" levanta a cinemática; \"está vendo sangue?\" rastreia hemorragia; \"que dia é hoje?\" e \"onde sente dor?\" medem o nível de consciência; \"alguma parte do corpo está presa?\" dimensiona o grau de encarceramento. Cada pergunta do roteiro alimenta uma etapa do XABCDE antes mesmo do contato físico."
+  },
+  {
+    q: "Com os dois socorristas no interior do veículo, inicia-se a criação de espaço interno. Sobre os procedimentos internos e a preparação para a extração, qual alternativa está correta?",
+    opts: [
+      {
+        text: "Os procedimentos que dependem dos controles elétricos (bancos, volante, vidros, portas) são realizados ANTES de desligar o veículo; a chave da ignição, celulares e objetos de valor são entregues ao comandante da operação; e, antes da extração, trocam-se as luvas de salvamento por luvas de procedimento.",
+        correct: true,
+        comment: "Certa. A ordem tem lógica funcional: tudo que depende de energia elétrica é feito antes do desligamento — depois, os mesmos ajustes só podem ser feitos manualmente. A chave vai para o comandante (junto com celulares, valores e documentos, para identificação das vítimas e salvaguarda de bens), e a troca de luvas de salvamento por luvas de procedimento marca a transição para o contato direto com o paciente na extração."
+      },
+      {
+        text: "O primeiro procedimento interno é desligar o veículo e retirar a chave da ignição — só depois disso é seguro movimentar bancos, volante e vidros pelos controles elétricos.",
+        correct: false,
+        comment: "Errada. Desligar primeiro inutilizaria os controles elétricos: bancos, volante, vidros e travas elétricas parariam de responder, e toda a movimentação teria de ser feita manualmente — mais lenta e trabalhosa. Por isso a sequência correta aciona os recursos elétricos antes do desligamento do veículo."
+      },
+      {
+        text: "A chave da ignição deve permanecer no contato, para que os socorristas possam reacionar os controles elétricos caso seja necessário criar mais espaço durante a operação.",
+        correct: false,
+        comment: "Errada. A chave é retirada da ignição e entregue ao comandante da operação — manter a possibilidade de religar o veículo (e seus airbags) durante a operação é exatamente o risco que o procedimento elimina. A eventual perda de conveniência é o preço da segurança da equipe e da vítima."
+      },
+      {
+        text: "Os encostos de cabeça devem ser mantidos nos bancos durante toda a operação, pois servem de apoio para a imobilização cervical da vítima na extração.",
+        correct: false,
+        comment: "Errada. A retirada dos encostos de cabeça é um dos procedimentos internos de criação de espaço listados no protocolo — eles são removidos, não mantidos. A RMC cervical é realizada pelas mãos do socorrista e pelos equipamentos de imobilização próprios, não pelo encosto do banco."
+      },
+      {
+        text: "Na extração, mantêm-se as luvas de salvamento — mais resistentes — e a coordenação cabe a qualquer membro da equipe que esteja mais próximo da vítima no momento.",
+        correct: false,
+        comment: "Errada. Dois erros: as luvas de salvamento são trocadas por luvas de procedimento antes do contato direto com o paciente (a luva contaminada do trabalho de corte não toca a vítima); e a coordenação da extração não é difusa — cabe ao militar responsável da equipe de resgate ou ao profissional de saúde presente na cena. Antes disso, desliga-se ainda a motobomba do conjunto desencarcerador à combustão, se for o caso."
+      }
+    ],
+    referencia: "Procedimentos internos: freio estacionário (4 rodas) → procedimentos pelos controles ELÉTRICOS → desligar o veículo (chave → comandante) → protetor de airbag → movimentação manual → retirar encostos de cabeça → celulares/valores/documentos → comandante. Extração: desligar motobomba à combustão; coordenação pelo responsável do resgate ou profissional de saúde; trocar luvas de salvamento por luvas de procedimento; evitar giros; manter alinhamento da coluna.",
+    aprofundamento: "Repare como esse bloco fecha o ciclo com a <strong>reunião tripartida</strong>: após a avaliação primária, o socorrista repassa as informações ao comandante e aos técnicos para definirem rota e técnica de extração — e ela pode se repetir conforme a ocorrência evolui. A criação de espaço interno, os trabalhos externos dos técnicos (acompanhados com proteção flexível e rígida sobre a vítima) e a extração final são executados sobre o que ficou decidido nessa reunião."
   }
 ];
 

@@ -5,7 +5,7 @@ disciplina: Fundamentos do Salvamento Veicular
 sigla: FSV
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 06/06/2026
+atualizado_em: 09/06/2026
 ---
 
 # MOC — FSV | Fundamentos do Salvamento Veicular
@@ -24,6 +24,7 @@ atualizado_em: 06/06/2026
 |---|---|---|
 | FSV CFO - Aula 01.pdf | Conceitos iniciais, Estatísticas, Segurança, FEAs, Anatomia Veicular | 06/06/2026 |
 | FSV CFO - Aula 02.pdf | Fases do Atendimento + Estabilização Veicular | 06/06/2026 |
+| FSV CFO - Aula 03.pdf | Considerações com a Vítima, Avaliação (XABCDE), Abordagem, Acesso e Extração | 09/06/2026 |
 
 ---
 
@@ -67,6 +68,14 @@ atualizado_em: 06/06/2026
 | 01 | Fases do Atendimento de Salvamento Veicular | [[Periodo01/06_FSV/pontos_chave/05_Fases-e-Estabilizacao/01_fases-do-atendimento]] |
 | 02 | Estabilização Veicular — Tipos e Formas por Posição | [[Periodo01/06_FSV/pontos_chave/05_Fases-e-Estabilizacao/02_estabilizacao-veicular]] |
 
+### 06 — Abordagem e Extração
+> Origem: `FSV CFO - Aula 03.pdf`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Considerações com a Vítima e Avaliação — Hora de Ouro, XABCDE, Tempos e Planos | [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/01_consideracoes-e-avaliacao-da-vitima]] |
+| 02 | Abordagem da Vítima, Acesso ao Veículo e Extração | [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/02_abordagem-acesso-e-extracao]] |
+
 ---
 
 ## Conexões com outras disciplinas
@@ -90,4 +99,5 @@ atualizado_em: 06/06/2026
 ## Status
 - ✅ Aula 01 processada — 6 arquivos de pontos-chave + resumo
 - ✅ Aula 02 processada — 2 arquivos de pontos-chave + resumo atualizado
-- ✅ VC01 — todos os artefatos de prova gerados
+- ✅ Aula 03 processada — 2 arquivos de pontos-chave + resumo atualizado
+- ✅ VC01 — todos os artefatos de prova gerados e atualizados com a Aula 03 (simulado ampliado para 20 questões)

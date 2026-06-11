@@ -4,7 +4,7 @@ tipo: moc_geral
 curso: CFO T16
 periodo_atual: Periodo01
 criado_em: 05/06/2026
-atualizado_em: 06/06/2026
+atualizado_em: 10/06/2026
 ---
 
 # MOC — CFO T16 | CBMPA
@@ -16,6 +16,14 @@ atualizado_em: 06/06/2026
 Cada disciplina processada tem seu próprio MOC dentro da pasta da disciplina.
 Clique no link da coluna "MOC" para ver todos os tópicos criados.
 O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Periodo0N/`.
+
+---
+
+## 🛡️ Disciplinar
+
+Acompanhamento das anotações de comportamento escolar, verificação de enquadramento
+(Anexo I do CEDCBMPA) e justificativas → [[Disciplinar/MOC_Disciplinar]]
+Base normativa: Livro IV do Código de Ética + Manual do Aluno CFO 2026.
 
 ---
 
@@ -33,12 +41,12 @@ O prefixo numérico indica a ordem de criação da pasta em `Nexus_Materiais/Per
 | 05      | ANFI   | Anatomia e Fisiologia                     | [[Periodo01/05_ANFI/MOC_ANFI]]         | ✅ Aulas 01–03 · Introdução + Osteologia + Miologia · 12 PK · 3 docs processados |
 | 01      | APHR   | APH e Resgate I                           | [[Periodo01/01_APHR/MOC_APHR]]         | ✅ Unidade VI · Choque e Hemorragia · Oxigenoterapia |
 | —       | DH     | Direitos Humanos                          | —                                      | 🔲 sem material                                 |
-| —       | DC     | Direito Constitucional                    | —                                      | 🔲 sem material                                 |
+| 07      | DC     | Direito Constitucional                    | [[Periodo01/07_DC/MOC_DC]]             | ✅ Aulas 03–04 · Teoria Geral + Organização do Estado · 6 PK · 2 docs processados |
 | 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Unidades I, III e IV · 11 PK · 2 docs processados |
 | 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ✅ Lei 8.388/2016 (6 PK) · ✅ Lei 11.060/2025 (4 PK) · ✅ Lei 5.251/1985 (5 PK) · 5 docs processados |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
 | —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
-| 06      | FSV    | Fundamentos de Salvamento Veicular        | [[Periodo01/06_FSV/MOC_FSV]]           | ✅ Aulas 01–02 · 8 PK · 5 temas · 2 docs processados |
+| 06      | FSV    | Fundamentos de Salvamento Veicular        | [[Periodo01/06_FSV/MOC_FSV]]           | ✅ Aulas 01–03 · 10 PK · 6 temas · 3 docs processados |
 | —       | FSAL   | Fundamentos de Salvamento em Altura       | —                                      | 🔲 sem material                                 |
 | —       | FSAQ   | Fundamentos de Salvamento Aquático        | —                                      | 🔲 sem material                                 |
 | —       | OAC    | OAC                                       | —                                      | 🔲 sem material                                 |

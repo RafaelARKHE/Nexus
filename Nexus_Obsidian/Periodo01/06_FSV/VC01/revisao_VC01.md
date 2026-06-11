@@ -5,9 +5,10 @@ disciplina: Fundamentos do Salvamento Veicular
 sigla: FSV
 periodo: Periodo01
 avaliacao: VC01
-escopo: Aulas 01 e 02 — Conceitos Iniciais, Estatísticas, Segurança nas Ocorrências, Ações Iniciais e Zonas, FEAs, Anatomia Veicular, Fases do Atendimento, Estabilização Veicular
+escopo: Aulas 01 a 03 — Conceitos Iniciais, Estatísticas, Segurança nas Ocorrências, Ações Iniciais e Zonas, FEAs, Anatomia Veicular, Fases do Atendimento, Estabilização Veicular, Considerações com a Vítima, Avaliação (XABCDE), Abordagem, Acesso e Extração
 criado_em: 06/06/2026
-versao: 1.0
+atualizado_em: 09/06/2026
+versao: 2.0
 ---
 
 # Revisão — Fundamentos do Salvamento Veicular | VC01
@@ -177,6 +178,69 @@ A estabilização é **contínua e progressiva** — não é feita uma vez só. 
 
 ---
 
+### A vítima no centro: avaliação, tempos e planos *(Aula 03)*
+
+A Aula 03 muda o foco do veículo para a vítima — e é ela quem **determina o tempo disponível, a rota de extração e a técnica de desencarceramento**. Dois princípios regem toda a extração: **evitar o giro do corpo** e **manter o alinhamento da coluna** (menor ângulo de rotação possível).
+
+**Hora de ouro:** vítima com hemorragia ativa (interna ou externa) sofre oxigenação inadequada dos tecidos pela queda da perfusão. Cuidados dentro do período dourado aumentam significativamente a chance de sobrevida — e a duração do período **depende da gravidade das lesões** (não é um valor fixo).
+
+**Ângulo de extração** é a relação entre a coluna vertebral da vítima e a via de acesso criada pelos cortes/aberturas. A equipe **sempre prioriza a extração a 0°** — mantém a posição anatômica e evita giros e torções. Após definir o plano de ação, o objetivo principal é alterar a vítima de **TF2 para TF1**.
+
+**Avaliação da vítima — XABCDE:**
+
+| Letra | Avaliação                                                            |
+| ----- | -------------------------------------------------------------------- |
+| **X** | Hemorragias                                                          |
+| **A** | Vias Aéreas + Restrição de Movimento da Coluna (RMC)                 |
+| **B** | Respiração                                                           |
+| **C** | Circulação — **decisão de retirada** (plano principal e emergencial) |
+| **D** | Neurológico                                                          |
+| **E** | Exposição                                                            |
+
+A **cinemática do trauma** orienta as lesões esperadas conforme o tipo de colisão. Na avaliação 360°, os itens relativos à vítima são: quantidade de vítimas, ejeção/indícios, gravidade, **uso do cinto**, **deformação do volante** e **acionamento de airbags**.
+
+**Classificação e tempo de extração — o par de números da prova:**
+
+| Vítima | Critério | Tempo |
+|---|---|---|
+| **Crítica** | **ECG ≤ 13**, grandes hemorragias, comprometimento circulatório/respiratório ou risco externo elevado | **10 minutos** — plano emergencial |
+| **Estável** | **ECG ≥ 14** | **25 minutos** — imobilização + alinhamento da coluna |
+
+**Tipos de retirada:** **controlada** (estável) · **rápida** (instável: dificuldade respiratória, inconsciência, hemorragia) · **imediata** (risco imediato: incêndio/explosão, hemorragia incontrolável, PR/PCR).
+
+**Planos de ação:** o **emergencial é garantido ANTES** do principal — se o quadro piorar, a extração sai rápido. Idealmente, o emergencial é **parte do caminho** para o principal (alinhamento de ações, ganho de agilidade).
+
+---
+
+### Abordagem, acesso e extração *(Aula 03)*
+
+**Abordagem — 2 socorristas, funções não taxativas** (alteradas ao comando do Socorrista 1):
+- **Socorrista 1**: posiciona-se **frontalmente** e inicia a **verbalização** — impede que a vítima gire a cervical. Se possível, **ministra oxigênio antes mesmo da estabilização primária**.
+- **Socorrista 2**: procura espaço para acessar o interior do veículo.
+
+A comunicação é avaliação: "lembra do que aconteceu?" (cinemática), "vendo sangue?" (hemorragia), "que dia é hoje?" / "onde dói?" (nível de consciência), "algo preso?" (grau de encarceramento).
+
+**Acesso:** tentar **acessos simples primeiro** (porta, janela manual). Se os dois entram: o 1 faz os procedimentos internos, o 2 troca para a avaliação primária. Se entra só um: **procedimentos internos urgentes ANTES de tocar na vítima**. Um dos socorristas faz a **RMC cervical**.
+
+**Procedimentos internos de criação de espaço** (a ordem tem lógica — o elétrico vem antes de desligar):
+1. Freio estacionário (veículo sobre 4 rodas)
+2. Procedimentos que dependem dos **controles elétricos** (bancos, volante, portas, vidros)
+3. **Desligar o veículo** — chave da ignição vai para o **comandante da operação**
+4. **Protetor de airbag**
+5. Movimentação **manual** de bancos/volante, portas, vidros
+6. Retirar os **encostos de cabeça**
+7. Celulares, valores e documentos → **comandante** (identificação + salvaguarda de bens)
+
+Após a avaliação primária ocorre a **reunião tripartida** (socorrista + comandante + técnicos) — define rota e técnica de extração; pode repetir conforme a ocorrência evolui.
+
+**Extração — checklist final:**
+1. Desligar a **motobomba à combustão** (se for o caso)
+2. Coordenação pelo **responsável do resgate ou profissional de saúde** na cena
+3. **Trocar luvas de salvamento por luvas de procedimento**
+4. Evitar giros · manter o alinhamento da coluna
+
+---
+
 ## Pontos Críticos
 
 Os itens abaixo concentram maior probabilidade de cobrança — por serem dados precisos, por envolverem sequências obrigatórias ou por serem distinções frequentemente confundidas:
@@ -201,6 +265,16 @@ Os itens abaixo concentram maior probabilidade de cobrança — por serem dados 
 18. **4 fases**: Preparação → Acionamento → Resposta → Finalização
 19. **Fase 3 (Resposta)**: 13 etapas em sequência — estabilização precede o acesso
 20. **Zona morna**: palco de ferramentas **sobre lona resistente**; área de descarte separada
+21. **Crítica: ECG ≤ 13 → 10 min** | **Estável: ECG ≥ 14 → 25 min** — par de números mais provável da Aula 03
+22. **XABCDE**: X (hemorragias) vem ANTES do A — e a **decisão de retirada ocorre no C**
+23. **Extração a 0°**: ângulo entre coluna vertebral e via de acesso — prioridade sempre
+24. **Plano emergencial ANTES do principal** — e idealmente parte do caminho dele
+25. **Retirada controlada / rápida / imediata** — estável / instável / risco imediato (incêndio, hemorragia incontrolável, PR/PCR)
+26. **Oxigênio antes mesmo da estabilização primária** — exceção que a banca adora
+27. **Chave, celulares, valores e documentos → comandante da operação**
+28. **Procedimentos elétricos ANTES de desligar o veículo** — depois, só manualmente
+29. **Trocar luvas de salvamento por luvas de procedimento** antes da extração
+30. **Hora de ouro: duração depende da gravidade das lesões** — não é 60 minutos fixos
 
 ---
 

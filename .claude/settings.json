@@ -3,5 +3,31 @@
     "allow": [
       "Bash(markitdown *)"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/sync_github.sh\"",
+            "timeout": 60,
+            "statusMessage": "Sincronizando Nexus com o GitHub..."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/sync_github.sh\"",
+            "timeout": 60,
+            "statusMessage": "Sincronizando Nexus com o GitHub..."
+          }
+        ]
+      }
+    ]
   }
 }
