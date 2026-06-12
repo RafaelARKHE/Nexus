@@ -84,7 +84,7 @@
 <div class="wrap">
   <header>
     <h1>Simulado — APH e Resgate I</h1>
-    <p>VC02 · 15 questões comentadas — nível integrado, escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
+    <p>VC02 · 19 questões comentadas — nível integrado, escopo: Avaliação de Cena e Biomecânica do Trauma, Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
   </header>
   <div id="app"></div>
   <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA</p>
@@ -92,6 +92,51 @@
 
 <script>
 const QUESTIONS_RAW = [
+{
+  q: "Uma guarnição do CBMPA é acionada para um acidente em uma via cuja velocidade máxima permitida é de 60 km/h. Ao chegar, não há outra viatura no local. Sobre o posicionamento da viatura e a sinalização da cena, é correto afirmar que:",
+  opts: [
+    { text: "A viatura deve estacionar 15 metros antes do acidente, servindo de anteparo e criando a zona de trabalho, e o primeiro cone deve ser posicionado a cerca de 60 passos do ponto de barreira.", correct:true, comment:"Certa. Não havendo outra viatura protegendo, a de socorro estaciona 15 metros antes do acidente, funcionando como anteparo e delimitando a 'zona de trabalho'. E a distância até o primeiro cone acompanha a velocidade da via: 60 km/h corresponde a 60 passos. A regra mnemônica é direta — o número de passos é igual à velocidade máxima da via." },
+    { text: "A viatura deve estacionar 15 metros à frente do acidente, pois essa é a posição padrão de toda viatura de socorro, independentemente de haver outra viatura no local.", correct:false, comment:"Errada. Os 15 metros À FRENTE são a posição usada apenas QUANDO já existe outra viatura fazendo a proteção. Como aqui não há outra viatura, a de socorro assume o papel de anteparo, estacionando 15 metros ANTES do acidente." },
+    { text: "O primeiro cone deve ser posicionado a 10 passos do acidente, pois essa é a distância fixa para qualquer velocidade de via.", correct:false, comment:"Errada. A regra '1 a cada 10 passos' refere-se ao ESPAÇAMENTO entre os cones na canalização, não à distância até o primeiro cone. A distância até o primeiro cone acompanha a velocidade da via — a 60 km/h, são 60 passos." },
+    { text: "A sinalização é dispensável em vias de até 60 km/h, sendo obrigatória apenas acima dessa velocidade.", correct:false, comment:"Errada. Não há essa dispensa — a sinalização e o isolamento do local fazem parte da segurança da cena em qualquer via. O material relaciona velocidades de 40 a 80 km/h, todas exigindo sinalização proporcional." },
+    { text: "A prioridade ao chegar à cena é iniciar imediatamente a avaliação primária (XABCDE) da vítima, deixando a sinalização para depois do atendimento.", correct:false, comment:"Errada. A segurança da cena é a consideração número um e precede o contato com o paciente — uma cena de trânsito não sinalizada coloca a guarnição em risco. O XABCDE só começa depois de a cena estar segura." }
+  ],
+  referencia: "Segurança do local: viatura estaciona 15 m antes do acidente (anteparo, cria a 'zona de trabalho'); se já há viatura protegendo, 15 m à frente. Cones idealmente 1 a cada 10 passos. Distância até o 1º cone = velocidade da via (40 km/h → 40 passos; 60 km/h → 60 passos; 80 km/h → 80 passos).",
+  aprofundamento: "A avaliação de cena tem três frentes, nesta ordem: segurança → situação → cinemática (biomecânica). A sinalização é parte da primeira frente. Só depois de a cena estar segura é que a guarnição passa à situação (o que aconteceu, quantas vítimas) e à leitura do mecanismo do trauma, que antecipa as lesões antes mesmo do XABCDE."
+},
+{
+  q: "Julgue a assertiva: “A principal consideração ao abordar qualquer cena de emergência é a rapidez no contato com o paciente; a segurança da equipe é secundária, pois o socorrista, sendo um profissional treinado, dificilmente se tornará uma vítima.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva inverte a prioridade central da avaliação de cena — a segurança não é secundária, é a consideração número um, e o treinamento não torna o socorrista imune às ameaças do ambiente." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). A principal consideração ao abordar qualquer cena é a SEGURANÇA de todos os socorristas, não a rapidez no contato com o paciente. O material é explícito: quando o socorrista se torna vítima, ele deixa de poder ajudar e ainda aumenta o número de pacientes. O atendimento pode, inclusive, precisar esperar até que o local esteja seguro o suficiente para a entrada da equipe sem riscos indevidos." }
+  ],
+  referencia: "Segurança da cena: a principal consideração ao abordar qualquer cena é a segurança de todos os socorristas. Quando o socorrista se torna vítima, deixa de ajudar e aumenta o número de pacientes. O atendimento pode esperar até que o local esteja seguro.",
+  aprofundamento: "Termos totalizantes como 'dificilmente' e a inversão de prioridade são as pistas do erro. A mesma lógica reaparece na pesquisa primária: antes do XABCDE, três perguntas em ordem — cena segura? recursos suficientes? qual a impressão geral? A segurança encabeça as duas etapas (avaliação de cena e primária)."
+},
+{
+  q: "Sobre a biomecânica (cinemática) do trauma, considere as assertivas:<br><br>I. Em uma colisão veicular ocorrem três impactos: o dos dois objetos, o dos ocupantes contra o veículo e o dos órgãos vitais dentro dos ocupantes.<br>II. A colisão traseira tem como lesão característica a hiperextensão da coluna cervical.<br>III. No atropelamento de um adulto, o impacto inicial costuma ocorrer no fêmur ou na pelve, em razão da menor estatura da vítima.<br>IV. O cisalhamento resulta de uma estrutura mudar de velocidade mais rapidamente que outra, enquanto a compressão resulta do esmagamento direto de um órgão entre estruturas.<br><br>Estão corretas:",
+  opts: [
+    { text: "I, II e IV.", correct:true, comment:"Certa. I — correta: os três impactos da colisão veicular são exatamente esses, e o terceiro (órgãos dentro dos ocupantes) explica lesões internas sem sinais externos. II — correta: a colisão traseira gera deslocamento posterior e hiperextensão cervical, sua lesão-assinatura. IV — correta: cisalhamento é a mudança de velocidade diferencial entre estruturas; compressão é o esmagamento direto. III — errada: a descrição (impacto inicial em fêmur/pelve pela menor estatura) aplica-se à CRIANÇA, não ao adulto — no adulto o impacto inicial é nas pernas." },
+    { text: "I, III e IV.", correct:false, comment:"Errada. I e IV estão corretas, mas III troca os perfis: o impacto inicial em fêmur/pelve pela menor estatura é o padrão da CRIANÇA atropelada; no adulto, o impacto inicial é nas pernas, seguido do tronco sobre o capô e da queda no asfalto." },
+    { text: "II, III e IV.", correct:false, comment:"Errada. II e IV são verdadeiras, mas III é falsa (descreve a criança, não o adulto) — e a combinação ainda exclui a I, que é verdadeira (os três impactos da colisão)." },
+    { text: "I e II, apenas.", correct:false, comment:"Errada. I e II realmente estão corretas, mas a IV também está — cisalhamento e compressão estão definidos exatamente como no material. Excluir a IV deixa a resposta incompleta." },
+    { text: "I, II, III e IV.", correct:false, comment:"Errada por incluir a III: o impacto inicial em fêmur/pelve devido à menor estatura é característico da CRIANÇA atropelada, não do adulto. As demais (I, II, IV) estão corretas." }
+  ],
+  referencia: "Biomecânica: três impactos da colisão (objetos → ocupantes no veículo → órgãos dentro dos ocupantes). Colisão traseira = hiperextensão cervical. Atropelamento: adulto — pernas primeiro; criança — fêmur/pelve (menor estatura). Cisalhamento = mudança de velocidade diferencial; compressão = esmagamento direto.",
+  aprofundamento: "A biomecânica antecipa o XABCDE: prever 'potencial de perda de sangue' a partir do mecanismo é prever hemorragia interna e choque hipovolêmico. Fratura bilateral de fêmur na motocicleta, lesão de baço na colisão frontal e fratura de pelve no atropelamento são exemplos de mecanismos que já apontam para onde procurar sangramento grave na pesquisa primária."
+},
+{
+  q: "Uma vítima de ferimento por arma branca no abdome é atendida pela guarnição. Apresenta um único ferimento visível na parede abdominal anterior. Sobre a conduta e o raciocínio diante de traumas penetrantes, é correto afirmar que:",
+  opts: [
+    { text: "A vítima deve ser totalmente exposta e examinada com atenção, pois múltiplos ferimentos por arma branca são possíveis e não podem ser descartados a partir de um único ferimento visível.", correct:true, comment:"Certa. No trauma por arma branca, a energia cinética é pequena e a lesão equivale ao trajeto do objeto — mas o material é enfático: deve-se sempre procurar mais de um ferimento, pois múltiplos ferimentos à faca são comuns e só podem ser descartados após a vítima ser exposta e examinada com atenção." },
+    { text: "Como a energia cinética da arma branca é pequena, basta inspecionar o ferimento visível; a exposição completa é desnecessária nesses casos.", correct:false, comment:"Errada. A baixa energia cinética explica por que a lesão segue o trajeto do objeto, mas NÃO dispensa a exposição completa — justamente porque pode haver mais de um ferimento oculto. Confiar no ferimento visível isolado é o erro que o material alerta para evitar." },
+    { text: "O ferimento por arma branca, por ter baixa energia, nunca atinge órgãos internos profundos, dispensando transporte prioritário.", correct:false, comment:"Errada. Mesmo com baixa energia, o trajeto pode atingir órgãos internos conforme a profundidade e a direção do golpe — um ferimento abdominal penetrante é potencialmente grave. A baixa energia cinética não equivale a ausência de lesão interna." },
+    { text: "A presença de tatuagem de pólvora ao redor do ferimento confirma tratar-se de arma branca.", correct:false, comment:"Errada. A tatuagem de pólvora é um achado de ferimento por ARMA DE FOGO (orifício de entrada), não de arma branca. A alternativa mistura os dois mecanismos penetrantes." },
+    { text: "Por se tratar de penetração no abdome, o procedimento correto é remover qualquer objeto encravado antes do transporte para facilitar a avaliação.", correct:false, comment:"Errada. Penetração por projétil ou objeto em cabeça, tórax ou abdome exige transporte imediato — e objetos encravados, como regra geral do trauma, não são removidos no pré-hospitalar, pois podem estar tamponando vasos. A conduta é estabilizar e transportar, não remover." }
+  ],
+  referencia: "Trauma por arma branca: lesão equivale ao trajeto do objeto (energia cinética pequena). Procurar sempre mais de um ferimento — múltiplos ferimentos à faca são possíveis e só podem ser descartados após exposição e exame atento. Projétil/penetração em cabeça, tórax ou abdome = transporte imediato.",
+  aprofundamento: "O trauma penetrante conecta-se diretamente ao 'X' e ao 'E' do XABCDE: a exposição (E) é o que permite encontrar o 'segundo ferimento', e qualquer hemorragia exsanguinante por arma branca ou projétil é tratada já no 'X'. Compare com a arma de fogo, em que a trajetória nem sempre é retilínea e pode atingir órgãos insuspeitados — outro motivo para o exame completo da vítima."
+},
 {
   q: "Durante o atendimento a uma vítima de acidente com a perna esmagada, a guarnição observa hemorragia pulsátil de grande volume na coxa e, ao mesmo tempo, percebe leve acúmulo de secreções na via aérea da vítima, que ainda respira espontaneamente. Segundo o protocolo XABCDE atual (PHTLS), a primeira conduta da guarnição deve ser:",
   opts: [

@@ -48,7 +48,10 @@ versao: 1.0
 
 ## Especificações técnicas
 
-- **Extensão alvo: 8.000 a 10.000 palavras** — abaixo de 8.000 o áudio fica curto demais
+- **Extensão de referência: 8.000 a 10.000 palavras** — é uma BASE de calibragem, não
+  regra fixa: serve para dimensionar a escrita desde o início, não para conferir depois.
+  A primeira versão gerada já é a definitiva — sem ciclo de contagem/ajuste. Passar um
+  pouco do teto (ex: ~11k em escopo amplo) é aceitável; o que não pode é ficar raso
 - **Velocidade de referência:** ~250 palavras/minuto — taxa REAL medida de reprodução TTS
   (calibrada em 12/06/2026 com o áudio de DA VC01: 4.000 palavras renderam apenas ~16
   minutos, não os 30 estimados pela referência antiga de 133 wpm)
@@ -93,7 +96,9 @@ versao: 1.0
 
 - Nenhuma lista ou marcador — tudo em texto corrido
 - Nenhum símbolo Markdown — o arquivo será lido por TTS ou pelo próprio usuário em voz alta
-- Manter contagem de palavras **entre 8.000 e 10.000** — verificar com `wc -w` após gerar
+- Dimensionar a escrita pela faixa de referência (8.000–10.000 palavras) **durante a
+  geração** — não contar palavras depois nem regenerar para "caber na faixa"; a primeira
+  versão é a definitiva. Apenas estimar a `duracao_estimada` do cabeçalho a ~250 wpm
 - Números, artigos de lei e siglas por extenso quando a leitura TTS exigir (ex: "artigo
   trinta e sete", "Lei número nove mil duzentos e trinta e quatro")
 - Depende do arquivo `revisao_VC0X.md` — não gerar sem ele

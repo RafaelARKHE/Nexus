@@ -51,6 +51,16 @@ atualizado_em: 12/06/2026
 | 04 | Sistemas de Oferta de O2 — Dispositivos e Classificação | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/04_sistemas-oferta-oxigenio]] |
 | 05 | Oxímetro de Pulso, Riscos da O2 e Aspiração | [[Periodo01/01_APHR/pontos_chave/03_Via-Aerea-e-Oxigenoterapia/05_oximetro-riscos-aspiracao]] |
 
+### 04 — Avaliação de Cena e Biomecânica do Trauma
+> Origem: `APHR UNIDADE V AVALIAÇÃO DE CENA.pptx`
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Avaliação de Cena — Segurança, Sinalização e Situação | [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/01_avaliacao-de-cena]] |
+| 02 | Biomecânica do Trauma — Conceito, Fases e Mecanismos | [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/02_biomecanica-fases-mecanismos]] |
+| 03 | Trauma Contuso — Colisões, Motocicleta e Atropelamento | [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/03_trauma-contuso-colisoes]] |
+| 04 | Trauma Penetrante e Lesões por Explosão | [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/04_trauma-penetrante-explosao]] |
+
 ---
 
 ## Materiais Originais
@@ -60,13 +70,15 @@ atualizado_em: 12/06/2026
 | APHR UNIDADE VI AVALIAÇÃO PRIMÁRIA E SECUNDÁRIA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Unidade VI |
 | APHR CHOQUE E HEMORRAGIA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Choque e Hemorragia |
 | APHR OXIGENOTERAPIA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Oxigenoterapia |
+| APHR UNIDADE V AVALIAÇÃO DE CENA.pptx | Nexus_Materiais/Periodo01/01_APHR/ | Unidade V |
 
 ---
 
 ## Avaliações (VC)
 
-### VC02 — Todos os assuntos disponíveis no sistema (12/06/2026)
-> Escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia — integrados pela espinha dorsal XABCDE.
+### VC02 — Todos os assuntos disponíveis no sistema (12/06/2026 · v2)
+> Escopo: Avaliação de Cena e Biomecânica do Trauma, Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia — integrados pela lógica avaliação de cena → XABCDE.
+> v2 (12/06/2026): incorporada a Unidade V (Avaliação de Cena e Biomecânica do Trauma).
 
 | Artefato | Arquivo |
 |---|---|
@@ -78,6 +90,7 @@ atualizado_em: 12/06/2026
 ---
 
 ## Status
+- [x] Unidade V — Avaliação de Cena e Biomecânica do Trauma — processado em 12/06/2026
 - [x] Unidade VI — Avaliação Primária e Secundária
 - [x] Choque e Hemorragia
 - [x] Oxigenoterapia — processado em 04/06/2026

@@ -70,7 +70,7 @@
 <div class="wrap">
   <header>
     <h1>Flashcards — APH e Resgate I</h1>
-    <p>VC02 · termos técnicos, definições e dados de memorização — escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
+    <p>VC02 · termos técnicos, definições e dados de memorização — escopo: Avaliação de Cena e Biomecânica do Trauma, Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
   </header>
   <div id="app"></div>
   <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — gerado a partir de pontos_chave/ e revisao_VC02</p>
@@ -78,6 +78,24 @@
 
 <script>
 const CARDS_RAW = [
+  { front: "Avaliação de cena — as três frentes, em ordem", back: "Segurança → Situação → Cinemática (biomecânica). A segurança é a consideração nº 1; só depois vêm a situação e a leitura do mecanismo do trauma." },
+  { front: "Segurança da cena — a regra central", back: "Quando o socorrista se torna vítima, ele deixa de ajudar e ainda aumenta o número de pacientes. O atendimento pode esperar até que o local esteja seguro." },
+  { front: "Posicionamento da viatura na cena", back: "15 metros ANTES do acidente (anteparo, cria a 'zona de trabalho'). Se já há outra viatura protegendo: 15 metros À FRENTE, mantendo a zona de trabalho." },
+  { front: "Sinalização — distância até o 1º cone e espaçamento", back: "Distância até o 1º cone = velocidade da via em passos (40 km/h → 40 passos; 60 → 60; 80 → 80). Cones espaçados idealmente 1 a cada 10 passos." },
+  { front: "Biomecânica do trauma — definição e objetivo", back: "Avaliação das forças do acidente para determinar as lesões resultantes. Objetivo: detectar precocemente lesões fatais e manter alto índice de suspeição (inclusive para lesões ocultas)." },
+  { front: "As três fases do evento traumático", back: "Pré-evento (condições prévias, substâncias, estado mental); Evento (do impacto à absorção da energia); Pós-evento (o atendimento que influencia o desfecho)." },
+  { front: "Os três impactos de uma colisão veicular", back: "1) Dos dois objetos (veículos); 2) Dos ocupantes contra o veículo; 3) Dos órgãos vitais dentro dos ocupantes (o mais silencioso e perigoso)." },
+  { front: "Os três mecanismos básicos de lesão por movimento", back: "Desaceleração frontal rápida; desaceleração vertical rápida; penetração de projétil." },
+  { front: "Cisalhamento x Compressão (trauma contuso)", back: "Cisalhamento: uma estrutura muda de velocidade mais rápido que outra (ex.: golpe/contragolpe cerebral). Compressão: esmagamento direto de um órgão entre estruturas (ex.: intestino entre coluna e parede abdominal)." },
+  { front: "Colisão frontal — caminho do ocupante e lesões", back: "O ocupante não contido segue para cima ou para baixo. Golpe/contragolpe cerebral, hiperextensão cervical, lesão de órgãos do tórax e abdome (coração, pulmões, fígado, baço)." },
+  { front: "Colisão traseira — lesão característica", back: "Hiperextensão da coluna cervical (deslocamento posterior dos ocupantes, agravado por apoio de cabeça mal ajustado)." },
+  { front: "Acidente de motocicleta — impacto frontal", back: "Motociclista lançado contra o guidão → trauma de cabeça, tórax e abdome. Com os pés presos ao pedal: fratura bilateral de fêmur (alta perda de sangue)." },
+  { front: "Atropelamento — padrão adulto x criança", back: "Adulto: impacto inicial nas pernas → tronco sobre o capô → queda no asfalto. Criança: impacto inicial em fêmur/pelve (pela menor estatura)." },
+  { front: "Regra da energia (ejeção)", back: "Mesma velocidade = mesma energia = lesão semelhante. Ejeção de skate/bicicleta em alta velocidade ≈ ejeção de automóvel na mesma velocidade." },
+  { front: "Trauma penetrante — fatores que determinam o dano", back: "Tamanho do projétil, energia da arma, giro, distância do tiro, trajetória (nem sempre retilínea) e fragmentação." },
+  { front: "Arma de fogo — orifícios e regra de transporte", back: "Orifício de entrada pode ter tatuagem de pólvora; nem todo tem saída correspondente. Projétil em cabeça, tórax ou abdome = transporte imediato. Colete sem furo ainda pode ter contusão cardíaca." },
+  { front: "Arma branca — princípio e dica de ouro", back: "Lesão equivale ao trajeto do objeto (energia cinética pequena). Procurar SEMPRE mais de um ferimento — só descartar após exposição e exame atento." },
+  { front: "Lesões por explosão — os três mecanismos", back: "1) Ondas de choque (deformam órgãos com gás — ouvido, pulmão, intestino); 2) Fragmentos (ampliam o raio de dano); 3) Lesões relacionadas (primárias a quinarias). Barotrauma pulmonar é pior em espaço fechado." },
   { front: "XABCDE — o que cada letra representa?", back: "X — Hemorragia exsanguinante; A — Vias aéreas (Airway); B — Respiração (Breathing); C — Circulação (Circulation); D — Déficit neurológico (Disability); E — Exposição (Exposure)." },
   { front: "Por que o 'X' vem antes do 'A' no protocolo atual (PHTLS)?", back: "Porque hemorragia exsanguinante mata mais rápido que obstrução de via aérea — é o diferencial do protocolo moderno em relação a abordagens antigas (ABC), que começavam pela via aérea." },
   { front: "Pergunta 'O que aconteceu com você?' — o que ela avalia de uma vez?", back: "Quatro sistemas simultaneamente: via aérea patente, ventilação suficiente, perfusão cerebral adequada e função neurológica preservada — se a resposta vier coerente, em frases completas." },

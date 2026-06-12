@@ -5,14 +5,17 @@ disciplina: APH e Resgate I
 sigla: APHR
 periodo: Periodo01
 avaliacao: VC02
-escopo: Todos os assuntos disponíveis no sistema — Avaliação Primária e Secundária (XABCDE, AVDI, Glasgow, SAMPLER), Choque e Hemorragia (fisiopatologia, classificação, diagnóstico diferencial, controle de hemorragia e torniquete), Via Aérea e Oxigenoterapia (anatomia, adjuntos, sistemas de oferta de O2, oxímetro, riscos, aspiração)
+escopo: Todos os assuntos disponíveis no sistema — Avaliação de Cena e Biomecânica do Trauma (segurança, sinalização, cinemática, colisões, trauma penetrante e explosão), Avaliação Primária e Secundária (XABCDE, AVDI, Glasgow, SAMPLER), Choque e Hemorragia (fisiopatologia, classificação, diagnóstico diferencial, controle de hemorragia e torniquete), Via Aérea e Oxigenoterapia (anatomia, adjuntos, sistemas de oferta de O2, oxímetro, riscos, aspiração)
 criado_em: 12/06/2026
-versao: 1.0
+atualizado_em: 12/06/2026
+versao: 2.0
 ---
 
 # Revisão — APH e Resgate I | VC02
 
-> Escopo: as três unidades processadas até o momento — Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia. O conteúdo é apresentado integrado, seguindo a lógica do XABCDE como espinha dorsal do atendimento.
+> Escopo: as quatro unidades processadas até o momento — Avaliação de Cena e Biomecânica do Trauma, Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia. O conteúdo é apresentado integrado, seguindo a sequência real do atendimento: avaliação de cena → XABCDE como espinha dorsal.
+>
+> **Histórico de versões:** v1.0 (12/06/2026) — três unidades. v2.0 (12/06/2026) — incorporada a Unidade V (Avaliação de Cena e Biomecânica do Trauma).
 
 ---
 
@@ -26,11 +29,41 @@ Antes de entrar no protocolo, quatro ideias sustentam tudo o que vem a seguir.
 
 **3. AVDI é rápido, Glasgow é detalhado.** A avaliação neurológica tem duas ferramentas com momentos diferentes: AVDI na pesquisa **primária** (decisão imediata), Escala de Glasgow na **secundária** (quando há tempo, geralmente no transporte). Confundir os dois momentos é um erro clássico de prova.
 
+**0. Antes de tocar a vítima, lê-se a cena.** Todo o XABCDE pressupõe um passo anterior: a **avaliação de cena**, em três frentes na ordem **segurança → situação → cinemática (biomecânica)**. Segurança é a consideração nº 1 — socorrista que vira vítima deixa de ajudar e ainda aumenta o número de pacientes. A biomecânica (cinemática do trauma) lê as forças do acidente para **prever as lesões** e manter um alto **índice de suspeição** — é ela que, ao estimar o "potencial de perda de sangue", conecta o mecanismo do trauma diretamente à hemorragia e ao choque.
+
 **4. O2 é droga, e a anatomia define o dispositivo certo.** O ar ambiente tem 21% de O2; cada litro suplementar por cateter soma cerca de +4% de FiO2. A escolha de cânula (orofaríngea vs. nasofaríngea) e de sistema de oferta de O2 (cateter, máscara simples, máscara com reservatório, BVM) depende diretamente da anatomia das vias aéreas (superiores: nariz/boca → faringe → laringe/epiglote; inferiores: traqueia → brônquios → alvéolos, a unidade funcional da respiração) e do nível de consciência do paciente.
 
 ---
 
 ## Conteúdo Integrado
+
+### Avaliação de Cena e Biomecânica do Trauma
+
+O atendimento real começa **antes** do XABCDE, com a leitura da cena em três frentes nesta ordem: **segurança → situação → cinemática**.
+
+**Segurança** é a prioridade absoluta. A regra-mãe: socorrista que vira vítima deixa de ajudar e **aumenta** o número de pacientes. Cobre tanto a equipe quanto o paciente. Ameaças típicas: incêndio, fios elétricos caídos, explosivos, produtos perigosos, tráfego, enchentes, armas e o próprio agressor ainda no local.
+
+**Segurança do local — sinalização:** a viatura estaciona **15 metros antes** do acidente, servindo de anteparo e criando a **zona de trabalho**; se já houver outra viatura protegendo, estaciona **15 metros à frente**. Os cones vão **1 a cada 10 passos**, e a distância até o primeiro cone acompanha a velocidade da via:
+
+| Velocidade da via | Passos até o 1º cone |
+|---|---|
+| 80 km/h | 80 passos |
+| 70 km/h | 70 passos |
+| 60 km/h | 60 passos |
+| 50 km/h | 50 passos |
+| 40 km/h | 40 passos |
+
+**Situação:** o que aconteceu, o mecanismo da lesão, número e idade das vítimas, necessidade de recursos adicionais.
+
+**Biomecânica (cinemática) do trauma** é a avaliação das forças do acidente para **detectar precocemente lesões fatais** e manter alto **índice de suspeição** — inclusive para lesões ocultas. Estrutura-se em **três fases**: *pré-evento* (condições prévias, substâncias, estado mental), *evento* (do impacto à absorção da energia) e *pós-evento* (o atendimento que influencia o desfecho). Numa colisão veicular ocorrem **três impactos**: dos objetos → dos ocupantes contra o veículo → dos órgãos dentro dos ocupantes. E há **três mecanismos básicos** de lesão por movimento: desaceleração frontal rápida, desaceleração vertical rápida e penetração de projétil. As forças do trauma contuso são **cisalhamento** (estruturas mudam de velocidade em ritmos diferentes — ex.: golpe/contragolpe cerebral) e **compressão** (esmagamento direto — ex.: intestino entre coluna e parede abdominal no usuário só de cinto).
+
+**Padrões de lesão por tipo de colisão:** frontal (ocupante segue para cima ou para baixo; golpe/contragolpe, hiperextensão cervical, lesão de órgãos torácicos/abdominais), **traseira** (hiperextensão da coluna cervical — lesão-assinatura), lateral (braço/ombro: úmero e clavícula; mais pelve/quadril/fêmur), rotacional e capotamento (impactos múltiplos). **Motocicleta** (sem estrutura de proteção): impacto frontal lança o condutor no guidão e, com pés presos ao pedal, gera **fratura bilateral de fêmur**. **Atropelamento** (mais grave por menor proteção): no adulto, pernas primeiro → tronco no capô → queda no asfalto; na **criança**, o impacto inicial é em **fêmur/pelve** pela menor estatura. Vale a regra da energia: ejeção de skate/bicicleta em alta velocidade produz lesões semelhantes à ejeção de um carro na mesma velocidade — **mesma energia, mesma lesão**.
+
+**Trauma penetrante:** a energia cinética afasta os tecidos; a gravidade depende do tamanho do projétil, da energia da arma, do giro, da distância, da trajetória (nem sempre retilínea) e da fragmentação. Na arma de fogo, o orifício de entrada (com tatuagem de pólvora) nem sempre tem saída; **projétil em cabeça, tórax ou abdome exige transporte imediato**; colete sem furo ainda pode esconder contusão cardíaca. Na arma branca, a lesão equivale ao trajeto (baixa energia) — **procurar sempre mais de um ferimento**, só descartando após exposição completa. **Explosão** (rápida dissipação de energia) lesa por três mecanismos: ondas de choque (deformam órgãos com gás — ouvido, pulmão, intestino), fragmentos (ampliam o raio de dano) e lesões relacionadas (primárias a quinarias); o **barotrauma pulmonar** é pior em **espaço fechado**.
+
+> Esta unidade é o degrau anterior ao XABCDE: a cena segura habilita o atendimento, e a biomecânica já antecipa, pelo mecanismo, onde procurar hemorragia exsanguinante (X) e lesão cervical (que define a manobra de via aérea em A).
+
+---
 
 ### Chegada à cena
 
@@ -300,6 +333,11 @@ Avaliação detalhada da **cabeça aos pés**, feita **após** a primária e o t
 
 ## Pontos Críticos
 
+- **Avaliação de cena: segurança → situação → cinemática** — a ordem das três frentes; segurança é a consideração nº 1 (socorrista que vira vítima aumenta o problema).
+- **Viatura 15 m antes (anteparo) / 15 m à frente (se já protegido)**; cones **1 a cada 10 passos**; **passos até o 1º cone = velocidade da via** (40/50/60/70/80).
+- **Os "trios" da biomecânica** — três fases (pré-evento/evento/pós-evento), três impactos (objetos → ocupantes → órgãos), três mecanismos (desaceleração frontal, vertical, penetração).
+- **Cisalhamento ≠ compressão**; **colisão traseira = hiperextensão cervical**; **moto frontal com pés presos = fratura bilateral de fêmur**; **atropelamento adulto pernas / criança fêmur-pelve**.
+- **Penetrante:** arma branca → procurar mais de um ferimento; **projétil em cabeça/tórax/abdome = transporte imediato**; explosão → **barotrauma pulmonar pior em espaço fechado**, órgãos com gás mais vulneráveis.
 - **X antes de A** — hemorragia exsanguinante mata mais rápido que obstrução de via aérea; é o diferencial do PHTLS, alta probabilidade de ser cobrado.
 - **Torniquete proximal e cronometrado** — emergencial na raiz do membro; controlado a 5–7 cm da ferida; máximo **120 minutos**; nunca afrouxar no campo; sempre anotar o horário.
 - **CAULIM ≠ QUITOSANA** — acelera coagulação vs. barreira física por tamponamento.

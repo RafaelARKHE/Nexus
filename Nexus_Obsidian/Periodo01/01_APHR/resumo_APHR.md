@@ -5,8 +5,8 @@ disciplina: APH e Resgate I
 sigla: APHR
 periodo: Periodo01
 criado_em: 03/06/2026
-atualizado_em: 04/06/2026
-versao: 1.2
+atualizado_em: 12/06/2026
+versao: 1.3
 moc_cfo: sim
 moc_materia: sim
 ---
@@ -513,5 +513,108 @@ Indicada quando o paciente não consegue eliminar secreções de forma autônoma
 - **DPOC: cuidado com O2 alto** — risco de suprimir o drive respiratório
 - **Aspiração: intercalar com O2** — nunca aspirar por tempo prolongado sem reoxigenar o paciente
 - **SpO2 < 85% = hipóxia grave** — memorizar a tabela de 4 faixas
+
+---
+
+## Unidade V — Avaliação de Cena e Biomecânica do Trauma
+> Adicionado em: 12/06/2026 | Origem: APHR UNIDADE V AVALIAÇÃO DE CENA.pptx
+
+### Pré-requisitos
+- Noção de segurança operacional e EPI
+- Conceito de energia cinética e transferência de energia
+- Anatomia geral (esqueleto, órgãos das cavidades torácica e abdominal)
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| **Consciência situacional** | Compreensão global da cena a partir do que se vê, ouve e cataloga |
+| **Zona de trabalho** | Área protegida pela viatura-anteparo, onde a guarnição atua com segurança |
+| **Biomecânica (cinemática) do trauma** | Avaliação das forças do acidente para prever as lesões resultantes |
+| **Cisalhamento** | Força em que estruturas mudam de velocidade em ritmos diferentes |
+| **Compressão** | Força de esmagamento direto de um órgão entre estruturas |
+| **Golpe/contragolpe** | Lesão do órgão contra a parede da cavidade e o rebote contrário |
+| **Índice de suspeição** | Grau de alerta para lesões ocultas baseado no mecanismo |
+| **Sobrepressão** | Aumento súbito de pressão da onda de choque de uma explosão |
+| **Barotrauma pulmonar** | Lesão (explosão) pulmonar por onda de choque — pior em espaço fechado |
+
+### Resumo
+
+#### Avaliação de Cena
+
+O reconhecimento da situação começa no **histórico do chamado** e segue até o local. Três frentes, nesta ordem: **segurança → situação → cinemática (biomecânica)**.
+
+**Segurança** é a consideração nº 1 — socorrista que vira vítima deixa de ajudar e aumenta o número de pacientes. Abrange socorrista e paciente. Ameaças: incêndio, fios elétricos caídos, explosivos, produtos perigosos, tráfego, armas, agressor no local.
+
+**Segurança do local (sinalização):** viatura estaciona **15 m antes** do acidente (anteparo, cria a "zona de trabalho"); se já há viatura protegendo, estaciona **15 m à frente**. Cones idealmente **1 a cada 10 passos**. Distância até o 1º cone segue a velocidade da via:
+
+| Velocidade da via | Passos até o 1º cone |
+|---|---|
+| 80 km/h | 80 passos |
+| 70 km/h | 70 passos |
+| 60 km/h | 60 passos |
+| 50 km/h | 50 passos |
+| 40 km/h | 40 passos |
+
+**Situação:** o que aconteceu, mecanismo da lesão, número/idade das vítimas e necessidade de recursos adicionais.
+
+---
+
+#### Biomecânica do Trauma — Fases e Mecanismos
+
+Avalia as **forças do acidente** para detectar precocemente lesões fatais. Três fases do evento:
+- **Pré-evento:** condições prévias, substâncias (álcool/drogas/medicações), estado mental.
+- **Evento:** do impacto à absorção da energia — direção, quantidade e efeitos da energia.
+- **Pós-evento:** o atendimento na cena e no transporte influencia o desfecho.
+
+**Três impactos da colisão veicular:** dos objetos → dos ocupantes contra o veículo → dos órgãos dentro dos ocupantes.
+
+**Três mecanismos básicos de lesão por movimento:** desaceleração frontal rápida, desaceleração vertical rápida, penetração de projétil.
+
+**Forças do trauma contuso:** **cisalhamento** (estruturas mudam de velocidade em ritmos diferentes) e **compressão** (esmagamento direto).
+
+---
+
+#### Trauma Contuso — Colisões e Atropelamento
+
+| Colisão | Lesões características |
+|---|---|
+| **Frontal** | Ocupante segue para cima ou para baixo; golpe/contragolpe, hiperextensão cervical, lesão de tórax/órgãos abdominais |
+| **Traseira** | Hiperextensão da coluna cervical |
+| **Lateral** | Braço/ombro (úmero, clavícula), tórax/abdome, pelve/quadril/fêmur |
+| **Rotacional / Capotamento** | Múltiplos impactos, lesões imprevisíveis |
+
+**Motocicleta** (sem estrutura de proteção): frontal → trauma de cabeça/tórax/abdome e fratura bilateral de fêmur; lateral → fratura de tíbia/fíbula; ejeção → energia irradia pelo corpo.
+
+**Atropelamento** (mais grave por menor proteção): adulto — pernas primeiro → tronco no capô → queda no asfalto; **criança** — impacto inicial em fêmur/pelve (menor estatura).
+
+---
+
+#### Trauma Penetrante e Lesões por Explosão
+
+**Penetrante:** a energia cinética afasta os tecidos. Fatores: tamanho do projétil, energia da arma, giro, distância, trajetória (nem sempre retilínea) e fragmentação. Arma de fogo: orifício de entrada (tatuagem de pólvora) nem sempre tem saída; **projétil em cabeça/tórax/abdome = transporte imediato**; colete sem furo ainda pode ter contusão cardíaca. **Arma branca:** lesão equivale ao trajeto (baixa energia) — **procurar sempre mais de um ferimento**.
+
+**Explosão** (rápida dissipação de energia) — três mecanismos: ondas de choque (deformam órgãos com gás — ouvido, pulmão, intestino), fragmentos (maximizam o raio de dano) e lesões relacionadas (primárias a quinarias). **Barotrauma pulmonar** é pior em **espaço fechado**.
+
+---
+
+### Conexões
+- [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/01_avaliacao-de-cena]] — segurança, sinalização e situação
+- [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/02_biomecanica-fases-mecanismos]] — fases do evento e mecanismos
+- [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/03_trauma-contuso-colisoes]] — colisões, motocicleta e atropelamento
+- [[Periodo01/01_APHR/pontos_chave/04_Avaliacao-de-Cena-e-Biomecanica/04_trauma-penetrante-explosao]] — projéteis, arma branca e explosão
+- [[Periodo01/01_APHR/pontos_chave/01_Avaliacao-Primaria-e-Secundaria/01_abordagem-da-cena]] — a avaliação de cena é o degrau anterior à pesquisa primária
+- [[Periodo01/01_APHR/pontos_chave/02_Choque-e-Hemorragia/03_hemorragia-tipos-sinais]] — o mecanismo prediz hemorragia interna e choque
+
+### Pontos de Atenção
+- **Segurança → Situação → Cinemática** — a ordem das frentes da avaliação de cena.
+- **15 m antes (anteparo) / 15 m à frente (se já protegido)** — estacionamento da viatura.
+- **Passos = velocidade da via** (40/50/60/70/80) — distância até o 1º cone; cones a cada 10 passos.
+- **Três fases (pré/evento/pós), três impactos, três mecanismos** — os "trios" da biomecânica.
+- **Cisalhamento ≠ compressão** — velocidade diferencial vs. esmagamento direto.
+- **Traseira = hiperextensão cervical; moto frontal = fratura bilateral de fêmur**.
+- **Atropelamento: adulto pernas / criança fêmur-pelve** — diferença pela altura.
+- **Arma branca: procurar mais de um ferimento; projétil em cabeça/tórax/abdome = transporte imediato**.
+- **Barotrauma pulmonar pior em espaço fechado** — órgãos com gás são os mais vulneráveis.
 
 ---
