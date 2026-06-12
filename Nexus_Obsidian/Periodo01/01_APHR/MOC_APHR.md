@@ -5,7 +5,7 @@ disciplina: APH e Resgate I
 sigla: APHR
 periodo: Periodo01
 criado_em: 03/06/2026
-atualizado_em: 04/06/2026
+atualizado_em: 12/06/2026
 ---
 
 # MOC — APH e Resgate I (APHR)
@@ -64,7 +64,16 @@ atualizado_em: 04/06/2026
 ---
 
 ## Avaliações (VC)
-*Nenhuma avaliação processada ainda.*
+
+### VC02 — Todos os assuntos disponíveis no sistema (12/06/2026)
+> Escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia — integrados pela espinha dorsal XABCDE.
+
+| Artefato | Arquivo |
+|---|---|
+| Revisão unificada | [[Periodo01/01_APHR/VC02/revisao_VC02]] |
+| Roteiro de áudio (~42min) | `Periodo01/01_APHR/VC02/audio_VC02.txt` |
+| Simulado (15 questões comentadas) | `Periodo01/01_APHR/VC02/simulado_VC02.html` |
+| Flashcards | `Periodo01/01_APHR/VC02/flashcard_VC02.html` |
 
 ---
 

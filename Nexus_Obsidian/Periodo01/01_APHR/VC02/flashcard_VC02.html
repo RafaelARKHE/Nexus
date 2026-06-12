@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards — APH e Resgate I | VC02</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
+  header { padding: 14px 16px 6px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 14px; color: #6b6a66; margin: 0; }
+  .meta { display:flex; justify-content: space-between; font-size: 13px; color:#6b6a66; margin: 14px 2px 8px; }
+  .progress-bar { height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; margin-bottom: 16px;}
+  .progress-bar > div { height: 100%; background: #8a3324; transition: width .25s ease; }
+
+  .scene { perspective: 1400px; margin-bottom: 16px; }
+  .card3d {
+    position: relative; width: 100%; min-height: 240px;
+    transform-style: preserve-3d; transition: transform .5s;
+    cursor: pointer;
+  }
+  .card3d.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,.1);
+  }
+  .face.front { background: #fff; }
+  .face.back { background: #fbf3e6; transform: rotateY(180deg); border: 1.5px solid #d9a441; }
+  .face .label {
+    font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: #9a988f; margin-bottom: 10px;
+  }
+  .face.back .label { color: #9a6b1a; }
+  .face .term { font-size: 19px; font-weight: 700; line-height: 1.4; }
+  .face .def { font-size: 16px; line-height: 1.55; }
+  .face .hint { font-size: 13px; color: #9a988f; margin-top: 14px; }
+
+  .actions { display: flex; gap: 10px; margin-bottom: 10px; }
+  .btn {
+    flex: 1; text-align: center; border: none; border-radius: 10px;
+    padding: 14px; font-size: 15px; font-weight: 700; min-height: 48px; cursor: pointer;
+  }
+  .btn.know { background: #4a8f5b; color: #fff; }
+  .btn.know:active { background: #3c7549; }
+  .btn.later { background: #fff; color: #8a3324; border: 1.5px solid #8a3324; }
+  .btn.later:active { background: #f8e9e7; }
+  .btn.full { width: 100%; background: #8a3324; color: #fff; margin-top: 6px; }
+  .btn.full:active { background: #6f2a1d; }
+  .btn.ghost { width: 100%; background: #fff; color: #6b6a66; border: 1.5px solid #e3e1da; margin-top: 8px; }
+
+  .summary { background:#fff; border-radius:14px; padding:22px; text-align:center; box-shadow: 0 1px 4px rgba(0,0,0,.08);}
+  .summary .num { font-size: 40px; font-weight: 800; color:#8a3324; margin: 6px 0;}
+  .summary .row { display:flex; justify-content:space-around; margin: 16px 0; }
+  .summary .row .item .n { font-size: 26px; font-weight: 800; }
+  .summary .row .item .l { font-size: 13px; color:#6b6a66; }
+  .summary .row .item.know .n { color:#4a8f5b; }
+  .summary .row .item.later .n { color:#8a3324; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 22px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Flashcards — APH e Resgate I</h1>
+    <p>VC02 · termos técnicos, definições e dados de memorização — escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
+  </header>
+  <div id="app"></div>
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — gerado a partir de pontos_chave/ e revisao_VC02</p>
+</div>
+
+<script>
+const CARDS_RAW = [
+  { front: "XABCDE — o que cada letra representa?", back: "X — Hemorragia exsanguinante; A — Vias aéreas (Airway); B — Respiração (Breathing); C — Circulação (Circulation); D — Déficit neurológico (Disability); E — Exposição (Exposure)." },
+  { front: "Por que o 'X' vem antes do 'A' no protocolo atual (PHTLS)?", back: "Porque hemorragia exsanguinante mata mais rápido que obstrução de via aérea — é o diferencial do protocolo moderno em relação a abordagens antigas (ABC), que começavam pela via aérea." },
+  { front: "Pergunta 'O que aconteceu com você?' — o que ela avalia de uma vez?", back: "Quatro sistemas simultaneamente: via aérea patente, ventilação suficiente, perfusão cerebral adequada e função neurológica preservada — se a resposta vier coerente, em frases completas." },
+  { front: "Hemorragia arterial — características", back: "Cor vermelho-vivo, fluxo pulsátil, controle difícil." },
+  { front: "Hemorragia venosa — características", back: "Cor vermelho-escura, fluxo lento e contínuo, controle moderado (grave se vaso de grosso calibre)." },
+  { front: "Hemorragia capilar — características", back: "Cor avermelhada, fluxo lento e contínuo, controle fácil." },
+  { front: "As 6 técnicas de controle de hemorragia, em ordem de complexidade", back: "1) Pressão direta; 2) Curativo compressivo; 3) Preenchimento de feridas; 4) Agentes hemostáticos (caulim/quitosana); 5) ITCLAMP; 6) Torniquete." },
+  { front: "Agente hemostático CAULIM — mecanismo", back: "Acelera a cadeia de coagulação (mecanismo bioquímico)." },
+  { front: "Agente hemostático QUITOSANA — mecanismo", back: "Forma uma barreira física por tamponamento (mecanismo mecânico) — diferente do caulim, que acelera a coagulação." },
+  { front: "ITCLAMP — o que é e onde se usa?", back: "Dispositivo que sela as bordas da ferida, usado em extremidades, regiões de junção (axila/virilha) e couro cabeludo — medida temporária até o controle cirúrgico definitivo." },
+  { front: "Torniquete Emergencial", back: "Aplicado na raiz do membro ('alto e apertado') — usado em urgência máxima, prioriza rapidez." },
+  { front: "Torniquete Controlado", back: "Aplicado de 5 a 7 cm acima da ferida — usado quando há tempo para posicionamento preciso; preserva mais tecido." },
+  { front: "Torniquete Juncional", back: "Aplicado em axila ou virilha — usado em regiões onde o torniquete de extremidade não se aplica." },
+  { front: "Regras de aplicação do torniquete", back: "Informar a vítima (vai doer); verificar objetos nos bolsos antes de apertar; apertar até ocluir o pulso distal; anotar o horário de aplicação; máximo de 120 minutos; nunca afrouxar no campo — só no hospital." },
+  { front: "Sinais de alerta para hemorragia interna", back: "Sangue por nariz/ouvidos (TCE fechado), tosse com sangue (trauma toracopulmonar), vômito com sangue (trauma abdominal), rigidez/espasmos abdominais, fratura de pelve ou ossos longos, equimose em tórax/abdômen, ferida penetrante." },
+  { front: "Sinais e sintomas compensatórios de hemorragia", back: "Agitação/desorientação, palidez, sudorese e pele fria, taquicardia (FC > 100), taquipneia (FR ≥ 28), sede, prostração." },
+  { front: "Hipotensão na hemorragia — é sinal precoce ou tardio?", back: "Sinal TARDIO — já indica perda superior a 30% do volume sanguíneo. Não esperar a PA cair para suspeitar de hemorragia." },
+  { front: "Causas de obstrução de via aérea, em ordem de frequência", back: "1) Queda da base da língua; 2) Secreções/sangue/resíduos na orofaringe; 3) Trauma ou edema de laringe (queimadura inalatória)." },
+  { front: "Manobra de via aérea sem suspeita cervical", back: "Chin lift + jaw thrust." },
+  { front: "Manobra de via aérea com suspeita cervical", back: "Jaw thrust isolado, com a cabeça mantida em posição neutra." },
+  { front: "Epiglote — função", back: "Direciona o ar para a traqueia e o alimento para o esôfago. Em pacientes inconscientes, pode perder o tônus e contribuir para a obstrução da via aérea." },
+  { front: "Alvéolos — o que são?", back: "A unidade funcional da respiração — local onde ocorre a troca de O2 e CO2." },
+  { front: "Músculos respiratórios — principal e acessórios", back: "Principal: diafragma. Acessórios: intercostais, esternocleidomastoideo e escaleno — sua visibilidade em repouso é sinal de desconforto respiratório." },
+  { front: "Cânula Orofaríngea (COF) — indicação e dimensionamento", back: "Indicada em paciente inconsciente SEM reflexo de vômito. Material rígido, via oral. Dimensionamento: do canto da boca ao lóbulo da orelha. Inserção em adultos: côncava para cima, com rotação de 180°." },
+  { front: "Cânula Nasofaríngea — indicação e dimensionamento", back: "Indicada em paciente inconsciente OU semiconsciente, TOLERADA com reflexo de vômito presente. Material flexível (silicone/PVC), via nasal. Dimensionamento: do lóbulo da orelha à base do nariz. Inserção direta, sem rotação." },
+  { front: "Categorias de frequência respiratória (FR) e conduta", back: "Apneico (0/gasping) → BVM + O2 imediatamente. Bradipneia (< 10) → assistir ventilação. Normal (10–20) → monitorar. Rápida (20–30) → investigar causa. Taquipneia grave (> 30) → hipóxia/acidose, sinal grave." },
+  { front: "Meta de SpO2 — geral e em DPOC", back: "Geral: ≥ 94%. Em DPOC com retenção crônica de CO2: 88–92% — O2 em excesso pode suprimir o drive respiratório." },
+  { front: "Regra de FiO2 do cateter nasal", back: "Ar ambiente = 21% de O2. Cada litro suplementar soma cerca de +3 a 4% de FiO2 (1 L/min ≈ 24%; 6 L/min ≈ 44%, o máximo do cateter)." },
+  { front: "Indicações de oxigenoterapia (AARC)", back: "PaO2 < 60 mmHg ou SpO2 < 90% em ar ambiente; SpO2 < 88% em esforço/sono em cardiorrespiratórios; IAM; intoxicação por monóxido de carbono; envenenamento por cianeto; convulsão." },
+  { front: "Cilindro de O2 — cor e componentes do regulador", back: "Cor verde = uso medicinal (norma internacional). Conjunto regulador: manômetro (quantidade interna, Kgf/cm²) + redutor de pressão (reduz 150–200 para 3–5 Kgf/cm²) + fluxômetro (dosa L/min)." },
+  { front: "Cateter nasal (óculos) — fluxo, FiO2 e indicação", back: "Fluxo: 1–6 L/min. FiO2: até 44%. Indicação: hipóxia leve (SpO2 92–94%)." },
+  { front: "Máscara facial simples — fluxo, FiO2 e regra absoluta", back: "Fluxo mínimo de 6 L/min (abaixo disso, reinalação de CO2). FiO2: até 60%. Indicação: hipóxia leve a moderada." },
+  { front: "Máscara com reservatório — fluxo, FiO2, indicação e cuidado", back: "Fluxo: 12–15 L/min. FiO2: 95–100%. Indicação: hipóxia moderada a grave sem indicação de IOT. Cuidado: manter o reservatório sempre cheio e monitorar nível de consciência (risco de vômito/broncoaspiração)." },
+  { front: "BVM (Bolsa-Válvula-Máscara) — fluxo, indicação e detalhe técnico", back: "Fluxo de O2: 10–15 L/min. Indicação: apneia ou ventilação ineficaz. Acoplamento firme é essencial — vazamento lateral anula o fluxo. Possui válvula pop-off (limitadora de pressão), que pode ser bloqueada se necessário." },
+  { front: "Classificação dos sistemas de O2 por FiO2", back: "Baixo fluxo: < 35% (cateter nasal). Médio fluxo: 35–60% (máscara facial simples). Alto fluxo: > 60% (máscara com reservatório, BVM)." },
+  { front: "Tabela de classificação do oxímetro de pulso (SpO2)", back: "95–100% = Normal. 91–94% = Hipóxia leve. 86–90% = Hipóxia moderada. < 85% = Hipóxia grave." },
+  { front: "Intoxicação por monóxido de carbono (CO) e o oxímetro", back: "O CO se liga à hemoglobina como o O2, causando leitura FALSAMENTE NORMAL no oxímetro. Tratar com O2 a 100% pelo julgamento clínico, independentemente da leitura." },
+  { front: "Efeito Lorrain Smith", back: "Nome técnico da toxicidade pulmonar por hiperóxia prolongada — dano direto ao epitélio alveolar e ao endotélio capilar." },
+  { front: "Atelectasia por absorção", back: "O nitrogênio (N2) do ar ambiente mantém os alvéolos abertos por ser absorvido lentamente. Substituído completamente por O2 (absorção mais rápida), os alvéolos colapsam." },
+  { front: "Vasoconstrição coronariana/cerebral por hiperóxia — mecanismo", back: "Hiperóxia → aumento de espécies reativas de oxigênio (EROs) → inativação do óxido nítrico (NO, vasodilatador) → vasoconstrição coronariana e cerebral." },
+  { front: "Supressão do drive respiratório em DPOC — mecanismo", back: "Em retentores crônicos de CO2, o estímulo respiratório passa a depender da hipoxemia (drive hipóxico). O2 em excesso elimina esse estímulo, com risco de apneia." },
+  { front: "Aspiração de vias aéreas — sequência e regra", back: "Sequência menos contaminada → mais contaminada (nariz → boca). Introduzir a sonda pelo canto lateral da boca, evitando a língua (reflexo de vômito). Não aspirar por períodos prolongados — intercalar com oxigenoterapia." },
+  { front: "Choque — definição", back: "Perfusão inadequada das células, gerando desequilíbrio entre oferta e demanda de O2 e disfunção orgânica." },
+  { front: "Metabolismo aeróbico x anaeróbico no choque", back: "Aeróbico: glicose + O2 → ATP, H2O e CO2 (eficiente). Sem O2 suficiente, a célula usa a via anaeróbica: glicose vira lactato (rendimento muito menor) → acidose metabólica. Abaixo de pH 7,20, o miocárdio entra em depressão grave." },
+  { front: "Sensibilidade isquêmica — tempo até lesão irreversível", back: "Cérebro, coração e pulmões: 4–6 minutos. Órgãos abdominais: 45–90 minutos. Pele e músculo esquelético: 4–6 horas." },
+  { front: "Resposta compensatória na hipovolemia — sequência", back: "Epinefrina (suprarrenais) aumenta o débito cardíaco → norepinefrina (simpático) → vasoconstrição periférica → fecha capilares → menos O2 periférico → metabolismo anaeróbico nas células." },
+  { front: "Os 4 tipos de choque e causa mais comum de cada", back: "Hipovolêmico — perda de volume (hemorragia). Cardiogênico — falha da bomba cardíaca (IAM). Distributivo — vasodilatação periférica intensa (sepse/anafilaxia/lesão medular). Obstrutivo — impedimento mecânico ao fluxo (tamponamento/TEP/PNX hipertensivo)." },
+  { front: "Choque distributivo — pele característica e subtipos", back: "Pele QUENTE na fase inicial (único choque com esse achado), por vasodilatação periférica intensa. Subtipos: séptico (febre + infecção), anafilático (urticária, broncoespasmo, edema) e neurogênico (lesão medular)." },
+  { front: "Choque neurogênico — achado que o diferencia dos demais", back: "Bradicardia — a única exceção à regra geral de taquicardia em quadros de choque." },
+  { front: "Classes de hemorragia I a IV — perda de volume aproximada (adulto 70 kg, volemia ≈ 5L)", back: "Classe I: < 15% (< 750 mL). Classe II: 15–30% (750–1.500 mL). Classe III: 30–40% (1.500–2.000 mL). Classe IV: > 40% (> 2.000 mL)." },
+  { front: "Classes de hemorragia I e II — o que acontece com a PA?", back: "Pode permanecer normal (ou leve queda na II) — a FC é o primeiro parâmetro a se alterar, não a PA." },
+  { front: "Classe IV de hemorragia — o que exige?", back: "Cristaloide isolado não resolve — exige transfusão maciça e controle definitivo da hemorragia. FC > 140, PA muito reduzida, estado mental letárgico ou em coma." },
+  { front: "Escala AVDI — significado de cada letra", back: "A — Acordado/Alerta (responde nome, endereço, detalhes; contato visual presente). V — Verbal (atende ao comando de voz, pode estar confuso — risco iminente de rebaixamento). D — Doloroso (responde só a estímulo doloroso). I — Irresponsivo (sem resposta a qualquer estímulo)." },
+  { front: "AVDI x Escala de Glasgow — quando usar cada uma?", back: "AVDI: avaliação PRIMÁRIA, decisão rápida. Glasgow: avaliação SECUNDÁRIA, quando há tempo (geralmente no transporte) — mais detalhada." },
+  { front: "Avaliação pupilar — Miose", back: "Pupilas contraídas e reativas — causa provável: drogas alucinógenas/estimulantes." },
+  { front: "Avaliação pupilar — Anisocoria", back: "Pupilas assimétricas — indica lesão cerebral localizada (TCE, AVC). Após trauma, considerar herniação cerebral até prova em contrário." },
+  { front: "Avaliação pupilar — Miose paralítica", back: "Pupilas contraídas e ARREATIVAS — causa provável: lesão do SNC ou medicamentos." },
+  { front: "Avaliação pupilar — Midríase paralítica", back: "Pupilas dilatadas e ARREATIVAS — a mais grave: associada a inconsciência, choque, PCR ou medicamentos." },
+  { front: "Escala de Coma de Glasgow — domínios e pontuação", back: "Abertura ocular (1–4) + resposta verbal (1–5) + resposta motora (1–6). Máximo 15 (normal), mínimo 3 (sem resposta). Usada na avaliação secundária." },
+  { front: "SAMPLER — o que cada letra representa?", back: "S — Sintomas; A — Alergias; M — Medicamentos; P — Passado médico; L — Lanche (última ingestão); E — Eventos; R — Risco de gravidez." },
+  { front: "SAMPLER — qual item é o mais esquecido e por quê?", back: "O 'L' (Lanche/última ingestão) — crítico para avaliar o risco de aspiração caso a vítima precise de via aérea avançada." },
+  { front: "SAMPLER — qual item é obrigatório em mulheres em idade fértil?", back: "O 'R' (Risco de gravidez) — última menstruação." },
+  { front: "Enchimento capilar — valor normal e sinal de alarme", back: "Normal: < 2 segundos. > 2 segundos = perfusão inadequada — sinal de alarme mesmo com pressão arterial normal." }
+];
+
+let order = [];
+let idx = 0;
+let know = 0;
+let later = [];
+let flipped = false;
+let reviewMode = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildDeck(cards){
+  order = shuffle(cards);
+  idx = 0;
+  know = 0;
+  later = [];
+  flipped = false;
+  reviewMode = false;
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(idx >= order.length){
+    app.innerHTML = `
+      <div class="summary">
+        <div class="term" style="font-size:18px;">Baralho concluído</div>
+        <div class="num">${order.length} cartões</div>
+        <div class="row">
+          <div class="item know"><div class="n">${know}</div><div class="l">Sei</div></div>
+          <div class="item later"><div class="n">${later.length}</div><div class="l">Revisar depois</div></div>
+        </div>
+        ${later.length > 0 ? '<button class="btn full" onclick="reviewLater()">Refazer apenas os pendentes</button>' : ''}
+        <button class="btn ghost" onclick="buildDeck(CARDS_RAW)">Embaralhar e recomeçar tudo</button>
+      </div>`;
+    return;
+  }
+  flipped = false;
+  const c = order[idx];
+  const pct = Math.round((idx/order.length)*100);
+  app.innerHTML = `
+    <div class="meta"><span>${reviewMode ? 'Revisão dos pendentes' : 'Baralho completo'} — cartão ${idx+1} de ${order.length}</span><span>Sei: ${know} · Revisar: ${later.length}</span></div>
+    <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    <div class="scene">
+      <div class="card3d" id="card3d" onclick="flip()">
+        <div class="face front">
+          <span class="label">Termo</span>
+          <div class="term">${c.front}</div>
+          <div class="hint">Toque no cartão para ver a definição</div>
+        </div>
+        <div class="face back">
+          <span class="label">Definição</span>
+          <div class="def">${c.back}</div>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn later" onclick="mark(false)">Revisar depois</button>
+      <button class="btn know" onclick="mark(true)">Sei</button>
+    </div>
+    <button class="btn ghost" onclick="buildDeck(CARDS_RAW)">Embaralhar tudo e recomeçar</button>`;
+}
+
+function flip(){
+  flipped = !flipped;
+  document.getElementById('card3d').classList.toggle('flipped', flipped);
+}
+
+function mark(knewIt){
+  const c = order[idx];
+  if(knewIt) know++;
+  else later.push(c);
+  idx++;
+  render();
+}
+
+function reviewLater(){
+  reviewMode = true;
+  buildDeck(later);
+}
+
+buildDeck(CARDS_RAW);
+</script>
+</body>
+</html>

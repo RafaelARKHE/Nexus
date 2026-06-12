@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — APH e Resgate I | VC02</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+  header { padding: 18px 16px 8px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 14px; color: #6b6a66; margin: 0; }
+  .progress { font-size: 14px; color: #6b6a66; margin: 14px 0 6px; }
+  .progress-bar { height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; }
+  .progress-bar > div { height: 100%; background: #8a3324; transition: width .25s ease; }
+  .card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-top: 14px;
+  }
+  .question { font-size: 17px; line-height: 1.5; margin: 0 0 16px; font-weight: 600; }
+  .opt {
+    display: block; width: 100%; text-align: left;
+    background: #faf9f6; border: 1.5px solid #e3e1da; border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px; font-size: 18px; line-height: 1.4;
+    min-height: 44px; cursor: pointer; color: #2b2a28;
+  }
+  .opt:active { background: #efeee8; }
+  .opt[disabled] { cursor: default; }
+  .opt.correct { background: #e7f3e9; border-color: #4a8f5b; }
+  .opt.wrong { background: #f8e9e7; border-color: #b5453a; }
+  .opt .tag {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 8px; border-radius: 6px; margin-bottom: 6px;
+  }
+  .opt.correct .tag { background: #4a8f5b; color: #fff; }
+  .opt.wrong .tag { background: #b5453a; color: #fff; }
+  .review { margin-top: 16px; }
+  .banner {
+    border-radius: 10px; padding: 14px 16px; font-size: 16px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .banner.ok { background: #e7f3e9; color: #2c5e38; border: 1.5px solid #4a8f5b; }
+  .banner.no { background: #f8e9e7; color: #7a2c22; border: 1.5px solid #b5453a; }
+  .analysis { margin-bottom: 14px; }
+  .analysis .item {
+    font-size: 15px; line-height: 1.5; padding: 10px 12px; border-radius: 8px;
+    margin-bottom: 8px; border-left: 4px solid #d8d6cf; background: #faf9f6;
+  }
+  .analysis .item.is-correct { border-left-color: #4a8f5b; background: #f0f7f1; }
+  .analysis .item.is-chosen-wrong { border-left-color: #b5453a; background: #fbf1f0; }
+  .analysis .item b { font-weight: 700; }
+  .block {
+    border-radius: 10px; padding: 14px 16px; font-size: 14.5px; line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .block.fixar { background: #fbf3e6; border: 1.5px solid #d9a441; }
+  .block.alem { background: #eaf0f7; border: 1.5px solid #5d7fa6; }
+  .block .label {
+    display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .block.fixar .label { color: #9a6b1a; }
+  .block.alem .label { color: #3b5a80; }
+  .btn {
+    display: inline-block; width: 100%; text-align: center;
+    background: #8a3324; color: #fff; border: none; border-radius: 10px;
+    padding: 14px; font-size: 16px; font-weight: 700; min-height: 48px;
+    margin-top: 14px; cursor: pointer;
+  }
+  .btn:active { background: #6f2a1d; }
+  .btn.secondary { background: #fff; color: #8a3324; border: 1.5px solid #8a3324; }
+  .score { text-align: center; }
+  .score .num { font-size: 44px; font-weight: 800; color: #8a3324; margin: 6px 0; }
+  .score .pct { font-size: 18px; color: #6b6a66; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 22px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Simulado — APH e Resgate I</h1>
+    <p>VC02 · 15 questões comentadas — nível integrado, escopo: Avaliação Primária e Secundária, Choque e Hemorragia, Via Aérea e Oxigenoterapia</p>
+  </header>
+  <div id="app"></div>
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA</p>
+</div>
+
+<script>
+const QUESTIONS_RAW = [
+{
+  q: "Durante o atendimento a uma vítima de acidente com a perna esmagada, a guarnição observa hemorragia pulsátil de grande volume na coxa e, ao mesmo tempo, percebe leve acúmulo de secreções na via aérea da vítima, que ainda respira espontaneamente. Segundo o protocolo XABCDE atual (PHTLS), a primeira conduta da guarnição deve ser:",
+  opts: [
+    { text: "Conter a hemorragia exsanguinante (torniquete na raiz do membro) antes de qualquer manobra sobre a via aérea.", correct:true, comment:"Certa. É o diferencial do protocolo moderno em relação ao antigo ABC: a hemorragia exsanguinante (o 'X') vem ANTES da via aérea, porque mata mais rápido. Com a vítima ainda respirando espontaneamente, a secreção leve pode esperar alguns segundos; a hemorragia pulsátil, não." },
+    { text: "Realizar manobra de chin lift ou jaw thrust para liberar a via aérea antes de tratar a hemorragia.", correct:false, comment:"Errada. Essa seria a lógica do ABC antigo, que começava pela via aérea. No XABCDE atual, hemorragia exsanguinante é tratada primeiro — exatamente a inversão que a questão está testando." },
+    { text: "Avaliar a Escala de Coma de Glasgow antes de qualquer intervenção, para definir a gravidade do caso.", correct:false, comment:"Errada. Glasgow é ferramenta da avaliação SECUNDÁRIA, aplicada após as ameaças à vida da primária estarem controladas. Usá-la como primeira conduta inverte a ordem do atendimento." },
+    { text: "Administrar oxigênio por máscara com reservatório antes de qualquer outra medida.", correct:false, comment:"Errada. Oxigenoterapia faz parte do 'B' (Respiração) — etapa posterior ao 'X' e ao 'A' no protocolo. Mesmo sendo importante, não é a prioridade diante de uma hemorragia exsanguinante ativa." },
+    { text: "Aguardar a chegada de recursos avançados antes de iniciar qualquer conduta sobre a vítima.", correct:false, comment:"Errada. As condutas de controle de hemorragia exsanguinante são justamente o que a guarnição de primeira resposta deve fazer imediatamente — não há justificativa para aguardar recursos adicionais diante de risco de vida iminente." }
+  ],
+  referencia: "X — Hemorragia Exsanguinante é a primeira etapa do XABCDE — o diferencial do protocolo moderno (PHTLS) em relação a abordagens antigas que começavam pela via aérea. Hemorragia exsanguinante mata mais rápido que obstrução de via aérea.",
+  aprofundamento: "Note que a questão também testa a leitura do estado respiratório: 'leve acúmulo de secreções' com respiração espontânea preservada não configura uma emergência de via aérea no mesmo nível da hemorragia pulsátil. Em provas, compare sempre a gravidade relativa dos achados antes de decidir a ordem de atendimento."
+},
+{
+  q: "Um torniquete foi aplicado na coxa de uma vítima às 14h05 para controle de hemorragia arterial em extremidade. Quarenta minutos depois, ainda durante o transporte, a equipe reavalia o membro: o sangramento está controlado, mas o membro apresenta-se bastante isquêmico e a vítima reclama de dor intensa no local. A conduta correta da equipe é:",
+  opts: [
+    { text: "Manter o torniquete aplicado, manter o registro do horário de aplicação e seguir para o hospital, sem afrouxá-lo no campo.", correct:true, comment:"Certa. A regra é absoluta: torniquete não se afrouxa no campo, independentemente de dor ou aspecto isquêmico do membro — esses achados são esperados. O afrouxamento só deve ocorrer em ambiente hospitalar, com recursos para lidar com o sangramento e a reperfusão. O registro do horário (40 minutos, dentro do limite de 120) orienta a equipe hospitalar." },
+    { text: "Afrouxar parcialmente o torniquete para restaurar parte da perfusão e reavaliar o sangramento.", correct:false, comment:"Errada. Afrouxar no campo é justamente o que a regra proíbe — pode reiniciar uma hemorragia exsanguinante já controlada, sem que a equipe tenha recursos para um novo controle eficaz em movimento." },
+    { text: "Substituir o torniquete por um curativo compressivo, já que o sangramento está controlado.", correct:false, comment:"Errada. A substituição do torniquete por uma técnica de menor eficácia (curativo compressivo) é uma forma de afrouxamento disfarçada — o risco de reabertura da hemorragia é o mesmo. A troca de dispositivo, se necessária, é decisão hospitalar." },
+    { text: "Remover o torniquete após 30 minutos, pois esse é o tempo máximo permitido no campo.", correct:false, comment:"Errada. O tempo máximo de aplicação do torniquete é de 120 minutos, não 30. Confundir esse número é um erro clássico — 30 minutos não corresponde a nenhum limite estabelecido para o torniquete." },
+    { text: "Aplicar um segundo torniquete acima do primeiro e remover imediatamente o primeiro.", correct:false, comment:"Errada. Não há indicação para essa troca quando o sangramento já está controlado e o tempo (40 min) está dentro do limite de 120 minutos. Trocar torniquetes sem necessidade apenas reintroduz o risco de reabertura da hemorragia." }
+  ],
+  referencia: "Regras de aplicação do torniquete: informar a vítima (vai doer); verificar objetos nos bolsos antes de apertar; apertar até ocluir o pulso distal; anotar o horário de aplicação; máximo 120 minutos; nunca afrouxar no campo — somente no hospital.",
+  aprofundamento: "Essa regra se conecta diretamente às classes de hemorragia: um torniquete bem aplicado é o que evita a progressão de uma hemorragia classe II para classe III ou IV. Afrouxá-lo prematuramente no campo pode jogar a vítima de volta para uma classe mais grave, com queda de PA, taquicardia maior e alteração do estado mental."
+},
+{
+  q: "Sobre os agentes hemostáticos utilizados no controle de hemorragias no atendimento pré-hospitalar, é correto afirmar que:",
+  opts: [
+    { text: "Agentes à base de caulim atuam acelerando a cadeia de coagulação, enquanto agentes à base de quitosana atuam formando uma barreira física por tamponamento — mecanismos distintos, não equivalentes.", correct:true, comment:"Certa. É exatamente a distinção do material: caulim acelera a cascata de coagulação (mecanismo bioquímico), enquanto a quitosana forma uma barreira física que tampona a ferida (mecanismo mecânico). São agentes hemostáticos, mas não intercambiáveis em termos de mecanismo de ação." },
+    { text: "Caulim e quitosana possuem exatamente o mesmo mecanismo de ação, diferindo apenas no fabricante do produto.", correct:false, comment:"Errada. A questão central deste tópico é justamente que os mecanismos são DIFERENTES — caulim acelera a coagulação, quitosana tampona fisicamente. Tratá-los como equivalentes ignora essa distinção que o material destaca explicitamente." },
+    { text: "Quitosana acelera a cadeia de coagulação, enquanto o caulim forma uma barreira física por tamponamento.", correct:false, comment:"Errada — é a inversão exata dos mecanismos. Caulim acelera a coagulação; quitosana forma a barreira física. Trocar os papéis entre os dois agentes é a pegadinha clássica deste tópico." },
+    { text: "Esses agentes substituem o torniquete em hemorragias exsanguinantes de extremidade, sendo a primeira escolha nesses casos.", correct:false, comment:"Errada. Na hierarquia das técnicas de controle de hemorragia, o torniquete é a medida de máxima eficácia para hemorragia exsanguinante de extremidade — os agentes hemostáticos compõem o preenchimento de feridas, etapa anterior na sequência, mas não substituem o torniquete quando este é indicado." },
+    { text: "São indicados apenas para hemorragias internas, nunca podendo ser utilizados em feridas externas abertas.", correct:false, comment:"Errada. Os agentes hemostáticos são aplicados justamente no preenchimento de feridas externas abertas — introduzidos na lesão em direção ao coração, finalizando com pressão direta ou curativo compressivo. Não se aplicam a hemorragias internas, que exigem controle definitivo hospitalar." }
+  ],
+  referencia: "Agentes hemostáticos: CAULIM (acelera a cadeia de coagulação) / QUITOSANA (barreira física por tamponamento) — mecanismos diferentes, não equivalentes. Etapa 4 das 6 técnicas de controle de hemorragia, dentro do preenchimento de feridas.",
+  aprofundamento: "Esses agentes se encaixam na sequência das 6 técnicas de controle de hemorragia — pressão direta, curativo compressivo, preenchimento de feridas, agentes hemostáticos, ITCLAMP e torniquete. Em uma ferida de junção (axila ou virilha), onde o torniquete convencional não se aplica, os agentes hemostáticos ganham ainda mais relevância, muitas vezes combinados ao ITCLAMP."
+},
+{
+  q: "Julgue a assertiva: “A Escala de Coma de Glasgow e a escala AVDI são intercambiáveis e podem ser aplicadas em qualquer momento do atendimento, pois ambas avaliam exatamente os mesmos parâmetros do nível de consciência, apenas com nomes diferentes.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva ignora que AVDI e Glasgow têm momentos e profundidades de avaliação diferentes — tratá-las como intercambiáveis é o erro central que o material alerta como confusão clássica de prova." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). AVDI é a ferramenta da avaliação PRIMÁRIA — rápida, usada para decisão imediata (Acordado, Verbal, Doloroso, Irresponsivo). A Escala de Coma de Glasgow é usada na avaliação SECUNDÁRIA, quando há tempo (geralmente durante o transporte), e é muito mais detalhada: avalia três domínios separados — abertura ocular, resposta verbal e resposta motora — somando de 3 a 15 pontos. Confundir os dois momentos e tratá-las como equivalentes é um erro clássico apontado no material." }
+  ],
+  referencia: "AVDI é rápido, Glasgow é detalhado: AVDI na pesquisa primária (decisão imediata); Escala de Glasgow na secundária (quando há tempo, geralmente no transporte). Glasgow: abertura ocular (1–4) + resposta verbal (1–5) + resposta motora (1–6); máximo 15, mínimo 3.",
+  aprofundamento: "Repare na palavra 'exatamente' na assertiva — termos totalizantes como esse costumam sinalizar uma generalização indevida. Na prática, um socorrista pode classificar a vítima como 'V' no AVDI durante a primária e, minutos depois, no transporte, aplicar Glasgow e encontrar, por exemplo, 12 pontos — as duas ferramentas convivem, mas em momentos e níveis de detalhe diferentes."
+},
+{
+  q: "Durante o atendimento, a vítima está inconsciente, mas apresenta reflexo de vômito presente quando há contato na cavidade oral. As manobras manuais de abertura de via aérea não foram suficientes para mantê-la pérvia. Qual adjunto de via aérea é o mais indicado nessa situação?",
+  opts: [
+    { text: "Cânula nasofaríngea, pois é tolerada mesmo com reflexo de vômito presente.", correct:true, comment:"Certa. A cânula nasofaríngea é indicada para pacientes inconscientes OU semiconscientes e, diferentemente da cânula orofaríngea, é tolerada mesmo com reflexo de vômito presente — exatamente o cenário descrito. É a opção quando manobras manuais falham, mas o reflexo ainda está ativo." },
+    { text: "Cânula orofaríngea (COF), pois é o adjunto de escolha para qualquer paciente inconsciente, independentemente do reflexo de vômito.", correct:false, comment:"Errada. A COF é indicada para pacientes inconscientes SEM reflexo de vômito — ela não é tolerada quando esse reflexo está presente, podendo provocar vômito e broncoaspiração. 'Qualquer paciente inconsciente' ignora essa condição essencial." },
+    { text: "Bolsa-Válvula-Máscara (BVM) diretamente, sem necessidade de qualquer cânula.", correct:false, comment:"Errada. A BVM trata da ventilação artificial (etapa do 'B'), mas não resolve, por si só, a obstrução por queda da base da língua descrita no cenário — o adjunto de via aérea adequado deve ser inserido antes ou em conjunto, conforme a tolerância ao reflexo de vômito." },
+    { text: "Cânula orofaríngea, desde que inserida sem o movimento de rotação de 180°.", correct:false, comment:"Errada. A técnica de inserção (com ou sem rotação) é uma questão de procedimento dentro da indicação da COF — mas a indicação primária da COF já está descartada neste caso pelo reflexo de vômito presente. O problema não é a técnica, é a escolha do dispositivo." },
+    { text: "Nenhum adjunto deve ser utilizado enquanto houver qualquer reflexo de vômito presente.", correct:false, comment:"Errada. Existe, sim, um adjunto compatível com reflexo de vômito presente — a cânula nasofaríngea, flexível e inserida pela via nasal. Descartar todos os adjuntos nessa situação ignora justamente a opção correta." }
+  ],
+  referencia: "Cânula Orofaríngea (COF): material rígido, via oral, indicada em inconsciente SEM reflexo de vômito, NÃO tolerada com reflexo presente. Cânula Nasofaríngea: material flexível, via nasal, indicada em inconsciente OU semiconsciente, TOLERADA com reflexo de vômito presente.",
+  aprofundamento: "Vale lembrar também o dimensionamento de cada cânula: a COF é medida do canto da boca ao lóbulo da orelha e, em adultos, é inserida com a concavidade para cima e rotação de 180°; a cânula nasofaríngea é medida do lóbulo da orelha à base do nariz e inserida diretamente, sem rotação. Esses detalhes de dimensionamento e técnica também costumam aparecer como distratores em questões sobre o tema."
+},
+{
+  q: "Um paciente consciente, respirando espontaneamente, apresenta SpO2 de 88% mesmo após receber oxigênio por cateter nasal a 6 L/min. Não há indicação de intubação orotraqueal. A conduta mais adequada da equipe é:",
+  opts: [
+    { text: "Trocar para máscara facial com reservatório, fluxo de 12 a 15 L/min, mantendo o reservatório sempre cheio.", correct:true, comment:"Certa. SpO2 de 88% caracteriza hipóxia moderada a grave. O cateter nasal já está no seu fluxo máximo (6 L/min, cerca de 44% de FiO2) e não está sendo suficiente. A máscara com reservatório oferece FiO2 de 95% a 100% com fluxo de 12 a 15 L/min, é indicada exatamente para hipóxia moderada a grave sem indicação de IOT, e exige manter o reservatório cheio para não comprometer a fração inspirada." },
+    { text: "Aumentar o fluxo do cateter nasal para 10 L/min, buscando elevar a FiO2 proporcionalmente.", correct:false, comment:"Errada. O fluxo máximo recomendado para o cateter nasal é de 6 L/min — acima disso não há ganho significativo de FiO2 e o fluxo excessivo resseca e lesiona a mucosa nasal. Aumentar para 10 L/min viola esse limite sem benefício correspondente." },
+    { text: "Trocar para máscara facial simples, com fluxo de 4 L/min.", correct:false, comment:"Errada por dois motivos: a máscara facial simples exige fluxo MÍNIMO de 6 L/min (abaixo disso, reinalação de CO2), e sua FiO2 máxima (até 60%) é menor que a da máscara com reservatório — não resolveria uma hipóxia moderada a grave de forma tão eficaz." },
+    { text: "Iniciar ventilação com Bolsa-Válvula-Máscara (BVM) imediatamente, mesmo o paciente respirando espontaneamente e estando consciente.", correct:false, comment:"Errada. A BVM é indicada para apneia ou ventilação ineficaz — o paciente do enunciado está consciente e respirando espontaneamente. Usar BVM nesse cenário seria desproporcional e ignoraria as opções de oxigenoterapia em alto fluxo ainda disponíveis." },
+    { text: "Reduzir o fluxo de oxigênio, pois 88% de SpO2 já está dentro da meta aceitável para qualquer paciente.", correct:false, comment:"Errada. A meta geral de SpO2 é ≥ 94% — 88% caracteriza hipóxia moderada e exige aumento, não redução, da oferta de oxigênio (exceto em pacientes DPOC, que não é o caso descrito no enunciado)." }
+  ],
+  referencia: "Sistemas de oferta de O2: cateter nasal (1–6 L/min, até 44% FiO2, hipóxia leve SpO2 92–94%); máscara facial simples (mín. 6 L/min, até 60%, hipóxia leve-moderada); máscara com reservatório (12–15 L/min, 95–100%, hipóxia moderada-grave sem indicação de IOT); BVM (10–15 L/min, ~100%, apneia ou ventilação ineficaz).",
+  aprofundamento: "Vale lembrar a tabela de classificação da oximetria — 95–100% normal, 91–94% hipóxia leve, 86–90% hipóxia moderada, < 85% hipóxia grave — e os riscos da oxigenoterapia em alto fluxo prolongado (Efeito Lorrain Smith, atelectasia por absorção, vasoconstrição por inativação do óxido nítrico), que justificam titular o fluxo pela meta de SpO2, e não oferecer O2 indiscriminadamente em fluxo máximo."
+},
+{
+  q: "Julgue a assertiva: “Em caso de suspeita de intoxicação por monóxido de carbono, uma leitura de oximetria de pulso dentro da faixa normal (95% a 100%) é suficiente para descartar a intoxicação e dispensar a oferta de oxigênio a 100%.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva ignora justamente a principal limitação do oxímetro de pulso citada no material: a intoxicação por monóxido de carbono pode produzir uma leitura falsamente normal." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). O monóxido de carbono se liga à hemoglobina de forma semelhante ao oxigênio, o que faz o oxímetro de pulso registrar uma leitura falsamente normal mesmo havendo intoxicação grave. Por isso, diante de suspeita de intoxicação por CO, o oxímetro NÃO é confiável, e a conduta é tratar com oxigênio a 100% com base no julgamento clínico, independentemente do número exibido no aparelho." }
+  ],
+  referencia: "Fatores que falseiam a leitura do oxímetro: luz ambiente, tremores, baixo volume de pulso, vasoconstrição periférica e, especialmente, intoxicação por CO — leitura falsamente normal, pois o CO se liga à hemoglobina como o O2. Regra de ouro: em caso de dúvida, confiar no julgamento clínico, não apenas no número.",
+  aprofundamento: "Esse é um dos pontos em que oxímetro e oxigenoterapia se cruzam diretamente: mesmo que o aparelho mostre 98%, a indicação de O2 a 100% na suspeita de intoxicação por CO está nas indicações AARC (intoxicação por monóxido de carbono é uma indicação expressa de oxigenoterapia), independente do valor do oxímetro."
+},
+{
+  q: "Uma vítima de picada de inseto desenvolve, em poucos minutos, urticária generalizada, broncoespasmo, hipotensão e pele quente e ruborizada — diferente da maioria dos quadros de choque, em que a pele costuma estar fria. O tipo de choque mais provável e o achado de pele que o caracteriza na fase inicial são, respectivamente:",
+  opts: [
+    { text: "Choque distributivo (subtipo anafilático); pele quente, pois há vasodilatação periférica intensa.", correct:true, comment:"Certa. O quadro — urticária, broncoespasmo e hipotensão após picada de inseto — é típico do subtipo anafilático do choque distributivo. E a pele quente na fase inicial é justamente o achado que diferencia o choque distributivo dos demais tipos: a vasodilatação periférica intensa (resistência vascular reduzida) mantém a pele quente, ao contrário do padrão 'pele fria' dos outros choques." },
+    { text: "Choque hipovolêmico; pele fria e pálida, por desvio de sangue para os órgãos vitais.", correct:false, comment:"Errada. O choque hipovolêmico decorre de perda de volume circulante (ex.: hemorragia) — não há relato de hemorragia no enunciado, e a pele fria e pálida é o padrão opposto ao 'pele quente' descrito no caso." },
+    { text: "Choque cardiogênico; pele fria e úmida, por falência da bomba cardíaca.", correct:false, comment:"Errada. O choque cardiogênico decorre de falha da bomba cardíaca (ex.: IAM), com pele fria e úmida e turgência jugular aumentada — nenhum desses elementos está presente no quadro alérgico descrito." },
+    { text: "Choque obstrutivo; pele fria, por impedimento mecânico ao fluxo sanguíneo.", correct:false, comment:"Errada. O choque obstrutivo é causado por impedimento mecânico (tamponamento cardíaco, TEP, pneumotórax hipertensivo), com pele fria e turgência jugular aumentada — não há nenhum desses mecanismos no caso de picada de inseto com broncoespasmo." },
+    { text: "Choque distributivo (subtipo neurogênico); pele fria, por lesão medular.", correct:false, comment:"Errada. O subtipo neurogênico decorre de lesão medular (não há trauma relatado) e se caracteriza por bradicardia — a única exceção à taquicardia no choque. O quadro descrito (picada de inseto, urticária, broncoespasmo) aponta para o subtipo anafilático, não o neurogênico." }
+  ],
+  referencia: "Diagnóstico diferencial do choque: o choque distributivo é o único que apresenta pele quente na fase inicial, por vasodilatação periférica intensa (resistência vascular ↓). Subtipos do distributivo: séptico (febre + sinais de infecção), anafilático (urticária, broncoespasmo, edema), neurogênico (lesão medular — bradicardia, única exceção à taquicardia no choque).",
+  aprofundamento: "Vale revisar a tabela completa de diagnóstico diferencial — pele, frequência cardíaca, pressão arterial, turgência jugular, débito cardíaco e resistência vascular — para os quatro tipos de choque (hipovolêmico, cardiogênico, distributivo e obstrutivo). O choque hipovolêmico, em especial, conecta-se diretamente ao 'X' do XABCDE: hemorragia não controlada é a causa mais comum desse tipo de choque."
+},
+{
+  q: "Uma vítima adulta de 70 kg sofre hemorragia estimada em 1.200 mL. Na avaliação, apresenta frequência cardíaca de 110 bpm, pressão arterial discretamente reduzida, frequência respiratória de 24 irpm, diurese em torno de 25 mL/h e está ansiosa, porém orientada. Essa apresentação é mais compatível com hemorragia classe:",
+  opts: [
+    { text: "II", correct:true, comment:"Certa. Uma perda de 1.200 mL em um adulto de 70 kg (volemia ≈ 5 L) corresponde a cerca de 24% do volume total — dentro da faixa de 15% a 30% (750 a 1.500 mL) da classe II. FC > 100, FR entre 20 e 30, diurese entre 20 e 30 mL/h, PA normal ou com leve queda e estado mental ansioso são exatamente os achados descritos para a classe II." },
+    { text: "I", correct:false, comment:"Errada. A classe I corresponde a perda menor que 15% (< 750 mL), com FC < 100, FR entre 14 e 20 e diurese > 30 mL/h. Os valores do enunciado (FC 110, FR 24, diurese 25 mL/h) já estão acima dos parâmetros da classe I." },
+    { text: "III", correct:false, comment:"Errada. A classe III corresponde a perda de 30% a 40% (1.500 a 2.000 mL), com FC > 120, PA já reduzida de forma mais evidente, FR entre 30 e 40, diurese entre 5 e 15 mL/h e estado mental confuso. A vítima do enunciado está orientada (apenas ansiosa) e com FC de 110 — abaixo do limiar de 120 da classe III." },
+    { text: "IV", correct:false, comment:"Errada. A classe IV corresponde a perda maior que 40% (> 2.000 mL), com FC > 140, PA muito reduzida, FR > 35, diurese < 5 mL/h e estado mental letárgico ou em coma — muito além da apresentação descrita, que envolve uma vítima orientada com FC de 110." },
+    { text: "Não é possível classificar sem exame de imagem confirmando o volume exato de sangue perdido.", correct:false, comment:"Errada. A classificação das hemorragias é construída justamente para ser feita por sinais clínicos (FC, PA, FR, diurese, estado mental) — sem depender de exame de imagem, que raramente está disponível no atendimento pré-hospitalar." }
+  ],
+  referencia: "Classes de hemorragia (adulto 70 kg, volume total ≈ 5 L): Classe II = 15–30% (750–1.500 mL), FC > 100, PA normal/leve ↓, FR 20–30, diurese 20–30 mL/h, estado mental ansioso.",
+  aprofundamento: "Esse caso reforça um ponto crítico: nas classes I e II a pressão arterial pode estar normal ou apenas levemente reduzida — a frequência cardíaca é o primeiro parâmetro a se alterar. Esperar a queda evidente da PA para suspeitar de hemorragia significativa significa já estar diante de uma classe III ou IV, quando a hipotensão se torna um sinal tardio e grave."
+},
+{
+  q: "Sobre a avaliação primária e o atendimento pré-hospitalar, considere as assertivas:<br><br>I. A hemorragia exsanguinante de extremidade deve ser controlada com torniquete antes de qualquer manobra de via aérea, segundo o protocolo atual (PHTLS).<br>II. A pergunta “O que aconteceu com você?” avalia simultaneamente via aérea, ventilação, perfusão cerebral e função neurológica.<br>III. A meta de saturação periférica de oxigênio (SpO2) é sempre de 94% a 100%, sem qualquer exceção.<br>IV. O enchimento capilar maior que 2 segundos é sinal de alarme, mesmo quando a pressão arterial está normal.<br>V. A escala AVDI substitui a Escala de Coma de Glasgow em todas as situações, inclusive na avaliação secundária.<br><br>Estão corretas:",
+  opts: [
+    { text: "I, II e IV.", correct:true, comment:"Certa. I — correta: o 'X' (hemorragia exsanguinante) vem antes do 'A' (via aérea) no XABCDE atual. II — correta: uma resposta coerente em frases completas à pergunta 'O que aconteceu com você?' indica via aérea patente, ventilação suficiente, perfusão cerebral adequada e função neurológica preservada — quatro sistemas de uma vez. IV — correta: enchimento capilar > 2 s é sinal de alarme mesmo com PA normal, pois indica perfusão inadequada antes da queda evidente da pressão. III — errada: em pacientes DPOC a meta é 88–92%, não 94–100% — há exceção. V — errada: AVDI é da avaliação primária; Glasgow é da secundária — não são intercambiáveis." },
+    { text: "I, III e V.", correct:false, comment:"Errada. Acerta a I, mas inclui duas falsas: III ignora a exceção do DPOC (meta 88–92%), e V inverte a relação entre AVDI (primária, rápido) e Glasgow (secundária, detalhado) — tratá-las como substitutas em qualquer situação contraria o material." },
+    { text: "II, III e IV.", correct:false, comment:"Errada. II e IV são verdadeiras, mas III é falsa pela exceção do DPOC — e essa combinação ainda exclui a I, que é verdadeira (X antes de A)." },
+    { text: "I, II, III e IV.", correct:false, comment:"Errada por incluir a III: a meta de SpO2 não é 'sempre' 94–100%, pois pacientes DPOC retentores de CO2 têm meta de 88–92% — a palavra 'sempre' torna a assertiva III falsa. As demais (I, II, IV) estão corretas." },
+    { text: "III, IV e V.", correct:false, comment:"Errada. Apenas a IV é verdadeira nessa combinação. III erra pela exceção do DPOC; V erra ao tratar AVDI e Glasgow como substitutos em qualquer situação, incluindo a secundária, quando na verdade Glasgow é a ferramenta própria da secundária." }
+  ],
+  referencia: "X antes de A (PHTLS); 'O que aconteceu com você?' avalia via aérea, ventilação, perfusão cerebral e função neurológica de uma vez; meta SpO2 ≥ 94% geral, mas 88–92% em DPOC; enchimento capilar > 2 s é sinal de alarme mesmo com PA normal; AVDI (primária) ≠ Glasgow (secundária).",
+  aprofundamento: "Essa questão amarra cinco 'Pontos Críticos' diferentes da revisão em um único item — é o formato que mais se aproxima de como o conteúdo integrado das três unidades (avaliação primária, choque/hemorragia e via aérea/oxigenoterapia) costuma ser cobrado em conjunto. Sempre que uma assertiva usar 'sempre' ou 'sem qualquer exceção', vale verificar se existe uma exceção documentada no material — DPOC é a exceção mais recorrente neste escopo."
+},
+{
+  q: "São riscos associados à oxigenoterapia em alto fluxo prolongado, EXCETO:",
+  opts: [
+    { text: "Toxicidade pulmonar, conhecida como Efeito Lorrain Smith, por dano direto ao epitélio alveolar e ao endotélio capilar.", correct:false, comment:"É risco real (não é a exceção). O Efeito Lorrain Smith é o nome técnico da toxicidade pulmonar por hiperóxia prolongada — exposição prolongada a altas FiO2 causa dano direto ao epitélio alveolar e ao endotélio capilar pulmonar." },
+    { text: "Atelectasia por absorção, decorrente da substituição do nitrogênio que mantém os alvéolos abertos.", correct:false, comment:"É risco real (não é a exceção). O nitrogênio do ar ambiente mantém os alvéolos abertos por ser absorvido lentamente; ao ser substituído completamente por O2 (absorção mais rápida), os alvéolos podem colapsar — atelectasia por absorção." },
+    { text: "Vasoconstrição coronariana e cerebral, por aumento de espécies reativas de oxigênio e inativação do óxido nítrico.", correct:false, comment:"É risco real (não é a exceção). A hiperóxia gera excesso de EROs (radicais livres), que inativam o óxido nítrico (NO, vasodilatador endotelial), levando à vasoconstrição coronariana e cerebral." },
+    { text: "Supressão do drive respiratório em pacientes DPOC retentores crônicos de CO2, cujo estímulo respiratório depende da hipoxemia.", correct:false, comment:"É risco real (não é a exceção). Em pacientes DPOC com retenção crônica de CO2, o estímulo para respirar passa a depender de níveis baixos de O2 (drive hipóxico); O2 em excesso elimina esse estímulo, com risco de apneia." },
+    { text: "Aumento da capacidade do sangue de transportar dióxido de carbono, prevenindo a acidose respiratória.", correct:true, comment:"Certa (é a exceção — não consta como risco). Esse efeito não está entre os riscos documentados da oxigenoterapia em alto fluxo. Pelo contrário: o material associa o excesso de O2 a riscos como toxicidade pulmonar, atelectasia, vasoconstrição e supressão do drive respiratório — nunca a uma melhora na eliminação de CO2. Essa alternativa inventa um benefício fisiológico que não corresponde a nenhum dos quatro riscos listados." }
+  ],
+  referencia: "Riscos da oxigenoterapia em alto fluxo prolongado: toxicidade pulmonar (Efeito Lorrain Smith), atelectasia por absorção, vasoconstrição coronariana/cerebral (via EROs e inativação do NO) e supressão do drive respiratório em DPOC retentor de CO2.",
+  aprofundamento: "Essa lista de quatro riscos é um excelente candidato a questões 'EXCETO' justamente porque tem um número fechado de itens — qualquer quinta opção plausível, mas não listada, é a exceção. Vale memorizar os quatro nominalmente: toxicidade pulmonar, atelectasia por absorção, vasoconstrição (coronariana/cerebral) e supressão do drive respiratório."
+},
+{
+  q: "Durante a pesquisa primária, o socorrista chama a vítima pelo nome em voz alta. A vítima abre os olhos e emite uma resposta verbal confusa, sem conseguir informar onde está nem o que aconteceu. De acordo com a escala AVDI, essa vítima é classificada como:",
+  opts: [
+    { text: "V — Verbal, o que já indica risco iminente de rebaixamento do nível de consciência e exige monitorização contínua.", correct:true, comment:"Certa. A vítima atende ao comando de voz (abriu os olhos ao chamado) mas está confusa — exatamente a descrição do nível V (Verbal) da escala AVDI. O material destaca esse nível como indicando risco iminente de rebaixamento, exigindo monitorização contínua, pois a confusão pode evoluir rapidamente para D ou I." },
+    { text: "A — Acordada e Alerta, pois respondeu ao chamado verbal do socorrista.", correct:false, comment:"Errada. O nível A (Acordado/Alerta) exige que a vítima responda nome, endereço e detalhes de forma coerente, com contato visual presente — indicando via aérea, ventilação e perfusão cerebral preservadas. Uma resposta confusa, sem orientação, não atende a esse critério." },
+    { text: "D — responde apenas a estímulo Doloroso (esterno, trapézio ou leito ungueal).", correct:false, comment:"Errada. O nível D é reservado para vítimas que NÃO respondem a estímulo verbal e só reagem a estímulo doloroso. A vítima do enunciado respondeu ao chamado verbal (abriu os olhos e falou, ainda que de forma confusa) — isso já a classifica como V, não D." },
+    { text: "I — Irresponsiva, sem resposta a qualquer estímulo.", correct:false, comment:"Errada. 'Irresponsiva' descreve ausência total de resposta a qualquer estímulo, inclusive doloroso — situação muito mais grave do que a descrita, em que a vítima abriu os olhos e respondeu verbalmente, mesmo que de forma confusa." },
+    { text: "Não é possível classificar pelo AVDI sem aplicar primeiro a Escala de Coma de Glasgow.", correct:false, comment:"Errada. O AVDI é justamente a ferramenta de classificação RÁPIDA da avaliação primária, aplicável sem depender da Escala de Glasgow — que é mais detalhada e usada na avaliação secundária, quando há tempo disponível." }
+  ],
+  referencia: "Escala AVDI: A — Acordado/Alerta (responde nome, endereço, detalhes; contato visual presente); V — Verbal (atende ao comando de voz, pode estar confuso — risco iminente de rebaixamento, monitorar continuamente); D — Doloroso (responde só a estímulo doloroso); I — Irresponsivo (sem resposta a qualquer estímulo).",
+  aprofundamento: "O nível V é um dos pontos mais sensíveis da escala: a vítima ainda 'responde', o que pode dar uma falsa sensação de estabilidade, mas a confusão mental já indica comprometimento da perfusão ou oxigenação cerebral. É exatamente por isso que o material associa o V a 'risco iminente' — diferente do A, que indica preservação plena das funções avaliadas pela pergunta 'O que aconteceu com você?'."
+},
+{
+  q: "Durante uma ocorrência com múltiplas vítimas de acidente automobilístico, a guarnição aplica torniquetes em três situações distintas: (1) hemorragia exsanguinante de extremidade com risco iminente de morte, exigindo controle imediato; (2) hemorragia de extremidade já identificada, com tempo disponível para posicionamento preciso a poucos centímetros da ferida; (3) hemorragia na região da virilha, onde o torniquete convencional de extremidade não pode ser posicionado. Os tipos de torniquete utilizados em cada situação são, respectivamente:",
+  opts: [
+    { text: "Emergencial, controlado e juncional.", correct:true, comment:"Certa. (1) Risco iminente de morte exige o torniquete emergencial, aplicado na raiz do membro ('alto e apertado'), priorizando rapidez. (2) Havendo tempo para posicionamento preciso, usa-se o torniquete controlado, aplicado de 5 a 7 cm acima da ferida, preservando mais tecido. (3) A virilha é uma região juncional, onde o torniquete de extremidade não se aplica — exige o torniquete juncional, posicionado em axila ou virilha." },
+    { text: "Controlado, emergencial e juncional.", correct:false, comment:"Errada — inverte as duas primeiras situações. A situação de risco iminente (1) exige o torniquete emergencial (prioriza rapidez), não o controlado; e a situação com tempo disponível (2) é a que permite o torniquete controlado, não o emergencial." },
+    { text: "Juncional, emergencial e controlado.", correct:false, comment:"Errada — desloca completamente as correspondências. O torniquete juncional é para regiões de junção (axila/virilha), que é a situação (3), não a (1); e a situação (3), descrita como virilha, não pode ser tratada com torniquete controlado, que é de extremidade." },
+    { text: "Emergencial, juncional e controlado.", correct:false, comment:"Errada nas duas últimas posições. A situação (2) — tempo disponível para posicionamento preciso em extremidade — corresponde ao torniquete controlado, não ao juncional; e a situação (3) — virilha — é a que exige o torniquete juncional, não o controlado." },
+    { text: "Controlado, juncional e emergencial.", correct:false, comment:"Errada em todas as posições. Risco iminente de morte (1) exige rapidez — torniquete emergencial, não controlado; tempo disponível em extremidade (2) é o cenário do torniquete controlado, não do juncional; e a virilha (3) exige torniquete juncional, não emergencial." }
+  ],
+  referencia: "Torniquete — os 3 tipos: Emergencial (raiz do membro, 'alto e apertado' — urgência máxima, prioriza rapidez); Controlado (5–7 cm acima da ferida — há tempo para posicionamento preciso, preserva mais tecido); Juncional (axila/virilha — regiões onde o torniquete de extremidade não se aplica).",
+  aprofundamento: "Em regiões juncionais, como a virilha, o ITCLAMP também é uma opção citada no material — ele sela as bordas da ferida em extremidades, junções (axila/virilha) e couro cabeludo, funcionando como medida temporária até o controle cirúrgico definitivo. Questões de correspondência ordenada como esta recompensam memorizar não só a definição de cada tipo, mas também o critério que leva à escolha de cada um (urgência vs. tempo disponível vs. localização anatômica)."
+},
+{
+  q: "Julgue a assertiva: “Em pacientes com DPOC e retenção crônica de dióxido de carbono, a meta de saturação periférica de oxigênio deve ser mantida entre 88% e 92%, pois a oferta excessiva de oxigênio pode suprimir o drive respiratório desses pacientes, que depende da hipoxemia.”",
+  opts: [
+    { text: "Certo", correct:true, comment:"Certa. A assertiva está correta e reproduz exatamente a exceção destacada no material: enquanto a meta geral de SpO2 é ≥ 94%, em pacientes DPOC retentores crônicos de CO2 a meta é reduzida para 88–92%, porque o estímulo respiratório desses pacientes passa a depender de níveis baixos de O2 (drive hipóxico) — oferta excessiva de O2 pode suprimir esse drive e levar à apneia." },
+    { text: "Errado", correct:false, comment:"Errada. A assertiva não contém erro — ela descreve corretamente tanto a meta numérica (88–92%) quanto o mecanismo fisiológico (supressão do drive respiratório dependente de hipoxemia em retentores crônicos de CO2), ambos presentes no material como exceção à meta geral de SpO2 ≥ 94%." }
+  ],
+  referencia: "Em DPOC, a meta de SpO2 é 88–92%, não 94–100% como padrão — O2 em excesso pode suprimir o drive respiratório (que nesses pacientes depende da hipoxemia). É um dos riscos da oxigenoterapia em alto fluxo: supressão do drive respiratório em DPOC retentor de CO2.",
+  aprofundamento: "Essa exceção do DPOC é um dos pontos de maior potencial de cobrança do escopo, porque conecta três tópicos ao mesmo tempo: a tabela de classificação do oxímetro (88–92% cairia em 'hipóxia moderada' pela tabela geral, mas é a META em DPOC), os riscos da oxigenoterapia (supressão do drive) e a titulação dos dispositivos de oferta de O2 (cateter nasal em fluxo baixo, titulado com cautela)."
+},
+{
+  q: "Durante a análise secundária de uma vítima consciente, o socorrista percorre o mnemônico SAMPLER para coletar a história clínica. Qual das letras corresponde ao item mais frequentemente esquecido pelos socorristas, apesar de ser crítico para avaliar o risco de aspiração caso a vítima venha a precisar de uma via aérea avançada?",
+  opts: [
+    { text: "L — Lanche (última ingestão de alimentos ou líquidos).", correct:true, comment:"Certa. O 'L' do SAMPLER — última ingestão (Lanche) — é apontado no material como o item mais frequentemente esquecido pelos socorristas, apesar de sua importância: saber quando e o que a vítima comeu ou bebeu por último é essencial para avaliar o risco de aspiração caso seja necessário manejo avançado de via aérea (ex.: indução para IOT)." },
+    { text: "S — Sintomas (queixa principal).", correct:false, comment:"Errada. O 'S' (Sintomas/queixa principal — dor, dispneia, dormência) costuma ser o primeiro item investigado, naturalmente, pois é o que motiva o atendimento — não é o item apontado como mais esquecido no material." },
+    { text: "A — Alergias, especialmente a medicamentos.", correct:false, comment:"Errada. Alergias são rotineiramente perguntadas em qualquer atendimento e não são o item destacado no material como o mais negligenciado — o destaque vai para o 'L' (última ingestão), relacionado ao risco de aspiração." },
+    { text: "M — Medicamentos em uso (prescritos, de venda livre, suplementos ou recreativos).", correct:false, comment:"Errada. Embora importante para entender o quadro clínico da vítima, o item 'Medicamentos' não é o apontado como o mais frequentemente esquecido — esse destaque é do 'L' (Lanche/última ingestão), pela sua relação direta com o risco de aspiração em via aérea avançada." },
+    { text: "R — Risco de gravidez (última menstruação, em mulheres em idade fértil).", correct:false, comment:"Errada. O 'R' (Risco de gravidez) é descrito no material como item OBRIGATÓRIO em mulheres em idade fértil — uma ênfase diferente da do 'L', que é descrito como o item mais ESQUECIDO de forma geral, independentemente do perfil da vítima." }
+  ],
+  referencia: "SAMPLER: S (Sintomas), A (Alergias), M (Medicamentos), P (Passado médico), L (Lanche — última ingestão, risco de aspiração), E (Eventos), R (Risco de gravidez). 'L' é o item mais esquecido e por isso mais cobrado; 'R' é obrigatório em mulheres em idade fértil.",
+  aprofundamento: "O 'L' se conecta diretamente ao bloco de via aérea e oxigenoterapia: uma vítima que comeu pouco antes do trauma tem maior risco de vômito e broncoaspiração caso seja necessário usar máscara com reservatório (que exige monitorar o nível de consciência por esse mesmo motivo) ou avançar para uma via aérea definitiva. É um exemplo de como o SAMPLER, embora pertença à avaliação secundária, antecipa decisões de manejo de via aérea que podem surgir a qualquer momento."
+}
+];
+
+let order = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildSession(){
+  order = shuffle(QUESTIONS_RAW.map((q,i)=>i)).map(i=>{
+    const q = QUESTIONS_RAW[i];
+    const isJulgamento = q.opts.length === 2;
+    const opts = isJulgamento
+      ? q.opts.map((o,k)=>({...o, _k:k}))
+      : shuffle(q.opts.map((o,k)=>({...o, _k:k})));
+    return { ...q, opts };
+  });
+  current = 0;
+  score = 0;
+  answered = false;
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(current >= order.length){
+    const pct = Math.round((score/order.length)*100);
+    app.innerHTML = `
+      <div class="card score">
+        <div class="question">Simulado concluído</div>
+        <div class="num">${score} / ${order.length}</div>
+        <div class="pct">${pct}% de acertos</div>
+        <button class="btn" onclick="buildSession()">Refazer simulado</button>
+      </div>`;
+    return;
+  }
+  const q = order[current];
+  answered = false;
+  const pct = Math.round((current/order.length)*100);
+  let optsHtml = '';
+  q.opts.forEach((o, idx) => {
+    optsHtml += `<button class="opt" data-idx="${idx}" onclick="choose(${idx})">${o.text}</button>`;
+  });
+  app.innerHTML = `
+    <div class="progress">Questão ${current+1} de ${order.length} · acertos até aqui: ${score}</div>
+    <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    <div class="card">
+      <p class="question">${q.q}</p>
+      <div id="opts">${optsHtml}</div>
+      <div id="reviewArea"></div>
+    </div>`;
+}
+
+function choose(idx){
+  if(answered) return;
+  answered = true;
+  const q = order[current];
+  const chosen = q.opts[idx];
+  if(chosen.correct) score++;
+
+  const buttons = document.querySelectorAll('#opts .opt');
+  buttons.forEach((btn,i)=>{
+    btn.disabled = true;
+    if(q.opts[i].correct) btn.classList.add('correct');
+    else if(i===idx) btn.classList.add('wrong');
+  });
+
+  let analysisHtml = '';
+  q.opts.forEach((o,i)=>{
+    let cls = '';
+    let tag = '';
+    if(o.correct){ cls='is-correct'; tag='<b>Correta — </b>'; }
+    else if(i===idx){ cls='is-chosen-wrong'; tag='<b>Sua resposta — </b>'; }
+    analysisHtml += `<div class="item ${cls}">${tag}${o.comment}</div>`;
+  });
+
+  let blocksHtml = '';
+  if(q.referencia){
+    blocksHtml += `<div class="block fixar"><span class="label">Para fixar</span>${q.referencia}</div>`;
+  }
+  if(q.aprofundamento){
+    blocksHtml += `<div class="block alem"><span class="label">Indo além desta questão</span>${q.aprofundamento}</div>`;
+  }
+
+  const bannerCls = chosen.correct ? 'ok' : 'no';
+  const bannerTxt = chosen.correct
+    ? 'Você acertou! A alternativa marcada está correta.'
+    : 'Você errou. Veja abaixo qual era a alternativa correta e por quê.';
+
+  document.getElementById('reviewArea').innerHTML = `
+    <div class="review">
+      <div class="banner ${bannerCls}">${bannerTxt}</div>
+      <div class="analysis">${analysisHtml}</div>
+      ${blocksHtml}
+      <button class="btn" onclick="next()">Próxima questão</button>
+    </div>`;
+}
+
+function next(){
+  current++;
+  render();
+}
+
+buildSession();
+</script>
+</body>
+</html>
