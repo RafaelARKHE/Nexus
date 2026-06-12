@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado — Direito Administrativo I | VC01 (v2)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+  header { padding: 18px 16px 8px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 14px; color: #6b6a66; margin: 0; }
+  .progress { font-size: 14px; color: #6b6a66; margin: 14px 0 6px; }
+  .progress-bar { height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; }
+  .progress-bar > div { height: 100%; background: #8a3324; transition: width .25s ease; }
+  .card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-top: 14px;
+  }
+  .question { font-size: 17px; line-height: 1.5; margin: 0 0 16px; font-weight: 600; }
+  .opt {
+    display: block; width: 100%; text-align: left;
+    background: #faf9f6; border: 1.5px solid #e3e1da; border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 10px; font-size: 18px; line-height: 1.4;
+    min-height: 44px; cursor: pointer; color: #2b2a28;
+  }
+  .opt:active { background: #efeee8; }
+  .opt[disabled] { cursor: default; }
+  .opt.correct { background: #e7f3e9; border-color: #4a8f5b; }
+  .opt.wrong { background: #f8e9e7; border-color: #b5453a; }
+  .opt .tag {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .03em;
+    padding: 2px 8px; border-radius: 6px; margin-bottom: 6px;
+  }
+  .opt.correct .tag { background: #4a8f5b; color: #fff; }
+  .opt.wrong .tag { background: #b5453a; color: #fff; }
+  .review { margin-top: 16px; }
+  .banner {
+    border-radius: 10px; padding: 14px 16px; font-size: 16px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .banner.ok { background: #e7f3e9; color: #2c5e38; border: 1.5px solid #4a8f5b; }
+  .banner.no { background: #f8e9e7; color: #7a2c22; border: 1.5px solid #b5453a; }
+  .analysis { margin-bottom: 14px; }
+  .analysis .item {
+    font-size: 15px; line-height: 1.5; padding: 10px 12px; border-radius: 8px;
+    margin-bottom: 8px; border-left: 4px solid #d8d6cf; background: #faf9f6;
+  }
+  .analysis .item.is-correct { border-left-color: #4a8f5b; background: #f0f7f1; }
+  .analysis .item.is-chosen-wrong { border-left-color: #b5453a; background: #fbf1f0; }
+  .analysis .item b { font-weight: 700; }
+  .block {
+    border-radius: 10px; padding: 14px 16px; font-size: 14.5px; line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .block.fixar { background: #fbf3e6; border: 1.5px solid #d9a441; }
+  .block.alem { background: #eaf0f7; border: 1.5px solid #5d7fa6; }
+  .block .label {
+    display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .block.fixar .label { color: #9a6b1a; }
+  .block.alem .label { color: #3b5a80; }
+  .btn {
+    display: inline-block; width: 100%; text-align: center;
+    background: #8a3324; color: #fff; border: none; border-radius: 10px;
+    padding: 14px; font-size: 16px; font-weight: 700; min-height: 48px;
+    margin-top: 14px; cursor: pointer;
+  }
+  .btn:active { background: #6f2a1d; }
+  .btn.secondary { background: #fff; color: #8a3324; border: 1.5px solid #8a3324; }
+  .score { text-align: center; }
+  .score .num { font-size: 44px; font-weight: 800; color: #8a3324; margin: 6px 0; }
+  .score .pct { font-size: 18px; color: #6b6a66; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 22px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Simulado — Direito Administrativo I</h1>
+    <p>VC01 · Sexta-feira, 12/06/2026 · 20 questões comentadas — nível e formato calibrados a partir das questões de revisão do professor — escopo: Generalidades e Princípios, Poderes Administrativos, Poder de Polícia, Atos Administrativos</p>
+  </header>
+  <div id="app"></div>
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — v2, calibrado com base nas questões de revisão fornecidas pelo professor em 11/06/2026</p>
+</div>
+
+<script>
+const QUESTIONS_RAW = [
+{
+  q: "Durante um incêndio em uma edificação comercial em Belém, a guarnição do CBMPA determina a evacuação imediata do prédio e o isolamento da área, mesmo contra a vontade expressa do proprietário, que alegava prejuízo às vendas. A atuação do CBMPA encontra fundamento direto no princípio da:",
+  opts: [
+    { text: "Supremacia do Interesse Público, que autoriza o Estado a impor restrições a interesses individuais em prol da coletividade.", correct:true, comment:"Certa. É a aplicação direta do princípio: o interesse coletivo (vida e segurança das pessoas na edificação e no entorno) prevalece sobre o interesse individual do proprietário (continuar vendendo). É essa supremacia que autoriza o Estado a agir mesmo contra a vontade do particular." },
+    { text: "Autotutela, que permite à Administração rever seus próprios atos sem intervenção do Judiciário.", correct:false, comment:"Errada. A autotutela trata do controle que a Administração exerce sobre seus PRÓPRIOS atos (anular os ilegais, revogar os inconvenientes — Súmulas STF 346 e 473). No caso, o CBMPA não está revendo ato próprio — está impondo restrição a um particular." },
+    { text: "Indisponibilidade do Interesse Público, que impede o administrador de abrir mão dos interesses da coletividade.", correct:false, comment:"Errada. A indisponibilidade veda que o administrador DISPONHA do interesse público como se fosse seu (ex.: perdoar uma multa por simpatia). Aqui o fundamento é outro: a PREVALÊNCIA do interesse coletivo sobre o individual — supremacia, não indisponibilidade. São princípios irmãos, mas com conteúdos distintos." },
+    { text: "Continuidade dos serviços públicos, que garante a prestação ininterrupta das atividades estatais essenciais.", correct:false, comment:"Errada. A continuidade trata da prestação ININTERRUPTA dos serviços (e fundamenta, por exemplo, a vedação à greve dos militares). Não é ela que autoriza a imposição de restrições ao particular durante a ocorrência." },
+    { text: "Autoexecutoriedade, princípio constitucional expresso no art. 37 da CF/88.", correct:false, comment:"Errada por dois motivos: a autoexecutoriedade não é princípio — é ATRIBUTO do poder de polícia (a possibilidade de executar a medida sem autorização judicial prévia) — e não consta do art. 37 da CF, que traz o LIMPE. A questão pedia o PRINCÍPIO que fundamenta a atuação, e este é a supremacia do interesse público." }
+  ],
+  referencia: "Supremacia do Interesse Público: o interesse público prevalece sobre o privado — o Estado pode usar prerrogativas mesmo contra interesses individuais. Exemplos clássicos: desapropriação (art. 5º, XXIV, CF) e cláusulas exorbitantes nos contratos administrativos (Lei nº 14.133/2021).",
+  aprofundamento: "Não confunda os dois princípios gerais: a SUPREMACIA explica por que o Estado pode mais que o particular (prevalência); a INDISPONIBILIDADE explica por que o administrador não pode abrir mão desse poder (ele age em nome do povo, não em nome próprio). Na evacuação do prédio operam os dois: a supremacia autoriza a medida, e a indisponibilidade impede que o comandante 'negocie' deixar de aplicá-la."
+},
+{
+  q: "Um empresário, querendo acelerar a renovação do seu CLCB, propõe verbalmente a um oficial do CBMPA que a vistoria 'deixe passar' algumas não conformidades de menor gravidade, comprometendo-se em troca a regularizá-las 'no futuro'. Ainda que o oficial considerasse as pendências realmente pequenas, aceitar o acordo violaria frontalmente o princípio da:",
+  opts: [
+    { text: "Indisponibilidade do Interesse Público, pois o agente não pode dispor de exigências legais que protegem a coletividade como se fossem interesses seus.", correct:true, comment:"Certa. As medidas de segurança contra incêndio existem para proteger a coletividade — o oficial as administra em nome do povo, não em nome próprio. 'Deixar passar' não conformidades é exatamente dispor de um interesse que não lhe pertence." },
+    { text: "Eficiência, pois o acordo retardaria a tramitação do processo de renovação do CLCB.", correct:false, comment:"Errada. O acordo até ACELERARIA a renovação — eficiência não é o problema aqui. A pegadinha está em achar que rapidez justifica flexibilizar exigência legal: eficiência nunca autoriza atropelar a legalidade nem dispor do interesse público." },
+    { text: "Autotutela, pois o oficial estaria revogando informalmente as exigências da vistoria.", correct:false, comment:"Errada. Autotutela é o poder de a Administração rever formalmente seus próprios atos (anular/revogar). Um 'acordo verbal' para ignorar exigências não é exercício de autotutela — é justamente sua negação: um ato informal, sem competência e contra a lei." },
+    { text: "Segurança Jurídica, pois mudaria as regras do jogo de forma retroativa em prejuízo do empresário.", correct:false, comment:"Errada. A segurança jurídica protege quem agiu de boa-fé conforme atos oficiais anteriores (art. 30, LINDB) — nada disso ocorre aqui. Não há mudança retroativa de interpretação; há proposta de descumprimento da norma vigente." },
+    { text: "Continuidade, pois a atividade fiscalizatória do CBMPA não pode sofrer interrupções.", correct:false, comment:"Errada. A continuidade trata da prestação ininterrupta dos serviços públicos — não é o princípio violado por um acordo para ignorar não conformidades. O vício aqui é dispor do interesse coletivo, não interromper o serviço." }
+  ],
+  referencia: "Indisponibilidade do Interesse Público: a Administração não pode abrir mão do interesse coletivo. O administrador age em nome do povo — não pode dispor dos interesses públicos como se fossem seus.",
+  aprofundamento: "A mesma conduta também ofenderia a MORALIDADE administrativa (boa-fé, probidade) e a LEGALIDADE (a Administração só pode o que a lei autoriza). Em prova, quando várias violações coexistem, escolha o princípio que a questão descreve no enunciado: aqui, o núcleo é 'dispor de exigência legal que protege a coletividade' — indisponibilidade."
+},
+{
+  q: "Considerando os princípios constitucionais do art. 37 da CF/88 (LIMPE), assinale a alternativa que descreve uma conduta EM CONFORMIDADE com esses princípios:",
+  opts: [
+    { text: "Vistoriador do CBMPA aplica os mesmos critérios técnicos das Instruções Técnicas a todas as edificações vistoriadas, independentemente de quem seja o proprietário.", correct:true, comment:"Certa. É a impessoalidade em estado puro: administrados que preenchem os mesmos requisitos têm direito a igual tratamento — sem favorecimentos nem perseguições. Também atende à legalidade (critérios previstos em norma) e à moralidade." },
+    { text: "Comandante de OBM cria, por decisão verbal própria, uma exigência de segurança não prevista em lei nem em Instrução Técnica, por considerá-la tecnicamente recomendável.", correct:false, comment:"Errada — viola a LEGALIDADE. A Administração só pode fazer o que a lei autoriza (diferente do particular, que pode tudo que a lei não proíbe — art. 5º, II, CF). Boa intenção técnica não substitui previsão normativa: o CBMPA não pode criar obrigações por vontade própria." },
+    { text: "Vistoriador libera edificação com pendências por 'conhecer o dono há muitos anos' e confiar que ele regularizará tudo.", correct:false, comment:"Errada — viola a IMPESSOALIDADE e a MORALIDADE. É exatamente o exemplo do material: o vistoriador não pode liberar edificação por 'conhecer o dono' — deve aplicar a lei igual para todos. O favorecimento pessoal, mesmo sem dinheiro envolvido, já fere os dois princípios." },
+    { text: "OBM decide manter sigilosos os resultados de todas as vistorias e autos de infração, para não expor os proprietários fiscalizados.", correct:false, comment:"Errada — viola a PUBLICIDADE. Os atos administrativos devem ser transparentes e documentados; a publicação é condição de EFICÁCIA do ato, e o cidadão tem direito de acesso (LAI). Sigilo generalizado de atos de fiscalização não tem amparo." },
+    { text: "Seção de vistorias represa deliberadamente os processos de análise por meses, sem justificativa, aguardando 'momento mais conveniente' para despachá-los.", correct:false, comment:"Errada — viola a EFICIÊNCIA. O serviço deve ser prestado com presteza e bom desempenho; atrasar deliberadamente, sem justificativa, contraria o princípio (que após a EC 45/2004 alcança também a duração razoável do processo — art. 5º, LXXVIII, CF)." }
+  ],
+  referencia: "LIMPE (art. 37, CF/88): Legalidade — Adm. só pode o que a lei autoriza; Impessoalidade — vedação a favorecimentos, tratamento igual; Moralidade — boa-fé, probidade (não exige ilegalidade para ser violada); Publicidade — condição de eficácia do ato; Eficiência — presteza e bom desempenho (EC 19/1998).",
+  aprofundamento: "Repare no formato da questão: em vez de pedir a conduta que VIOLA, pediu a que está EM CONFORMIDADE — cada alternativa errada é um mini-caso de violação de um princípio diferente. O professor cobra LIMPE assim: situação prática → identificar o princípio. Treine ler a conduta e nomear o princípio antes de olhar as alternativas."
+},
+{
+  q: "Sobre o princípio da eficiência, introduzido no texto constitucional pela EC nº 19/1998, é correto afirmar que:",
+  opts: [
+    { text: "Restringe-se à exigência de rapidez no atendimento ao cidadão, sem qualquer projeção sobre a duração dos processos administrativos e judiciais.", correct:false, comment:"Errada. A eficiência vai além da rapidez no atendimento: a EC nº 45/2004 projetou o princípio também sobre os processos, garantindo a duração razoável do processo judicial E administrativo (art. 5º, LXXVIII, CF)." },
+    { text: "Alcança tanto o modo de atuação do agente público — do qual se espera o melhor desempenho — quanto a duração razoável do processo, judicial e administrativo (art. 5º, LXXVIII, CF, incluído pela EC nº 45/2004).", correct:true, comment:"Certa. A eficiência tem essa dupla projeção: (1) presteza e bom desempenho na atuação do agente e na organização da Administração (EC 19/1998); (2) celeridade processual — duração razoável do processo, judicial e administrativo (EC 45/2004)." },
+    { text: "Foi o primeiro princípio a constar expressamente do art. 37 da CF/88, antes mesmo da legalidade e da moralidade.", correct:false, comment:"Errada — inverteu a cronologia. A eficiência foi o ÚLTIMO princípio inserido no art. 37, pela EC nº 19/1998 (Reforma Administrativa). Legalidade, impessoalidade, moralidade e publicidade já constavam do texto original de 1988. Esse detalhe cronológico cai em prova." },
+    { text: "Autoriza o administrador a afastar exigências legais sempre que elas tornarem o serviço mais lento ou burocrático.", correct:false, comment:"Errada. Eficiência não derroga legalidade: o administrador deve buscar o melhor desempenho DENTRO do que a lei autoriza. Nenhum princípio do LIMPE serve de licença para descumprir a lei." },
+    { text: "Por ter sido introduzida por emenda constitucional, a eficiência não vincula os órgãos militares, que se regem exclusivamente pela hierarquia e disciplina.", correct:false, comment:"Errada. O art. 37 vincula TODA a Administração Pública, direta e indireta, de qualquer dos Poderes — incluídos os órgãos militares como o CBMPA. Hierarquia e disciplina são pilares da organização militar, mas não excluem os princípios constitucionais." }
+  ],
+  referencia: "Eficiência: prestação de serviço com presteza e bom desempenho — inovação da EC nº 19/1998. A EC nº 45/2004 reforçou o aspecto processual: duração razoável do processo, judicial e administrativo (art. 5º, LXXVIII, CF).",
+  aprofundamento: "A doutrina — Di Pietro (2024) — sistematiza a eficiência em dois aspectos: o modo de ATUAÇÃO DO AGENTE público (melhor desempenho individual) e o modo de ORGANIZAR e estruturar a Administração (melhor resultado institucional). Se a prova citar a autora, é essa a divisão esperada."
+},
+{
+  q: "Julgue a assertiva: “O princípio da moralidade administrativa considera-se satisfeito sempre que a conduta do agente público estiver formalmente amparada em lei, pois ato legal é, por definição, ato moral.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva funde dois princípios autônomos. Se moralidade fosse mero reflexo da legalidade, não precisaria constar separadamente no art. 37 — bastaria a legalidade." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). A moralidade NÃO exige ilegalidade para ser violada: basta a conduta contrariar a ética administrativa — boa-fé, lealdade, probidade. Um ato pode ser formalmente legal e ainda assim imoral (ex.: favorecimento dentro da margem discricionária, nepotismo antes de vedação expressa). Legalidade e moralidade são princípios autônomos do LIMPE." }
+  ],
+  referencia: "Moralidade (art. 37, CF): boa-fé, lealdade, probidade, honestidade. Moral administrativa ≠ moral comum. Ponto de atenção do material: “não exige ilegalidade para ser violada — basta contrariar a ética administrativa”.",
+  aprofundamento: "É o raciocínio do caso do oficial designado para vistoriar o estabelecimento da própria sogra: ainda que nenhuma norma proibisse expressamente, realizar a vistoria violaria moralidade e impessoalidade. Em julgamento de assertivas, desconfie de palavras totalizantes como 'sempre', 'por definição', 'qualquer que seja' — quase sempre escondem a generalização indevida que torna o item errado."
+},
+{
+  q: "Um oficial do CBMPA é designado para vistoriar um centro comercial e, ao chegar ao local, descobre que o empreendimento pertence à sua sogra, que o recebe calorosamente e pede 'compreensão' com algumas pendências. Considerando os princípios da Administração Pública, a conduta correta do oficial é:",
+  opts: [
+    { text: "Comunicar formalmente o impedimento à chefia e solicitar a designação de outro militar para a vistoria, preservando a impessoalidade e a moralidade administrativa.", correct:true, comment:"Certa. O vínculo familiar compromete a isenção (real ou aparente) do agente. Declarar-se impedido e devolver a designação preserva a impessoalidade (tratamento igual a todos os administrados) e a moralidade (boa-fé, probidade) — e protege o próprio oficial de questionamentos futuros sobre qualquer resultado da vistoria." },
+    { text: "Realizar a vistoria normalmente e atender ao pedido da sogra, já que as pendências são de menor gravidade e a relação familiar não está prevista em lei como impedimento.", correct:false, comment:"Errada. 'Deixar passar' pendências por vínculo familiar é favorecimento — viola impessoalidade e moralidade, ainda que não haja vedação legal expressa e específica. Lembre: a moralidade não exige ilegalidade para ser violada." },
+    { text: "Realizar a vistoria com rigor deliberadamente maior que o usual, reprovando itens que normalmente aprovaria, para demonstrar publicamente que não favorece parentes.", correct:false, comment:"Errada. O rigor artificial é o erro simétrico ao favorecimento: tratar a sogra PIOR que os demais administrados também viola a impessoalidade (que veda perseguições tanto quanto favorecimentos) e desvirtua a finalidade da vistoria." },
+    { text: "Interditar preventivamente o estabelecimento antes de qualquer análise técnica, transferindo a decisão final para a chefia.", correct:false, comment:"Errada. Interdição é medida grave que exige fundamento técnico e legal (motivo real) — usá-la para 'se livrar' do constrangimento é ato sem motivo idôneo, passível de anulação. A solução correta é afastar-se da designação, não praticar ato infundado." },
+    { text: "Pedir a um colega que assine o laudo da vistoria que ele próprio realizará, ocultando seu vínculo com a proprietária.", correct:false, comment:"Errada — e gravíssima. Ocultar o vínculo e falsear a autoria do laudo viola moralidade, legalidade e pode configurar ilícito penal e disciplinar. É a pior das condutas listadas: soma o favorecimento à fraude documental." }
+  ],
+  referencia: "Impessoalidade: vedação a discriminações E favorecimentos — administrados que preenchem os requisitos têm direito a igual tratamento. Moralidade: boa-fé, lealdade, probidade — violável mesmo sem ilegalidade formal.",
+  aprofundamento: "Este é o Caso 1 do estudo dirigido do professor, em formato de questão. Repare que duas alternativas erradas são 'simétricas': favorecer a sogra E persegui-la artificialmente violam o MESMO princípio (impessoalidade). E se o oficial fizesse a vistoria rigorosa para depois 'compensar' aprovando outra edificação da família? Aí entraria o desvio de poder — ato praticado com finalidade diversa da legal."
+},
+{
+  q: "O CBMPA constata que um CLCB foi emitido com base em vistoria realizada por militar que não possuía competência legal para o ato. Diante disso, a Administração:",
+  opts: [
+    { text: "Deve revogar o CLCB, por razões de conveniência e oportunidade, com efeitos ex nunc.", correct:false, comment:"Errada. Revogação pressupõe ato VÁLIDO que se tornou inconveniente — não é o caso. Aqui o ato nasceu ILEGAL (vício de competência), e ato ilegal se ANULA, não se revoga. Trocar anulação por revogação é a pegadinha central deste tema." },
+    { text: "Pode anular o CLCB de ofício, no exercício da autotutela, com efeitos retroativos (ex tunc), independentemente de decisão judicial.", correct:true, comment:"Certa. Vício de competência = ilegalidade = ANULAÇÃO. Pela autotutela (Súmulas STF 346 e 473), a própria Administração desfaz o ato ilegal, sem precisar do Judiciário, e os efeitos retroagem à origem (ex tunc), pois de ato nulo não se originam direitos." },
+    { text: "Só poderá desfazer o CLCB mediante ação judicial, pois o documento gerou direitos ao particular.", correct:false, comment:"Errada. A autotutela existe exatamente para dispensar a via judicial: a Administração PODE anular seus próprios atos ilegais (Súmula 346). O fato de o ato favorecer o particular não impede a anulação — apenas atrai o prazo decadencial de 5 anos (salvo má-fé) e o dever de respeitar o contraditório." },
+    { text: "Deve aguardar a renúncia do proprietário, único legitimado a desfazer ato que ampliou sua esfera jurídica.", correct:false, comment:"Errada. A renúncia é a abdicação do direito PELO beneficiário — faculdade do particular, não condição para a Administração agir. Ato ilegal é anulável de ofício pela própria Administração, sem depender de qualquer iniciativa do beneficiado." },
+    { text: "Nada pode fazer, pois a presunção de legitimidade do ato administrativo é absoluta e impede seu desfazimento.", correct:false, comment:"Errada. A presunção de legitimidade é RELATIVA (juris tantum) — admite prova em contrário. Comprovado o vício, o ato cai. Presunção absoluta de legitimidade tornaria a autotutela impossível, o que contraria as Súmulas 346 e 473 do STF." }
+  ],
+  referencia: "Anulação: ilegalidade · efeito ex tunc · Administração (autotutela) ou Judiciário. Revogação: inconveniência/inoportunidade · efeito ex nunc · só a Administração. Súmula STF 473: a Administração pode anular seus atos ilegais ou revogá-los por conveniência, ressalvada a apreciação judicial.",
+  aprofundamento: "Note que o vício do caso é de COMPETÊNCIA — um dos três elementos do COFIM que são SEMPRE vinculados (Competência, Finalidade, Forma). Vício em elemento vinculado = ilegalidade = anulação. Se o problema fosse de mérito (o ato era legal, mas se tornou inconveniente), aí sim caberia revogação — privativa da Administração e impossível ao Judiciário."
+},
+{
+  q: "Julgue a assertiva: “Constatado que um CLCB foi obtido há 2 anos mediante documento falsificado, o CBMPA está impedido de anulá-lo, pois o atual proprietário do imóvel — que o adquiriu há 1 ano — agiu de boa-fé, e o ato já consolidou efeitos favoráveis ao destinatário.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva soma dois argumentos que não se sustentam: o prazo decadencial nem se esgotou (2 anos < 5 anos) e, havendo má-fé na obtenção do ato, o prazo sequer protegeria o beneficiário." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). Dois fundamentos: (1) o prazo decadencial para anular atos com efeitos favoráveis é de 5 ANOS (Lei nº 8.972/2020, art. 67) — passaram-se apenas 2; (2) ainda que o prazo tivesse decorrido, a ressalva legal é expressa: 'salvo comprovada má-fé' — e o ato nasceu de falsificação. A boa-fé do adquirente atual não convalida ato nulo na origem; ela pode mitigar efeitos patrimoniais e justificar prazo de adequação, mas não impede a anulação de um CLCB fraudado, que põe em risco a segurança da coletividade." }
+  ],
+  referencia: "Prazo de autotutela (Lei nº 8.972/2020, art. 67 — âmbito estadual): o direito de anular atos com efeitos favoráveis ao destinatário decai em 5 anos, SALVO comprovada má-fé. Anulação: efeito ex tunc — de ato nulo não se originam direitos.",
+  aprofundamento: "Este é o Caso 4 do estudo dirigido do professor. A sofisticação está em separar os planos: a má-fé que afasta o prazo é a da OBTENÇÃO do ato (falsificação), não a do atual proprietário. A boa-fé do terceiro não salva o ato — mas orienta COMO a Administração executa a anulação: notificação, contraditório, prazo razoável para nova regularização (segurança jurídica), em vez de interdição sumária."
+},
+{
+  q: "Durante uma greve geral que paralisa diversas categorias no Estado, um grupo de bombeiros militares cogita aderir ao movimento para reivindicar melhorias salariais. Sobre a situação, é correto afirmar que:",
+  opts: [
+    { text: "A adesão é possível, pois o art. 37, VII, da CF assegura o direito de greve aos servidores públicos, categoria que inclui os militares estaduais.", correct:false, comment:"Errada. O art. 37, VII trata dos servidores públicos CIVIS (e mesmo para eles depende de lei específica). Aos militares a Constituição veda expressamente greve e sindicalização — regime constitucional próprio, distinto do servidor civil." },
+    { text: "A adesão é vedada: militares não podem fazer greve nem sindicalizar-se, vedação que decorre do princípio da continuidade dos serviços públicos, dada a natureza essencial e inadiável da segurança pública.", correct:true, comment:"Certa. A sociedade tem necessidades inadiáveis — segurança e socorro não podem parar. Os militares são a garantia de prestação contínua desses serviços; por isso a vedação constitucional a greve e sindicalização, que o material vincula diretamente ao princípio da continuidade." },
+    { text: "A adesão é possível desde que mantido um percentual mínimo de efetivo em serviço, como ocorre nas atividades essenciais regidas pela Lei de Greve.", correct:false, comment:"Errada. O regime de 'percentual mínimo' vale para atividades essenciais exercidas por trabalhadores e servidores com direito de greve. Para militares a vedação é TOTAL — não há greve parcial, com aviso prévio ou com efetivo mínimo. Qualquer adesão é ilícita." },
+    { text: "A vedação à greve militar viola o princípio da isonomia, sendo por isso considerada inconstitucional pelo STF.", correct:false, comment:"Errada. Não há violação de isonomia: militares têm regime jurídico constitucional próprio, com restrições (greve, sindicalização, filiação partidária na ativa) compensadas por garantias específicas. A vedação está na própria Constituição — não há como ser 'inconstitucional'." },
+    { text: "A adesão seria irregular apenas se ocorresse durante o expediente, sendo lícita a participação dos militares em atos grevistas nos horários de folga.", correct:false, comment:"Errada. A condição de militar não se suspende na folga — a vedação à greve e à sindicalização acompanha o militar enquanto durar o vínculo. Participar do movimento grevista, mesmo fora de serviço, configura transgressão apurável pelo poder disciplinar." }
+  ],
+  referencia: "Continuidade dos Serviços Públicos: prestação ininterrupta — a sociedade tem necessidades inadiáveis. Consequência direta: militares não podem fazer greve nem sindicalizar-se — são a garantia de prestação contínua dos serviços de segurança pública.",
+  aprofundamento: "Este é o Caso 3 do estudo dirigido. Feche o circuito com o poder disciplinar: a adesão de um militar à greve seria transgressão disciplinar, apurada com base no CEDCBMPA (Lei nº 9.161/2021) — e a punição correspondente seria um ato punitivo, expressão concreta do poder disciplinar. Princípio violado → poder que reage → ato que materializa: é assim que os blocos da prova se conectam."
+},
+{
+  q: "Julgue a assertiva: “Uma edificação teve seu projeto de segurança contra incêndio aprovado pelo CBMPA em 2020, conforme as normas então vigentes. Publicada nova Instrução Técnica mais rigorosa em 2024, o CBMPA pode exigir a adequação imediata da edificação às novas exigências, sem concessão de qualquer prazo, aplicando multa pelo descumprimento desde a data de publicação da nova norma.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva ignora a proteção da confiança: o proprietário agiu de boa-fé conforme ato oficial do próprio CBMPA (a aprovação de 2020). Puni-lo retroativamente, sem prazo de adequação, é mudar as regras do jogo contra quem confiou no Estado." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). O princípio da segurança jurídica / proteção à confiança (art. 30, LINDB) impede que a Administração mude as 'regras do jogo' retroativamente em prejuízo de quem agiu de boa-fé conforme atos oficiais anteriores. O exemplo do material é literalmente este: o CBMPA não pode exigir nova medida de segurança de edificação aprovada conforme a legislação da época SEM prazo de adequação razoável. A nova IT pode ser aplicada — mas com prazo razoável e sem efeito punitivo retroativo." }
+  ],
+  referencia: "Segurança Jurídica / Proteção à Confiança (art. 30, LINDB): veda a aplicação retroativa de nova interpretação ou exigência. Protege quem agiu de boa-fé com base em atos oficiais anteriores. Exemplo do material: edificação aprovada na norma da época → exige-se prazo razoável de adequação.",
+  aprofundamento: "Cuidado com o extremo oposto: segurança jurídica NÃO significa que a edificação fica eternamente imune a novas exigências. O interesse público (supremacia) autoriza a atualização das normas de segurança; o que o princípio impõe é o COMO — prazo razoável, sem retroatividade punitiva. Em prova, tanto 'pode exigir imediatamente com multa retroativa' quanto 'nunca poderá exigir adequação' estão errados."
+},
+{
+  q: "Julgue a assertiva: “No exercício do poder discricionário, o Comandante de uma OBM pode deixar de aplicar uma Instrução Técnica vigente que considere tecnicamente ultrapassada, pois a discricionariedade lhe confere liberdade de escolha segundo seu juízo de conveniência e oportunidade.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva apresenta como discricionariedade aquilo que é arbitrariedade. Não existe juízo de conveniência CONTRA norma vigente — o espaço de escolha do administrador existe apenas onde e como a lei o prevê." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa). Discricionariedade ≠ arbitrariedade. A discricionariedade é a liberdade de escolha DENTRO dos limites da lei — quando a própria norma admite mais de um comportamento possível. Deixar de aplicar norma vigente por juízo pessoal não é escolha entre opções legais: é atuar CONTRA a lei. Se a IT está ultrapassada, o caminho é provocar sua revisão pelo canal competente (poder normativo), nunca descumpri-la." }
+  ],
+  referencia: "Poder Discricionário: a lei prevê mais de um comportamento possível e o administrador escolhe pelo mérito (conveniência + oportunidade) — sempre dentro dos limites legais. Discricionariedade ≠ arbitrariedade: toda atuação administrativa se dá com a lei, pela lei e dentro da lei.",
+  aprofundamento: "Mesma lógica do Caso 2 do estudo dirigido (prazo de adequação): quando a norma diz 'prazo de até 90 dias', o Comandante pode fixar 30 para um shopping de alto risco e 90 para um pequeno comércio — isso é discricionariedade (escolha DENTRO da moldura legal, motivada pelo grau de risco). Fixar 120 dias, ou dispensar a exigência, seria exceder a moldura — ilegalidade pura."
+},
+{
+  q: "Sobre a distinção entre poder vinculado e poder discricionário, assinale a alternativa correta:",
+  opts: [
+    { text: "No poder vinculado, a lei define o único comportamento possível diante do caso concreto, sem margem de escolha — como no limite máximo de 35 anos de serviço ativo (art. 69, LC nº 142/2021): atingido o limite, a transferência para a reserva é obrigatória.", correct:true, comment:"Certa. É o conceito exato com o exemplo do material: na vinculação, todos os elementos do ato já estão definidos na lei — o administrador apenas executa. Atingido o limite legal de serviço ativo, não há juízo de conveniência: a consequência é automática e obrigatória." },
+    { text: "O mérito administrativo — conveniência e oportunidade — está presente em todos os atos administrativos, vinculados ou discricionários, variando apenas sua intensidade.", correct:false, comment:"Errada. Mérito administrativo SÓ existe nos atos discricionários — é justamente o espaço de escolha (conveniência: condições em que o ato é praticado; oportunidade: momento). No ato vinculado não há escolha alguma, logo não há mérito." },
+    { text: "A classificação vinculado/discricionário aplica-se aos poderes administrativos, mas não guarda relação com os elementos do ato administrativo.", correct:false, comment:"Errada. A relação é direta e é uma das conexões-chave da matéria: nos elementos do ato (COFIM), Competência, Finalidade e Forma são SEMPRE vinculados, enquanto Motivo e Objeto podem ser vinculados ou discricionários. A classificação atravessa os dois blocos." },
+    { text: "Atos discricionários, por envolverem juízo de conveniência, não podem ser anulados pelo Poder Judiciário em nenhuma hipótese.", correct:false, comment:"Errada. O que o Judiciário não pode avaliar é o MÉRITO (conveniência/oportunidade). A LEGALIDADE do ato discricionário ele controla normalmente: se o ato extrapolou a moldura legal, desviou de finalidade ou se apoiou em motivo falso, o Judiciário anula — sem com isso tocar no mérito." },
+    { text: "O ato praticado no exercício do poder vinculado pode ser revogado pela Administração quando se tornar inconveniente.", correct:false, comment:"Errada. Revogação pressupõe mérito — e ato vinculado não tem mérito. Por isso a regra: ato vinculado não se revoga (não há conveniência a reavaliar); apenas se anula, se for ilegal. A revogação é exclusiva dos atos discricionários válidos." }
+  ],
+  referencia: "Poder Vinculado: a lei define o único comportamento possível — todos os elementos do ato são vinculados. Ex.: limite máximo de 35 anos no serviço ativo (art. 69, LC nº 142/2021). Poder Discricionário: a lei admite mais de um comportamento — mérito = conveniência + oportunidade. O Judiciário controla legalidade, nunca mérito.",
+  aprofundamento: "Guarde a ponte com o COFIM: a dupla 'Motivo e Objeto' é onde mora a discricionariedade quando ela existe; 'Competência, Finalidade e Forma' são sempre vinculados — em QUALQUER ato, até no mais discricionário. Por isso o desvio de finalidade torna nulo até o ato discricionário: a finalidade nunca foi do administrador, sempre foi da lei."
+},
+{
+  q: "O Comandante de uma OBM, no mesmo dia: (1) aplica a sanção de suspensão a um subordinado, após processo disciplinar regular, com base no art. 39 do CEDCBMPA; e (2) expede ordem de serviço reorganizando a escala de plantão da unidade. Os poderes administrativos exercidos em cada ato são, respectivamente:",
+  opts: [
+    { text: "Poder disciplinar e poder hierárquico.", correct:true, comment:"Certa. A sanção de suspensão é exercício do PODER DISCIPLINAR — punir quem tem vínculo com a Administração (o marco que o separa do hierárquico é a abertura do processo administrativo). A ordem de serviço reorganizando a escala é exercício do PODER HIERÁRQUICO — ordenar, coordenar e controlar as atividades dos subordinados dentro da estrutura interna, materializado em ato ordinatório." },
+    { text: "Poder de polícia e poder normativo.", correct:false, comment:"Errada. Poder de polícia restringe direitos de PARTICULARES (não de subordinados com vínculo) e poder normativo expede normas gerais com efeito erga omnes — uma ordem de serviço interna não tem efeito externo nem generalidade normativa." },
+    { text: "Poder hierárquico e poder disciplinar.", correct:false, comment:"Errada — é a ordem invertida. A questão pediu 'respectivamente': a sanção (1) é poder disciplinar; a escala (2) é poder hierárquico. Atenção redobrada com questões que cobram correspondência ordenada: errar a ordem com os conceitos certos ainda é errar." },
+    { text: "Poder disciplinar e poder de polícia.", correct:false, comment:"Errada na segunda parte. A escala de plantão atinge SUBORDINADOS, dentro da estrutura interna — poder hierárquico. O poder de polícia se dirige a particulares sem vínculo especial com a Administração (proprietários de edificações, condutores etc.)." },
+    { text: "Poder normativo e poder hierárquico.", correct:false, comment:"Errada na primeira parte. Aplicar sanção após processo disciplinar não é expedir norma geral — é punir caso concreto: poder disciplinar, materializado em ato punitivo. A segunda parte (escala = hierárquico) está correta, mas a alternativa erra o conjunto." }
+  ],
+  referencia: "Poder Hierárquico: ordenar, coordenar, controlar, dar ordens, delegar e avocar — só dentro da estrutura interna; origina os atos ordinatórios (ordem de serviço, portaria interna, memorando). Poder Disciplinar: decorre do hierárquico — o marco de transição é a abertura do processo administrativo; origina os atos punitivos (sanções do art. 39, CEDCBMPA).",
+  aprofundamento: "A independência das esferas completa o quadro: a mesma conduta do subordinado pode gerar sanção disciplinar (administrativa), processo penal militar e dever de indenizar (civil) — sem bis in idem, pois a vedação à dupla punição vale DENTRO de cada esfera, não entre esferas distintas."
+},
+{
+  q: "Sobre o poder de polícia exercido pelo CBMPA, considere as assertivas:<br><br>I. A vistoria realizada em uma edificação para verificar o cumprimento das medidas de segurança corresponde à fase de fiscalização do ciclo de polícia.<br>II. A análise e aprovação do projeto de segurança contra incêndio é manifestação preventiva do poder de polícia.<br>III. A taxa cobrada pelo CBMPA tem como fato gerador a prestação de um serviço público específico e divisível ao contribuinte.<br>IV. São atributos do poder de polícia a discricionariedade, a coercibilidade e a autoexecutoriedade.<br>V. A vistoria constitui sanção de polícia, pois pressiona o proprietário a regularizar a edificação.<br><br>Estão corretas:",
+  opts: [
+    { text: "I, II e IV.", correct:true, comment:"Certa. I — correta: vistoria é verificação de cumprimento = fiscalização de polícia (3ª fase do ciclo). II — correta: a análise/aprovação de projeto atua ANTES do dano, caráter preventivo típico da polícia administrativa (e corresponde ao consentimento). IV — correta: são exatamente os três atributos do material. III — errada: o fato gerador da taxa de polícia é o EXERCÍCIO REGULAR DO PODER DE POLÍCIA, não a prestação de serviço (esse é o fato gerador da taxa de serviço). V — errada: vistoria é fiscalização, não sanção — sanção é a penalidade pelo descumprimento (multa, cassação), que só a lei pode prever." },
+    { text: "I, III e V.", correct:false, comment:"Errada. Acerta a I, mas inclui as duas falsas: III troca o fato gerador da taxa de polícia (exercício do poder de polícia) pelo da taxa de serviço; V confunde fiscalização (verificar) com sanção (punir) — fases distintas do ciclo." },
+    { text: "II, IV e V.", correct:false, comment:"Errada. II e IV estão corretas, mas V é falsa (vistoria = fiscalização, não sanção) — e a combinação ainda exclui a I, que é verdadeira." },
+    { text: "I, II, III e IV.", correct:false, comment:"Errada por incluir a III: o fato gerador da taxa de polícia é o exercício regular do poder de polícia (fiscalização), e não a prestação de serviço específico e divisível. As demais (I, II, IV) estão corretas." },
+    { text: "III, IV e V.", correct:false, comment:"Errada. Só a IV é verdadeira nessa combinação. III erra o fato gerador da taxa; V erra a classificação da vistoria no ciclo de polícia." }
+  ],
+  referencia: "Ciclo de polícia: Ordem → Consentimento → Fiscalização → Sanção. Vistoria do CBMPA = fiscalização. Atributos do poder de polícia: discricionariedade, coercibilidade, autoexecutoriedade. Taxa de polícia: fato gerador = exercício regular do poder de polícia (art. 145, II, CF; arts. 77-78, CTN) — não a prestação de serviço.",
+  aprofundamento: "As assertivas III e V erram nos dois pontos que o STF já enfrentou: a taxa é devida pela existência do aparato fiscalizador (RE 416.601 — presume-se o exercício quando há órgão criado e estruturado, mesmo sem vistoria individualizada) — e é por isso que a renovação anual do CLCB gera a taxa do Anexo I da Lei nº 9.234/2021, medida em UPF-PA, ainda que naquele ano não haja vistoria presencial."
+},
+{
+  q: "Sobre a delegação do poder de polícia, conforme decidido pelo STF no RE 633.782, é correto afirmar que:",
+  opts: [
+    { text: "Todas as fases do ciclo de polícia são delegáveis a pessoas jurídicas de direito privado, inclusive a ordem de polícia, desde que haja previsão em lei.", correct:false, comment:"Errada. A ordem de polícia — a função de legislar, criar as restrições — é ABSOLUTAMENTE indelegável a pessoa de direito privado. A tese do STF excepciona expressamente essa fase; 'todas as fases' torna a alternativa falsa." },
+    { text: "A ordem de polícia é absolutamente indelegável; o consentimento, a fiscalização e a sanção podem ser delegados, por lei, a pessoas jurídicas de direito privado integrantes da Administração Indireta, de capital majoritariamente público, que prestem exclusivamente serviço público próprio do Estado em regime não concorrencial.", correct:true, comment:"Certa. É a tese do RE 633.782 (Min. Luiz Fux) com todos os seus requisitos: (1) delegação POR LEI; (2) a PJ de direito privado deve integrar a Administração Indireta; (3) capital social majoritariamente público; (4) serviço público típico de Estado; (5) regime não concorrencial. E a exceção: a ordem de polícia (função legislativa) jamais se delega." },
+    { text: "Nenhuma fase do ciclo de polícia pode ser delegada a pessoa jurídica de direito privado, por se tratar de atividade típica de Estado.", correct:false, comment:"Errada — é a posição superada. Justamente por ser atividade típica de Estado é que a delegação exige os requisitos rigorosos da tese; mas, preenchidos eles, consentimento, fiscalização e sanção PODEM ser delegados. A vedação total contraria o precedente." },
+    { text: "Apenas a sanção de polícia é delegável, pois as demais fases envolvem juízo discricionário privativo da Administração Direta.", correct:false, comment:"Errada — inverteu a lógica. A sanção é uma das fases delegáveis, mas não a única: consentimento e fiscalização também o são. A única fase reservada é a ordem de polícia." },
+    { text: "A delegação é admitida apenas a empresas privadas contratadas mediante licitação, vedada às empresas públicas e sociedades de economia mista.", correct:false, comment:"Errada — é o avesso da tese. A delegação é admitida exatamente às estatais (empresas públicas e sociedades de economia mista da Administração Indireta — no Pará: Cosanpa, Cohab, Ceasa, Banpará) e NÃO a empresas privadas meramente contratadas, que estão fora da Administração." }
+  ],
+  referencia: "STF, RE 633.782: “É constitucional a delegação do poder de polícia, por meio de lei, a pessoas jurídicas de direito privado integrantes da Administração Pública indireta de capital social majoritariamente público que prestem exclusivamente serviço público de atuação própria do Estado e em regime não concorrencial.” Exceção: ordem de polícia (função legislativa) — absolutamente indelegável.",
+  aprofundamento: "Tradução para o CBMPA: editar Instruções Técnicas (ordem de polícia) jamais poderia ser transferido a uma estatal; já atividades de consentimento e fiscalização poderiam, em tese, ser delegadas por lei a uma PJ da Administração Indireta que cumprisse todos os requisitos. Em prova, cada requisito da tese é um distrator em potencial — decore os cinco."
+},
+{
+  q: "Analise as duas situações:<br><br>I. Comandante de OBM, ao punir um subordinado, aplica sanção de 40 dias de “prisão administrativa” — penalidade que não existe no rol do art. 39 do CEDCBMPA.<br>II. Comandante remove um subordinado para unidade distante, alegando “necessidade do serviço”, quando o real motivo, comprovado documentalmente, era retaliá-lo por ter denunciado irregularidades na OBM.<br><br>As situações configuram, respectivamente:",
+  opts: [
+    { text: "I — excesso de poder (vício de competência); II — desvio de poder (vício de finalidade).", correct:true, comment:"Certa. Em I, o agente EXTRAPOLA os limites da sua competência legal — aplica sanção que a lei não prevê: excesso de poder, vício de competência (é o exemplo literal do material). Em II, o agente TEM competência para remover, mas usa o ato para fim diverso do interesse público — punição disfarçada: desvio de poder (ou desvio de finalidade), vício de finalidade." },
+    { text: "I — desvio de poder (vício de finalidade); II — excesso de poder (vício de competência).", correct:false, comment:"Errada — é a inversão exata. Quem vai ALÉM do que a lei permite comete excesso (I); quem age dentro da competência mas com finalidade desviada comete desvio (II). Decore o par: excesso ↔ competência · desvio ↔ finalidade." },
+    { text: "Ambas configuram excesso de poder, pois nos dois casos o Comandante extrapolou suas atribuições legais.", correct:false, comment:"Errada. Em II o Comandante NÃO extrapolou a competência — remover subordinado por necessidade do serviço está dentro de suas atribuições. O vício está escondido na finalidade: o motivo declarado era falso e o fim era retaliar. Por isso é desvio, não excesso." },
+    { text: "Ambas configuram desvio de poder, pois nos dois casos houve intenção de prejudicar o subordinado.", correct:false, comment:"Errada. A classificação não depende da intenção subjetiva de prejudicar, mas do TIPO de vício: em I, o problema é objetivo — a sanção aplicada não existe na lei (competência extrapolada = excesso), independentemente da intenção." },
+    { text: "Apenas a situação II configura abuso de poder; a situação I é mera irregularidade formal, sanável por convalidação.", correct:false, comment:"Errada. Aplicar pena inexistente no ordenamento é abuso de poder na modalidade excesso — ilegalidade grave, que torna o ato nulo, e não vício formal sanável. As duas situações são espécies do mesmo gênero: abuso de poder." }
+  ],
+  referencia: "Abuso de poder — duas espécies: Excesso de Poder → vício de COMPETÊNCIA (agente extrapola os limites legais; ex.: pena de prisão administrativa inexistente). Desvio de Poder/Finalidade → vício de FINALIDADE (agente competente busca fim diverso do legal; ex.: remoção como punição disfarçada). Controle: autotutela ou ação judicial; pode configurar ilícito penal, civil e administrativo.",
+  aprofundamento: "Ligue ao COFIM: Competência e Finalidade são dois dos três elementos SEMPRE vinculados do ato administrativo — por isso o abuso de poder é sempre ILEGALIDADE (nunca questão de mérito) e o ato é anulável pela própria Administração ou pelo Judiciário. Na situação II, repare ainda na Teoria dos Motivos Determinantes: o motivo declarado ('necessidade do serviço') era falso — segundo fundamento autônomo de nulidade."
+},
+{
+  q: "Julgue a assertiva: “Excesso de poder e desvio de poder são as duas espécies do gênero abuso de poder: no excesso, o agente atua fora dos limites de sua competência legal; no desvio, o agente atua dentro de sua competência, porém visando finalidade diversa da prevista em lei ou contrária ao interesse público.”",
+  opts: [
+    { text: "Certo", correct:true, comment:"Certa. A assertiva está integralmente correta — e com a relação gênero/espécie na ordem certa: ABUSO DE PODER é o gênero; excesso (vício de competência) e desvio (vício de finalidade) são as espécies. As definições de cada espécie também estão precisas." },
+    { text: "Errado", correct:false, comment:"Errada. A assertiva não contém erro: gênero (abuso) e espécies (excesso e desvio) estão corretamente posicionados, e os vícios correspondentes (competência e finalidade) corretamente atribuídos. Cuidado para não 'procurar erro onde não há' — em julgamento de assertivas, itens integralmente corretos também caem." }
+  ],
+  referencia: "Abuso de poder (GÊNERO) → espécies: Excesso de Poder (vício de competência — agente extrapola os limites legais) e Desvio de Poder/Finalidade (vício de finalidade — agente competente busca fim diverso do legal).",
+  aprofundamento: "O professor cobrou exatamente essa relação com os papéis INVERTIDOS entre as alternativas — ex.: “o excesso de poder é o gênero do qual o abuso de poder é espécie” (errado). Antes de julgar, monte mentalmente a árvore: abuso no topo, excesso e desvio embaixo. Qualquer assertiva que coloque excesso ou desvio como gênero, ou troque os vícios entre si, é falsa."
+},
+{
+  q: "Julgue a assertiva: “A taxa cobrada pelo CBMPA em razão do licenciamento anual das edificações tem como fato gerador a prestação de um serviço público específico e divisível, equiparando-se, em sua natureza jurídica, à multa aplicada por descumprimento das normas de segurança.”",
+  opts: [
+    { text: "Certo", correct:false, comment:"Errada. A assertiva contém dois erros graves — o fato gerador apontado é o de outra espécie de taxa, e a equiparação entre taxa e multa confunde tributo com sanção." },
+    { text: "Errado", correct:true, comment:"Certa (a assertiva é falsa) — por DOIS erros: (1) o fato gerador da taxa de polícia é o EXERCÍCIO REGULAR DO PODER DE POLÍCIA (art. 145, II, CF; arts. 77-78, CTN), não a prestação de serviço específico e divisível (esse é o fato gerador da taxa de serviço); (2) taxa NÃO se equipara a multa: taxa é TRIBUTO, contraprestação pela atividade estatal lícita de fiscalização; multa é SANÇÃO, penalidade por ato ilícito (4ª fase do ciclo de polícia). Naturezas jurídicas completamente distintas." }
+  ],
+  referencia: "Taxa de polícia: tributo vinculado ao exercício regular do poder de polícia (art. 145, II, CF; art. 217, II, CE-PA; arts. 77-78, CTN). STF, RE 416.601: presume-se o exercício quando existe órgão fiscalizador criado e estruturado. Taxas do CBMPA: Anexo I da Lei nº 9.234/2021 (art. 102), em UPF-PA. Multa = sanção de polícia (penalidade), não tributo.",
+  aprofundamento: "Na prática do CBMPA os dois institutos convivem no mesmo processo: o proprietário paga a TAXA pela renovação anual do CLCB (fato gerador: o poder de polícia em exercício — devida mesmo sem vistoria presencial, RE 416.601) e, SE descumprir as normas, sofre a MULTA (sanção do art. 71 da Lei nº 9.234/2021). A renovação, aliás, é condicionada ao pagamento da taxa E das multas eventualmente aplicadas (art. 62)."
+},
+{
+  q: "São espécies de atos administrativos, EXCETO:",
+  opts: [
+    { text: "Atos normativos, como decretos e regulamentos que detalham a execução da lei.", correct:false, comment:"Errada (é espécie). Os atos normativos são a primeira das cinco espécies — decorrem do poder normativo e expedem comandos gerais, sempre inferiores à lei: decretos, regulamentos, portarias normativas, instruções técnicas." },
+    { text: "Atos ordinatórios, como ordens de serviço e memorandos que disciplinam o funcionamento interno.", correct:false, comment:"Errada (é espécie). Os atos ordinatórios decorrem do poder hierárquico e organizam a vida interna da Administração — portarias internas, ordens de serviço, memorandos, ofícios. Não produzem efeitos externos para os particulares." },
+    { text: "Atos negociais, como a licença, a autorização e a permissão, manifestados por alvará.", correct:false, comment:"Errada (é espécie). Os atos negociais materializam o consentimento de polícia: licença (vinculada), autorização (discricionária e precária) e permissão (discricionária, com interesse público e licitação) — todos manifestados por alvará." },
+    { text: "Atos políticos, como o veto presidencial e a declaração de guerra.", correct:true, comment:"Certa (é a exceção). Atos políticos NÃO são atos administrativos em sentido estrito — são atos de governo, praticados no exercício da função política (veto, declaração de guerra, indicação de ministros). O material os exclui expressamente, ao lado dos atos privados da Administração e dos atos materiais (mera execução física, como a demolição em si). É a 'pegadinha clássica' apontada na revisão." },
+    { text: "Atos punitivos, como as multas aplicadas a particulares e as sanções disciplinares aplicadas a servidores.", correct:false, comment:"Errada (é espécie). Os atos punitivos fecham a lista das cinco espécies — derivam do poder disciplinar (sanções a quem tem vínculo: art. 39 do CEDCBMPA) ou do poder de polícia (multas e sanções a particulares)." }
+  ],
+  referencia: "Cinco espécies de atos administrativos: normativos · ordinatórios · negociais · enunciativos · punitivos. NÃO são atos administrativos stricto sensu: atos PRIVADOS da Administração, atos POLÍTICOS (veto, guerra) e atos MATERIAIS (execução física — demolição).",
+  aprofundamento: "Guarde o trio de excluídos — privados, políticos e materiais — porque ele aparece de duas formas em prova: como alternativa intrusa em questão de espécies (este formato 'EXCETO') ou como assertiva para julgar (“o veto presidencial é ato administrativo” → errado). E lembre que a quinta espécie que não apareceu no enunciado, os atos ENUNCIATIVOS (certidão, atestado, parecer), apenas atesta ou opina — sem impor vontade."
+},
+{
+  q: "Um Comandante remove um subordinado para outra unidade, declarando expressamente no ato que o fundamento é a “reestruturação do efetivo da OBM”. Posteriormente, comprova-se por documentos que nenhuma reestruturação existia ou estava planejada. Sobre a validade do ato, é correto afirmar que:",
+  opts: [
+    { text: "O ato é válido, pois a remoção por necessidade do serviço é ato discricionário, que dispensa motivação e não admite controle.", correct:false, comment:"Errada por partes: ainda que se discuta quando a motivação é obrigatória, no caso ela EXISTIU — e uma vez declarado o motivo, ele vincula. Além disso, ato discricionário admite controle de legalidade normalmente; o que escapa ao controle judicial é só o mérito." },
+    { text: "O ato é nulo, pela Teoria dos Motivos Determinantes: o motivo declarado vincula a validade do ato e, comprovadamente falso, contamina-o — ainda que a lei não exigisse a declaração do motivo.", correct:true, comment:"Certa. É a aplicação literal da teoria: quando o agente declara o motivo do ato, esse motivo passa a ser determinante de sua validade. Motivo falso ou inexistente = ato nulo, MESMO que a declaração não fosse legalmente obrigatória. A comprovação documental da inexistência da 'reestruturação' sela a nulidade." },
+    { text: "O ato é válido, porém revogável pela Administração, por razões de conveniência e oportunidade, com efeitos ex nunc.", correct:false, comment:"Errada. Revogação é para ato VÁLIDO que se tornou inconveniente. Ato com motivo falso é ILEGAL — o desfazimento adequado é a anulação, com efeito ex tunc, pela Administração (autotutela) ou pelo Judiciário." },
+    { text: "O vício do ato está no elemento forma, pois o Comandante deveria ter publicado a remoção em boletim antes de efetivá-la.", correct:false, comment:"Errada. A questão não traz nenhum defeito de formalização ou publicidade — o vício comprovado está no MOTIVO (situação de fato declarada que não existia). Identificar corretamente o elemento viciado do COFIM é metade da questão." },
+    { text: "O Poder Judiciário não pode anular o ato, pois isso significaria invadir o mérito administrativo da decisão de remover.", correct:false, comment:"Errada. Anular ato com motivo falso é controle de LEGALIDADE, não de mérito. O Judiciário não pode dizer se a remoção era conveniente — mas pode (e deve) verificar se o motivo declarado existia. Inexistindo, anula o ato sem tocar no mérito." }
+  ],
+  referencia: "Teoria dos Motivos Determinantes: o motivo declarado vincula a validade do ato — se o motivo for falso ou inexistente, o ato é NULO, mesmo que a lei não exigisse sua declaração. Motivo = elemento do COFIM que pode ser vinculado ou discricionário; sua falsidade gera ilegalidade → anulação (ex tunc).",
+  aprofundamento: "Compare com a questão do desvio de poder: lá, a remoção retaliatória era vício de FINALIDADE; aqui, o foco é o MOTIVO falso. Na prática os dois vícios costumam andar juntos (motivo falso mascarando finalidade ilícita), mas a prova pode cobrá-los separadamente — leia o enunciado para identificar qual elemento do COFIM a questão está iluminando: o fim buscado (finalidade) ou a situação de fato declarada (motivo)."
+}
+];
+
+let order = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildSession(){
+  order = shuffle(QUESTIONS_RAW.map((q,i)=>i)).map(i=>{
+    const q = QUESTIONS_RAW[i];
+    const isJulgamento = q.opts.length === 2;
+    const opts = isJulgamento
+      ? q.opts.map((o,k)=>({...o, _k:k}))
+      : shuffle(q.opts.map((o,k)=>({...o, _k:k})));
+    return { ...q, opts };
+  });
+  current = 0;
+  score = 0;
+  answered = false;
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(current >= order.length){
+    const pct = Math.round((score/order.length)*100);
+    app.innerHTML = `
+      <div class="card score">
+        <div class="question">Simulado concluído</div>
+        <div class="num">${score} / ${order.length}</div>
+        <div class="pct">${pct}% de acertos</div>
+        <button class="btn" onclick="buildSession()">Refazer simulado</button>
+      </div>`;
+    return;
+  }
+  const q = order[current];
+  answered = false;
+  const pct = Math.round((current/order.length)*100);
+  let optsHtml = '';
+  q.opts.forEach((o, idx) => {
+    optsHtml += `<button class="opt" data-idx="${idx}" onclick="choose(${idx})">${o.text}</button>`;
+  });
+  app.innerHTML = `
+    <div class="progress">Questão ${current+1} de ${order.length} · acertos até aqui: ${score}</div>
+    <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    <div class="card">
+      <p class="question">${q.q}</p>
+      <div id="opts">${optsHtml}</div>
+      <div id="reviewArea"></div>
+    </div>`;
+}
+
+function choose(idx){
+  if(answered) return;
+  answered = true;
+  const q = order[current];
+  const chosen = q.opts[idx];
+  if(chosen.correct) score++;
+
+  const buttons = document.querySelectorAll('#opts .opt');
+  buttons.forEach((btn,i)=>{
+    btn.disabled = true;
+    if(q.opts[i].correct) btn.classList.add('correct');
+    else if(i===idx) btn.classList.add('wrong');
+  });
+
+  let analysisHtml = '';
+  q.opts.forEach((o,i)=>{
+    let cls = '';
+    let tag = '';
+    if(o.correct){ cls='is-correct'; tag='<b>Correta — </b>'; }
+    else if(i===idx){ cls='is-chosen-wrong'; tag='<b>Sua resposta — </b>'; }
+    analysisHtml += `<div class="item ${cls}">${tag}${o.comment}</div>`;
+  });
+
+  let blocksHtml = '';
+  if(q.referencia){
+    blocksHtml += `<div class="block fixar"><span class="label">Para fixar</span>${q.referencia}</div>`;
+  }
+  if(q.aprofundamento){
+    blocksHtml += `<div class="block alem"><span class="label">Indo além desta questão</span>${q.aprofundamento}</div>`;
+  }
+
+  const bannerCls = chosen.correct ? 'ok' : 'no';
+  const bannerTxt = chosen.correct
+    ? 'Você acertou! A alternativa marcada está correta.'
+    : 'Você errou. Veja abaixo qual era a alternativa correta e por quê.';
+
+  document.getElementById('reviewArea').innerHTML = `
+    <div class="review">
+      <div class="banner ${bannerCls}">${bannerTxt}</div>
+      <div class="analysis">${analysisHtml}</div>
+      ${blocksHtml}
+      <button class="btn" onclick="next()">Próxima questão</button>
+    </div>`;
+}
+
+function next(){
+  current++;
+  render();
+}
+
+buildSession();
+</script>
+</body>
+</html>

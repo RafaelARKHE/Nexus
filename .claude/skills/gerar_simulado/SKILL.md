@@ -31,9 +31,8 @@ não apenas de teste de acerto/erro.
 
 ## Especificações do simulado
 
-- **Quantidade padrão: 15 questões** de múltipla escolha — usar outro número apenas se o
+- **Quantidade padrão: 15 questões** — usar outro número apenas se o
   usuário pedir explicitamente (ex: "faz um simulado de 10", "quero 30 questões")
-- **Alternativas:** 5 por questão (A, B, C, D, E)
 - **Nível:** integrado — questões que testam conexões entre conceitos, não memorização isolada
 - **Distribuição:** cobrir os tópicos do escopo proporcionalmente, priorizando pares de
   conceitos confundíveis (ex: choque×colisão, primária×secundária, laminado×temperado) —
@@ -41,11 +40,53 @@ não apenas de teste de acerto/erro.
 
 ---
 
+## Mix de formatos de questão
+
+> Calibrado a partir das questões de revisão distribuídas pelos professores da ABM
+> (referência: revisão de DA para a VC01, 11/06/2026). As provas institucionais não usam
+> só múltipla escolha de 5 alternativas — misturam formatos. O simulado deve espelhar isso.
+
+Proporção de referência para 15-20 questões (ajustar ao que o material do professor
+indicar, quando houver questões-amostra):
+
+| Formato | Proporção | Como montar |
+|---|---|---|
+| **Múltipla escolha** (5 alternativas) | ~50-60% | Formato base descrito abaixo |
+| **Julgamento de assertiva** (Certo/Errado) | ~20-25% | `opts` com apenas 2 itens: `{text:"Certo"}` e `{text:"Errado"}`. Enunciado começa com "Julgue a assertiva:" e traz a afirmação entre aspas. Incluir itens CERTOS além dos errados — procurar erro onde não há também é habilidade de prova |
+| **Combinação de assertivas** | 1-2 por simulado | Enunciado lista afirmativas I a V (separadas por `<br>`); alternativas são as combinações ("I, II e IV", etc.). O comentário de cada alternativa julga as assertivas incluídas/excluídas |
+| **"EXCETO" / assinale a incorreta** | 1-2 por simulado | Quatro alternativas verdadeiras + uma falsa (a correta da questão). O comentário das verdadeiras vira microrrevisão de cada item da lista |
+| **Correspondência ordenada** | 0-1 por simulado | Duas ou mais situações numeradas no enunciado; alternativas trazem as classificações "respectivamente". Distratores = inversões da ordem |
+
+### Estilo de cobrança (tão importante quanto o formato)
+
+- **Casuística situacional**: sempre que possível, ambientar o enunciado em situação
+  concreta da realidade da disciplina/profissão (no caso do CBMPA: vistoria, CLCB,
+  ocorrência, OBM, relação comandante-subordinado) — o aluno deve identificar o conceito
+  a partir do caso, não reconhecer a definição de cor
+- **Citações doutrinárias e legais**: quando o material citar autor (ex: "Di Pietro, 2024")
+  ou dispositivo (lei, artigo, súmula, julgado), incorporar a citação ao enunciado ou às
+  alternativas — provas institucionais cobram a fonte junto com o conceito
+- **Armadilhas de generalização**: em assertivas Certo/Errado, usar termos totalizantes
+  ("sempre", "qualquer que seja", "sem exceção") como mecanismo de erro — e comentar
+  explicitamente essa pista no painel de revisão
+- **Inversões estruturais**: cobrar relações gênero/espécie, pares conceituais e
+  correspondências com os papéis trocados entre as alternativas (ex: inverter qual espécie
+  corresponde a qual vício)
+
+### Regras de engine para os formatos
+
+- Questões Certo/Errado **não embaralham** as alternativas (Certo sempre primeiro, como na
+  prova real) — no `buildSession`, detectar `opts.length === 2` e pular o shuffle
+- Enunciados com assertivas numeradas usam `<br>` dentro da string JS (nunca quebra de
+  linha literal) — o render usa `innerHTML`
+
+---
+
 ## Comportamento interativo
 
 - Ao clicar em uma alternativa, a questão é travada e exibe um **painel de revisão** com:
   1. **Banner de resultado** — confirma acerto/erro e identifica a alternativa correta
-  2. **Análise de cada alternativa** — comentário individual das 5 opções (não só da
+  2. **Análise de cada alternativa** — comentário individual de todas as opções (não só da
      escolhida), com a correta e a escolhida destacadas visualmente
   3. **Bloco "Para fixar"** *(quando houver dado técnico/definição que sustente a resposta)*
      — cartão destacado com a definição exata, número, sequência ou especificação cobrada
@@ -61,7 +102,7 @@ não apenas de teste de acerto/erro.
 
 ### Comentário por alternativa (o coração do formato)
 
-Cada uma das 5 alternativas — certa ou errada — recebe seu próprio comentário. Para as
+Cada alternativa — certa ou errada — recebe seu próprio comentário. Para as
 erradas, não basta dizer "está errada": explicar **por que ela parece plausível** e **qual
 conceito real ela está confundindo ou distorcendo**. Esse é o mecanismo central do formato:
 transforma cada questão em até 5 microrrevisões, não em 1.
@@ -148,7 +189,7 @@ Estrutura de dados de cada questão (`QUESTIONS_RAW`):
   q: "enunciado",
   opts: [
     { text: "...", correct: true|false, comment: "Certa/Errada. ..." },
-    // 5 alternativas, cada uma com seu comentário
+    // 5 alternativas (múltipla escolha) ou 2 (Certo/Errado), cada uma com seu comentário
   ],
   referencia: "trecho técnico destacado (opcional)",
   aprofundamento: "parágrafo de conexão com assunto vizinho (opcional)"

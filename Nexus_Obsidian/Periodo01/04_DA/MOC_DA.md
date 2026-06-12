@@ -5,8 +5,8 @@ disciplina: Direito Administrativo I
 sigla: DA
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 07/06/2026
-versao: 1.2
+atualizado_em: 11/06/2026
+versao: 1.3
 ---
 
 # MOC — Direito Administrativo I (DA)
@@ -61,14 +61,16 @@ versao: 1.2
 
 ## Avaliações (VC)
 
-### VC01 — Quinta-feira, 11/06/2026, 11h10–12h00 (VC Teórica)
+### VC01 — Sexta-feira, 12/06/2026 (VC Teórica)
 > Escopo: todo o conteúdo disponível — Unidades I, III e IV (Generalidades/Princípios, Poderes Administrativos incl. Poder de Polícia, Atos Administrativos)
+> Data corrigida em 11/06/2026 — confirmada no Google Calendar (os artefatos iniciais citavam quinta 11/06)
 
 | Artefato | Arquivo | Status |
 |---|---|---|
 | Revisão unificada | [[Periodo01/04_DA/VC01/revisao_VC01]] | ✅ Gerado |
-| Áudio (~30min) | `VC01/audio_VC01.txt` | ✅ Gerado |
+| Áudio (~30min, v1.1 — inclui seção sobre formato/estilo da prova) | `VC01/audio_VC01.txt` | ✅ Atualizado 11/06 |
 | Simulado (15 questões comentadas) | `VC01/simulado_VC01.html` | ✅ Gerado |
+| Simulado v2 (20 questões — nível e formatos calibrados pelas questões de revisão do professor) | `VC01/simulado_VC01_v2.html` | ✅ Gerado 11/06 |
 | Flashcards (55 cartões) | `VC01/flashcard_VC01.html` | ✅ Gerado |
 
 ---
