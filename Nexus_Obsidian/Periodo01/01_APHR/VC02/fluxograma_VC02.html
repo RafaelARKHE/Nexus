@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<!--
+sistema: Nexus
+tipo: fluxograma
+disciplina: APH e Resgate I
+sigla: APHR
+periodo: Periodo01
+avaliacao: VC02
+criado_em: 12/06/2026
+atualizado_em: 12/06/2026
+versao: 1.0
+descricao: Fluxograma interativo de construção ativa — o atendimento de APH se monta passo a passo. Em cada nó, uma pergunta com balões; a opção correta conecta-se ao fluxo e revela o próximo passo; a errada dá feedback sem avançar. Gerado a partir de revisao_VC02.md.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluxograma do Atendimento — APH e Resgate I | VC02</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f3ef; color: #2b2a28;
+  }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 16px 16px 80px; }
+  header { padding: 14px 4px 6px; }
+  header h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { font-size: 13.5px; color: #6b6a66; margin: 0; line-height: 1.5; }
+
+  .hud {
+    position: sticky; top: 0; z-index: 30;
+    background: #f4f3ef; padding: 10px 2px 8px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid #e3e1da;
+  }
+  .hud .stat { font-size: 13px; color: #6b6a66; }
+  .hud .stat b { font-weight: 800; }
+  .hud .stat.ok b { color: #4a8f5b; }
+  .hud .stat.err b { color: #8a3324; }
+  .hud .progress { flex: 1; height: 6px; background: #e3e1da; border-radius: 4px; overflow: hidden; }
+  .hud .progress > div { height: 100%; background: #8a3324; transition: width .3s ease; width: 0; }
+
+  /* ----- Fluxograma construído ----- */
+  #fluxo { margin: 8px 0 4px; }
+  .node {
+    position: relative; background: #fff; border-radius: 12px;
+    padding: 12px 14px; box-shadow: 0 1px 5px rgba(0,0,0,.08);
+    border-left: 5px solid #8a3324; cursor: pointer;
+    animation: drop .45s cubic-bezier(.2,.9,.3,1.2);
+  }
+  @keyframes drop { from { opacity: 0; transform: translateY(-14px) scale(.96); } to { opacity: 1; transform: none; } }
+  .node .badge {
+    display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .05em;
+    text-transform: uppercase; color: #fff; background: #8a3324;
+    padding: 2px 8px; border-radius: 20px; margin-bottom: 6px;
+  }
+  .node .titulo { font-size: 15px; font-weight: 700; line-height: 1.4; }
+  .node .exp { font-size: 13.5px; color: #54524d; line-height: 1.5; margin-top: 8px;
+    display: none; border-top: 1px dashed #e3e1da; padding-top: 8px; }
+  .node.open .exp { display: block; }
+  .node .tip { font-size: 11px; color: #b3b1a8; margin-top: 6px; }
+  .connector { display: flex; justify-content: center; }
+  .connector svg { display: block; }
+
+  /* ----- Pergunta atual ----- */
+  .ask {
+    background: #fbf3e6; border: 1.5px solid #d9a441; border-radius: 16px;
+    padding: 18px 16px 16px; margin-top: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    animation: drop .4s ease;
+  }
+  .ask .stepnum { font-size: 11px; font-weight: 800; letter-spacing: .05em;
+    text-transform: uppercase; color: #9a6b1a; }
+  .ask .pergunta { font-size: 17px; font-weight: 700; line-height: 1.45; margin: 6px 0 14px; }
+  .balloons { display: flex; flex-direction: column; gap: 10px; }
+  .balloon {
+    text-align: left; border: 1.5px solid #e3d8bd; background: #fff;
+    border-radius: 14px; padding: 13px 15px; font-size: 15px; line-height: 1.4;
+    cursor: pointer; min-height: 48px; transition: transform .12s, background .2s, border-color .2s;
+    position: relative;
+  }
+  .balloon:active { transform: scale(.985); }
+  .balloon.correct { background: #e9f3ec; border-color: #4a8f5b; color: #245b34; font-weight: 600; pointer-events: none; }
+  .balloon.wrong { background: #f8e7e4; border-color: #c2543f; animation: shake .4s; }
+  @keyframes shake { 0%,100%{transform:none} 20%{transform:translateX(-7px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)} }
+  .feedback {
+    font-size: 13.5px; line-height: 1.5; color: #8a3324;
+    background: #f8e7e4; border-radius: 10px; padding: 10px 12px; margin-top: 10px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.go { color: #245b34; background: #e9f3ec; }
+
+  .next-btn {
+    width: 100%; border: none; border-radius: 12px; background: #8a3324; color: #fff;
+    font-size: 15px; font-weight: 700; padding: 14px; margin-top: 12px; cursor: pointer;
+    min-height: 50px; display: none;
+  }
+  .next-btn.show { display: block; }
+  .next-btn:active { background: #6f2a1d; }
+
+  /* ----- Resumo final ----- */
+  .summary { background: #fff; border-radius: 16px; padding: 24px 20px; text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08); margin-top: 16px; animation: drop .5s ease; }
+  .summary h2 { margin: 0 0 4px; font-size: 22px; color: #8a3324; }
+  .summary .sub { font-size: 14px; color: #6b6a66; margin-bottom: 18px; }
+  .summary .row { display: flex; justify-content: space-around; margin: 14px 0 6px; }
+  .summary .row .item .n { font-size: 30px; font-weight: 800; }
+  .summary .row .item .l { font-size: 12.5px; color: #6b6a66; }
+  .summary .row .item.ok .n { color: #4a8f5b; }
+  .summary .row .item.err .n { color: #8a3324; }
+  .summary .revisar { text-align: left; margin-top: 16px; font-size: 13.5px; }
+  .summary .revisar b { display:block; margin-bottom: 6px; }
+  .summary .revisar ul { margin: 0; padding-left: 18px; color: #54524d; line-height: 1.6; }
+
+  .btn-line { display: flex; gap: 10px; margin-top: 16px; }
+  .ghost { flex: 1; background: #fff; color: #6b6a66; border: 1.5px solid #e3e1da;
+    border-radius: 11px; padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 46px; }
+  .ghost:active { background: #efeee9; }
+  .footer-note { font-size: 12px; color: #9a988f; text-align: center; margin: 26px 0 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Fluxograma do Atendimento — APH I</h1>
+    <p>VC02 · monte o protocolo do socorro passo a passo. Em cada nó, escolha o balão correto: ele se conecta ao fluxo e abre o próximo passo. Errou? O feedback explica e você tenta de novo. Ao final, o fluxograma inteiro estará montado por você.</p>
+  </header>
+
+  <div class="hud">
+    <span class="stat ok">✓ <b id="hudOk">0</b></span>
+    <span class="stat err">✗ <b id="hudErr">0</b></span>
+    <div class="progress"><div id="hudBar"></div></div>
+    <span class="stat"><b id="hudStep">0</b>/<span id="hudTot">0</span></span>
+  </div>
+
+  <div id="fluxo"></div>
+  <div id="current"></div>
+
+  <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — gerado a partir de revisao_VC02 · progresso salvo automaticamente</p>
+</div>
+
+<script>
+/* ============================================================
+   GRAFO DO ATENDIMENTO (data-driven — trocar este objeto
+   generaliza o motor para qualquer processo de outra matéria)
+   Cada nó: id, etapa, pergunta, opcoes[{t, ok, fb}], exp, proximos[]
+   ============================================================ */
+const ETAPAS = {
+  CENA:        { rotulo: "Avaliação de Cena", cor: "#5b6e8c" },
+  BIOMECANICA: { rotulo: "Biomecânica",       cor: "#7a5c8c" },
+  PACIENTE:    { rotulo: "Chegada ao Paciente",cor: "#4a8f5b" },
+  X: { rotulo: "X · Hemorragia",  cor: "#8a3324" },
+  A: { rotulo: "A · Via Aérea",   cor: "#b06a1a" },
+  B: { rotulo: "B · Respiração",  cor: "#1a7a86" },
+  C: { rotulo: "C · Circulação",  cor: "#8a3324" },
+  D: { rotulo: "D · Neurológico", cor: "#5b6e8c" },
+  E: { rotulo: "E · Exposição",   cor: "#7a5c8c" },
+  SEC: { rotulo: "Secundária",    cor: "#6b6a66" }
+};
+
+const FLUXO = {
+  cena_1: { etapa: "CENA",
+    pergunta: "Você chega à cena de um acidente de trânsito. Qual a PRIMEIRA ação?",
+    opcoes: [
+      { t: "Garantir a segurança da cena — EPI e avaliação de riscos", ok: true },
+      { t: "Iniciar o XABCDE direto na vítima", fb: "Antes de tocar a vítima, lê-se a cena. Socorrista que vira vítima deixa de ajudar e ainda aumenta o número de pacientes — segurança é a consideração nº 1." },
+      { t: "Perguntar o histórico médico do paciente", fb: "Isso é parte da avaliação secundária (SAMPLER), muito depois da segurança da cena." }
+    ],
+    exp: "A avaliação de cena vem antes de tudo, em três frentes nesta ordem: segurança → situação → cinemática. Sem cena segura não há atendimento.",
+    proximos: ["cena_sinaliz"] },
+
+  cena_sinaliz: { etapa: "CENA",
+    pergunta: "Acidente numa via de 60 km/h, sem viatura no local. Onde posicionar a viatura e o 1º cone?",
+    opcoes: [
+      { t: "Viatura 15 m ANTES do acidente; 1º cone a 60 passos", ok: true },
+      { t: "Viatura 15 m à frente; 1º cone a 15 passos", fb: "15 m à FRENTE é só quando já há outra viatura protegendo. E a distância até o 1º cone acompanha a velocidade da via: 60 km/h → 60 passos." },
+      { t: "Viatura sobre o acidente; cones a cada 5 passos", fb: "A viatura serve de anteparo e fica 15 m antes; os cones vão 1 a cada 10 passos, não a cada 5." }
+    ],
+    exp: "Viatura 15 m antes = anteparo que cria a zona de trabalho (15 m à frente se já houver outra protegendo). Cones 1 a cada 10 passos; passos até o 1º cone = velocidade da via (40/50/60/70/80).",
+    proximos: ["cena_situacao"] },
+
+  cena_situacao: { etapa: "CENA",
+    pergunta: "Cena segura e sinalizada. Qual a próxima frente da avaliação de cena?",
+    opcoes: [
+      { t: "Situação — o que aconteceu, mecanismo, nº e idade das vítimas, recursos", ok: true },
+      { t: "Já iniciar a pesquisa primária", fb: "Ainda falta ler situação e cinemática. A primária começa só ao chegar ao paciente." },
+      { t: "Cinemática, pulando a situação", fb: "A ordem é segurança → situação → cinemática. A situação vem antes." }
+    ],
+    exp: "Ordem das três frentes: segurança → situação → cinemática (biomecânica). A situação dimensiona recursos e contexto.",
+    proximos: ["bio_1"] },
+
+  bio_1: { etapa: "BIOMECANICA",
+    pergunta: "Cinemática do trauma: para que serve ler as forças do acidente?",
+    opcoes: [
+      { t: "Prever lesões e manter alto índice de suspeição, inclusive ocultas", ok: true },
+      { t: "Determinar quem causou o acidente", fb: "Biomecânica é clínica, não pericial — serve para antecipar lesões, não apurar culpa." },
+      { t: "Calcular a velocidade exata do impacto", fb: "O objetivo é detectar precocemente lesões fatais pelo mecanismo, não medir velocidade." }
+    ],
+    exp: "Biomecânica detecta precocemente lesões fatais. Os trios: 3 fases (pré-evento/evento/pós-evento), 3 impactos (objetos → ocupantes → órgãos), 3 mecanismos (desaceleração frontal, vertical, penetração).",
+    proximos: ["bio_colisao"] },
+
+  bio_colisao: { etapa: "BIOMECANICA",
+    pergunta: "Colisão TRASEIRA. Qual a lesão-assinatura?",
+    opcoes: [
+      { t: "Hiperextensão da coluna cervical", ok: true },
+      { t: "Fratura bilateral de fêmur", fb: "Isso é o padrão da MOTO em impacto frontal com os pés presos ao pedal, não da colisão traseira." },
+      { t: "Golpe e contragolpe por desaceleração frontal", fb: "Golpe/contragolpe é o padrão da colisão FRONTAL. A traseira gera hiperextensão cervical." }
+    ],
+    exp: "Traseira = hiperextensão cervical. Frontal = golpe/contragolpe + hiperextensão; moto frontal com pés presos = fêmur bilateral; atropelamento adulto começa nas pernas, criança em fêmur/pelve.",
+    proximos: ["bio_penetrante"] },
+
+  bio_penetrante: { etapa: "BIOMECANICA",
+    pergunta: "Ferimento por projétil de arma de fogo no TÓRAX. Conduta?",
+    opcoes: [
+      { t: "Transporte imediato", ok: true },
+      { t: "Achar só o orifício de entrada e liberar a vítima", fb: "Nem sempre há orifício de saída, e projétil em cabeça/tórax/abdome exige transporte imediato — não se libera." },
+      { t: "Aguardar sinais de choque para decidir", fb: "Não se espera o choque: projétil em cavidade nobre já indica transporte imediato." }
+    ],
+    exp: "Projétil em cabeça, tórax ou abdome = transporte imediato. Arma branca: procurar sempre mais de um ferimento. Explosão: barotrauma pulmonar pior em espaço fechado, órgãos com gás mais vulneráveis.",
+    proximos: ["pac_1"] },
+
+  pac_1: { etapa: "PACIENTE",
+    pergunta: "Há mais vítimas do que recursos disponíveis. Como triar?",
+    opcoes: [
+      { t: "Risco de vida → risco de membro → demais condições", ok: true },
+      { t: "Por ordem de chegada à cena", fb: "Triagem é por gravidade, não por ordem de chegada." },
+      { t: "Crianças e idosos sempre primeiro, por idade", fb: "O critério é o risco clínico (vida → membro → resto), não a idade isoladamente." }
+    ],
+    exp: "Triagem quando há mais vítimas que recursos: vida → membro → demais. Depois vem a impressão geral do paciente.",
+    proximos: ["pac_pergunta"] },
+
+  pac_pergunta: { etapa: "PACIENTE",
+    pergunta: "Você pergunta 'o que aconteceu com você?'. Uma resposta coerente em frase completa indica o quê?",
+    opcoes: [
+      { t: "Via aérea pérvia, ventilação, perfusão cerebral e função neuro preservadas", ok: true },
+      { t: "Apenas que a via aérea está livre", fb: "A resposta avalia 4 sistemas de uma vez, não só a via aérea." },
+      { t: "Nada clínico — é só criar vínculo", fb: "É uma ferramenta de triagem real: avalia 4 sistemas simultaneamente." }
+    ],
+    exp: "A pergunta avalia quatro sistemas de uma vez. Resposta ausente ou incompreensível → iniciar a pesquisa primária (XABCDE) imediatamente.",
+    proximos: ["x_1"] },
+
+  x_1: { etapa: "X",
+    pergunta: "Início do XABCDE. Qual é a PRIMEIRA letra no PHTLS moderno?",
+    opcoes: [
+      { t: "X — hemorragia exsanguinante", ok: true },
+      { t: "A — via aérea", fb: "Essa era a abordagem antiga. A hemorragia exsanguinante mata mais rápido que a obstrução de via aérea, por isso o X vem antes do A." },
+      { t: "C — circulação", fb: "A circulação é o C; a hemorragia que jorra é tratada já no X, antes de tudo." }
+    ],
+    exp: "X antes de A é o diferencial do PHTLS moderno: hemorragia exsanguinante mata mais rápido que obstrução de via aérea.",
+    proximos: ["x_local"] },
+
+  x_local: { etapa: "X",
+    pergunta: "Hemorragia grave numa EXTREMIDADE (coxa). Primeira conduta?",
+    opcoes: [
+      { t: "Torniquete imediato, o mais proximal possível", ok: true },
+      { t: "Tentar pressão direta e curativo antes de pensar em torniquete", fb: "Em extremidade não se atrasa o torniquete tentando outras medidas primeiro — ele é imediato." },
+      { t: "Aplicar agente hemostático apenas", fb: "Hemostático é para junções/couro cabeludo; em extremidade com hemorragia grave, torniquete imediato." }
+    ],
+    exp: "Extremidade → torniquete imediato e proximal (raiz do membro). Couro cabeludo ou junção tronco-membro → pressão direta + curativo/hemostático.",
+    proximos: ["x_torniquete"] },
+
+  x_torniquete: { etapa: "X",
+    pergunta: "Sobre as regras do torniquete, qual está CORRETA?",
+    opcoes: [
+      { t: "Anotar o horário, máximo 120 min, nunca afrouxar no campo", ok: true },
+      { t: "Afrouxar a cada 20 min para reperfundir o membro", fb: "Nunca se afrouxa o torniquete no campo — só no hospital. Afrouxar reinicia a hemorragia." },
+      { t: "Sem limite de tempo, se estiver bem apertado", fb: "Há limite: máximo de 120 minutos, e o horário de aplicação deve ser anotado." }
+    ],
+    exp: "Informar a vítima, verificar bolsos, apertar até ocluir o pulso distal, anotar o horário, máximo 120 minutos, afrouxar só no hospital.",
+    proximos: ["x_interna"] },
+
+  x_interna: { etapa: "X",
+    pergunta: "Suspeita de hemorragia. Qual sinal NÃO se deve esperar para suspeitar?",
+    opcoes: [
+      { t: "Hipotensão — é sinal tardio, já indica perda acima de 30%", ok: true },
+      { t: "Taquicardia, com FC acima de 100", fb: "Taquicardia é sinal precoce de compensação — ela aparece antes, e ajuda a suspeitar cedo." },
+      { t: "Palidez e pele fria", fb: "Palidez e pele fria são sinais compensatórios precoces, úteis para suspeitar antes da PA cair." }
+    ],
+    exp: "Hipotensão é sinal TARDIO. A compensação aparece antes: taquicardia (FC>100), taquipneia (FR≥28), palidez, sudorese, agitação, sede.",
+    proximos: ["a_1"] },
+
+  a_1: { etapa: "A",
+    pergunta: "A — via aérea, COM suspeita de lesão cervical. Qual manobra?",
+    opcoes: [
+      { t: "Jaw thrust isolado, cabeça em posição neutra", ok: true },
+      { t: "Chin lift + jaw thrust com extensão da cabeça", fb: "A extensão da cabeça só é permitida SEM suspeita cervical. Com suspeita, jaw thrust isolado e cabeça neutra." },
+      { t: "Hiperextender a cabeça para abrir a via", fb: "Hiperextensão com suspeita cervical pode agravar lesão da coluna — proibida aqui." }
+    ],
+    exp: "Sem suspeita cervical → chin lift + jaw thrust. Com suspeita cervical → jaw thrust isolado, cabeça neutra, estabilização manual até colar + protetores.",
+    proximos: ["a_canula"] },
+
+  a_canula: { etapa: "A",
+    pergunta: "Paciente inconsciente, mas COM reflexo de vômito presente. Qual adjunto de via aérea?",
+    opcoes: [
+      { t: "Cânula nasofaríngea (tolerada com reflexo presente)", ok: true },
+      { t: "Cânula orofaríngea (COF)", fb: "A COF só é tolerada no inconsciente SEM reflexo de vômito; com reflexo presente ela provoca vômito/broncoaspiração." },
+      { t: "Nenhum adjunto pode ser usado", fb: "A nasofaríngea existe exatamente para esse caso: inconsciente ou semiconsciente que ainda tem reflexo." }
+    ],
+    exp: "COF = inconsciente SEM reflexo de vômito (afasta a base da língua). Cânula nasofaríngea = flexível, tolerada com reflexo presente.",
+    proximos: ["b_1"] },
+
+  b_1: { etapa: "B",
+    pergunta: "B — respiração. Paciente apneico / em gasping. Conduta imediata?",
+    opcoes: [
+      { t: "BVM + O2 imediatamente, antes de continuar o XABCDE", ok: true },
+      { t: "Cateter nasal a 6 L/min e seguir o exame", fb: "Cateter não ventila um apneico. Apneia/gasping exige BVM + O2 já, interrompendo o XABCDE." },
+      { t: "Aguardar a oximetria antes de agir", fb: "Em apneia não se espera oxímetro — ventila-se imediatamente com BVM." }
+    ],
+    exp: "Apneico/gasping → BVM + O2 antes de seguir. Faixas de FR: <10 assistir, 10–20 normal, 20–30 atenção, >30 grave.",
+    proximos: ["b_o2"] },
+
+  b_o2: { etapa: "B",
+    pergunta: "Hipóxia grave (SpO2 84%), respirando, sem indicação de intubação. Melhor dispositivo de O2?",
+    opcoes: [
+      { t: "Máscara com reservatório — 12 a 15 L/min, FiO2 95–100%", ok: true },
+      { t: "Cateter nasal (óculos), até 44% de FiO2", fb: "O cateter chega só a ~44% de FiO2 — insuficiente para hipóxia grave." },
+      { t: "Máscara facial simples a 4 L/min", fb: "Máscara simples abaixo de 6 L/min causa reinalação de CO2, e não atinge a FiO2 necessária aqui." }
+    ],
+    exp: "Reservatório para hipóxia moderada-grave (FiO2 95–100%). Cada litro de cateter soma ~+4% de FiO2. Máscara simples exige mínimo 6 L/min.",
+    proximos: ["b_oximetro"] },
+
+  b_oximetro: { etapa: "B",
+    pergunta: "Vítima de incêndio em ambiente fechado, suspeita de intoxicação por CO. O que lembrar do oxímetro?",
+    opcoes: [
+      { t: "Pode dar leitura falsamente normal — o CO se liga à hemoglobina como o O2", ok: true },
+      { t: "A leitura do oxímetro é sempre confiável", fb: "Vários fatores falseiam o oxímetro; o CO em especial dá leitura falsamente normal." },
+      { t: "O oxímetro detecta o CO diretamente", fb: "Ele não distingue O2 de CO ligados à hemoglobina — por isso a leitura engana." }
+    ],
+    exp: "CO falseia o oxímetro (leitura normal não exclui intoxicação). Meta geral SpO2 ≥94%, mas 88–92% em DPOC. Tabela: 95–100 normal / 91–94 leve / 86–90 moderada / <85 grave.",
+    proximos: ["c_1"] },
+
+  c_1: { etapa: "C",
+    pergunta: "C — circulação. Choque com pele QUENTE na fase inicial. Qual tipo?",
+    opcoes: [
+      { t: "Distributivo (séptico, anafilático ou neurogênico)", ok: true },
+      { t: "Hipovolêmico", fb: "O hipovolêmico cursa com pele FRIA e pálida (vasoconstrição). Pele quente inicial é marca do distributivo." },
+      { t: "Cardiogênico", fb: "O cardiogênico dá pele fria e úmida. Pele quente na fase inicial aponta para o distributivo." }
+    ],
+    exp: "Distributivo = único com pele quente na fase inicial (vasodilatação). Neurogênico é a exceção da bradicardia — todos os outros choques cursam com taquicardia.",
+    proximos: ["c_classe"] },
+
+  c_classe: { etapa: "C",
+    pergunta: "Hemorragia classe II (perda de 15 a 30%). O que esperar da pressão arterial?",
+    opcoes: [
+      { t: "Normal ou levemente reduzida — a FC já está elevada (>100)", ok: true },
+      { t: "Já muito baixa", fb: "A PA só começa a cair de fato a partir da classe III. Nas classes I e II ela pode estar normal." },
+      { t: "Aumentada", fb: "Hemorragia não eleva a PA. Nas classes I/II ela fica normal/levemente reduzida, com FC já subindo." }
+    ],
+    exp: "Classes I e II podem ter PA normal — a FC é o primeiro sinal a se alterar. A PA cai a partir da classe III; na classe IV, cristaloide isolado não resolve.",
+    proximos: ["c_fisio"] },
+
+  c_fisio: { etapa: "C",
+    pergunta: "Na cadeia do choque, abaixo de qual pH a contração do miocárdio entra em depressão grave?",
+    opcoes: [
+      { t: "pH abaixo de 7,20", ok: true },
+      { t: "pH abaixo de 7,45", fb: "7,45 é o limite superior do pH normal — não há depressão miocárdica aí. O limiar crítico é 7,20." },
+      { t: "pH abaixo de 6,80", fb: "O ponto de virada da depressão miocárdica grave é antes disso: pH 7,20." }
+    ],
+    exp: "Hipoperfusão → via anaeróbica → lactato → acidose metabólica → abaixo de pH 7,20 o miocárdio entra em depressão grave. É o fio condutor do choque.",
+    proximos: ["d_1"] },
+
+  d_1: { etapa: "D",
+    pergunta: "D — déficit neurológico, na avaliação PRIMÁRIA. Qual ferramenta usar?",
+    opcoes: [
+      { t: "AVDI — rápida, para decisão imediata", ok: true },
+      { t: "Escala de Coma de Glasgow", fb: "Glasgow é detalhada e fica para a SECUNDÁRIA, quando há tempo (geralmente no transporte). Confundir os momentos é erro clássico de prova." },
+      { t: "SAMPLER", fb: "SAMPLER é histórico da secundária. Na primária, o nível de consciência é avaliado pela AVDI." }
+    ],
+    exp: "AVDI na primária (A-acordado, V-verbal, D-doloroso, I-irresponsivo) para decisão imediata; Glasgow na secundária. Não confundir os momentos.",
+    proximos: ["d_pupila"] },
+
+  d_pupila: { etapa: "D",
+    pergunta: "Pupilas assimétricas (anisocoria) após trauma de crânio. Pensar em quê?",
+    opcoes: [
+      { t: "Herniação / lesão cerebral localizada até prova em contrário", ok: true },
+      { t: "Variação anatômica normal, sem importância", fb: "Após trauma, anisocoria nunca é tratada como normal — presume-se herniação até prova em contrário." },
+      { t: "Intoxicação por estimulantes", fb: "Estimulantes dão miose bilateral (contraídas e reativas). Assimetria pós-trauma aponta lesão localizada." }
+    ],
+    exp: "Anisocoria pós-trauma = herniação cerebral até prova em contrário. A pupila mais grave é a midríase paralítica (dilatada + arreativa): PCR, choque, inconsciência.",
+    proximos: ["e_1"] },
+
+  e_1: { etapa: "E",
+    pergunta: "E — exposição. Qual o cuidado obrigatório logo após expor o paciente?",
+    opcoes: [
+      { t: "Cobrir o paciente imediatamente — prevenir hipotermia", ok: true },
+      { t: "Manter exposto para facilitar a reavaliação", fb: "Exposição prolongada gera hipotermia, que piora a coagulação. Expõe-se o necessário e cobre-se já." },
+      { t: "Dar um banho para limpar a pele", fb: "Não se banha o politraumatizado no campo; o cuidado-chave é cobrir para evitar hipotermia." }
+    ],
+    exp: "Expor apenas o necessário (total se mecanismo grave ou NC alterado), e cobrir imediatamente para prevenir hipotermia. Reavaliar o XABCDE quantas vezes for preciso.",
+    proximos: ["sec_1"] },
+
+  sec_1: { etapa: "SEC",
+    pergunta: "Avaliação secundária. No SAMPLER, qual item é o mais esquecido — e por isso mais cobrado?",
+    opcoes: [
+      { t: "L — Lanche (última ingestão; risco de aspiração)", ok: true },
+      { t: "A — Alergias", fb: "Alergias raramente são esquecidas. O item negligenciado é o L (última ingestão / lanche)." },
+      { t: "S — Sintomas", fb: "Os sintomas abrem a avaliação e dificilmente passam batido. O esquecido é o L de lanche." }
+    ],
+    exp: "SAMPLER: Sintomas, Alergias, Medicamentos, Passado médico, Lanche, Eventos, Risco de gravidez. A secundária é feita após a primária e nunca atrasa o transporte do paciente crítico.",
+    proximos: [] }
+};
+
+const RAIZ = "cena_1";
+
+/* ============================================================
+   MOTOR (genérico — independe do conteúdo de FLUXO)
+   ============================================================ */
+const SAVE_KEY = "nexus_fluxo_APHR_VC02_v1";
+const TOTAL = Object.keys(FLUXO).length;
+const elFluxo = document.getElementById("fluxo");
+const elCurrent = document.getElementById("current");
+
+let estado = carregar() || {
+  fila: [RAIZ],          // ids pendentes
+  construidos: [],       // ids já montados, em ordem
+  acertos: 0,
+  erros: 0,
+  errados: []            // ids em que houve ao menos um erro
+};
+
+function salvar() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(estado)); } catch(e){} }
+function carregar() { try { return JSON.parse(localStorage.getItem(SAVE_KEY)); } catch(e){ return null; } }
+
+function badge(id) {
+  const e = ETAPAS[FLUXO[id].etapa];
+  return `<span class="badge" style="background:${e.cor}">${e.rotulo}</span>`;
+}
+function corEtapa(id){ return ETAPAS[FLUXO[id].etapa].cor; }
+function respostaCerta(id){ return FLUXO[id].opcoes.find(o => o.ok).t; }
+
+function connectorSVG(cor) {
+  return `<div class="connector"><svg width="20" height="26" viewBox="0 0 20 26">
+    <line x1="10" y1="0" x2="10" y2="18" stroke="${cor}" stroke-width="2"/>
+    <path d="M4 16 L10 24 L16 16" fill="none" stroke="${cor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>`;
+}
+
+function renderFluxo() {
+  elFluxo.innerHTML = estado.construidos.map((id, i) => {
+    const cor = corEtapa(id);
+    const conn = i > 0 ? connectorSVG(corEtapa(estado.construidos[i-1])) : "";
+    return conn + `<div class="node" style="border-left-color:${cor}" data-id="${id}">
+      ${badge(id)}
+      <div class="titulo">${respostaCerta(id)}</div>
+      <div class="exp">${FLUXO[id].exp}</div>
+      <div class="tip">toque para ver/ocultar a explicação</div>
+    </div>`;
+  }).join("");
+  elFluxo.querySelectorAll(".node").forEach(n => {
+    n.addEventListener("click", () => n.classList.toggle("open"));
+  });
+}
+
+function renderHUD() {
+  document.getElementById("hudOk").textContent = estado.acertos;
+  document.getElementById("hudErr").textContent = estado.erros;
+  document.getElementById("hudStep").textContent = estado.construidos.length;
+  document.getElementById("hudTot").textContent = TOTAL;
+  document.getElementById("hudBar").style.width = (estado.construidos.length / TOTAL * 100) + "%";
+}
+
+function embaralhar(arr){ return arr.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
+
+function renderPergunta() {
+  if (estado.fila.length === 0) { renderResumo(); return; }
+  const id = estado.fila[0];
+  const no = FLUXO[id];
+  const cor = corEtapa(id);
+  const opts = embaralhar(no.opcoes.slice());
+  const conn = estado.construidos.length > 0 ? connectorSVG(corEtapa(estado.construidos[estado.construidos.length-1])) : "";
+
+  elCurrent.innerHTML = conn + `<div class="ask" style="border-color:${cor}">
+    <div class="stepnum" style="color:${cor}">Passo ${estado.construidos.length + 1} de ${TOTAL} · ${ETAPAS[no.etapa].rotulo}</div>
+    <div class="pergunta">${no.pergunta}</div>
+    <div class="balloons">
+      ${opts.map((o,i) => `<button class="balloon" data-ok="${o.ok?1:0}" data-fb="${(o.fb||"").replace(/"/g,'&quot;')}">${o.t}</button>`).join("")}
+    </div>
+    <div class="feedback" id="fb"></div>
+    <button class="next-btn" id="nextBtn">Continuar o atendimento →</button>
+  </div>`;
+
+  const fb = document.getElementById("fb");
+  const nextBtn = document.getElementById("nextBtn");
+
+  elCurrent.querySelectorAll(".balloon").forEach(b => {
+    b.addEventListener("click", () => {
+      if (b.classList.contains("correct") || b.classList.contains("wrong")) return;
+      if (b.dataset.ok === "1") {
+        b.classList.add("correct");
+        estado.acertos++;
+        elCurrent.querySelectorAll(".balloon").forEach(x => x.style.pointerEvents = "none");
+        fb.className = "feedback go show";
+        fb.innerHTML = "<b>Correto.</b> " + no.exp;
+        nextBtn.classList.add("show");
+        salvar(); renderHUD();
+      } else {
+        b.classList.add("wrong");
+        estado.erros++;
+        if (!estado.errados.includes(id)) estado.errados.push(id);
+        fb.className = "feedback show";
+        fb.innerHTML = b.dataset.fb || "Não é a melhor escolha aqui. Tente outra.";
+        setTimeout(() => b.classList.remove("wrong"), 450);
+        salvar(); renderHUD();
+      }
+    });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    estado.construidos.push(id);
+    estado.fila.shift();
+    no.proximos.forEach(p => { if (!estado.fila.includes(p) && !estado.construidos.includes(p)) estado.fila.push(p); });
+    salvar();
+    renderFluxo(); renderHUD(); renderPergunta();
+    const ultimo = elFluxo.querySelector(".node:last-child");
+    if (ultimo) ultimo.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function renderResumo() {
+  const total = estado.acertos + estado.erros;
+  const aproveitamento = total ? Math.round(estado.acertos / total * 100) : 100;
+  const listaErros = estado.errados.length
+    ? `<div class="revisar"><b>Nós em que você errou — vale revisar:</b><ul>${
+        estado.errados.map(id => `<li>${ETAPAS[FLUXO[id].etapa].rotulo}: ${respostaCerta(id)}</li>`).join("")
+      }</ul></div>`
+    : `<div class="revisar"><b>Você montou o fluxo inteiro sem nenhum erro. 🔥</b></div>`;
+
+  elCurrent.innerHTML = `<div class="summary">
+    <h2>Fluxograma completo!</h2>
+    <div class="sub">Você montou as ${TOTAL} etapas do atendimento, da cena à secundária.</div>
+    <div class="row">
+      <div class="item ok"><div class="n">${estado.acertos}</div><div class="l">acertos</div></div>
+      <div class="item err"><div class="n">${estado.erros}</div><div class="l">erros</div></div>
+      <div class="item"><div class="n">${aproveitamento}%</div><div class="l">de primeira</div></div>
+    </div>
+    ${listaErros}
+    <div class="btn-line">
+      <button class="ghost" id="reiniciar">Recomeçar do zero</button>
+    </div>
+  </div>`;
+  document.getElementById("reiniciar").addEventListener("click", reiniciar);
+}
+
+function reiniciar() {
+  estado = { fila: [RAIZ], construidos: [], acertos: 0, erros: 0, errados: [] };
+  salvar();
+  renderFluxo(); renderHUD(); renderPergunta();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* boot */
+renderFluxo();
+renderHUD();
+renderPergunta();
+</script>
+</body>
+</html>
