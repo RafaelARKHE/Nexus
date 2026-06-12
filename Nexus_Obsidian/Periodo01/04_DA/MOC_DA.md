@@ -68,7 +68,7 @@ versao: 1.3
 | Artefato | Arquivo | Status |
 |---|---|---|
 | Revisão unificada | [[Periodo01/04_DA/VC01/revisao_VC01]] | ✅ Gerado |
-| Áudio (~30min, v1.1 — inclui seção sobre formato/estilo da prova) | `VC01/audio_VC01.txt` | ✅ Atualizado 11/06 |
+| Áudio (v2.0 — ~11.000 palavras / ~44min na taxa real de TTS, com seção sobre formato/estilo da prova) | `VC01/audio_VC01.txt` | ✅ Expandido 12/06 |
 | Simulado (15 questões comentadas) | `VC01/simulado_VC01.html` | ✅ Gerado |
 | Simulado v2 (20 questões — nível e formatos calibrados pelas questões de revisão do professor) | `VC01/simulado_VC01_v2.html` | ✅ Gerado 11/06 |
 | Flashcards (55 cartões) | `VC01/flashcard_VC01.html` | ✅ Gerado |

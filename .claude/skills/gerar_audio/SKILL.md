@@ -5,7 +5,7 @@ description: >
   escuta passiva no deslocamento. Acionada pela skill REVISAO_PROVA ou diretamente
   quando o usuário pedir "gerar áudio da prova", "áudio para dirigir", "versão
   para ouvir". Transforma o documento de revisão em texto corrido com linguagem
-  fluida, redundância planejada e ~4.000 palavras (30 minutos de escuta).
+  fluida, redundância planejada e 8.000 a 10.000 palavras (32 a 40 minutos de escuta).
 ---
 
 # GERAR_AUDIO
@@ -37,8 +37,8 @@ disciplina: [NOME_COMPLETO]
 sigla: [SIGLA]
 periodo: Periodo0N
 avaliacao: VC0X
-duracao_estimada: 30min
-palavras_alvo: 4000
+duracao_estimada: 35min
+palavras_alvo: 9000
 criado_em: [DATA DD/MM/AAAA]
 versao: 1.0
 ---
@@ -48,10 +48,16 @@ versao: 1.0
 
 ## Especificações técnicas
 
-- **Extensão alvo:** ~4.000 palavras
-- **Velocidade de referência:** 133 palavras/minuto
-- **Duração estimada:** 30 minutos
+- **Extensão alvo: 8.000 a 10.000 palavras** — abaixo de 8.000 o áudio fica curto demais
+- **Velocidade de referência:** ~250 palavras/minuto — taxa REAL medida de reprodução TTS
+  (calibrada em 12/06/2026 com o áudio de DA VC01: 4.000 palavras renderam apenas ~16
+  minutos, não os 30 estimados pela referência antiga de 133 wpm)
+- **Duração estimada:** 32 a 40 minutos
 - **Formato:** texto corrido em `.txt` — sem listas, sem marcadores, sem headers
+- **Como chegar à extensão sem encher linguiça:** além do `revisao_VC0X.md`, puxar os
+  `pontos_chave/*.md` da disciplina — detalhamentos, exemplos práticos, súmulas, tabelas
+  comparativas e "Pontos de Atenção" viram parágrafos explicados com calma. A redundância
+  planejada (retomadas, recapitulações por bloco) também é parte legítima da extensão
 
 ---
 
@@ -87,5 +93,7 @@ versao: 1.0
 
 - Nenhuma lista ou marcador — tudo em texto corrido
 - Nenhum símbolo Markdown — o arquivo será lido por TTS ou pelo próprio usuário em voz alta
-- Manter contagem de palavras próxima de 4.000
+- Manter contagem de palavras **entre 8.000 e 10.000** — verificar com `wc -w` após gerar
+- Números, artigos de lei e siglas por extenso quando a leitura TTS exigir (ex: "artigo
+  trinta e sete", "Lei número nove mil duzentos e trinta e quatro")
 - Depende do arquivo `revisao_VC0X.md` — não gerar sem ele
