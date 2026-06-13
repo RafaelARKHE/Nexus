@@ -94,7 +94,7 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 | DA     | Direito Administrativo I                  |
 | LBI    | Legislação Básica Institucional           |
 | FCIU   | Fundamentos do Combate ao Incêndio Urbano |
-| FSALT  | Fundamentos de Salvamento Terrestre       |
+| FSAT   | Fundamentos de Salvamento Terrestre       |
 | FSV    | Fundamentos de Salvamento Veicular        |
 | FSAL   | Fundamentos de Salvamento em Altura       |
 | FSAQ   | Fundamentos de Salvamento Aquático        |
