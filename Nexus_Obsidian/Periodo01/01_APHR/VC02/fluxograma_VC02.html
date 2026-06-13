@@ -8,10 +8,10 @@ periodo: Periodo01
 avaliacao: VC02
 criado_em: 12/06/2026
 atualizado_em: 13/06/2026
-versao: 4.0
+versao: 5.0
 tema: escuro (padrão Nexus)
-descricao: Estudos de caso interativos de APH em tema escuro. Cada caso percorre o XABCDE completo (X→A→B→C→D→E) até o desfecho, com nível de detalhe do simulado: comentário por alternativa (revelado na própria posição ao acertar), referência técnica e aprofundamento. Glossário de termos e siglas. 8 casos cobrindo o espectro de mecanismos e tipos de choque cobráveis em prova prática. Motor data-driven.
-historico: v1 fluxo único -> v2 5 casos -> v3 profundidade do simulado -> v4 tema escuro, glossário, XABCDE completo por caso, correta em posição fixa, 8 casos de cobertura ampla.
+descricao: Estudos de caso interativos de APH (tema escuro). Cada caso percorre o XABCDE completo até o desfecho. Após escolher a resposta, abre-se um bloco de 3 abas espelhando o simulado: "Para fixar" (o CONCEITO do porquê daquela conduta), "Indo além desta questão" (conexão com outro conhecimento) e "Glossário" (significado dos termos técnicos e expansão das siglas usadas nas duas abas — gerado automaticamente). Motor data-driven.
+historico: v1 fluxo único; v2 5 casos; v3 profundidade do simulado; v4 dark+glossário+XABCDE completo; v5 referência técnica reescrita como CONCEITO (não dados), 3 abas (Para fixar / Indo além / Glossário auto), explicações menos vagas.
 -->
 <html lang="pt-BR">
 <head>
@@ -86,19 +86,26 @@ historico: v1 fluxo único -> v2 5 casos -> v3 profundidade do simulado -> v4 te
   .balloon:active { transform: scale(.985); }
   .balloon.correct { background: rgba(95,184,122,.16); border-color: var(--green); color: #cdeed6; font-weight: 600; }
   .balloon.wrong { background: rgba(208,90,63,.16); border-color: var(--red); animation: shake .4s; }
-  .balloon.dim { opacity: .55; }
+  .balloon.dim { opacity: .5; }
   @keyframes shake { 0%,100%{transform:none} 20%{transform:translateX(-7px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)} }
-  .optc { display:none; font-size:12.5px; line-height:1.45; color:var(--muted); padding:8px 12px 2px; }
+  .optc { display:none; font-size:12.5px; line-height:1.5; color:var(--muted); padding:8px 12px 2px; }
   .optc.show { display:block; }
   .opt.iscorrect .optc { color:#bfe7c9; }
 
-  .refcard, .aprofcard { font-size: 13px; line-height: 1.5; border-radius: 10px; padding: 11px 12px; margin-top: 10px; }
-  .refcard { background: var(--elev); border:1px solid var(--line); color: var(--text); }
-  .aprofcard { background: rgba(70,179,189,.10); border:1px solid rgba(70,179,189,.3); color: #c9eef1; }
-  .refcard .lbl, .aprofcard .lbl { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em;
-    text-transform: uppercase; margin-bottom: 5px; }
-  .refcard .lbl { color: var(--red); } .aprofcard .lbl { color: var(--teal); }
-  .reveal { display:none; } .reveal.show { display:block; margin-top:6px; }
+  /* Bloco de 3 abas (espelho do simulado) */
+  .reveal { display:none; margin-top:14px; }
+  .reveal.show { display:block; }
+  .tabs { display:flex; gap:4px; border-bottom:1px solid var(--line); }
+  .tab { flex:1; background:none; border:none; color:var(--muted); font-size:12px; font-weight:800;
+    padding:10px 4px; cursor:pointer; border-bottom:2px solid transparent; line-height:1.2; }
+  .tab.active { color:var(--text); border-bottom-color:var(--red); }
+  .pane { display:none; font-size:13.5px; line-height:1.6; padding:13px 2px 2px; }
+  .pane.active { display:block; }
+  .pane.fixar { color:var(--text); }
+  .pane.alem { color:#cdeef1; }
+  .glx { background:var(--elev); border:1px solid var(--line); border-radius:9px; padding:9px 11px; margin-bottom:8px; }
+  .glx .gt { font-weight:800; color:var(--gold); font-size:13.5px; }
+  .glx .gd { color:var(--text); font-size:12.5px; margin-top:2px; line-height:1.45; }
 
   .next-btn { width: 100%; border: none; border-radius: 12px; background: var(--red); color: #14110f; font-size: 15px;
     font-weight: 800; padding: 14px; margin-top: 14px; cursor: pointer; min-height: 50px; display: none; }
@@ -117,13 +124,11 @@ historico: v1 fluxo único -> v2 5 casos -> v3 profundidade do simulado -> v4 te
     padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 46px; }
   .ghost.primary { background: var(--red); color: #14110f; border-color: var(--red); font-weight:800; }
 
-  /* glossário */
   .glos-search { width:100%; background:var(--elev); border:1px solid var(--line); color:var(--text);
     border-radius:11px; padding:12px 14px; font-size:15px; margin:10px 0 14px; }
   .glos-item { background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:11px 13px; margin-bottom:9px; }
   .glos-item .t { font-size:14.5px; font-weight:800; color:var(--gold); }
   .glos-item .d { font-size:13px; line-height:1.5; color:var(--text); margin-top:3px; }
-  .glos-cat { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--teal); margin:16px 2px 8px; }
 
   .footer-note { font-size: 12px; color: var(--faint); text-align: center; margin: 26px 0 4px; }
   a, button { -webkit-tap-highlight-color: transparent; }
@@ -133,7 +138,7 @@ historico: v1 fluxo único -> v2 5 casos -> v3 profundidade do simulado -> v4 te
 <div class="wrap">
   <header>
     <h1>Estudos de Caso — APH I</h1>
-    <p>VC02 · conduza cada paciente pelo XABCDE completo até o desfecho. Acertou: o passo se fixa, abre a próxima fase e revela a análise de cada alternativa na própria posição, com referência técnica e aprofundamento. Termos técnicos e siglas estão no Glossário.</p>
+    <p>VC02 · conduza cada paciente pelo XABCDE completo até o desfecho. Ao escolher a resposta, abrem-se três abas: <b>Para fixar</b> (o porquê da conduta), <b>Indo além desta questão</b> (conexões) e <b>Glossário</b> (termos e siglas usados). A correta acende na própria posição e as demais são comentadas.</p>
   </header>
   <div id="app"></div>
   <p class="footer-note">Sistema Nexus · CFO T16 · CBMPA — tema escuro · gerado a partir de revisao_VC02</p>
@@ -141,103 +146,135 @@ historico: v1 fluxo único -> v2 5 casos -> v3 profundidade do simulado -> v4 te
 
 <script>
 /* ============================================================
-   GLOSSÁRIO (data-driven)
+   GLOSSÁRIO (dicionário único). A aba "Glossário" de cada passo
+   é gerada por varredura automática dos termos que aparecem em
+   "Para fixar" (fixar) + "Indo além" (alem).
    ============================================================ */
 const GLOSSARIO = [
- {cat:"Protocolo e avaliação", itens:[
-  {t:"APH", d:"Atendimento Pré-Hospitalar — o socorro prestado à vítima antes da chegada ao hospital."},
-  {t:"PHTLS", d:"Prehospital Trauma Life Support — protocolo internacional de atendimento ao trauma. É dele que vem a ordem XABCDE."},
-  {t:"XABCDE", d:"Sequência da pesquisa primária: X (hemorragia exsanguinante), A (via aérea), B (respiração), C (circulação), D (neurológico), E (exposição)."},
-  {t:"Pesquisa primária", d:"Avaliação rápida que busca e trata ameaças imediatas à vida, na ordem XABCDE."},
-  {t:"Avaliação secundária", d:"Exame detalhado da cabeça aos pés, feito após a primária e o controle das ameaças à vida — geralmente já no transporte."},
-  {t:"AVDI", d:"Escala rápida de consciência usada na primária: Alerta, Verbal (responde à voz), Doloroso (só à dor), Irresponsivo."},
-  {t:"Escala de Glasgow", d:"Escala detalhada de consciência (abertura ocular + resposta verbal + motora; de 3 a 15), usada na avaliação secundária."},
-  {t:"SAMPLER", d:"Roteiro de história clínica: Sintomas, Alergias, Medicamentos, Passado médico, Lanche (última ingestão), Eventos, Risco de gravidez."},
-  {t:"Cinemática / Biomecânica do trauma", d:"Estudo das forças do acidente para prever as lesões antes mesmo de examinar a vítima."},
-  {t:"Índice de suspeição", d:"Grau de atenção a lesões possíveis pelo mecanismo, mesmo sem sinais externos evidentes."},
- ]},
- {cat:"Choque e circulação", itens:[
-  {t:"Choque", d:"Perfusão (chegada de sangue/O2) insuficiente para as células, levando à disfunção dos órgãos."},
-  {t:"Perfusão", d:"Chegada de sangue oxigenado aos tecidos. Hipoperfusão = perfusão inadequada."},
-  {t:"Choque hipovolêmico", d:"Choque por perda de volume circulante. Causa mais comum: hemorragia. Cursa com pele fria e taquicardia."},
-  {t:"Choque cardiogênico", d:"Choque por falha da bomba cardíaca (ex.: infarto). Pele fria e úmida, turgência jugular aumentada."},
-  {t:"Choque distributivo", d:"Choque por vasodilatação intensa (vasos 'abrem' demais). Único com pele quente na fase inicial. Subtipos: séptico, anafilático, neurogênico."},
-  {t:"Choque neurogênico", d:"Subtipo distributivo por lesão da medula: perde-se o tônus dos vasos. Único choque com bradicardia (FC baixa)."},
-  {t:"Choque obstrutivo", d:"Choque por obstáculo mecânico ao fluxo de sangue (ex.: pneumotórax hipertensivo, tamponamento cardíaco)."},
-  {t:"Hipovolemia", d:"Volume de sangue circulante reduzido (ex.: por hemorragia)."},
-  {t:"Hemorragia exsanguinante", d:"Sangramento maciço que pode levar à morte rapidamente — por isso é o 'X', tratado antes de tudo."},
-  {t:"Torniquete", d:"Garrote que comprime o membro para estancar hemorragia de extremidade. Tipos: emergencial (raiz do membro), controlado (5–7 cm da ferida), juncional (axila/virilha)."},
-  {t:"Agente hemostático", d:"Substância que ajuda a estancar sangramento. CAULIM acelera a coagulação; QUITOSANA forma barreira física (tamponamento)."},
-  {t:"ITCLAMP", d:"Dispositivo que sela as bordas da ferida (extremidades, junções, couro cabeludo) até a cirurgia."},
-  {t:"Turgência jugular", d:"Veias do pescoço ingurgitadas — aumentada no choque cardiogênico e obstrutivo."},
-  {t:"Enchimento capilar", d:"Tempo para a cor voltar à unha após pressioná-la. Normal < 2 s; > 2 s indica perfusão inadequada."},
-  {t:"Diaforese", d:"Sudorese fria — sinal de estimulação simpática (resposta ao choque)."},
-  {t:"Cristaloide", d:"Soro (ex.: soro fisiológico) usado para reposição de volume. Na hemorragia grave, não substitui sangue nem o controle da fonte."},
- ]},
- {cat:"Metabolismo do choque", itens:[
-  {t:"Metabolismo aeróbico", d:"Produção de energia (ATP) com oxigênio — eficiente, gera água e CO2."},
-  {t:"Metabolismo anaeróbico", d:"Produção de energia sem O2 suficiente; gera lactato e pouca energia. Ocorre na hipoperfusão."},
-  {t:"Lactato", d:"Produto do metabolismo anaeróbico; seu acúmulo causa acidose."},
-  {t:"Acidose metabólica", d:"Queda do pH do sangue por acúmulo de ácido (lactato). Abaixo de pH 7,20, o coração contrai mal."},
-  {t:"pH", d:"Medida de acidez do sangue (normal ~7,35–7,45). Quanto menor, mais ácido."},
-  {t:"Isquemia", d:"Falta de fluxo sanguíneo/O2 a um tecido. Cérebro/coração/pulmões toleram só 4–6 minutos."},
- ]},
- {cat:"Via aérea e respiração", itens:[
-  {t:"Via aérea pérvia", d:"Via aérea aberta e desobstruída, permitindo a passagem de ar."},
-  {t:"Jaw thrust", d:"Manobra de elevação do ângulo da mandíbula para abrir a via aérea sem mover o pescoço (usada com suspeita cervical)."},
-  {t:"Chin lift", d:"Elevação do queixo para abrir a via aérea — usada quando NÃO há suspeita de lesão cervical."},
-  {t:"COF (cânula orofaríngea)", d:"Tubo rígido inserido pela boca; afasta a base da língua. Só em inconsciente SEM reflexo de vômito."},
-  {t:"Cânula nasofaríngea", d:"Tubo flexível inserido pelo nariz; tolerada mesmo com reflexo de vômito presente."},
-  {t:"BVM (Bolsa-Válvula-Máscara)", d:"O 'ambu': dispositivo para ventilar o paciente. Usado em apneia ou ventilação ineficaz. ~100% de O2."},
-  {t:"IOT", d:"Intubação Orotraqueal — via aérea avançada (tubo na traqueia)."},
-  {t:"Epiglote", d:"Estrutura que fecha a entrada da laringe ao engolir, separando ar (traqueia) de alimento (esôfago)."},
-  {t:"Alvéolo", d:"Menor unidade do pulmão, onde ocorre a troca de O2 e CO2."},
-  {t:"FiO2", d:"Fração de O2 inspirado (% de oxigênio no ar que o paciente respira). Ar ambiente = 21%."},
-  {t:"SpO2", d:"Saturação de oxigênio medida pelo oxímetro. Meta geral ≥ 94% (88–92% em DPOC)."},
-  {t:"Oximetria de pulso", d:"Medida não invasiva da SpO2. Pode falsear em intoxicação por CO (leitura falsamente normal)."},
-  {t:"FR", d:"Frequência Respiratória (respirações por minuto). Normal 10–20; > 30 é grave."},
-  {t:"Apneia / Gasping", d:"Ausência de respiração / respiração agônica ineficaz. Exige ventilação imediata com BVM."},
-  {t:"Taquipneia", d:"Frequência respiratória elevada (respiração rápida)."},
-  {t:"Barotrauma pulmonar", d:"Lesão do pulmão pela onda de pressão (ex.: explosão). Pior em espaço fechado."},
-  {t:"Pneumotórax", d:"Ar acumulado entre o pulmão e a parede do tórax; o hipertensivo comprime e causa choque obstrutivo."},
-  {t:"Hemotórax", d:"Sangue acumulado na cavidade do tórax."},
-  {t:"Efeito Lorrain Smith", d:"Toxicidade pulmonar por O2 em alta concentração por tempo prolongado."},
-  {t:"Atelectasia por absorção", d:"Colapso de alvéolos quando o N2 que os mantinha abertos é substituído por O2."},
- ]},
- {cat:"Oxigenoterapia e gases", itens:[
-  {t:"Oxigenoterapia", d:"Oferta de O2 como tratamento. O2 é considerado uma droga: tem indicações, doses e riscos."},
-  {t:"Cateter nasal (óculos)", d:"Dispositivo de baixo fluxo (1–6 L/min, até 44% FiO2) para hipóxia leve."},
-  {t:"Máscara com reservatório", d:"Alto fluxo (12–15 L/min, 95–100% FiO2), para hipóxia moderada-grave sem indicação de intubação."},
-  {t:"CO (monóxido de carbono)", d:"Gás da combustão; liga-se à hemoglobina no lugar do O2. Trata-se com O2 a 100%."},
-  {t:"Carboxihemoglobina", d:"Hemoglobina ligada ao CO em vez de O2 — causa a hipóxia 'invisível' da intoxicação por CO."},
-  {t:"Hipóxia", d:"Oxigênio insuficiente nos tecidos."},
-  {t:"Hipoxemia", d:"Oxigênio baixo no sangue (baixa PaO2/SpO2)."},
-  {t:"AARC", d:"American Association for Respiratory Care — referência das indicações de oxigenoterapia."},
-  {t:"DPOC", d:"Doença Pulmonar Obstrutiva Crônica. Meta de SpO2 mais baixa (88–92%) — O2 em excesso pode reduzir o estímulo respiratório."},
- ]},
- {cat:"Neurológico e mecanismos", itens:[
-  {t:"TCE", d:"Traumatismo Cranioencefálico — lesão da cabeça/cérebro."},
-  {t:"Lesão secundária (TCE)", d:"Dano cerebral que se soma ao do impacto, causado por hipóxia e hipotensão. Evitá-las protege o cérebro."},
-  {t:"Anisocoria", d:"Pupilas de tamanhos diferentes. Após trauma, sugere herniação cerebral até prova em contrário."},
-  {t:"Miose", d:"Pupilas contraídas (pequenas)."},
-  {t:"Midríase", d:"Pupilas dilatadas (grandes). Midríase paralítica (dilatada e arreativa) é a pupila mais grave."},
-  {t:"Herniação cerebral", d:"Deslocamento do cérebro por pressão intracraniana — emergência."},
-  {t:"Tríade de Cushing", d:"Hipertensão + bradicardia + respiração irregular: sinal de hipertensão intracraniana grave."},
-  {t:"Cisalhamento", d:"Força em que estruturas mudam de velocidade em ritmos diferentes (ex.: golpe/contragolpe do cérebro)."},
-  {t:"Compressão", d:"Esmagamento direto de um órgão entre estruturas."},
-  {t:"Golpe / contragolpe", d:"Lesão cerebral no ponto do impacto (golpe) e no lado oposto (contragolpe)."},
-  {t:"Taquicardia", d:"Frequência cardíaca elevada (FC alta)."},
-  {t:"Bradicardia", d:"Frequência cardíaca baixa (FC < 60). Aparece no choque neurogênico e na tríade de Cushing."},
-  {t:"FC / PA", d:"Frequência Cardíaca (batimentos/min) e Pressão Arterial."},
-  {t:"Restrição de coluna", d:"Imobilização da cabeça/coluna na suspeita de lesão espinal (colar cervical + estabilização)."},
-  {t:"Hipotermia", d:"Temperatura corporal baixa. No trauma, piora a coagulação e o choque — por isso se cobre o paciente."},
- ]},
+ {t:"APH", d:"Atendimento Pré-Hospitalar: o socorro à vítima antes da chegada ao hospital."},
+ {t:"PHTLS", d:"Prehospital Trauma Life Support: protocolo internacional de trauma; dele vem a ordem XABCDE."},
+ {t:"XABCDE", d:"Sequência da pesquisa primária: X (hemorragia exsanguinante), A (via aérea), B (respiração), C (circulação), D (neurológico), E (exposição)."},
+ {t:"pesquisa primária", d:"Avaliação rápida que busca e trata ameaças imediatas à vida, na ordem XABCDE."},
+ {t:"avaliação secundária", d:"Exame detalhado da cabeça aos pés, feito após a primária — em geral já no transporte."},
+ {t:"índice de suspeição", d:"Grau de atenção a lesões prováveis pelo mecanismo, mesmo sem sinal externo."},
+ {t:"cinemática", d:"(ou biomecânica) Estudo das forças do acidente para prever lesões antes de examinar."},
+ {t:"biomecânica", d:"Leitura das forças do trauma para antecipar as lesões prováveis."},
+ {t:"zona de trabalho", d:"Área segura criada pela sinalização (viatura como anteparo + cones) onde a equipe atua."},
+
+ {t:"choque", d:"Perfusão insuficiente para as células, levando à disfunção dos órgãos."},
+ {t:"choque hipovolêmico", d:"Choque por perda de volume circulante; causa mais comum é a hemorragia. Pele fria e taquicardia."},
+ {t:"choque cardiogênico", d:"Choque por falha da bomba cardíaca (ex.: IAM). Turgência jugular aumentada."},
+ {t:"choque distributivo", d:"Choque por vasodilatação intensa; único com pele quente na fase inicial. Subtipos: séptico, anafilático, neurogênico."},
+ {t:"choque neurogênico", d:"Subtipo distributivo por lesão medular; perde-se o tônus dos vasos. Único choque com bradicardia."},
+ {t:"choque obstrutivo", d:"Choque por obstáculo mecânico ao fluxo (ex.: pneumotórax hipertensivo, tamponamento)."},
+ {t:"perfusão", d:"Chegada de sangue oxigenado aos tecidos."},
+ {t:"hipoperfusão", d:"Perfusão inadequada dos tecidos."},
+ {t:"perfusão cerebral", d:"Chegada de sangue oxigenado ao cérebro; sua queda altera o nível de consciência."},
+ {t:"compensação", d:"Mecanismos do corpo (taquicardia, vasoconstrição) que sustentam a pressão no início do choque."},
+ {t:"vasoconstrição", d:"Estreitamento dos vasos para preservar a pressão e direcionar sangue aos órgãos vitais."},
+ {t:"vasodilatação", d:"Alargamento dos vasos; no choque distributivo causa pele quente e queda de pressão."},
+ {t:"hemorragia exsanguinante", d:"Sangramento maciço capaz de matar rapidamente; por isso é o 'X', tratado antes de tudo."},
+ {t:"torniquete", d:"Garrote que comprime o membro para estancar hemorragia de extremidade (raiz do membro, '5–7 cm da ferida')."},
+ {t:"torniquete juncional", d:"Torniquete específico para junções (axila/virilha), onde o de extremidade não funciona."},
+ {t:"pressão direta", d:"1ª técnica de controle de hemorragia: comprimir a ferida com gaze/mão enluvada."},
+ {t:"agente hemostático", d:"Substância que ajuda a estancar sangramento. Caulim acelera a coagulação; quitosana faz barreira física."},
+ {t:"caulim", d:"Agente hemostático que acelera a cascata de coagulação."},
+ {t:"quitosana", d:"Agente hemostático que tampona a ferida por barreira física."},
+ {t:"ITCLAMP", d:"Dispositivo que sela as bordas da ferida até a cirurgia (extremidades, junções, couro cabeludo)."},
+ {t:"junção", d:"Junção tronco-membro (axila/virilha) e couro cabeludo: usa-se pressão/hemostático, não torniquete de extremidade."},
+ {t:"turgência jugular", d:"Veias do pescoço ingurgitadas; aumentada no choque cardiogênico e obstrutivo."},
+ {t:"tríade de Beck", d:"Turgência jugular + hipotensão + bulhas cardíacas abafadas: sugere tamponamento cardíaco."},
+ {t:"tamponamento", d:"Sangue no saco que envolve o coração, comprimindo-o (choque obstrutivo)."},
+ {t:"enchimento capilar", d:"Tempo para a cor voltar à unha após pressioná-la. Normal < 2 s; > 2 s indica má perfusão."},
+ {t:"diaforese", d:"Sudorese fria, sinal de estimulação simpática no choque."},
+ {t:"cristaloide", d:"Soro de reposição de volume; na hemorragia grave não substitui sangue nem o controle da fonte."},
+ {t:"classes de hemorragia", d:"Classificação I a IV pela % de volume perdido; nas classes I–II a PA ainda pode estar normal."},
+ {t:"retroperitônio", d:"Região atrás do peritônio; fratura de pelve pode causar grande sangramento ali."},
+
+ {t:"metabolismo anaeróbico", d:"Produção de energia sem O2 suficiente; gera lactato e acidose. Ocorre na hipoperfusão."},
+ {t:"lactato", d:"Produto do metabolismo anaeróbico; seu acúmulo causa acidose."},
+ {t:"acidose", d:"Queda do pH do sangue por acúmulo de ácido; abaixo de pH 7,20 o coração contrai mal."},
+ {t:"pH", d:"Medida de acidez do sangue (normal ~7,35–7,45). Quanto menor, mais ácido."},
+ {t:"isquemia", d:"Falta de fluxo/O2 a um tecido. Cérebro, coração e pulmões toleram só 4–6 minutos."},
+
+ {t:"via aérea pérvia", d:"Via aérea aberta e desobstruída, deixando o ar passar."},
+ {t:"jaw thrust", d:"Elevação do ângulo da mandíbula para abrir a via aérea sem mover o pescoço (suspeita cervical)."},
+ {t:"chin lift", d:"Elevação do queixo para abrir a via aérea; só SEM suspeita de lesão cervical."},
+ {t:"cânula orofaríngea", d:"COF: tubo rígido pela boca que afasta a base da língua. Só em inconsciente SEM reflexo de vômito."},
+ {t:"COF", d:"Cânula Orofaríngea: rígida, via oral, para inconsciente sem reflexo de vômito."},
+ {t:"cânula nasofaríngea", d:"Tubo flexível pelo nariz; tolerada mesmo com reflexo de vômito presente."},
+ {t:"BVM", d:"Bolsa-Válvula-Máscara (o 'ambu'): ventila o paciente em apneia/ventilação ineficaz; ~100% O2."},
+ {t:"válvula pop-off", d:"Válvula da BVM que limita a pressão; pode ser bloqueada se necessário."},
+ {t:"IOT", d:"Intubação Orotraqueal: via aérea avançada (tubo na traqueia)."},
+ {t:"diafragma", d:"Principal músculo da respiração; controlado por nervos cervicais altos (C3–C5)."},
+ {t:"nervo frênico", d:"Nervo (raízes C3–C5) que comanda o diafragma; por isso lesão cervical alta afeta a respiração."},
+ {t:"epiglote", d:"Estrutura que fecha a laringe ao engolir, separando ar e alimento."},
+ {t:"alvéolo", d:"Menor unidade do pulmão, onde ocorre a troca de O2 e CO2."},
+ {t:"base da língua", d:"Causa nº 1 de obstrução de via aérea no inconsciente; cai sobre a faringe."},
+ {t:"queimadura inalatória", d:"Lesão da via aérea por fumaça/calor; causa edema progressivo de laringe."},
+ {t:"estridor", d:"Som agudo na inspiração; sinal de estreitamento da via aérea superior."},
+ {t:"apneia", d:"Ausência de respiração; exige ventilação imediata com BVM."},
+ {t:"gasping", d:"Respiração agônica ineficaz; tratada como apneia."},
+ {t:"barotrauma", d:"Lesão por onda de pressão (ex.: explosão); atinge órgãos com gás (pulmão, ouvido, intestino)."},
+ {t:"onda de choque", d:"Frente de pressão da explosão que deforma órgãos cheios de gás."},
+ {t:"blast", d:"Lesão por explosão (onda de choque, fragmentos e impacto)."},
+ {t:"pneumotórax", d:"Ar entre o pulmão e a parede do tórax; reduz a expansão pulmonar."},
+ {t:"pneumotórax hipertensivo", d:"Pneumotórax que comprime e desloca estruturas, causando choque obstrutivo."},
+ {t:"hemotórax", d:"Sangue acumulado na cavidade do tórax."},
+
+ {t:"oxigenoterapia", d:"Oferta de O2 como tratamento; o O2 é uma droga, com indicações, doses e riscos."},
+ {t:"FiO2", d:"Fração inspirada de oxigênio (% de O2 no ar respirado). Ar ambiente = 21%."},
+ {t:"SpO2", d:"Saturação de oxigênio medida pelo oxímetro. Meta geral ≥ 94% (88–92% em DPOC)."},
+ {t:"oximetria", d:"Medida não invasiva da SpO2; pode falsear em intoxicação por CO."},
+ {t:"oxímetro", d:"Aparelho que mede a SpO2; no envenenamento por CO dá leitura falsamente normal."},
+ {t:"cateter nasal", d:"Dispositivo de baixo fluxo (1–6 L/min, até 44% FiO2) para hipóxia leve."},
+ {t:"máscara com reservatório", d:"Alto fluxo (12–15 L/min, 95–100% FiO2) para hipóxia moderada-grave."},
+ {t:"CO", d:"Monóxido de carbono: gás da combustão que ocupa o lugar do O2 na hemoglobina."},
+ {t:"carboxihemoglobina", d:"Hemoglobina ligada ao CO em vez de O2 — causa a hipóxia 'invisível' da intoxicação."},
+ {t:"hipóxia", d:"Oxigênio insuficiente nos tecidos."},
+ {t:"AARC", d:"American Association for Respiratory Care: referência das indicações de oxigenoterapia."},
+ {t:"DPOC", d:"Doença Pulmonar Obstrutiva Crônica; meta de SpO2 mais baixa (88–92%)."},
+ {t:"Lorrain Smith", d:"Efeito tóxico pulmonar do O2 em alta concentração por tempo prolongado."},
+ {t:"atelectasia", d:"Colapso de alvéolos; pode ocorrer quando o N2 é substituído por O2 (por absorção)."},
+
+ {t:"AVDI", d:"Escala rápida de consciência da primária: Alerta, Verbal, Doloroso, Irresponsivo."},
+ {t:"Escala de Glasgow", d:"Escala detalhada de consciência (3 a 15); usada na avaliação secundária."},
+ {t:"Glasgow", d:"Escala de Coma de Glasgow: abertura ocular + verbal + motora, de 3 a 15 (secundária)."},
+ {t:"SAMPLER", d:"História clínica: Sintomas, Alergias, Medicamentos, Passado, Lanche (última ingestão), Eventos, Risco de gravidez."},
+ {t:"TCE", d:"Traumatismo Cranioencefálico: lesão da cabeça/cérebro."},
+ {t:"lesão secundária", d:"Dano cerebral que se soma ao do impacto, causado por hipóxia e hipotensão — evitá-las protege o cérebro."},
+ {t:"HIC", d:"Hipertensão Intracraniana: aumento da pressão dentro do crânio."},
+ {t:"tríade de Cushing", d:"Hipertensão + bradicardia + respiração irregular: sinal de hipertensão intracraniana grave."},
+ {t:"anisocoria", d:"Pupilas de tamanhos diferentes; após trauma sugere herniação até prova em contrário."},
+ {t:"miose", d:"Pupilas contraídas (pequenas)."},
+ {t:"midríase", d:"Pupilas dilatadas (grandes). A midríase paralítica (dilatada e arreativa) é a mais grave."},
+ {t:"herniação", d:"Deslocamento do cérebro por pressão intracraniana; emergência."},
+ {t:"cisalhamento", d:"Força em que estruturas mudam de velocidade em ritmos diferentes (ex.: golpe/contragolpe)."},
+ {t:"compressão", d:"Esmagamento direto de um órgão entre estruturas."},
+ {t:"golpe/contragolpe", d:"Lesão cerebral no ponto do impacto (golpe) e no lado oposto (contragolpe)."},
+ {t:"taquicardia", d:"Frequência cardíaca elevada (FC alta)."},
+ {t:"bradicardia", d:"Frequência cardíaca baixa (FC < 60); aparece no choque neurogênico e na tríade de Cushing."},
+ {t:"taquipneia", d:"Frequência respiratória elevada (respiração rápida)."},
+ {t:"FC", d:"Frequência Cardíaca (batimentos por minuto)."},
+ {t:"PA", d:"Pressão Arterial."},
+ {t:"FR", d:"Frequência Respiratória (respirações por minuto). Normal 10–20; > 30 é grave."},
+ {t:"RCP", d:"Reanimação Cardiopulmonar; indicada na ausência de pulso (com apneia/gasping)."},
+ {t:"restrição de coluna", d:"Imobilização da cabeça/coluna na suspeita de lesão espinal (colar + estabilização)."},
+ {t:"hipotermia", d:"Temperatura corporal baixa; no trauma piora a coagulação e o choque — por isso se cobre o paciente."},
+ {t:"coagulopatia", d:"Falha da coagulação; agravada por hipotermia e acidose (tríade letal)."},
+ {t:"tríade letal", d:"Hipotermia + acidose + coagulopatia: ciclo que se retroalimenta e agrava o trauma."},
+ {t:"termorregulação", d:"Capacidade do corpo de manter a temperatura; perdida no choque neurogênico."},
+ {t:"tônus simpático", d:"Ação do sistema nervoso que mantém vasos contraídos e a FC; sua perda causa o choque neurogênico."},
+ {t:"IAM", d:"Infarto Agudo do Miocárdio; causa típica de choque cardiogênico."},
+ {t:"carga e vai", d:"Conduta de transporte imediato, com tempo de cena mínimo, em vítimas críticas."},
+ {t:"plasma", d:"Parte líquida do sangue; o grande queimado perde plasma pela superfície lesada."}
 ];
 
 /* ============================================================
    ESTUDOS DE CASO (data-driven)
-   passo: { etapa, pergunta, opcoes:[{t, ok, c}], ref, aprof }
-   Cada caso percorre CENA -> (BIO) -> X -> A -> B -> C -> D -> E.
+   passo: { etapa, pergunta, opcoes:[{t, ok, c}], fixar, alem }
+   fixar = "Para fixar": CONCEITO do porquê da conduta.
+   alem  = "Indo além desta questão": conexão com outro conhecimento.
    ============================================================ */
 const ET = { CENA:"#7e91b3", BIO:"#a98cc0", X:"#d05a3f", A:"#d99a4a", B:"#46b3bd", C:"#d05a3f", D:"#7e91b3", E:"#a98cc0" };
 
@@ -251,89 +288,89 @@ const CASOS = [
     { etapa:"CENA", pergunta:"O condutor sangra muito e está exposto na pista. Qual a PRIMEIRA ação?",
       opcoes:[
         {t:"Estabelecer a segurança da cena e sinalizar a via antes de aproximar", ok:true,
-         c:"Mesmo com hemorragia à vista, a segurança é a consideração nº 1. Viatura 15 m antes (anteparo/zona de trabalho); em via de 60 km/h o 1º cone fica a 60 passos."},
+         c:"Sinaliza-se primeiro (viatura como anteparo, cones conforme a velocidade) para criar a zona de trabalho; só então se toca a vítima, mesmo com sangue à vista."},
         {t:"Correr até a vítima e comprimir a coxa imediatamente",
-         c:"O sangue à vista é a isca: entrar na pista sem sinalizar expõe o socorrista ao tráfego — e socorrista atropelado vira a 2ª vítima. O atendimento espera a cena segura."},
+         c:"Entrar na pista de 60 km/h sem sinalizar pode te fazer ser atropelado — e aí seriam duas vítimas e nenhum socorrista. A pressa diante do sangue é a armadilha."},
         {t:"Perguntar a testemunhas como foi o acidente",
-         c:"Coletar história é a frente 'situação'/secundária. Antecipá-la pula a frente de segurança, que encabeça a avaliação de cena."}
+         c:"Coletar a história é parte da 'situação' e da avaliação secundária; antecipá-la pula a frente de segurança, que encabeça a avaliação de cena."}
       ],
-      ref:"Avaliação de cena, 3 frentes: segurança → situação → cinemática. Viatura 15 m antes (15 m à frente se já houver viatura protegendo). Cones 1 a cada 10 passos; distância até o 1º cone = velocidade da via.",
-      aprof:"A segurança encabeça tanto a avaliação de cena quanto a primária. Termos do glossário aqui: cinemática, índice de suspeição." },
+      fixar:"A regra 'segurança primeiro' não é burocracia: o socorrista é o único recurso capaz de salvar a vítima, e se ele é atropelado a cena passa a ter duas vítimas e nenhum socorrista. Por isso a sinalização — que cria a zona de trabalho — antecede qualquer toque na vítima, por mais grave que pareça o sangramento.",
+      alem:"O mesmo princípio reaparece dentro da pesquisa primária: antes do XABCDE você se pergunta 'a cena é segura? há recursos? qual a impressão geral?'. A segurança encabeça as duas etapas — avaliação de cena e primária." },
     { etapa:"BIO", pergunta:"Impacto frontal, pés presos ao pedal. Que lesão você já suspeita pelo mecanismo?",
       opcoes:[
         {t:"Fratura bilateral de fêmur", ok:true,
-         c:"A moto não tem estrutura de proteção: o impacto frontal lança o condutor no guidão e, com os pés presos, gera fratura bilateral de fêmur — grande potencial de perda de sangue."},
+         c:"Pés presos ao pedal + impacto frontal transmitem a energia aos fêmures. Importa porque cada fêmur fraturado pode reter mais de um litro de sangue — você já vai procurar hemorragia."},
         {t:"Apenas escoriações superficiais nos braços",
-         c:"Subestimar o mecanismo derruba o índice de suspeição e faz perder lesões fatais e ocultas. A energia do impacto produz lesões graves mesmo com pouca marca externa."},
+         c:"Subestimar o mecanismo derruba o índice de suspeição e faz perder uma lesão fatal; a energia produz lesão grave mesmo com pouca marca externa."},
         {t:"Hiperextensão cervical, típica desse mecanismo",
-         c:"Hiperextensão cervical é a assinatura da colisão TRASEIRA, não da moto frontal. Trocar o mecanismo faz procurar a lesão no lugar errado."}
+         c:"Hiperextensão cervical é a assinatura da colisão traseira, não da moto frontal — atribuir o mecanismo errado faz procurar a lesão no lugar errado."}
       ],
-      ref:"Moto (sem proteção): impacto frontal + pés presos → fratura bilateral de fêmur. Frontal de carro: golpe/contragolpe, hiperextensão cervical. Traseira: hiperextensão cervical.",
-      aprof:"A biomecânica antecipa o XABCDE: ler o mecanismo é prever o 'potencial de perda de sangue'. Fratura de fêmur aponta direto para hemorragia (X) e choque hipovolêmico (C)." },
+      fixar:"Ler o mecanismo serve para criar um índice de suspeição: você passa a procurar a lesão provável antes de ela dar sinal. Pés presos ao pedal somados ao impacto frontal canalizam a energia para os fêmures, daí a fratura bilateral — relevante porque é uma fonte enorme e oculta de perda de sangue.",
+      alem:"É a ponte entre biomecânica e o C (choque): estimar o 'potencial de perda de sangue' pelo mecanismo é prever o choque hipovolêmico antes de medir a pressão. O mesmo raciocínio vale para fratura de pelve e lesão de baço." },
     { etapa:"X", pergunta:"Sangue vermelho-vivo jorrando em jato pela coxa. Conduta agora?",
       opcoes:[
         {t:"Torniquete imediato, o mais proximal possível no membro", ok:true,
-         c:"Sangue pulsátil e vermelho-vivo é arterial. Em extremidade, torniquete imediato e proximal, sem atrasar com medidas mais lentas. O X é a 1ª letra do XABCDE."},
+         c:"Sangue pulsátil e vermelho-vivo é arterial; em extremidade, o torniquete é a única técnica que oclui de imediato o fluxo do membro. Por isso vem antes mesmo da via aérea."},
         {t:"Abrir e checar a via aérea primeiro (A antes do X)",
-         c:"Armadilha central: o protocolo antigo começava pelo A. No PHTLS moderno o X vem antes porque a hemorragia exsanguinante mata mais rápido que a obstrução de via aérea."},
+         c:"Era o protocolo antigo. A hemorragia exsanguinante mata mais rápido que a obstrução de via aérea — abrir o A antes de conter um jato arterial é perder a vítima por sangramento."},
         {t:"Tentar pressão direta por alguns minutos antes do torniquete",
-         c:"Em hemorragia arterial grave de extremidade não se atrasa o torniquete. Localização (extremidade) e gravidade (jato) indicam ir direto a ele."}
+         c:"Em jato arterial de extremidade não se atrasa o torniquete tentando medidas mais lentas; cada minuto de demora é volume perdido."}
       ],
-      ref:"X — 1ª etapa do XABCDE (diferencial do PHTLS). Extremidade → torniquete imediato e proximal. Anotar horário; máx. 120 min; nunca afrouxar no campo.",
-      aprof:"O X conecta-se ao C: hemorragia não controlada é a causa mais comum de choque hipovolêmico. Um torniquete bem aplicado impede a progressão das classes de hemorragia." },
+      fixar:"O torniquete vem imediatamente porque a hemorragia arterial de extremidade é exsanguinante: o sangue sai rápido demais para que pressão direta ou curativo deem conta a tempo. O torniquete é a única técnica que oclui de uma vez o fluxo do membro — por isso, nessa gravidade e localização, ele precede até a via aérea.",
+      alem:"Aqui está o motivo de o X ter sido posto antes do A no PHTLS moderno: parar de sangrar salva mais rápido do que abrir a via aérea. E conter agora evita a progressão pelas classes de hemorragia que você revê no C." },
     { etapa:"A", pergunta:"Hemorragia controlada. Vítima rebaixando, mecanismo grave. Como abrir a via aérea?",
       opcoes:[
         {t:"Jaw thrust isolado, mantendo a cabeça em posição neutra", ok:true,
-         c:"Mecanismo grave = suspeita de lesão cervical até prova em contrário. Abre-se com jaw thrust isolado, cabeça neutra, com estabilização manual até colar e protetores."},
+         c:"O jaw thrust eleva a mandíbula e abre a via sem mover o pescoço — essencial porque todo trauma grave é suspeito de lesão cervical até prova em contrário."},
         {t:"Chin lift com hiperextensão da cabeça para abrir bem",
-         c:"A extensão só vale SEM suspeita cervical. Num politrauma de alta energia, hiperextender pode agravar uma lesão de coluna."},
+         c:"A extensão só vale SEM suspeita cervical; num politrauma de alta energia, hiperextender pode agravar uma lesão de coluna."},
         {t:"Inserir cânula orofaríngea sem checar o reflexo de vômito",
-         c:"A COF só é tolerada no inconsciente SEM reflexo de vômito. Inseri-la sem checar pode provocar vômito e broncoaspiração."}
+         c:"A COF só é tolerada no inconsciente sem reflexo de vômito; inseri-la sem checar pode provocar vômito e broncoaspiração."}
       ],
-      ref:"A — sem suspeita cervical: chin lift + jaw thrust; com suspeita: jaw thrust isolado, cabeça neutra. Causa nº 1 de obstrução: queda da base da língua.",
-      aprof:"A escolha de adjunto depende da consciência: COF (rígida) só no inconsciente sem reflexo; nasofaríngea (flexível) tolerada com reflexo presente." },
+      fixar:"Escolhe-se o jaw thrust isolado porque ele abre a via aérea elevando a mandíbula sem mover a coluna cervical — e todo trauma de alta energia é tratado como lesão de coluna até prova em contrário. A meta é desobstruir sem trocar uma via aérea aberta por uma medula lesada.",
+      alem:"Conecta-se à anatomia: a causa nº 1 de obstrução no inconsciente é a queda da base da língua, que o jaw thrust e depois a cânula orofaríngea afastam da faringe. A escolha do adjunto, por sua vez, depende do nível de consciência." },
     { etapa:"B", pergunta:"Via aérea pérvia. FR 32, SpO2 90%, ausculta simétrica. Conduta no B?",
       opcoes:[
         {t:"O2 em alto fluxo (máscara com reservatório) e reavaliar", ok:true,
-         c:"FR 32 (>30, grave) com SpO2 90% é hipóxia significativa. A máscara com reservatório (12–15 L/min) dá FiO2 95–100%. Meta SpO2 ≥94%."},
+         c:"FR 32 e SpO2 90% é hipóxia significativa num paciente que respira; a máscara com reservatório é o dispositivo que entrega FiO2 perto de 100%. Titula-se pela meta SpO2 ≥ 94%."},
         {t:"Assumir a ventilação com BVM imediatamente",
-         c:"A BVM é para apneia ou ventilação ineficaz. O paciente respira (FR 32) — assumir a ventilação sem necessidade é desproporcional."},
+         c:"A BVM é para apneia ou ventilação ineficaz; o paciente respira (FR 32), então assumir a ventilação sem necessidade é desproporcional."},
         {t:"Cateter nasal a 4 L/min",
-         c:"O cateter dá no máximo ~44% de FiO2, e a 4 L/min ~36% — insuficiente para SpO2 90% com taquipneia grave."}
+         c:"O cateter dá no máximo ~44% de FiO2 (a 4 L/min, ~36%) — insuficiente para SpO2 90% com taquipneia grave."}
       ],
-      ref:"O2: cateter (1–6 L/min, até 44%); máscara simples (mín. 6 L/min); reservatório (12–15 L/min, 95–100%); BVM (apneia). Meta SpO2 ≥94%.",
-      aprof:"O2 é droga: alto fluxo prolongado traz riscos (Efeito Lorrain Smith, atelectasia por absorção). Por isso se titula pela SpO2 — mas a hipóxia aqui justifica o alto fluxo." },
+      fixar:"Usa-se a máscara com reservatório porque ela é o dispositivo capaz de entregar FiO2 alta a um paciente que respira mas está hipóxico; o cateter não alcança essa fração e a BVM seria para quem não respira. A regra é casar o dispositivo à gravidade da hipóxia, titulando pela SpO2.",
+      alem:"Liga-se aos riscos do oxigênio: como o O2 em excesso prolongado tem efeitos tóxicos (Lorrain Smith, atelectasia), não se oferta fluxo máximo 'por garantia' — titula-se pela meta. A própria SpO2 reaparece no C como pista de perfusão." },
     { etapa:"C", pergunta:"Pele fria, pálida e suada; pulso 124 e fino; PA ainda 110/70. Interpretação?",
       opcoes:[
         {t:"Choque hipovolêmico compensado — tratar já, sem esperar a PA cair", ok:true,
-         c:"Taquicardia, palidez, pele fria e diaforese são compensação precoce. Trata-se como choque já: controle da hemorragia e transporte. A PA 110/70 não tranquiliza."},
+         c:"Taquicardia, palidez e diaforese são compensação: o corpo segura a PA até não conseguir mais. Tratar agora é o que impede a queda da pressão, que já seria sinal tardio."},
         {t:"Sem choque, pois a pressão arterial está normal",
-         c:"Armadilha da PA: a hipotensão é sinal TARDIO (perda >30%, classe III+). Esperar a PA cair é chegar atrasado."},
+         c:"A hipotensão é sinal tardio (perda > 30%, classe III+). Esperar a PA cair para reconhecer o choque é chegar atrasado."},
         {t:"Choque cardiogênico, pela taquicardia",
-         c:"O contexto é perda de sangue (fêmur bilateral) = hipovolêmico. O cardiogênico tem turgência jugular aumentada e contexto de falha de bomba (IAM)."}
+         c:"O contexto é perda de sangue (fêmur bilateral) = hipovolêmico; o cardiogênico teria turgência jugular aumentada e contexto de falha de bomba (IAM)."}
       ],
-      ref:"Choque hipovolêmico: hemorragia é a causa mais comum. Compensação: taquicardia, taquipneia, palidez, pele fria, diaforese. Hipotensão é tardia. Classes I–IV.",
-      aprof:"O C fecha a cadeia: hipoperfusão → anaerobiose → lactato → acidose → pH <7,20 → depressão miocárdica. Nas classes I e II a FC é o 1º a alterar, com PA normal." },
+      fixar:"Reconhece-se o choque pela compensação, não pela pressão: o corpo defende a PA com taquicardia e vasoconstrição (pele fria, pálida, suada) até não conseguir mais. Tratar nessa fase compensada é o que impede a queda da PA — que, quando vem, já é sinal tardio de perda grave.",
+      alem:"Fecha a cadeia metabólica do choque: sem perfusão, a célula entra em metabolismo anaeróbico, gera lactato e acidose, e abaixo de pH 7,20 o coração contrai mal. É por isso que o controle precoce no X protege o C." },
     { etapa:"D", pergunta:"Avaliação neurológica nesta fase primária. Qual ferramenta?",
       opcoes:[
         {t:"AVDI", ok:true,
-         c:"Na primária usa-se AVDI (Alerta, Verbal, Doloroso, Irresponsivo) — rápida, para decisão imediata. Glasgow fica para a secundária."},
+         c:"Quatro níveis (Alerta, Verbal, Doloroso, Irresponsivo) bastam para uma decisão imediata sobre via aérea e perfusão cerebral; é o que a cena crítica permite."},
         {t:"Calcular a Escala de Glasgow detalhada agora",
-         c:"Glasgow é detalhada e da secundária. Parar na cena para somá-la num politrauma grave atrasa o transporte — erro de momento clássico."},
+         c:"A Glasgow é mais fina, mas é da secundária; parar na cena para somá-la num politrauma grave atrasa o transporte — erro de momento clássico."},
         {t:"SAMPLER",
-         c:"SAMPLER é a história da secundária, não a ferramenta de consciência. Na primária, o NC é avaliado pela AVDI."}
+         c:"SAMPLER é a história clínica da secundária, não a ferramenta de consciência da primária; aqui o nível é dado pela AVDI."}
       ],
-      ref:"AVDI (primária): A, V, D, I. Glasgow (secundária): ocular (1–4) + verbal (1–5) + motora (1–6); 3 a 15.",
-      aprof:"As duas convivem em momentos diferentes. NC reduzido indica hipóxia/hipoperfusão cerebral, lesão do SNC, tóxicos ou distúrbio metabólico." },
+      fixar:"Na primária usa-se a AVDI porque a decisão precisa ser imediata: quatro níveis bastam para dizer se a vítima protege a própria via aérea e tem perfusão cerebral. A Escala de Glasgow é mais detalhada, mas exige um tempo que a cena crítica não tem.",
+      alem:"O nível de consciência é um termômetro indireto de quanto o cérebro está sendo perfundido e oxigenado — por isso uma queda da AVDI manda revisar B (oxigenação) e C (perfusão), não só o D." },
     { etapa:"E", pergunta:"Antes de transportar, na exposição:",
       opcoes:[
         {t:"Expor o necessário, examinar e cobrir logo para evitar hipotermia", ok:true,
-         c:"Mecanismo grave → exposição ampla para não perder lesões; cobre-se imediatamente após, prevenindo hipotermia. Reavaliar o XABCDE quantas vezes preciso."},
+         c:"Expor mostra o que o uniforme esconde, mas a exposição é uma janela curta: cobre-se logo porque a hipotermia ataca a coagulação que você acabou de trabalhar no torniquete."},
         {t:"Manter a vítima exposta durante todo o transporte",
-         c:"Exposição prolongada gera hipotermia, que piora a coagulação e o choque. Expõe-se o necessário e cobre-se já."}
+         c:"Exposição prolongada gera hipotermia, que piora a coagulação e o choque; cobre-se imediatamente após o exame."}
       ],
-      ref:"E — exposição total se mecanismo grave/NC alterado; cobrir já (hipotermia). Transporte iniciado o quanto antes nos críticos.",
-      aprof:"Hipotermia + acidose + coagulopatia = tríade letal do trauma. A exposição breve protege a hemostasia obtida no torniquete." }
+      fixar:"Expõe-se para enxergar o que o uniforme esconde (lesões, sangramentos), mas cobre-se logo porque a hipotermia ataca a coagulação — justamente o que você acabou de trabalhar no torniquete. Exposição é uma janela curta, não um estado.",
+      alem:"Aqui aparece a tríade letal do trauma — hipotermia, acidose e coagulopatia — que se retroalimenta com o choque do C. Por isso a avaliação secundária detalhada (SAMPLER) é feita já aquecendo e transportando." }
   ],
   desfecho:"Torniquete aplicado com horário anotado, O2 em alto fluxo, vítima coberta e transportada em menos de 10 min. No hospital: fratura bilateral de fêmur confirmada, hemorragia controlada a tempo. Você priorizou o X sobre o A e reconheceu o choque antes da PA cair."
 },
@@ -346,87 +383,87 @@ const CASOS = [
     { etapa:"CENA", pergunta:"A vítima é crítica, mas a cena é de violência recente. O que fazer?",
       opcoes:[
         {t:"Garantir que a cena está segura / aguardar o controle policial antes de entrar", ok:true,
-         c:"Cena de violência: a ameaça típica é o próprio agressor, que pode retornar. Segurança da equipe primeiro; só se aproxima após a cena controlada."},
+         c:"Numa cena de violência a ameaça é o agressor, que pode voltar; segurar a aproximação até o controle evita transformar uma vítima em duas."},
         {t:"Entrar imediatamente para socorrer, já que é crítico",
-         c:"A urgência é a isca. Numa cena de tiro não controlada o socorrista pode virar a próxima vítima. Sem segurança não há atendimento."},
+         c:"A urgência da vítima é a isca; entrar numa cena de tiro não controlada pode te tornar a próxima vítima. Sem segurança não há atendimento."},
         {t:"Sinalizar o trânsito com cones a cada 10 passos",
-         c:"A ameaça aqui é a violência, não o tráfego. A prioridade é a segurança contra o agressor, não a sinalização viária."}
+         c:"A ameaça aqui é a violência, não o tráfego; a prioridade é a segurança contra o agressor, não a sinalização viária."}
       ],
-      ref:"Segurança: ameaças incluem armas e o próprio agressor no local. Socorrista que vira vítima aumenta o número de pacientes.",
-      aprof:"A integração com a segurança pública é parte da 1ª frente (segurança). Só depois vêm situação e cinemática do mecanismo penetrante." },
+      fixar:"Numa cena de violência, a ameaça que mata o socorrista é o agressor, não o trânsito. Segurar a aproximação até a cena estar controlada é o que evita transformar uma vítima em duas — a urgência clínica não anula a regra da segurança.",
+      alem:"É a mesma lógica de segurança do acidente de trânsito, com ameaça diferente: cada cena exige ler qual é o risco predominante (tráfego, fogo, eletricidade, agressor) antes de definir como entrar." },
     { etapa:"BIO", pergunta:"Orifício de entrada no tórax esquerdo. Quanto a outros ferimentos?",
       opcoes:[
         {t:"Procurar ativamente saída e outros ferimentos, expondo o tronco", ok:true,
-         c:"No penetrante a trajetória nem sempre é retilínea, pode haver fragmentação e mais de um ferimento, e nem sempre há saída. Só se descarta após exposição completa."},
+         c:"O projétil tem trajetória imprevisível, pode fragmentar e nem sempre tem saída; só a exposição completa permite descartar outros ferimentos."},
         {t:"Registrar apenas o orifício de entrada e seguir",
-         c:"Registrar só a entrada faz perder ferimentos ocultos e a saída. A regra é procurar sempre mais de um e expor para confirmar."},
+         c:"Contar só a entrada é falsa segurança — pode haver saída e mais de um ferimento; a regra é procurar sempre."},
         {t:"Como ele usa colete e não há furo, descartar lesão torácica",
-         c:"Colete sem furo ainda pode esconder contusão cardíaca pela energia transmitida. A ausência de furo não descarta lesão interna."}
+         c:"Colete sem furo ainda pode esconder contusão cardíaca pela energia transmitida; a ausência de furo não descarta lesão."}
       ],
-      ref:"Penetrante: gravidade depende de projétil, energia, giro, distância, trajetória e fragmentação. Projétil em cabeça/tórax/abdome = transporte imediato.",
-      aprof:"O penetrante liga-se ao X e ao E: a exposição revela o 'segundo ferimento'; a hemorragia exsanguinante é tratada já no X." },
+      fixar:"Procura-se ativamente mais de um ferimento porque o projétil pode ter trajetória imprevisível, fragmentar-se e nem sempre deixar orifício de saída. Contar só a entrada é uma falsa segurança — só a exposição completa permite descartar lesões.",
+      alem:"Conecta o penetrante ao E (exposição): é expondo o tronco que se acha o 'segundo ferimento'. E à explosão, em que os fragmentos multiplicam esses ferimentos dispersos pelo corpo." },
     { etapa:"X", pergunta:"Sangramento moderado na ferida torácica, vítima já taquicárdica. Prioridade global?",
       opcoes:[
         {t:"Conter o sangramento externo possível e priorizar o transporte imediato", ok:true,
-         c:"Projétil em tórax é caso de transporte imediato ('carga e vai'), tempo de cena mínimo. O controle definitivo da hemorragia torácica é cirúrgico."},
+         c:"A hemorragia que mata aqui é interna e só se resolve no centro cirúrgico; controla-se o externo possível e leva-se ('carga e vai'), com tempo de cena mínimo."},
         {t:"Permanecer na cena estabilizando totalmente antes de mover",
-         c:"'Estabilizar tudo' na cena num penetrante torácico custa a vida. A estabilização definitiva é hospitalar/cirúrgica."},
+         c:"'Estabilizar tudo' na cena num penetrante torácico deixa o sangramento interno correr onde ninguém alcança; a estabilização definitiva é cirúrgica."},
         {t:"Aguardar a PA cair para confirmar a gravidade",
          c:"A hipotensão é tardia; esperar por ela perde a janela do transporte precoce. A gravidade já está dada pelo mecanismo."}
       ],
-      ref:"Hemorragia interna: suspeitar pelo mecanismo. Projétil em cabeça/tórax/abdome = transporte imediato. O transporte é o aspecto mais importante no crítico.",
-      aprof:"Conversa com o C: em hemorragia interna torácica, cristaloide não substitui o controle cirúrgico — daí o 'carga e vai'." },
+      fixar:"A prioridade é o transporte porque a hemorragia que mata num ferimento torácico é interna e só se resolve no centro cirúrgico; gastar tempo 'estabilizando' na cena é deixar o sangramento correr onde ninguém alcança. Controla-se o externo possível e leva-se.",
+      alem:"Liga-se ao C: a hemorragia interna torácica produz choque hipovolêmico e/ou obstrutivo, e cristaloide não substitui o controle da fonte — por isso o tempo de cena mínimo é, ele próprio, parte do tratamento." },
     { etapa:"A", pergunta:"A vítima fala com você, em frases curtas. Via aérea?",
       opcoes:[
         {t:"Pérvia neste momento — manter sob vigilância, pode deteriorar", ok:true,
-         c:"Resposta verbal em frases indica via aérea pérvia, ventilação e perfusão cerebral agora. Mas pode rebaixar — reavaliar sempre."},
+         c:"Falar em frases prova via aérea pérvia e reflexo presente; instrumentar agora só provocaria vômito. Vigia-se porque o trauma torácico pode rebaixar depois."},
         {t:"Inserir cânula orofaríngea já, por precaução",
-         c:"Quem fala tem reflexo de vômito presente; a COF provocaria vômito e broncoaspiração. Não se instrumenta uma via aérea que está pérvia."}
+         c:"Com reflexo presente, a COF provoca vômito e broncoaspiração; não se instrumenta uma via aérea que está pérvia."}
       ],
-      ref:"Resposta coerente em frases = via aérea pérvia, ventilação, perfusão cerebral e neuro preservadas. COF só no inconsciente sem reflexo.",
-      aprof:"A via aérea no trauma torácico é dinâmica: pode estar pérvia agora e deteriorar com o pneumotórax ou o choque — daí a reavaliação em ciclo." },
+      fixar:"Não se instrumenta a via aérea de quem fala em frases porque isso prova que ela está pérvia e o reflexo está presente — uma cânula orofaríngea aí só provocaria vômito. A conduta é vigiar, porque um trauma torácico pode rebaixar e fechar essa via depois.",
+      alem:"Por isso o XABCDE é cíclico: a via aérea pérvia agora pode deteriorar com a evolução do pneumotórax ou do choque — qualquer queda de SpO2 ou de consciência manda reabrir a primária." },
     { etapa:"B", pergunta:"Dispneia crescente e murmúrio MUITO reduzido à esquerda. Conduta no B?",
       opcoes:[
         {t:"O2 em alto fluxo e alta suspeição de pneumotórax/hemotórax", ok:true,
-         c:"Murmúrio muito reduzido à esquerda sugere pneumotórax ou hemotórax. O2 alto fluxo e transporte — a assimetria é sinal de alarme estrutural."},
+         c:"A assimetria de murmúrio aponta uma lesão estrutural que a SpO2 não mostra; oferta-se O2 alto e transporta-se, pois um pneumotórax pode virar hipertensivo."},
         {t:"Cateter nasal a 2 L/min, já que ele ainda fala",
          c:"Cateter a 2 L/min dá FiO2 baixa (~28%), insuficiente num trauma torácico hipóxico com possível pneumotórax."},
         {t:"Ignorar a assimetria se a SpO2 estiver em 93%",
          c:"Assimetria de murmúrio é achado grave independente da SpO2; ignorá-la pode deixar evoluir um pneumotórax hipertensivo."}
       ],
-      ref:"B — auscultar os dois lados: assimetria sugere pneumotórax/hemotórax. Meta SpO2 ≥94%. Reservatório: 12–15 L/min, 95–100%.",
-      aprof:"O pneumotórax hipertensivo é causa de choque OBSTRUTIVO (turgência jugular aumentada) — diferente do hipovolêmico. Ambos exigem transporte imediato." },
+      fixar:"A assimetria de murmúrio é tratada como sinal de alarme porque aponta uma lesão estrutural (pneumotórax/hemotórax) que a SpO2 isolada não revela. Oferta-se O2 alto e transporta-se, porque um pneumotórax pode evoluir para hipertensivo e travar a circulação.",
+      alem:"É a ponte entre B e C: o pneumotórax hipertensivo é, ao mesmo tempo, um problema de ventilação e a causa de um choque obstrutivo — daí a turgência jugular que você procura no diagnóstico diferencial do choque." },
     { etapa:"C", pergunta:"Pele fria, pulso 130 filiforme, PA 80/50. Tipo de choque mais provável?",
       opcoes:[
         {t:"Hipovolêmico e/ou obstrutivo por trauma torácico — transporte e reposição", ok:true,
-         c:"Pele fria, pulso 130 e PA 80/50 = choque instalado. No penetrante torácico: hipovolêmico (hemorragia) e/ou obstrutivo (pneumotórax hipertensivo/tamponamento)."},
+         c:"Pele fria afasta o distributivo (seria quente); o contexto é perda de sangue + possível obstrução torácica. Acertar o tipo define a conduta: transporte e controle da fonte."},
         {t:"Distributivo, pela vasodilatação periférica",
-         c:"O distributivo tem pele QUENTE inicial. Aqui a pele é fria — o mecanismo é perda/obstrução, não vasodilatação."},
+         c:"O distributivo tem pele quente inicial; aqui a pele é fria, então o mecanismo é perda/obstrução, não vasodilatação."},
         {t:"Sem choque, pois ele falava há pouco",
-         c:"PA 80/50 com pulso filiforme é choque instalado (classe III–IV). Ter falado há pouco não exclui."}
+         c:"PA 80/50 com pulso filiforme é choque instalado (classe III–IV); ter falado há pouco não exclui."}
       ],
-      ref:"4 choques: hipovolêmico, cardiogênico, distributivo (pele quente, exceção neurogênico=bradicardia), obstrutivo (turgência jugular ↑).",
-      aprof:"Turgência jugular separa: ↑ no cardiogênico e obstrutivo. Jugulares túrgidas + hipotensão + bulhas abafadas = tríade de Beck (tamponamento)." },
+      fixar:"Classifica-se como hipovolêmico/obstrutivo porque a pele fria afasta o distributivo (que seria quente) e o contexto é perda de sangue mais possível obstrução torácica. Acertar o tipo de choque define a conduta: aqui, transporte e controle da fonte, não vasopressor.",
+      alem:"O diagnóstico diferencial dos quatro choques se apoia em achados como pele, FC e turgência jugular; a tríade de Beck (jugular túrgida + hipotensão + bulhas abafadas) aponta tamponamento, outro obstrutivo tempo-dependente." },
     { etapa:"D", pergunta:"No transporte a vítima fica sonolenta. Avaliação neurológica?",
       opcoes:[
         {t:"AVDI — a queda do nível (de 'A' para 'V'/'D') sinaliza agravamento", ok:true,
-         c:"Na primária usa-se AVDI; a queda do nível indica hipóxia/hipoperfusão cerebral por choque progressivo. Reavaliar o XABCDE."},
+         c:"Num choque hemorrágico, sonolência é cérebro mal perfundido, não cansaço; a queda da AVDI é o aviso de que piorou e manda reavaliar o XABCDE."},
         {t:"Glasgow detalhada, parando o transporte",
          c:"Glasgow é da secundária e não se interrompe o transporte de um baleado torácico para somá-la."},
         {t:"Ignorar — sonolência é normal pós-trauma",
          c:"Sonolência num choque hemorrágico é hipoperfusão cerebral, não normalidade — exige reavaliar o XABCDE."}
       ],
-      ref:"AVDI na primária. NC reduzido = hipóxia/hipoperfusão cerebral, lesão do SNC, tóxicos ou distúrbio metabólico.",
-      aprof:"No choque hemorrágico o cérebro é alvo precoce (isquemia 4–6 min); a queda do NC pode anunciar a migração para classe III/IV antes da hipotensão franca." },
+      fixar:"A queda do nível na AVDI é valorizada porque, num choque hemorrágico, sonolência significa que o cérebro está sendo mal perfundido — não é 'cansaço'. É um sinal de que o paciente piorou, mandando reavaliar todo o XABCDE.",
+      alem:"Conecta D com C: o cérebro tolera só 4–6 minutos de isquemia, então a alteração de consciência costuma denunciar a hipoperfusão antes mesmo de a pressão despencar." },
     { etapa:"E", pergunta:"Exposição no baleado:",
       opcoes:[
         {t:"Expor o tronco para achar todos os ferimentos e cobrir para evitar hipotermia", ok:true,
-         c:"A exposição (E) revela o segundo ferimento no penetrante; cobre-se em seguida, pois hipotermia agrava a coagulopatia."},
+         c:"No penetrante, o ferimento não visto é o que mata; expõe-se para achá-lo e cobre-se logo, pois a hipotermia agrava o próprio sangramento que se tenta conter."},
         {t:"Não expor, para preservar o pudor da vítima",
          c:"No penetrante grave a exposição é necessária para não perder ferimentos ocultos; o pudor cede à segurança, com recobrimento imediato."}
       ],
-      ref:"E — exposição total no mecanismo grave; cobrir já (hipotermia). Reavaliar o XABCDE.",
-      aprof:"Hipotermia + acidose + coagulopatia = tríade letal. A exposição breve seguida de aquecimento protege a hemostasia até a cirurgia." }
+      fixar:"Expõe-se mesmo contra o pudor porque, no penetrante, o ferimento não visto é o que mata; e cobre-se em seguida porque a hipotermia agrava o sangramento que você está tentando conter. A prioridade clínica organiza a sequência.",
+      alem:"Reforça a tríade letal (hipotermia–acidose–coagulopatia) e o princípio de que a avaliação secundária detalhada acontece no transporte, sem atrasar a saída do crítico." }
   ],
   desfecho:"Cena liberada pela polícia, dois ferimentos identificados na exposição, O2 em alto fluxo e transporte imediato a centro de trauma. A cirurgia controlou a hemorragia torácica. Você não entrou numa cena insegura, procurou mais de um ferimento e não perdeu tempo na cena."
 },
@@ -439,72 +476,72 @@ const CASOS = [
     { etapa:"CENA", pergunta:"Onde e como você inicia o atendimento?",
       opcoes:[
         {t:"Em área segura, longe da fumaça e do fogo, com EPI completo", ok:true,
-         c:"Ambiente com fogo/fumaça é perigoso e insalubre; atende-se após a retirada para zona segura. A fumaça intoxica inclusive a equipe (CO)."},
+         c:"A fumaça não é só calor: carrega monóxido de carbono que intoxica também o socorrista. Tirar a vítima para a zona segura é condição para atender sem virar paciente."},
         {t:"Ainda dentro do cômodo, para ganhar tempo",
-         c:"Permanecer na fumaça intoxica o socorrista (CO) e o expõe ao fogo. Remove-se a vítima para área segura antes de atender."}
+         c:"Permanecer na fumaça intoxica o socorrista (CO) e o expõe ao fogo; remove-se a vítima para área segura antes de atender."}
       ],
-      ref:"Segurança: ameaças incluem incêndio, fumaça e produtos da combustão. Atender fora do ambiente fechado, já com a vítima retirada.",
-      aprof:"Camada extra: a fumaça é fonte de CO para a própria equipe — o fio que conecta o caso à oxigenoterapia." },
+      fixar:"Atende-se fora do ambiente porque a fumaça não é só calor: ela carrega monóxido de carbono (CO) que intoxica também o socorrista. Tirar a vítima para a zona segura é condição para atender sem virar paciente.",
+      alem:"Essa fumaça é o fio que liga o caso à oxigenoterapia: o mesmo gás que ameaça a equipe (CO) é o que vai enganar o oxímetro na vítima, mais adiante no B." },
     { etapa:"X", pergunta:"O protocolo manda checar o X primeiro. Há hemorragia exsanguinante?",
       opcoes:[
         {t:"Checar e, não havendo sangramento grave, seguir (aqui a ameaça é o A)", ok:true,
-         c:"O X é o primeiro olhar em todo paciente. Não havendo hemorragia exsanguinante, avança-se; neste caso a ameaça crítica é a via aérea por edema."},
+         c:"O X é o primeiro olhar em todo paciente — a vítima pode ter caído ou se ferido na fuga. Confirmada a ausência, segue-se para a verdadeira ameaça: a via aérea."},
         {t:"Pular o X porque queimadura não sangra",
-         c:"Não se pula o X por suposição: ele é checado em todos. Só após descartar hemorragia exsanguinante é que se segue."}
+         c:"Não se pula o X por suposição: ele é checado em todos. Só a ausência confirmada de hemorragia exsanguinante libera seguir."}
       ],
-      ref:"XABCDE: o X é checado primeiro em todos; ausente, segue-se ao A. Couro cabeludo/junção: pressão direta (não torniquete).",
-      aprof:"Mesmo em mecanismo não hemorrágico o X é verificação obrigatória — evita perder um sangramento associado (ex.: queda na fuga do incêndio)." },
+      fixar:"Checa-se o X mesmo numa queimadura porque o protocolo não pula etapas por suposição — a vítima pode ter caído ou se ferido na fuga. Confirmar que não há hemorragia exsanguinante é o que autoriza seguir para a verdadeira ameaça, a via aérea.",
+      alem:"Mostra que o XABCDE é uma disciplina de ordem: o X é sempre o primeiro olhar, e só a sua ausência libera o foco para a fase seguinte — aqui, o A." },
     { etapa:"A", pergunta:"Rouquidão, estridor incipiente, fuligem na boca e pelos nasais chamuscados. Maior ameaça?",
       opcoes:[
         {t:"A via aérea — risco de edema/obstrução por queimadura de laringe; vigiar e priorizar", ok:true,
-         c:"Esses sinais indicam queimadura inalatória, com edema progressivo de laringe (3ª causa de obstrução). É uma via aérea que pode fechar: máxima vigilância e via aérea avançada precoce."},
+         c:"A queimadura inalatória provoca edema progressivo de laringe: a via aberta agora pode fechar em minutos. Por isso se age antes, com via aérea avançada precoce."},
         {t:"Nenhuma séria, pois ele ainda fala normalmente",
-         c:"Armadilha do caso. Falar agora não garante via aérea adiante: o edema é progressivo e pode obstruir em minutos. Subestimar perde a janela."},
+         c:"Falar agora não garante a via adiante — o edema é progressivo e pode obstruir em minutos. Subestimar perde a janela: é a armadilha do caso."},
         {t:"A circulação, por causa da fumaça",
-         c:"A ameaça-assinatura da queimadura inalatória é a VIA AÉREA (edema de laringe), não o C. A fumaça preocupa pelo CO no B."}
+         c:"A ameaça-assinatura da queimadura inalatória é a via aérea (edema de laringe); a fumaça preocupa pelo CO no B, mas a obstrução iminente vem antes."}
       ],
-      ref:"Obstrução (ordem): queda da língua → secreções/sangue → trauma/edema de laringe. Sinais de inalação: rouquidão, estridor, fuligem perioral, pelos nasais chamuscados.",
-      aprof:"Aqui não há restrição de coluna, mas há janela temporal estreita antes de o edema fechar a via — a conduta é antecipar, não esperar a obstrução." },
+      fixar:"A via aérea é a maior ameaça porque a queimadura inalatória provoca edema progressivo da laringe: a via que está aberta agora pode fechar em minutos. Por isso se age antes (via aérea avançada precoce), em vez de esperar o estridor virar obstrução.",
+      alem:"É a terceira causa de obstrução de via aérea (trauma/edema de laringe), depois da queda da base da língua e das secreções — e a única que piora com o tempo, o que muda a urgência da decisão." },
     { etapa:"B", pergunta:"O oxímetro marca SpO2 96%. Como interpretar nesta vítima?",
       opcoes:[
         {t:"Não confiar na leitura — o CO falseia o oxímetro; ofertar O2 a 100%", ok:true,
-         c:"O CO liga-se à hemoglobina como o O2 (carboxihemoglobina), dando leitura falsamente normal. Oferta-se O2 a 100% (reservatório) pelo quadro clínico."},
+         c:"O monóxido de carbono ocupa o lugar do O2 na hemoglobina e o oxímetro lê os dois como se fossem oxigênio; o número fica falsamente bom. Trata-se com O2 a 100%."},
         {t:"96% é normal — basta cateter nasal a 2 L/min",
-         c:"Armadilha do oxímetro: 96% NÃO exclui CO. Confiar na leitura e dar baixo fluxo subtrata uma vítima muito hipóxica no nível tecidual."},
+         c:"96% não exclui CO; confiar na leitura e dar baixo fluxo subtrata uma vítima muito hipóxica no nível tecidual."},
         {t:"Aguardar a SpO2 cair antes de ofertar O2",
-         c:"Com CO presente a SpO2 pode jamais cair, pois o aparelho não distingue O2 de CO ligados à hemoglobina. Esperar mantém a intoxicação."}
+         c:"Com CO presente a SpO2 pode jamais cair, pois o aparelho não distingue O2 de CO na hemoglobina; esperar mantém a intoxicação."}
       ],
-      ref:"Oxímetro falseado por: luz, tremor, baixo pulso, vasoconstrição e CO (leitura falsamente normal). Intoxicação por CO é indicação AARC de O2.",
-      aprof:"O2 a 100% acelera a dissociação do CO da hemoglobina (reduz a meia-vida da carboxihemoglobina) — aqui o alto fluxo é terapêutico, não só suporte." },
+      fixar:"Não se confia na SpO2 porque o monóxido de carbono ocupa o lugar do oxigênio na hemoglobina e o oxímetro lê os dois como se fossem O2 — o número fica falsamente bom. Trata-se pelo quadro clínico, com O2 a 100%, que ainda acelera a saída do CO.",
+      alem:"Conecta oxímetro e oxigenoterapia: a intoxicação por CO é indicação formal de O2 (AARC) mesmo com SpO2 alta — um caso em que o número engana e o conceito manda." },
     { etapa:"C", pergunta:"Pulso 110, áreas queimadas, enchimento capilar 3 s. Circulação?",
       opcoes:[
         {t:"Perfusão comprometida — grande queimado perde volume; monitorar e antecipar choque", ok:true,
-         c:"Queimaduras extensas cursam com perda de fluido e hipoperfusão (enchimento >2 s). Avalia-se a circulação e antecipa-se o choque do grande queimado."},
+         c:"O grande queimado perde plasma pela superfície lesada e entra em hipoperfusão antes de a PA cair; enchimento capilar 3 s com pulso presente já é sinal para antecipar o choque."},
         {t:"Circulação normal, pois há pulso presente",
-         c:"Pulso presente não exclui hipoperfusão: enchimento capilar >2 s é alarme mesmo com PA normal."}
+         c:"Pulso presente não exclui hipoperfusão: enchimento capilar > 2 s é alarme mesmo com PA normal."}
       ],
-      ref:"C — enchimento <2 s normal; >2 s = perfusão inadequada (alarme mesmo com PA normal). Grande queimado perde volume (plasma).",
-      aprof:"O choque do queimado tem componente hipovolêmico (perda de plasma pela área lesada); reconhecer cedo pelo enchimento capilar segue a lógica de não esperar a hipotensão." },
+      fixar:"Valoriza-se o enchimento capilar lento porque o grande queimado perde plasma pela superfície lesada e entra em hipoperfusão antes de a PA cair. Perfusão ruim com pulso presente já é sinal para antecipar o choque.",
+      alem:"É o mesmo princípio do trauma: não esperar a hipotensão. O enchimento capilar > 2 s funciona como alarme precoce, como a taquicardia funciona no choque hemorrágico." },
     { etapa:"D", pergunta:"Ele está agitado e confuso. Como avaliar e o que considerar?",
       opcoes:[
         {t:"AVDI ('V') — e considerar que a confusão pode ser hipóxia/CO, não só susto", ok:true,
-         c:"Avalia-se o NC pela AVDI (aqui 'V'). E a agitação/confusão deve ser lida como possível hipóxia cerebral ou CO — um sinal de gravidade."},
+         c:"Em vítima de fumaça, agitação costuma ser hipóxia cerebral ou CO, não nervosismo; a AVDI registra o nível e a interpretação dele guia a urgência."},
         {t:"Assumir que é apenas nervosismo do incêndio",
-         c:"Atribuir a 'nervosismo' esconde a gravidade: em vítima de fumaça, confusão pode ser hipóxia/CO. O NC é indicador da oxigenação cerebral."},
+         c:"Atribuir a 'nervosismo' esconde a gravidade: confusão em vítima de fumaça pode ser hipóxia/CO. O NC é indicador da oxigenação cerebral."},
         {t:"Aplicar a Escala de Glasgow detalhada antes de tudo",
          c:"Glasgow é da secundária; na primária, AVDI. E o foco é proteger a via aérea e ofertar O2, não somar pontos."}
       ],
-      ref:"AVDI (primária). NC reduzido = hipóxia/hipoperfusão cerebral, lesão do SNC, tóxicos ou distúrbio metabólico. Reavaliar continuamente.",
-      aprof:"No CO o cérebro sofre cedo (isquemia 4–6 min). Confusão/agitação são alertas precoces de hipóxia tecidual — coerentes com o oxímetro falsamente normal." },
+      fixar:"Lê-se a confusão como sinal clínico porque, em vítima de fumaça, agitação costuma ser hipóxia cerebral ou CO — não nervosismo. A AVDI registra o nível rápido, e a interpretação dele guia a urgência.",
+      alem:"Liga D a B: a mesma hipóxia 'invisível' que o oxímetro não mostra aparece como alteração de consciência — o cérebro é dos primeiros órgãos a sentir a falta de O2 (isquemia em 4–6 min)." },
     { etapa:"E", pergunta:"Exposição do queimado:",
       opcoes:[
         {t:"Expor para estimar a extensão das queimaduras e cobrir/aquecer — pele lesada perde calor", ok:true,
-         c:"A exposição mede a área queimada; o recobrimento é essencial porque a pele lesada perde muito calor — hipotermia é risco real no grande queimado."},
+         c:"A extensão queimada define gravidade e reposição; e cobre-se logo porque a pele destruída perde calor e líquido — hipotermia é risco real no grande queimado."},
         {t:"Manter exposto para resfriar as queimaduras no transporte",
          c:"Resfriamento prolongado leva à hipotermia, perigosa no grande queimado; cobre-se após avaliar."}
       ],
-      ref:"E — expor para avaliar extensão; cobrir/aquecer (pele lesada perde calor; hipotermia agrava o quadro).",
-      aprof:"O mesmo princípio de prevenção de hipotermia do trauma, com razão extra: a barreira cutânea destruída acelera a perda térmica e hídrica." }
+      fixar:"Expõe-se para medir a extensão das queimaduras (que define gravidade e reposição) e cobre-se logo porque a pele destruída perde calor e líquido — hipotermia é risco real no grande queimado.",
+      alem:"É o mesmo cuidado de hipotermia do trauma, agravado: sem a barreira da pele, a perda térmica e de plasma é maior, e isso retroalimenta o choque do queimado." }
   ],
   desfecho:"Atendido em zona segura, via aérea vigiada de perto, O2 a 100% mesmo com o oxímetro em 96%, transporte precoce. No hospital: carboxihemoglobina elevada confirmada e via aérea garantida antes de o edema fechar. Você não confiou na SpO2 e protegeu a via aérea a tempo."
 },
@@ -517,79 +554,79 @@ const CASOS = [
     { etapa:"CENA", pergunta:"Primeira ação ao chegar?",
       opcoes:[
         {t:"Segurança e sinalização da via — 1º cone a 50 passos", ok:true,
-         c:"Segurança e sinalização primeiro; em via de 50 km/h o 1º cone fica a 50 passos. A movimentação da criança respeita a suspeita de lesão espinal."},
+         c:"A via segue ativa; sinaliza-se primeiro e move-se a criança só com controle de coluna. A distância do cone acompanha a velocidade (50 km/h → 50 passos)."},
         {t:"Pegar a criança no colo e tirar da via imediatamente",
-         c:"Retirar no colo, sem segurança nem controle de coluna, pode agravar lesões espinais e te expor ao trânsito. Primeiro a cena segura."}
+         c:"Retirar no colo, sem segurança nem controle de coluna, pode agravar lesões espinais e te expor ao trânsito; primeiro a cena segura."}
       ],
-      ref:"Sinalização: viatura 15 m antes; cones a cada 10 passos; 1º cone = velocidade da via (50→50). Restrição de coluna no mecanismo significativo.",
-      aprof:"Em pediatria a suspeita espinal é ainda mais conservadora. A leitura do mecanismo já antecipa onde estarão as lesões — próximo passo." },
+      fixar:"Sinaliza-se antes de tocar a criança porque a via segue ativa e mover uma vítima de atropelamento sem segurança nem controle de coluna pode agravar lesões e expor a equipe. A pressa de pegar a criança no colo é o erro a evitar.",
+      alem:"A distância dos cones acompanha a velocidade da via (50 km/h → 50 passos) — a mesma regra de todo acidente de trânsito, aqui com a camada extra do cuidado pediátrico com a coluna." },
     { etapa:"BIO", pergunta:"Pela baixa estatura da criança, onde o impacto inicial tende a atingir?",
       opcoes:[
         {t:"Fêmur e pelve", ok:true,
-         c:"Pela menor estatura, o impacto inicial atinge fêmur e pelve (no adulto, é nas pernas → tronco no capô → asfalto). Mesma energia, lesões graves."},
+         c:"A baixa estatura faz o para-choque bater nessa altura — diferente do adulto, em que o impacto começa nas pernas. Ler o mecanismo certo é procurar a lesão no lugar certo."},
         {t:"As pernas primeiro, depois o tronco no capô, como no adulto",
-         c:"Esse é o padrão do ADULTO. Aplicá-lo à criança subestima a lesão de fêmur/pelve, onde o impacto inicial incide pela baixa estatura."},
+         c:"Esse é o padrão do adulto; aplicá-lo à criança subestima a lesão de fêmur/pelve, onde o impacto inicial incide pela baixa estatura."},
         {t:"Apenas a cabeça",
-         c:"O TCE é possível, mas o impacto inicial na criança é em fêmur/pelve — e a bacia já sangra aqui. Focar só na cabeça perde a hemorragia de pelve."}
+         c:"O TCE é possível, mas o impacto inicial na criança é em fêmur/pelve — e a bacia já sangra aqui; focar só na cabeça perde a hemorragia de pelve."}
       ],
-      ref:"Atropelamento: adulto — pernas → capô → asfalto; criança — impacto inicial em fêmur/pelve (menor estatura). Mesma velocidade, mesma lesão.",
-      aprof:"Fratura de pelve é hemorragia interna grave (sangue no retroperitônio). A biomecânica direciona a primária a procurar sangramento de pelve/junção." },
+      fixar:"Antecipa-se fêmur/pelve porque a baixa estatura da criança faz o para-choque bater nessa altura — diferente do adulto, em que o impacto começa nas pernas. Ler o mecanismo certo é procurar a lesão no lugar certo.",
+      alem:"Conecta biomecânica e X/C: fratura de pelve é hemorragia interna grave (sangue no retroperitônio), então o mecanismo já avisa onde procurar sangramento e por que esperar choque." },
     { etapa:"X", pergunta:"Sangramento por fratura de pelve e ferida na raiz da coxa (junção). Conduta?",
       opcoes:[
         {t:"Pressão direta / curativo hemostático na junção (torniquete de extremidade não se aplica)", ok:true,
-         c:"Pelve e raiz da coxa são junções tronco-membro, onde o torniquete de extremidade não oclui o vaso. Usa-se pressão direta, hemostáticos (caulim/quitosana) ou torniquete juncional."},
+         c:"Pelve e raiz da coxa são junções, onde o torniquete de extremidade não acha onde ocluir o vaso; a técnica é ditada pela localização — pressão, hemostático ou torniquete juncional."},
         {t:"Torniquete bem alto na coxa, na raiz do membro",
-         c:"Armadilha de localização: na junção/pelve o torniquete de extremidade não comprime o vaso eficazmente; insistir perde tempo sem controlar."},
+         c:"Na junção o torniquete de extremidade não comprime o vaso eficazmente; insistir perde tempo sem controlar — armadilha de localização."},
         {t:"Apenas observar, porque é criança e sangra menos",
-         c:"Criança tem menor reserva volêmica e descompensa rápido; subestimar pela idade é perigoso. A perda exige controle ativo."}
+         c:"Criança tem menor reserva volêmica e descompensa rápido; subestimar pela idade é perigoso."}
       ],
-      ref:"Por localização: extremidade → torniquete; couro cabeludo/junção → pressão direta + hemostáticos. Juncional: axila/virilha. Caulim acelera coagulação; quitosana tampona.",
-      aprof:"As 6 técnicas: pressão direta, curativo compressivo, preenchimento, hemostáticos, ITCLAMP, torniquete. Em junções, hemostáticos e ITCLAMP ganham protagonismo." },
+      fixar:"Escolhe-se pressão/hemostático porque a pelve e a raiz da coxa são junções, onde o torniquete de extremidade não encontra estrutura para ocluir o vaso. A técnica é ditada pela localização, não pela vontade de usar o torniquete.",
+      alem:"É o outro extremo da decisão do caso da moto: lá, extremidade → torniquete; aqui, junção → pressão direta, agente hemostático ou torniquete juncional. A localização mudou, a técnica muda junto." },
     { etapa:"A", pergunta:"Criança com rebaixamento e mecanismo grave. Via aérea?",
       opcoes:[
         {t:"Jaw thrust isolado, cabeça neutra, com estabilização cervical", ok:true,
-         c:"Mecanismo grave em criança é suspeito de lesão cervical; abre-se com jaw thrust isolado, sem extensão, estabilizando a cabeça."},
+         c:"O atropelamento é mecanismo significativo e, em criança, a suspeita cervical é ainda mais conservadora; protege-se a coluna enquanto se desobstrui a via."},
         {t:"Hiperextender para abrir — crianças toleram bem",
          c:"Hiperextensão com suspeita cervical pode agravar lesão de coluna em qualquer idade; usa-se jaw thrust isolado."}
       ],
-      ref:"A — com suspeita cervical: jaw thrust isolado, cabeça neutra. Na criança a COF é inserida sem a rotação de 180° do adulto.",
-      aprof:"Detalhe pediátrico: a COF na criança vai com a concavidade já na posição final, sem rotação — outro ponto que vira distrator." },
+      fixar:"Abre-se com jaw thrust isolado porque o atropelamento é mecanismo significativo e, em criança, a suspeita de lesão cervical é ainda mais conservadora. Protege-se a coluna enquanto se desobstrui a via.",
+      alem:"Há um detalhe pediátrico de técnica: a cânula orofaríngea na criança é inserida sem a rotação de 180° do adulto — ponto que costuma virar pegadinha de prova." },
     { etapa:"B", pergunta:"FR elevada para a idade, SpO2 91%. Conduta no B?",
       opcoes:[
         {t:"O2 suplementar com dispositivo adequado e reavaliar a SpO2", ok:true,
-         c:"Hipóxia (SpO2 91%) com taquipneia pede O2 suplementar titulado pela meta; reavalia-se a resposta."},
+         c:"SpO2 91% com respiração rápida é hipóxia real, não a FR naturalmente mais alta da criança; oferta-se O2 titulado pela meta e reavalia-se."},
         {t:"Aguardar — crianças têm FR naturalmente alta",
          c:"FR alta + SpO2 91% é hipóxia, não variação fisiológica; oferta-se O2 e investiga-se a causa."}
       ],
-      ref:"B — meta SpO2 ≥94%; titular pela oximetria. Apneico/gasping → BVM+O2 já.",
-      aprof:"A oximetria conecta B e C: queda de SpO2 no choque pode refletir hipoperfusão periférica (leitura ruim), não só problema pulmonar — repete-se a primária antes de só subir o fluxo." },
+      fixar:"Oferta-se O2 porque SpO2 91% com respiração rápida é hipóxia real, não a frequência naturalmente mais alta da criança. Titula-se pela meta e reavalia-se a resposta.",
+      alem:"A oximetria amarra B e C: num paciente em choque, a SpO2 pode cair por má perfusão periférica (leitura ruim), e não por problema pulmonar — por isso se reabre a primária antes de só subir o fluxo." },
     { etapa:"C", pergunta:"Pele fria, taquicárdica, ainda reativa. PA 'normal' para a idade. Interpretação?",
       opcoes:[
         {t:"Choque hipovolêmico compensado — agir, a PA normal não tranquiliza", ok:true,
-         c:"Taquicardia e pele fria já indicam choque compensado; em pediatria a PA se mantém 'normal' até uma descompensação abrupta e tardia."},
+         c:"A criança compensa muito bem e desaba de repente; taquicardia e pele fria são o aviso, e a PA normal é uma falsa calma. Agir cedo evita o colapso súbito."},
         {t:"Estável, pois a PA está dentro do esperado",
-         c:"Em criança a compensação é ainda mais enganosa: a PA normal pode preceder um colapso súbito. FC e pele fria são os sinais que importam."}
+         c:"Em criança a PA normal pode preceder um colapso súbito; FC e pele fria são os sinais que realmente importam."}
       ],
-      ref:"Compensação: vasoconstrição, taquicardia, palidez, pele fria. Hipotensão é tardia — e na criança a descompensação é mais brusca.",
-      aprof:"A criança compensa muito bem... até não compensar mais. FC e perfusão (enchimento >2 s) são alertas precoces; a hipotensão é traiçoeira em qualquer idade." },
+      fixar:"Trata-se como choque mesmo com PA normal porque a criança compensa muito bem e desaba de repente: a taquicardia e a pele fria são o aviso, e a pressão normal é uma falsa calma. Agir cedo evita o colapso súbito.",
+      alem:"É o mesmo 'não espere a hipotensão' do adulto, levado ao extremo: em pediatria a queda de PA é mais brusca e tardia, tornando FC e perfusão os parâmetros que realmente guiam." },
     { etapa:"D", pergunta:"Avaliação neurológica na primária:",
       opcoes:[
         {t:"AVDI", ok:true,
-         c:"Na primária, AVDI — rápida e suficiente para a decisão imediata. Glasgow fica para a secundária/transporte."},
+         c:"Decisão imediata numa criança em choque; parar para somar a Glasgow detalhada na cena rouba tempo do transporte."},
         {t:"Escala de Glasgow detalhada antes de transportar",
-         c:"Numa criança em choque com fratura de pelve, parar para somar Glasgow na cena atrasa o transporte."}
+         c:"Numa criança em choque com fratura de pelve, somar Glasgow na cena atrasa o transporte; ela é da secundária."}
       ],
-      ref:"AVDI na primária; Glasgow na secundária. O NC é indicador indireto da oxigenação cerebral.",
-      aprof:"'Tempo de cena mínimo no crítico' atravessa todos os casos: avaliações detalhadas migram para dentro da ambulância." },
+      fixar:"Usa-se a AVDI porque a decisão é imediata numa criança em choque; parar para somar a Glasgow detalhada na cena rouba tempo do transporte. A escolha é pela ferramenta certa para o momento.",
+      alem:"Reflete o princípio do 'tempo de cena mínimo no crítico', que atravessa todos os casos: avaliações detalhadas migram para dentro da ambulância." },
     { etapa:"E", pergunta:"Exposição da criança atropelada:",
       opcoes:[
         {t:"Expor o necessário, examinar pelve/membros e cobrir logo — alto risco de hipotermia", ok:true,
-         c:"Crianças perdem calor mais rápido (maior superfície/peso); expõe-se para examinar e cobre-se imediatamente."},
+         c:"A criança esfria mais que o adulto (mais superfície de pele por quilo); expor para examinar é necessário, manter exposto é perigoso."},
         {t:"Deixar exposta para vigiar a pelve no transporte",
          c:"Exposição prolongada gera hipotermia, ainda mais grave na criança; cobre-se após o exame."}
       ],
-      ref:"E — expor o necessário, cobrir já. Crianças têm maior relação superfície/peso e esfriam mais rápido.",
-      aprof:"A hipotermia fecha o ciclo com o C: no choque pediátrico instalado, o frio piora a coagulação e a perfusão — recobrir é tratamento, não conforto." }
+      fixar:"Cobre-se rápido porque a criança esfria mais que o adulto — tem mais superfície de pele para cada quilo de corpo. Expor para examinar é necessário; manter exposto é perigoso.",
+      alem:"Fecha o ciclo com o C: no choque já instalado, a hipotermia piora a coagulação e a perfusão — aquecer é parte do tratamento, não conforto." }
   ],
   desfecho:"Cena sinalizada, coluna protegida, hemorragia da junção contida por pressão e hemostático (sem torniquete inútil na pelve), choque reconhecido apesar da PA 'normal', transporte rápido. No hospital: fratura de pelve e fêmur estabilizadas. Você leu o mecanismo pediátrico e escolheu a técnica certa para a localização."
 },
@@ -602,83 +639,83 @@ const CASOS = [
     { etapa:"CENA", pergunta:"Primeira ação ao chegar à cena?",
       opcoes:[
         {t:"Segurança da cena (riscos do veículo, trânsito) e sinalização antes de abordar", ok:true,
-         c:"Avaliam-se riscos do veículo (combustível, instabilidade, trânsito) e sinaliza-se antes de abordar, mesmo num quadro neurológico chamativo."},
+         c:"Combustível, instabilidade e trânsito continuam ameaçando a equipe; um quadro neurológico chamativo não suspende a segurança. Primeiro a cena, depois o paciente."},
         {t:"Abrir a porta e iniciar o exame neurológico de imediato",
-         c:"Iniciar o exame sem avaliar riscos e sinalizar expõe a equipe. A urgência do TCE não suspende a regra da segurança."}
+         c:"Iniciar o exame sem avaliar riscos e sinalizar expõe a equipe; a urgência do TCE não suspende a regra da segurança."}
       ],
-      ref:"Cena: segurança → situação → cinemática. Para-brisa estrelado e ausência de cinto são pistas que antecipam TCE e trauma cervical.",
-      aprof:"A leitura da cena alimenta o índice de suspeição: para-brisa estrelado = impacto da cabeça; sem cinto = ocupante não contido." },
+      fixar:"Avalia-se o risco do veículo e sinaliza-se antes porque um quadro neurológico chamativo não suspende a segurança — combustível, instabilidade e trânsito continuam ameaçando a equipe. Primeiro a cena, depois o paciente.",
+      alem:"A leitura da cena já alimenta a suspeição: para-brisa estrelado indica impacto da cabeça, e a ausência de cinto, um corpo livre para o golpe/contragolpe — pistas que orientam A e D." },
     { etapa:"BIO", pergunta:"Motorista sem cinto em colisão frontal. Que padrão antecipar?",
       opcoes:[
         {t:"Golpe/contragolpe cerebral, hiperextensão cervical e lesão de órgãos do tronco", ok:true,
-         c:"O ocupante não contido segue a trajetória (cima/baixo): golpe/contragolpe, hiperextensão cervical e lesão de órgãos torácicos/abdominais."},
+         c:"O ocupante sem cinto segue a trajetória do carro; a desaceleração brusca lesa o cérebro (golpe/contragolpe) e a coluna, além de órgãos torácicos/abdominais."},
         {t:"Fratura bilateral de fêmur por pés presos",
-         c:"Esse é o padrão da MOTOCICLETA. No carro frontal sem cinto, o corpo é projetado para frente/cima — TCE, lesão cervical e de órgãos."}
+         c:"Esse é o padrão da motocicleta; no carro frontal sem cinto, o corpo é projetado para frente/cima — TCE, lesão cervical e de órgãos."}
       ],
-      ref:"Frontal: golpe/contragolpe, hiperextensão cervical, órgãos torácicos/abdominais. Forças: cisalhamento (velocidade diferencial) e compressão.",
-      aprof:"O golpe/contragolpe é cisalhamento: o cérebro muda de velocidade em ritmo diferente do crânio. O mesmo mecanismo explica a anisocoria avaliada no D." },
+      fixar:"Antecipa-se TCE + lesão cervical + órgãos porque o ocupante sem cinto segue a trajetória do carro e é a desaceleração brusca que lesa o cérebro (golpe/contragolpe) e a coluna. O mecanismo aponta onde olhar.",
+      alem:"O golpe/contragolpe é um exemplo de cisalhamento — o cérebro muda de velocidade em ritmo diferente do crânio. O mesmo mecanismo explica por que a anisocoria, lá no D, sinaliza lesão grave." },
     { etapa:"X", pergunta:"Couro cabeludo sangrando bastante. Conduta no X?",
       opcoes:[
         {t:"Pressão direta no couro cabeludo (não torniquete) e seguir o XABCDE", ok:true,
-         c:"Couro cabeludo não é extremidade: controla-se por pressão direta e curativo, não por torniquete. É o X, antes do A."},
+         c:"Couro cabeludo não é extremidade: controla-se por pressão direta. Ele sangra muito por ser ricamente vascularizado, e mesmo num caso 'de cabeça' o X vem antes do D."},
         {t:"Torniquete na cabeça para conter o sangramento",
          c:"Não se aplica torniquete em cabeça/couro cabeludo; o controle é por pressão direta e compressas hemostáticas."},
         {t:"Ignorar — couro cabeludo sangra pouco",
          c:"O couro cabeludo é muito vascularizado e pode sangrar de forma significativa; controla-se no X."}
       ],
-      ref:"X — couro cabeludo/junção: pressão direta + curativos/hemostáticos (torniquete só em extremidade).",
-      aprof:"Mesmo num caso 'neurológico', o X (hemorragia) é sempre verificado antes do D — a ordem do protocolo não muda." },
+      fixar:"Controla-se o couro cabeludo por pressão direta porque ali não cabe torniquete (não é extremidade), e ele sangra muito por ser ricamente vascularizado. Mesmo num caso 'de cabeça', o X vem antes do D.",
+      alem:"Reforça a ordem do protocolo: a hemorragia (X) é sempre verificada e tratada antes da avaliação neurológica (D) — a aparência 'neurológica' do caso não muda a sequência." },
     { etapa:"A", pergunta:"Como abrir a via aérea deste paciente?",
       opcoes:[
         {t:"Jaw thrust isolado com estabilização manual e cabeça neutra", ok:true,
-         c:"Mecanismo de alta energia impõe suspeita cervical até prova em contrário. Abre-se com jaw thrust isolado, cabeça neutra, estabilização mantida."},
+         c:"A energia que lesou o cérebro pode ter lesado a coluna; o jaw thrust isolado desobstrui sem mover o pescoço. Trocar via aérea por medula seria um mau negócio."},
         {t:"Hiperextender a cabeça para garantir a abertura",
-         c:"Hiperextender com suspeita cervical pode agravar lesão de coluna. A extensão só vale sem suspeita cervical — não é o caso."}
+         c:"Hiperextender com suspeita cervical pode agravar lesão de coluna; a extensão só vale sem suspeita cervical."}
       ],
-      ref:"A — com suspeita cervical: jaw thrust isolado, cabeça neutra; estabilizar até colar + protetores laterais.",
-      aprof:"O cuidado cervical é o elo entre A e D no TCE: a energia que lesou o encéfalo pode ter lesado a coluna. Mover sem cuidado arriscaria piorar uma lesão medular." },
+      fixar:"Abre-se sem hiperextensão porque a energia que lesou o cérebro pode ter lesado a coluna cervical; o jaw thrust isolado desobstrui sem mover o pescoço. Trocar via aérea por medula seria um mau negócio.",
+      alem:"É o elo entre A e D no TCE: proteger a coluna é parte de proteger o sistema nervoso. A mesma cabeça que você não move por causa da via aérea é a que vai te dar o sinal pupilar." },
     { etapa:"B", pergunta:"Respira espontaneamente, SpO2 93%, sem assimetria. Conduta no B no TCE?",
       opcoes:[
-        {t:"Ofertar O2 para manter SpO2 ≥94% — o cérebro lesado não tolera hipóxia", ok:true,
-         c:"No TCE evita-se a hipóxia a todo custo (lesão secundária); titula-se O2 para SpO2 ≥94%, mesmo com 93%."},
+        {t:"Ofertar O2 para manter SpO2 ≥ 94% — o cérebro lesado não tolera hipóxia", ok:true,
+         c:"Cada queda de O2 adiciona lesão secundária à lesão do impacto; por isso se mira ≥ 94% mesmo com 93%. Aqui o O2 é neuroproteção, não só suporte."},
         {t:"Não ofertar O2, pois 93% é aceitável",
-         c:"No TCE a meta é ≥94%; 93% com cérebro lesado favorece lesão secundária por hipóxia."}
+         c:"No TCE a meta é ≥ 94%; 93% com cérebro lesado favorece lesão secundária por hipóxia."}
       ],
-      ref:"B — meta SpO2 ≥94%. No TCE, hipóxia e hipotensão são os maiores vilões da lesão secundária.",
-      aprof:"Lesão primária é a do impacto; a secundária vem de hipóxia e hipoperfusão. Por isso B (O2) e C (PA) são tratados agressivamente para proteger o encéfalo." },
+      fixar:"Mira-se SpO2 ≥ 94% com rigor porque o cérebro lesado não tolera hipóxia: cada queda de oxigênio adiciona 'lesão secundária' à lesão do impacto. Aqui o O2 é neuroproteção, não só suporte.",
+      alem:"Junta B e C sob o conceito de lesão secundária: hipóxia (B) e hipotensão (C) são os dois maiores vilões do TCE, e por isso ambos são tratados de forma agressiva." },
     { etapa:"C", pergunta:"PA 150/90, FC 55 (bradicardia), respiração irregular. O que sugere?",
       opcoes:[
         {t:"Tríade de Cushing — hipertensão intracraniana / herniação; emergência", ok:true,
-         c:"Hipertensão + bradicardia + respiração irregular é a tríade de Cushing, indicando hipertensão intracraniana grave — transporte imediato."},
+         c:"Hipertensão + bradicardia + respiração irregular é o oposto do choque e denuncia HIC; pede transporte imediato. Confundir com 'choque' levaria à conduta errada."},
         {t:"Choque hipovolêmico, pela alteração dos sinais",
          c:"No hipovolêmico há taquicardia e hipotensão; aqui há hipertensão e bradicardia — o oposto, sugerindo hipertensão intracraniana."},
         {t:"Sinais normais para a dor do trauma",
          c:"Esse padrão (PA alta + FC baixa + respiração irregular) não é dor: é a tríade de Cushing da HIC."}
       ],
-      ref:"Tríade de Cushing (HIC): hipertensão + bradicardia + respiração irregular. Contrasta com o choque (taquicardia + hipotensão).",
-      aprof:"Um dos poucos contextos com bradicardia + hipertensão juntas — distinto do choque neurogênico (bradicardia + hipotensão). Separar os dois é clássico de prova." },
+      fixar:"Identifica-se a tríade de Cushing porque hipertensão + bradicardia + respiração irregular é o oposto do choque e denuncia hipertensão intracraniana (HIC) — uma emergência que pede transporte imediato. Trocar isso por 'choque' levaria à conduta errada.",
+      alem:"Contrasta diretamente com o choque neurogênico (bradicardia + hipotensão) do caso da queda de altura: as duas têm bradicardia, mas causas e condutas opostas — diferenciar é decisivo." },
     { etapa:"D", pergunta:"Pupila direita dilatada, esquerda normal (anisocoria), após o TCE. Significado?",
       opcoes:[
         {t:"Sinal de herniação / lesão cerebral localizada — emergência, transporte imediato", ok:true,
-         c:"Anisocoria após trauma significa herniação/lesão localizada até prova em contrário — exige transporte imediato a centro com neurocirurgia."},
+         c:"Uma pupila que dilata sozinha indica compressão do nervo de um lado do cérebro: é sinal localizatório de herniação, que eleva a prioridade do transporte."},
         {t:"Variação anatômica normal, sem importância",
          c:"Após TCE, anisocoria nunca é tratada como normal; descartá-la deixa passar uma herniação — dos achados mais graves e cobrados."},
         {t:"Provável uso de drogas estimulantes",
-         c:"Estimulantes causam miose BILATERAL (contraídas e reativas), não assimetria. Pupila assimétrica pós-trauma aponta lesão localizada."}
+         c:"Estimulantes causam miose bilateral (contraídas e reativas), não assimetria; pupila assimétrica pós-trauma aponta lesão localizada."}
       ],
-      ref:"Pupila: miose (estimulantes); anisocoria (lesão localizada — TCE/AVC); midríase paralítica (a mais grave — PCR/choque). Anisocoria pós-trauma = herniação.",
-      aprof:"Na primária registra-se o NC pela AVDI (aqui 'V'); a Glasgow seriada no transporte detecta deterioração (ex.: cair de 13 para 9). Somar Glasgow na cena seria erro de momento." },
+      fixar:"A anisocoria pós-trauma é lida como herniação porque uma pupila que dilata sozinha indica compressão do nervo de um lado do cérebro. É um sinal localizatório de emergência, que eleva a prioridade do transporte como uma hemorragia elevaria.",
+      alem:"Aqui as escalas se complementam: a AVDI dispara a decisão agora, e a Glasgow seriada no transporte detecta se o paciente piora (ex.: cair de 13 para 9). Somar Glasgow na cena seria erro de momento." },
     { etapa:"E", pergunta:"Exposição no TCE:",
       opcoes:[
         {t:"Expor o necessário, cobrir e prevenir hipotermia, reavaliando o XABCDE", ok:true,
-         c:"Expõe-se para procurar lesões associadas e cobre-se já; hipotermia também prejudica o paciente neurológico."},
+         c:"Um sangramento de tórax/abdome não visto causaria hipotensão — e hipotensão mata o cérebro lesado. Cobrir em seguida evita a hipotermia, outro agravante."},
         {t:"Exposição é dispensável, a lesão é só na cabeça",
          c:"Mecanismo de alta energia exige exposição para não perder lesões de tórax/abdome/coluna, que podem causar hipotensão e agravar o TCE."}
       ],
-      ref:"E — expor (mecanismo grave) e cobrir; reavaliar o XABCDE. Evitar hipotensão/hipóxia que agravam o TCE.",
-      aprof:"Pular a exposição arrisca perder um sangramento torácico/abdominal que cause hipotensão — e hipotensão, junto da hipóxia, é o que mata o cérebro lesado." }
+      fixar:"Expõe-se mesmo num 'caso de cabeça' porque um sangramento de tórax ou abdome não visto causaria hipotensão — e hipotensão mata o cérebro lesado. Cobrir em seguida evita a hipotermia, outro agravante.",
+      alem:"Volta ao conceito de lesão secundária: tudo no atendimento do TCE conspira para evitar hipóxia e hipotensão, e a exposição é o que garante que nenhuma fonte de choque passe despercebida." }
   ],
-  desfecho:"Cena segura, coluna estabilizada, couro cabeludo controlado por pressão, O2 mantendo SpO2 ≥94%, tríade de Cushing e anisocoria reconhecidas como hipertensão intracraniana, transporte imediato a centro com neurocirurgia. Você protegeu o cérebro da lesão secundária e não perdeu tempo somando Glasgow na cena."
+  desfecho:"Cena segura, coluna estabilizada, couro cabeludo controlado por pressão, O2 mantendo SpO2 ≥ 94%, tríade de Cushing e anisocoria reconhecidas como hipertensão intracraniana, transporte imediato a centro com neurocirurgia. Você protegeu o cérebro da lesão secundária e não perdeu tempo somando Glasgow na cena."
 },
 {
   id:"medular", titulo:"Queda de altura com lesão medular",
@@ -689,77 +726,77 @@ const CASOS = [
     { etapa:"CENA", pergunta:"Primeira ação na obra?",
       opcoes:[
         {t:"Avaliar a segurança (queda de objetos, estrutura instável) antes de abordar", ok:true,
-         c:"Obra tem riscos de queda de materiais e instabilidade. Segurança da equipe primeiro; só então se aproxima da vítima."},
+         c:"Obra tem risco de queda de material e instabilidade; e mobilizar uma suspeita de lesão de coluna sem cuidado pode transformá-la em definitiva. Segurança e controle de coluna andam juntos."},
         {t:"Ir direto à vítima e mobilizá-la para fora do andaime",
-         c:"Mobilizar sem segurança e sem controle de coluna pode agravar a lesão medular suspeita e expor o socorrista. Cena segura primeiro."}
+         c:"Mobilizar sem segurança e sem controle de coluna pode agravar a lesão medular suspeita e te expor; cena segura primeiro."}
       ],
-      ref:"Cena: segurança → situação → cinemática. Restrição de coluna obrigatória na suspeita de lesão espinal.",
-      aprof:"A queixa de não sentir as pernas e o mecanismo de queda já gritam lesão medular — a manipulação será toda com controle de coluna." },
+      fixar:"Avalia-se a obra antes porque queda de material e estrutura instável ameaçam a equipe, e mobilizar uma suspeita de lesão de coluna sem cuidado pode transformar uma lesão parcial em definitiva. Segurança e controle de coluna andam juntos.",
+      alem:"A queixa de 'não sentir as pernas' já é, por si, um aviso de lesão medular — o que vai exigir restrição de coluna em todo o manejo e explicar o tipo de choque do C." },
     { etapa:"BIO", pergunta:"Queda de 6 m de costas. Que mecanismo e suspeita?",
       opcoes:[
         {t:"Desaceleração vertical — alta suspeita de lesão de coluna (e de calcâneo/pelve conforme o impacto)", ok:true,
-         c:"A desaceleração vertical é um dos 3 mecanismos básicos; a aterrissagem transmite energia à coluna, com alto risco de lesão medular."},
+         c:"A queda transmite a energia ao eixo do corpo; estar consciente não afasta a lesão medular — o déficit motor já a denuncia."},
         {t:"Sem risco de coluna, pois ele está consciente e falando",
-         c:"Estar consciente não exclui lesão medular — o déficit motor nas pernas já a sugere. Mantém-se restrição de coluna."}
+         c:"Estar consciente não exclui lesão medular; a perda de força nas pernas já a sugere. Mantém-se restrição de coluna."}
       ],
-      ref:"3 mecanismos básicos: desaceleração frontal, desaceleração vertical e penetração. Queda vertical → energia transmitida à coluna/membros.",
-      aprof:"A biomecânica antecipa: a perda de força nas pernas (déficit motor) é coerente com lesão medular — o que vai definir o tipo de choque no C." },
+      fixar:"Suspeita-se de lesão de coluna porque a desaceleração vertical (queda) transmite a energia ao eixo do corpo. O paciente estar consciente não afasta a lesão medular — o déficit motor já a denuncia.",
+      alem:"Conecta o mecanismo ao C: uma lesão medular alta interrompe o controle dos vasos e do coração, preparando o terreno para o choque neurogênico que aparece adiante." },
     { etapa:"X", pergunta:"Conduta no X neste paciente?",
       opcoes:[
         {t:"Checar hemorragia exsanguinante; não havendo, seguir o XABCDE", ok:true,
-         c:"O X é checado em todos. Sem hemorragia exsanguinante visível, avança-se — mas mantendo o índice de suspeição para sangramento interno pela queda."},
+         c:"O X é checado em todos; queda de altura pode causar hemorragia interna (pelve/órgãos). Sem sangramento visível, avança-se mantendo a suspeição."},
         {t:"Pular o X porque o problema é a medula",
-         c:"Não se pula o X por suposição: queda de altura pode causar hemorragia interna (pelve/órgãos). Checa-se sempre primeiro."}
+         c:"Não se pula o X por suposição: queda de altura pode causar hemorragia interna; checa-se sempre primeiro."}
       ],
-      ref:"X — verificação obrigatória em todos. Queda de altura pode causar hemorragia interna (pelve, órgãos abdominais).",
-      aprof:"Disciplina de protocolo: mesmo num caso de medula, o X vem antes — sangramento interno por queda é uma armadilha silenciosa." },
+      fixar:"Checa-se o X porque uma queda de altura também causa hemorragia interna (pelve, órgãos), e o protocolo não dispensa essa verificação por o caso 'ser de medula'. Confirmar a ausência libera seguir.",
+      alem:"Mostra a disciplina do XABCDE: o sangramento oculto da queda é uma armadilha silenciosa que o X existe para não deixar passar." },
     { etapa:"A", pergunta:"Via aérea deste paciente?",
       opcoes:[
         {t:"Jaw thrust isolado se necessário, com estabilização cervical rigorosa", ok:true,
-         c:"Alta suspeita de lesão cervical: qualquer manejo de via aérea é com jaw thrust isolado e cabeça neutra, sem extensão."},
+         c:"A suspeita de lesão cervical é máxima aqui; mover o pescoço para abrir a via poderia agravar a medula. Abre-se protegendo a coluna."},
         {t:"Chin lift com extensão, já que ele fala",
          c:"Mesmo falando, o mecanismo impõe restrição de coluna; a extensão poderia agravar a lesão cervical. Jaw thrust isolado."}
       ],
-      ref:"A — suspeita cervical: jaw thrust isolado, cabeça neutra; estabilização manual até colar + protetores.",
-      aprof:"Na lesão medular alta, proteger a coluna é proteger a própria respiração: lesões cervicais altas podem comprometer o diafragma (nervo frênico)." },
+      fixar:"Qualquer manejo é com jaw thrust isolado porque a suspeita de lesão cervical é máxima aqui; mover o pescoço para abrir a via poderia agravar a medula. A via aérea é aberta protegendo a coluna.",
+      alem:"Liga A e B: lesões cervicais altas comprometem o diafragma (nervo frênico, raízes C3–C5), então proteger a coluna é também proteger a respiração — o que justifica a vigilância ventilatória do próximo passo." },
     { etapa:"B", pergunta:"Respira, porém com esforço e amplitude reduzida. Conduta no B?",
       opcoes:[
         {t:"Ofertar O2, monitorar a ventilação de perto e a SpO2 — lesão cervical alta pode afetar a respiração", ok:true,
-         c:"Lesões cervicais altas comprometem músculos respiratórios; oferta-se O2 e vigia-se de perto, pronto para assistir a ventilação se necessário."},
+         c:"Lesão cervical alta enfraquece os músculos respiratórios; respirar agora não garante respirar depois. Oferta-se O2 e fica-se pronto para assistir a ventilação."},
         {t:"Nada a fazer, pois ele respira sozinho",
-         c:"Respirar agora não garante que continuará: a lesão medular alta pode reduzir progressivamente a ventilação. Monitorar de perto e ofertar O2."}
+         c:"Respirar agora não garante a continuidade: a lesão medular alta pode reduzir progressivamente a ventilação. Monitorar de perto e ofertar O2."}
       ],
-      ref:"B — meta SpO2 ≥94%. Diafragma é o principal músculo; lesão cervical alta pode comprometer a ventilação. Vigilância contínua.",
-      aprof:"O diafragma depende de nervos cervicais altos (C3–C5). Por isso a lesão medular alta é também um risco respiratório, não só motor." },
+      fixar:"Vigia-se a ventilação de perto porque a lesão medular alta pode enfraquecer progressivamente os músculos respiratórios; respirar agora não garante respirar daqui a pouco. Oferta-se O2 e prepara-se para assistir.",
+      alem:"É a consequência direta do A: o diafragma, principal músculo da respiração, depende de nervos cervicais altos — a lesão que ameaça o movimento das pernas pode ameaçar o fôlego." },
     { etapa:"C", pergunta:"Pele quente e rosada, FC 50 (bradicardia), PA baixa. Tipo de choque?",
       opcoes:[
         {t:"Choque neurogênico (distributivo por lesão medular) — a exceção com bradicardia", ok:true,
-         c:"A lesão medular interrompe o tônus simpático: vasodilatação (pele quente) + bradicardia + hipotensão. É o único choque com bradicardia."},
+         c:"A lesão medular tira o tônus dos vasos: eles dilatam (pele quente) e a FC cai em vez de subir. É a única exceção à regra da taquicardia no choque."},
         {t:"Hipovolêmico, pela hipotensão",
          c:"No hipovolêmico a pele é fria e há taquicardia; aqui a pele é quente e há bradicardia — padrão neurogênico."},
         {t:"Sem choque, pois a pele está quente e rosada",
          c:"Pele quente é justamente a pista do distributivo/neurogênico na fase inicial; com hipotensão e bradicardia, é choque."}
       ],
-      ref:"Distributivo: vasodilatação (pele quente, resistência vascular ↓). Neurogênico (lesão medular) = bradicardia, única exceção à taquicardia no choque.",
-      aprof:"Contraste com a tríade de Cushing do TCE (hipertensão + bradicardia): aqui é hipotensão + bradicardia. A bradicardia tem causas opostas — diferenciar é decisivo." },
+      fixar:"Reconhece-se o choque neurogênico porque a lesão medular tira o tônus dos vasos: eles dilatam (pele quente) e a frequência cardíaca cai (bradicardia) em vez de subir. É a única exceção à regra da taquicardia no choque.",
+      alem:"Contrasta com o hipovolêmico (pele fria + taquicardia) e com a tríade de Cushing do TCE (bradicardia + hipertensão): três quadros, três combinações — saber separá-los muda a conduta." },
     { etapa:"D", pergunta:"Avaliação neurológica?",
       opcoes:[
         {t:"AVDI (alerta) e checar déficit motor/sensitivo nas pernas", ok:true,
-         c:"Ele está alerta ('A' na AVDI), mas há déficit motor/sensitivo — documenta-se o nível para comparação posterior."},
+         c:"Ele está alerta ('A'), mas o D não para na consciência: avalia-se a função motora/sensitiva, que denuncia o nível da lesão medular."},
         {t:"Glasgow detalhada antes de qualquer coisa",
-         c:"Glasgow é da secundária. Na primária, AVDI; o déficit motor já indica lesão medular a documentar."}
+         c:"Glasgow é da secundária; na primária, AVDI. O déficit motor já indica lesão medular a documentar."}
       ],
-      ref:"AVDI na primária. Avaliar função motora/sensitiva (déficit sugere nível da lesão medular). Glasgow na secundária.",
-      aprof:"Aqui a consciência está preservada ('A'), mas o déficit é motor/sensitivo — mostra que o D não é só nível de consciência, também função neurológica focal." },
+      fixar:"A AVDI mostra um paciente alerta, mas o D não para na consciência: avalia-se também a função motora e sensitiva, que denuncia o nível da lesão medular. O achado focal é o que importa aqui.",
+      alem:"Amplia o conceito de D: não é só 'nível de consciência', é o estado neurológico — incluindo déficits focais que, num TCE, apareceriam como a pupila, e aqui aparecem como a perda de força." },
     { etapa:"E", pergunta:"Exposição neste paciente:",
       opcoes:[
         {t:"Expor para avaliar o nível sensitivo/motor e cobrir — o lesado medular perde a termorregulação", ok:true,
-         c:"A vasodilatação do choque neurogênico impede conservar calor; o paciente esfria com facilidade — cobrir é essencial."},
+         c:"A vasodilatação do choque neurogênico impede conservar calor; o corpo esfria mesmo com a pele quente ao toque. Aqui a hipotermia é parte da própria doença."},
         {t:"Manter exposto, pois a pele está quente",
          c:"A pele quente é da vasodilatação, mas essa mesma vasodilatação faz perder calor rápido; cobre-se para evitar hipotermia."}
       ],
-      ref:"E — no choque neurogênico há perda da termorregulação (vasodilatação) → tendência à hipotermia; cobrir e aquecer.",
-      aprof:"Razão extra para recobrir cedo: a própria fisiopatologia (perda do tônus simpático) impede o corpo de se aquecer." }
+      fixar:"Cobre-se cedo porque o choque neurogênico tira a capacidade de conservar calor: a vasodilatação faz o corpo esfriar mesmo com a pele quente ao toque. A hipotermia, aqui, é parte da própria fisiopatologia.",
+      alem:"Diferente do trauma comum, em que a hipotermia vem do ambiente, no neurogênico ela vem da perda do tônus simpático (termorregulação) — mais um motivo para aquecer ativamente." }
   ],
   desfecho:"Coluna imobilizada desde o início, X checado, ventilação vigiada (risco cervical alto), choque neurogênico reconhecido pela tríade pele quente + bradicardia + hipotensão (e diferenciado da tríade de Cushing), paciente aquecido e transportado. Você não confundiu a bradicardia com sinal benigno nem com hipovolemia."
 },
@@ -772,39 +809,39 @@ const CASOS = [
     { etapa:"CENA", pergunta:"Primeira ação ao chegar?",
       opcoes:[
         {t:"Garantir a segurança — risco de nova explosão, vazamento de gás e estrutura instável", ok:true,
-         c:"Pós-explosão há risco de nova deflagração, gás residual e desabamento. Segurança da equipe primeiro; só então se atende."},
+         c:"Pós-explosão há risco de nova deflagração, gás residual e desabamento; entrar correndo pode somar o socorrista às vítimas. A urgência não vence a segurança."},
         {t:"Entrar correndo para socorrer a vítima projetada",
-         c:"Entrar sem controlar o risco de nova explosão/gás pode fazer o socorrista virar vítima. Sem segurança não há atendimento."}
+         c:"Entrar sem controlar o risco de nova explosão/gás pode te tornar vítima; sem segurança não há atendimento."}
       ],
-      ref:"Segurança: ameaças incluem explosivos, produtos perigosos e instabilidade estrutural. Socorrista que vira vítima aumenta o problema.",
-      aprof:"O ambiente fechado é dado relevante: ele agrava o barotrauma da onda de choque — algo que vai pesar no B." },
+      fixar:"Assegura-se a cena porque após uma explosão há risco de nova deflagração, gás residual e desabamento — entrar correndo pode somar o socorrista às vítimas. A urgência não vence a segurança.",
+      alem:"O dado 'espaço fechado' já importa aqui: ele agrava a onda de choque que vai lesar o pulmão, conectando a leitura da cena ao problema respiratório do B." },
     { etapa:"BIO", pergunta:"Explosão em espaço fechado. Como a energia lesa a vítima?",
       opcoes:[
         {t:"Ondas de choque (órgãos com gás), fragmentos e lesões relacionadas — barotrauma pior em espaço fechado", ok:true,
-         c:"A explosão lesa por 3 mecanismos: onda de choque (ouvido, pulmão, intestino), fragmentos (ampliam o dano) e lesões relacionadas. Espaço fechado piora o barotrauma."},
+         c:"A explosão lesa por três mecanismos: onda de choque (ouvido, pulmão, intestino), fragmentos e impacto contra estruturas. O espaço fechado piora a onda."},
         {t:"Apenas queimaduras superficiais de pele",
          c:"A explosão é muito mais que queimadura: a onda de choque lesa órgãos internos com gás, e fragmentos causam ferimentos múltiplos."}
       ],
-      ref:"Explosão: ondas de choque (deformam órgãos com gás — ouvido, pulmão, intestino), fragmentos e lesões relacionadas. Barotrauma pulmonar pior em espaço fechado.",
-      aprof:"A surdez súbita (lesão de tímpano) marca uma onda de choque intensa — pista para procurar lesões pulmonares e intestinais ocultas." },
+      fixar:"Lê-se a explosão em três mecanismos porque ela não é só queimadura: a onda de choque deforma órgãos cheios de gás (ouvido, pulmão, intestino), os fragmentos cortam, e o impacto contra estruturas completa o dano. Espaço fechado piora a onda.",
+      alem:"A surdez súbita (lesão de tímpano) é um marcador de onda intensa — avisa para procurar lesão pulmonar e intestinal ocultas, do mesmo modo que um mecanismo grave eleva a suspeição no trauma comum." },
     { etapa:"X", pergunta:"Conduta no X após a explosão?",
       opcoes:[
         {t:"Checar e controlar hemorragias por fragmentos; depois seguir o XABCDE", ok:true,
-         c:"Os fragmentos podem causar hemorragias graves; controla-se o que for exsanguinante (conforme a localização) antes de avançar."},
+         c:"Os fragmentos funcionam como múltiplos projéteis e podem abrir sangramentos graves; controla-se o exsanguinante conforme a localização antes de avançar."},
         {t:"Pular o X porque a queixa principal é a surdez",
          c:"A queixa do paciente não define a prioridade: o X (hemorragia) é checado primeiro, sempre — fragmentos podem ter aberto sangramentos."}
       ],
-      ref:"X — controlar hemorragia exsanguinante (técnica conforme a localização: torniquete em extremidade, pressão/hemostático em junção).",
-      aprof:"Como no penetrante, fragmentos exigem busca ativa por múltiplos ferimentos; o X trata o que sangra de forma exsanguinante." },
+      fixar:"Controla-se primeiro a hemorragia por fragmentos porque eles funcionam como múltiplos projéteis e podem abrir sangramentos graves. A técnica segue a localização (torniquete em extremidade, pressão em junção).",
+      alem:"Aproxima a explosão do trauma penetrante: em ambos, fragmentos/projéteis exigem busca por mais de um ferimento, e o X trata o que é exsanguinante." },
     { etapa:"A", pergunta:"Via aérea da vítima de explosão?",
       opcoes:[
         {t:"Avaliar via aérea com cuidado cervical; atenção a queimadura/edema se houve calor", ok:true,
-         c:"A projeção contra a parede impõe suspeita cervical (jaw thrust isolado). Se houve calor/chama, vigiar edema de via aérea como na queimadura inalatória."},
+         c:"A projeção contra a parede impõe suspeita cervical (jaw thrust isolado); se houve calor, vigia-se o edema como numa queimadura inalatória."},
         {t:"Via aérea não é prioridade, pois ele fala",
          c:"Falar agora não dispensa a avaliação: há suspeita cervical pela projeção e possível edema se houve exposição a calor."}
       ],
-      ref:"A — com suspeita cervical: jaw thrust isolado. Em exposição a calor, vigiar edema de laringe (queimadura inalatória).",
-      aprof:"A explosão combina mecanismos: contuso (projeção → coluna), térmico (calor → via aérea) e penetrante (fragmentos) — a via aérea cruza vários deles." },
+      fixar:"Avalia-se a via aérea com cuidado cervical porque a projeção contra a parede é trauma contuso (suspeita de coluna); e se houve calor, vigia-se o edema como numa queimadura inalatória. A explosão soma mecanismos.",
+      alem:"Mostra a explosão como trauma combinado: contuso (coluna), térmico (via aérea) e penetrante (fragmentos) — a via aérea cruza vários desses eixos ao mesmo tempo." },
     { etapa:"B", pergunta:"Surdez, dor torácica e dispneia progressiva após blast em espaço fechado. Maior preocupação no B?",
       opcoes:[
         {t:"Barotrauma pulmonar (onda de choque) — O2 e transporte, atenção a pneumotórax", ok:true,
@@ -814,148 +851,186 @@ const CASOS = [
         {t:"Hiperventilação — basta acalmar a vítima",
          c:"Em barotrauma a conduta é O2 e transporte, não só tranquilizar; pode evoluir para pneumotórax."}
       ],
-      ref:"Explosão — onda de choque lesa pulmão (barotrauma), pior em espaço fechado. B: O2, auscultar os dois lados (assimetria = pneumotórax/hemotórax).",
-      aprof:"A surdez por lesão timpânica indica que a onda foi forte o bastante para lesar também o pulmão e o intestino — manter alto índice de suspeição." },
+      fixar:"A dispneia progressiva após blast em espaço fechado é tratada como barotrauma porque a onda de choque lesa o tecido pulmonar e pode gerar pneumotórax. Oferta-se O2 e transporta-se, em vez de chamar de 'ansiedade'.",
+      alem:"Liga B e C: um pneumotórax hipertensivo decorrente do barotrauma é, ao mesmo tempo, falência ventilatória e choque obstrutivo — o mesmo cruzamento visto no ferimento por arma de fogo." },
     { etapa:"C", pergunta:"Pulso acelerado, pele esfriando após a explosão. Circulação?",
       opcoes:[
         {t:"Suspeitar de choque (hemorragia por fragmentos e/ou barotrauma) — monitorar e transportar", ok:true,
-         c:"Taquicardia + pele esfriando sugerem choque hipovolêmico (fragmentos) ou obstrutivo (pneumotórax hipertensivo). Monitora-se e transporta-se."},
+         c:"Taquicardia com pele esfriando é compensação de choque — aqui hipovolêmico (fragmentos) ou obstrutivo (pneumotórax hipertensivo). Não se espera a PA cair."},
         {t:"Circulação normal, pois há pulso forte",
          c:"Taquicardia com pele esfriando é compensação de choque; não se aguarda a PA cair para reconhecer."}
       ],
-      ref:"C — taquicardia + pele fria = compensação do choque. Hipovolêmico (fragmentos) ou obstrutivo (pneumotórax hipertensivo do barotrauma).",
-      aprof:"O barotrauma liga B e C: um pneumotórax hipertensivo é, ao mesmo tempo, problema ventilatório (B) e causa de choque obstrutivo (C)." },
+      fixar:"Suspeita-se de choque porque taquicardia com pele esfriando é compensação — aqui por hemorragia de fragmentos e/ou obstrução por pneumotórax. Não se espera a PA cair para reconhecer.",
+      alem:"Reúne os tipos de choque do penetrante: hipovolêmico (fragmentos) e obstrutivo (barotrauma), reforçando que o tipo certo define a conduta (transporte e descompressão, não vasopressor)." },
     { etapa:"D", pergunta:"Avaliação neurológica?",
       opcoes:[
         {t:"AVDI — atenção a rebaixamento por hipóxia (barotrauma) ou TCE da projeção", ok:true,
-         c:"AVDI na primária; rebaixamento pode vir de hipóxia (barotrauma) ou de TCE pelo impacto contra a parede."},
+         c:"Rebaixamento pode vir de hipóxia (barotrauma) ou de TCE pelo impacto contra a parede; a AVDI integra essas frentes na decisão imediata."},
         {t:"Glasgow detalhada, parando para somar pontos",
          c:"Glasgow é da secundária; na primária, AVDI. A prioridade segue sendo O2 e transporte."}
       ],
-      ref:"AVDI (primária). NC reduzido pode indicar hipóxia (barotrauma) ou lesão do SNC (impacto da projeção).",
-      aprof:"A explosão pode causar TCE pela projeção — por isso o D vigia rebaixamento, somando-se à hipóxia do barotrauma como causa de alteração do NC." },
+      fixar:"A AVDI vigia rebaixamento porque ele pode vir de hipóxia (barotrauma) ou de TCE pela projeção. O nível de consciência integra as várias frentes de lesão da explosão.",
+      alem:"Conecta D a B: a hipóxia do barotrauma aparece como alteração de consciência, do mesmo modo que no caso do CO — o cérebro denuncia a falta de O2." },
     { etapa:"E", pergunta:"Exposição da vítima de explosão:",
       opcoes:[
         {t:"Expor para procurar ferimentos por fragmentos em todo o corpo e cobrir", ok:true,
-         c:"Os fragmentos ampliam o raio de dano e podem causar múltiplos ferimentos dispersos; expõe-se para encontrá-los e cobre-se em seguida."},
+         c:"Os fragmentos espalham ferimentos por onde você não está olhando; examinar só onde dói deixa lesões para trás. Cobre-se depois, contra a hipotermia."},
         {t:"Examinar só o tórax, que é onde dói",
          c:"Limitar ao tórax perde ferimentos por fragmentos em outras regiões; a exposição é ampla no mecanismo de explosão."}
       ],
-      ref:"E — fragmentos ampliam o raio de lesão; exposição completa para localizar múltiplos ferimentos; cobrir (hipotermia).",
-      aprof:"Como no penetrante, o E revela ferimentos ocultos — aqui multiplicados pelos fragmentos; vale a regra de procurar 'mais de um ferimento'." }
+      fixar:"Expõe-se o corpo todo porque os fragmentos espalham ferimentos por onde você não está olhando; examinar só onde dói deixa lesões para trás. Cobre-se depois, contra a hipotermia.",
+      alem:"É a mesma lição do penetrante levada ao extremo: a exposição (E) revela os ferimentos ocultos, agora multiplicados pelos fragmentos da explosão." }
   ],
   desfecho:"Cena assegurada contra nova explosão, hemorragias por fragmentos controladas, barotrauma pulmonar suspeitado pela dispneia progressiva e pela surdez, O2 e transporte com vigilância de pneumotórax. Na exposição, ferimentos dispersos foram encontrados. Você leu os três mecanismos da explosão e não tratou a dispneia como simples ansiedade."
 },
 {
   id:"viaaerea", titulo:"Capotamento com inconsciente roncando",
   chamado:"Capotamento; ocupante encontrado inconsciente, respiração ruidosa (ronco).",
-  tags:["Via aérea","Adjuntos","Oxigenoterapia"],
+  tags:["Via aérea","Adjuntos","Ventilação"],
   vinheta:"Após um capotamento, o ocupante é encontrado inconsciente dentro do veículo, com respiração ruidosa, tipo ronco. Não responde ao chamado. Sem sangramento externo evidente.",
   passos:[
     { etapa:"CENA", pergunta:"Primeira ação?",
       opcoes:[
         {t:"Avaliar a segurança (veículo capotado, instabilidade, combustível, trânsito)", ok:true,
-         c:"Veículo capotado é instável e pode vazar combustível; sinaliza-se e estabiliza-se a cena antes de acessar a vítima."},
+         c:"O veículo capotado é instável e pode vazar combustível; acessá-lo sem assegurar a cena põe a equipe em risco, mesmo com a via aérea ameaçada."},
         {t:"Entrar no veículo e abrir a via aérea de imediato",
-         c:"Acessar um veículo capotado sem assegurar a cena expõe a equipe. Segurança primeiro, mesmo com via aérea ameaçada."}
+         c:"Acessar um veículo capotado sem assegurar a cena expõe a equipe; segurança primeiro, mesmo com via aérea ameaçada."}
       ],
-      ref:"Cena: segurança → situação → cinemática. Veículo instável e combustível são ameaças típicas; estabilizar antes de acessar.",
-      aprof:"O ronco já indica via aérea ameaçada — mas a sequência não muda: a cena segura habilita o atendimento." },
+      fixar:"Estabiliza-se o veículo capotado antes de entrar porque ele é instável e pode vazar combustível; acessar a vítima numa estrutura insegura põe a equipe em risco. Mesmo com a via aérea ameaçada, a cena vem primeiro.",
+      alem:"O ronco já anuncia uma via aérea em risco, mas a sequência não muda — a segurança habilita o atendimento, como em todos os casos." },
     { etapa:"BIO", pergunta:"Capotamento. O que esperar do mecanismo?",
       opcoes:[
         {t:"Impactos múltiplos e imprevisíveis — alta suspeição e restrição de coluna", ok:true,
-         c:"O capotamento gera impactos múltiplos em direções variadas; mantém-se alto índice de suspeição e restrição de coluna."},
+         c:"O capotamento gera impactos em várias direções, sem padrão único; mantém-se alto índice de suspeição e restrição de coluna."},
         {t:"Um único impacto frontal previsível",
          c:"Capotamento não é impacto único: são impactos múltiplos, com lesões dispersas e difíceis de prever."}
       ],
-      ref:"Capotamento: impactos múltiplos. Mecanismo significativo = suspeita de lesão espinal (restrição de coluna).",
-      aprof:"A imprevisibilidade do capotamento reforça a reavaliação contínua do XABCDE e o cuidado cervical em todo manejo de via aérea." },
+      fixar:"Espera-se lesões dispersas porque o capotamento produz impactos múltiplos em várias direções, sem um padrão único. Isso mantém alta a suspeição e impõe restrição de coluna em todo manejo.",
+      alem:"A imprevisibilidade reforça duas coisas que voltam adiante: o cuidado cervical ao abrir a via (A) e a reavaliação contínua do XABCDE, sobretudo num inconsciente que não relata sintomas." },
     { etapa:"X", pergunta:"Conduta no X?",
       opcoes:[
         {t:"Checar hemorragia exsanguinante; sem sangramento grave, seguir para a via aérea", ok:true,
-         c:"O X é checado em todos. Sem hemorragia exsanguinante, avança-se — mas com suspeição de sangramento interno pelo capotamento."},
+         c:"O X é checado em todos; o capotamento pode ter causado hemorragia interna. Sem sangramento, avança-se mantendo a suspeição."},
         {t:"Pular o X porque o problema é o ronco",
-         c:"Não se pula o X por suposição: capotamento pode causar hemorragia interna. Checa-se primeiro, sempre."}
+         c:"Não se pula o X por suposição: capotamento pode causar hemorragia interna; checa-se primeiro, sempre."}
       ],
-      ref:"X — verificação obrigatória. Capotamento pode causar hemorragia interna (suspeitar pelo mecanismo e sinais).",
-      aprof:"Mesmo num caso claramente de via aérea, a disciplina do protocolo mantém o X antes do A." },
+      fixar:"Checa-se o X porque o capotamento pode ter causado hemorragia interna, e o protocolo verifica isso antes da via aérea mesmo num caso que 'parece' ser só de respiração. A ausência confirmada libera o A.",
+      alem:"Outra demonstração da disciplina de ordem do XABCDE: a queixa aparente (ronco) não define a prioridade — o X é sempre o primeiro olhar." },
     { etapa:"A", pergunta:"Inconsciente com respiração em ronco. Causa provável e conduta?",
       opcoes:[
         {t:"Queda da base da língua (causa nº 1) — jaw thrust (suspeita cervical) e cânula orofaríngea se sem reflexo", ok:true,
-         c:"O ronco no inconsciente é a queda da base da língua, causa nº 1 de obstrução. Abre-se com jaw thrust (há suspeita cervical) e, sem reflexo de vômito, insere-se a COF."},
+         c:"O ronco no inconsciente é a queda da base da língua; abre-se com jaw thrust (há suspeita cervical) e, sem reflexo de vômito, coloca-se a COF, que afasta a língua. Não é engasgo — sem Heimlich."},
         {t:"Provável corpo estranho — aplicar manobra de Heimlich",
          c:"O ronco indica queda da língua, não engasgo por corpo estranho; a conduta é manobra manual + adjunto, não Heimlich."},
         {t:"Hiperextender a cabeça para abrir a via",
          c:"Em capotamento há suspeita cervical: usa-se jaw thrust isolado, sem hiperextensão."}
       ],
-      ref:"Obstrução nº 1: queda da base da língua (inconsciente). COF: rígida, inconsciente SEM reflexo de vômito, afasta a língua. Com suspeita cervical, abrir por jaw thrust.",
-      aprof:"A COF resolve exatamente a causa nº 1 (afasta a língua); se houvesse reflexo de vômito, a escolha seria a cânula nasofaríngea, tolerada nessa condição." },
+      fixar:"O ronco no inconsciente é a queda da base da língua, a causa nº 1 de obstrução; abre-se com jaw thrust (há suspeita cervical) e, sem reflexo de vômito, coloca-se a cânula orofaríngea, que afasta a língua da faringe. Não é engasgo, então não se faz Heimlich.",
+      alem:"A escolha do adjunto depende do reflexo: sem reflexo, COF; se houvesse reflexo presente, seria a cânula nasofaríngea, flexível e tolerada — o critério clássico de via aérea." },
     { etapa:"B", pergunta:"Após abrir a via, a vítima entra em apneia (gasping). Conduta imediata?",
       opcoes:[
         {t:"Ventilar com BVM + O2 imediatamente, antes de prosseguir o XABCDE", ok:true,
-         c:"Apneia/gasping exige ventilação imediata com BVM (10–15 L/min, ~100%), interrompendo o XABCDE até reverter."},
+         c:"Oferta passiva (cateter/máscara) não move ar em quem não respira; interrompe-se o XABCDE para ventilar com BVM até restabelecer a respiração."},
         {t:"Cateter nasal a 6 L/min e seguir avaliando",
          c:"Cateter não ventila um apneico; é preciso assumir a ventilação com BVM."},
         {t:"Aguardar a oximetria antes de ventilar",
          c:"Em apneia não se espera oxímetro — ventila-se já com BVM."}
       ],
-      ref:"FR: apneico/gasping → BVM + O2 imediatamente. BVM: 10–15 L/min, ~100% FiO2; acoplamento firme é essencial (vazamento anula o fluxo).",
-      aprof:"A BVM tem válvula pop-off (limitadora de pressão), que pode ser bloqueada se necessário; o acoplamento firme da máscara é o ponto crítico." },
+      fixar:"Diante da apneia, ventila-se já com BVM porque oferta passiva (cateter/máscara) não move ar em quem não respira. Interrompe-se o XABCDE até restabelecer a ventilação — sem isso, nada do resto importa.",
+      alem:"Aqui o conceito-chave é o acoplamento: a BVM só funciona com vedação firme da máscara (vazamento anula o fluxo), e a válvula pop-off limita a pressão — detalhes que separam ventilar de só parecer ventilar." },
     { etapa:"C", pergunta:"Após ventilar, há pulso central presente, pele levemente fria. Conduta no C?",
       opcoes:[
         {t:"Avaliar pulso, pele e enchimento capilar; manter ventilação e procurar fontes de choque", ok:true,
-         c:"Com pulso presente, avalia-se perfusão (pele, enchimento capilar) e procuram-se fontes de hemorragia interna do capotamento, mantendo a ventilação."},
+         c:"Com pulso presente, avalia-se a perfusão e procuram-se fontes de hemorragia interna do capotamento, mantendo a ventilação — não se inicia compressão."},
         {t:"Iniciar RCP, mesmo havendo pulso",
-         c:"RCP é para ausência de pulso. Havendo pulso central, mantém-se a ventilação e avalia-se a circulação — não se inicia compressão."}
+         c:"RCP é para ausência de pulso; havendo pulso central, mantém-se a ventilação e avalia-se a circulação."}
       ],
-      ref:"C — pulso, pele, enchimento capilar (<2 s normal). Ausência de pulso + apneia/gasping → RCP. Com pulso, manter ventilação.",
-      aprof:"A distinção é decisiva: apneia COM pulso = ventilar; apneia SEM pulso = RCP. Checa-se o pulso carotídeo por até 10 s antes de decidir." },
+      fixar:"Confirma-se o pulso antes de qualquer compressão porque apneia COM pulso se trata ventilando, e apneia SEM pulso vira RCP. Iniciar compressão num coração que bate seria um erro grave.",
+      alem:"É a divisão de águas do suporte de vida: checa-se o pulso central por até 10 s; a presença ou ausência dele decide entre ventilar e reanimar — e isso se conecta ao C de circulação de todos os casos." },
     { etapa:"D", pergunta:"Avaliação neurológica deste inconsciente?",
       opcoes:[
         {t:"AVDI — classifica-se como 'I' (irresponsivo); situação crítica", ok:true,
-         c:"Sem resposta a qualquer estímulo = 'I' na AVDI, situação crítica que exige ação imediata e via aérea protegida."},
+         c:"Sem resposta a qualquer estímulo = 'I' na AVDI; esse paciente não protege a própria via aérea, o que justifica a cânula e a vigilância máxima."},
         {t:"Glasgow detalhada na cena antes de transportar",
          c:"Glasgow é da secundária; na primária, AVDI. O paciente 'I' precisa de transporte rápido, não de cálculo de escala na cena."}
       ],
-      ref:"AVDI: I (irresponsivo) = sem resposta a qualquer estímulo, situação crítica. Avaliação rápida da primária.",
-      aprof:"O paciente 'I' não protege a própria via aérea (sem reflexos) — daí a COF ser apropriada e a vigilância máxima; é o oposto do 'A' (alerta)." },
+      fixar:"Classifica-se como 'I' (irresponsivo) porque não há resposta a nenhum estímulo — o nível mais crítico da AVDI. Esse paciente não protege a própria via aérea, o que justifica a cânula e a vigilância máxima.",
+      alem:"Fecha o raciocínio do A: o 'I' é o oposto do 'A' (alerta); quem está alerta mantém a via aérea sozinho, quem está irresponsivo depende inteiramente da equipe para mantê-la." },
     { etapa:"E", pergunta:"Exposição deste paciente:",
       opcoes:[
         {t:"Expor para procurar lesões do capotamento e cobrir para evitar hipotermia", ok:true,
-         c:"O capotamento gera impactos múltiplos; expõe-se para não perder lesões dispersas e cobre-se para prevenir hipotermia."},
+         c:"O capotamento gera impactos múltiplos; expõe-se para não perder lesões dispersas e cobre-se para prevenir hipotermia, sobretudo num inconsciente."},
         {t:"Não expor, pois ele está inconsciente e não se queixa",
          c:"Justamente por estar inconsciente (não relata sintomas) é que a exposição e a reavaliação do XABCDE são ainda mais importantes."}
       ],
-      ref:"E — capotamento = impactos múltiplos; exposição para procurar lesões dispersas; cobrir (hipotermia). Reavaliar o XABCDE, sobretudo no inconsciente.",
-      aprof:"O inconsciente não relata novos sintomas — a reavaliação contínua do XABCDE e a exposição cuidadosa são a única forma de flagrar a deterioração." }
+      fixar:"Expõe-se e reavalia-se justamente porque o inconsciente não relata novos sintomas: só o exame e a repetição do XABCDE flagram a deterioração. Cobre-se em seguida para evitar hipotermia.",
+      alem:"Conecta-se à natureza do capotamento (impactos múltiplos): lesões dispersas exigem exposição cuidadosa, e a reavaliação contínua é a rede de segurança no paciente que não fala." }
   ],
   desfecho:"Cena estabilizada, X checado, via aérea aberta por jaw thrust e mantida com cânula orofaríngea (sem reflexo de vômito), ventilação assumida com BVM ao surgir a apneia, pulso confirmado (sem RCP indevida), paciente 'I' coberto e transportado com via aérea protegida. Você manejou a via aérea na ordem certa e distinguiu apneia com pulso de parada."
 }
 ];
 
 /* ============================================================
-   MOTOR (genérico — independe do conteúdo de CASOS/GLOSSARIO)
+   MOTOR (genérico)
    ============================================================ */
-const SAVE_KEY = "nexus_casos_APHR_VC02_v4";
+const SAVE_KEY = "nexus_casos_APHR_VC02_v5";
 const app = document.getElementById("app");
 let concluidos = carregar() || [];
 
 function salvar(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(concluidos)); }catch(e){} }
 function carregar(){ try{ return JSON.parse(localStorage.getItem(SAVE_KEY)); }catch(e){ return null; } }
-function esc(s){ return (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
 function embaralhar(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]); }
 function conn(cor){ return `<div class="connector"><svg width="20" height="24" viewBox="0 0 20 24">
   <line x1="10" y1="0" x2="10" y2="16" stroke="${cor}" stroke-width="2"/>
   <path d="M4 14 L10 22 L16 14" fill="none" stroke="${cor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`; }
-function cardsRefAprof(p){
-  return `<div class="refcard"><span class="lbl">Referência técnica</span>${p.ref}</div>
-          <div class="aprofcard"><span class="lbl">Aprofundamento</span>${p.aprof}</div>`;
+
+/* --- Glossário automático: varre fixar+alem por termos do dicionário --- */
+function escReg(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+function usaTermo(texto, termo){
+  const re = new RegExp("(^|[^0-9A-Za-zÀ-ÿ])"+escReg(termo)+"([^0-9A-Za-zÀ-ÿ]|$)","i");
+  return re.test(texto);
+}
+function glossarioDoPasso(p){
+  const txt = (p.fixar||"") + " ||| " + (p.alem||"");
+  let hits = GLOSSARIO.filter(g => usaTermo(txt, g.t));
+  // remove termo que é substring de outro termo também presente (mantém o mais específico)
+  hits = hits.filter(g => !hits.some(o => o!==g && o.t.toLowerCase().includes(g.t.toLowerCase())));
+  return hits;
+}
+
+/* --- Bloco de 3 abas (Para fixar / Indo além / Glossário) --- */
+function blocoAbas(p, uid){
+  const termos = glossarioDoPasso(p);
+  const glosHtml = termos.length
+    ? termos.map(g=>`<div class="glx"><div class="gt">${g.t}</div><div class="gd">${g.d}</div></div>`).join("")
+    : `<div class="gd" style="color:var(--muted)">Sem siglas ou termos técnicos nesta etapa.</div>`;
+  return `<div class="reveal show" data-uid="${uid}">
+    <div class="tabs">
+      <button class="tab active" data-pane="fixar">Para fixar</button>
+      <button class="tab" data-pane="alem">Indo além desta questão</button>
+      <button class="tab" data-pane="glos">Glossário</button>
+    </div>
+    <div class="pane fixar active" data-pane="fixar">${p.fixar}</div>
+    <div class="pane alem" data-pane="alem">${p.alem}</div>
+    <div class="pane glos" data-pane="glos">${glosHtml}</div>
+  </div>`;
+}
+function ligaAbas(container){
+  container.querySelectorAll(".reveal").forEach(rev=>{
+    rev.querySelectorAll(".tab").forEach(tb=>{
+      tb.addEventListener("click",()=>{
+        const alvo = tb.dataset.pane;
+        rev.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active", x.dataset.pane===alvo));
+        rev.querySelectorAll(".pane").forEach(x=>x.classList.toggle("active", x.dataset.pane===alvo));
+      });
+    });
+  });
 }
 
 /* ---------- Home ---------- */
 function renderHome(){
   app.innerHTML = `
-    <div class="topbtns"><button id="abreGlos">📖 Glossário de termos e siglas</button></div>
+    <div class="topbtns"><button id="abreGlos">📖 Glossário completo de termos e siglas</button></div>
     <div class="casos">${CASOS.map(c=>`
       <div class="caso-card" data-id="${c.id}" style="border-left-color:${ET[c.passos[0].etapa]}">
         <div class="head"><h3>${c.titulo}</h3>${concluidos.includes(c.id)?'<span class="done">✓ concluído</span>':''}</div>
@@ -966,7 +1041,7 @@ function renderHome(){
   app.querySelectorAll(".caso-card").forEach(el=>el.addEventListener("click",()=>abrirCaso(el.dataset.id)));
 }
 
-/* ---------- Glossário ---------- */
+/* ---------- Glossário completo ---------- */
 function renderGlossario(){
   app.innerHTML = `<button class="voltar" id="volta">← Casos</button>
     <h2 style="margin:4px 2px 0;font-size:19px">Glossário</h2>
@@ -974,14 +1049,13 @@ function renderGlossario(){
     <div id="glist"></div>`;
   document.getElementById("volta").addEventListener("click", renderHome);
   const glist = document.getElementById("glist"), busca = document.getElementById("busca");
-  function pinta(filtro){
-    const f = (filtro||"").toLowerCase().trim();
-    glist.innerHTML = GLOSSARIO.map(g=>{
-      const itens = g.itens.filter(i => !f || i.t.toLowerCase().includes(f) || i.d.toLowerCase().includes(f));
-      if(!itens.length) return "";
-      return `<div class="glos-cat">${g.cat}</div>` + itens.map(i=>`
-        <div class="glos-item"><div class="t">${i.t}</div><div class="d">${i.d}</div></div>`).join("");
-    }).join("") || `<p style="color:var(--muted);font-size:14px">Nenhum termo encontrado.</p>`;
+  const ordenado = GLOSSARIO.slice().sort((a,b)=>a.t.localeCompare(b.t,"pt"));
+  function pinta(f){
+    f = (f||"").toLowerCase().trim();
+    const its = ordenado.filter(i=>!f || i.t.toLowerCase().includes(f) || i.d.toLowerCase().includes(f));
+    glist.innerHTML = its.length
+      ? its.map(i=>`<div class="glos-item"><div class="t">${i.t}</div><div class="d">${i.d}</div></div>`).join("")
+      : `<p style="color:var(--muted);font-size:14px">Nenhum termo encontrado.</p>`;
   }
   pinta("");
   busca.addEventListener("input", e=>pinta(e.target.value));
@@ -1008,16 +1082,20 @@ function renderCaso(){
     <div id="fluxo"></div><div id="cur"></div>`;
   document.getElementById("volta").addEventListener("click", renderHome);
 
-  document.getElementById("fluxo").innerHTML = S.construidos.map((pi,i)=>{
+  const fluxo = document.getElementById("fluxo");
+  fluxo.innerHTML = S.construidos.map((pi,i)=>{
     const p = c.passos[pi], cor = ET[p.etapa], ac = p.opcoes.find(o=>o.ok);
     return (i>0?conn(ET[c.passos[S.construidos[i-1]].etapa]):"") +
       `<div class="node" style="border-left-color:${cor}">
         <span class="badge" style="background:${cor}">${p.etapa}</span>
         <div class="titulo">${ac.t}</div>
-        <div class="det"><p style="margin:0 0 2px"><b>Conduta:</b> ${ac.c}</p>${cardsRefAprof(p)}</div>
+        <div class="det"><p style="margin:0 0 2px"><b>Conduta:</b> ${ac.c}</p>${blocoAbas(p,"n"+pi)}</div>
         <div class="tip">toque para ver/ocultar os detalhes</div></div>`;
   }).join("");
-  document.querySelectorAll("#fluxo .node").forEach(n=>n.addEventListener("click",()=>n.classList.toggle("open")));
+  fluxo.querySelectorAll(".node").forEach(n=>{
+    n.addEventListener("click",(ev)=>{ if(ev.target.closest(".reveal"))return; n.classList.toggle("open"); });
+  });
+  ligaAbas(fluxo);
 
   if (S.idx >= total) { renderDesfecho(); return; }
   renderPasso();
@@ -1036,17 +1114,16 @@ function renderPasso(){
           <button class="balloon" data-ok="${o.ok?1:0}">${o.t}</button>
           <div class="optc">${o.c}</div>
         </div>`).join("")}</div>
-      <div class="reveal" id="reveal"></div>
+      <div id="revslot"></div>
       <button class="next-btn" id="next">Próxima fase →</button>
     </div>`;
-  const reveal = document.getElementById("reveal"), next = document.getElementById("next");
+  const next = document.getElementById("next");
 
   cur.querySelectorAll(".balloon").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const opt = btn.parentElement;
       if(opt.classList.contains("answered")) return;
       if(btn.dataset.ok==="1"){
-        // acerto: revela TODAS as alternativas na própria posição
         S.acertos++;
         cur.querySelectorAll(".opt").forEach(el=>{
           el.classList.add("answered");
@@ -1054,12 +1131,12 @@ function renderPasso(){
           b.classList.add(b.dataset.ok==="1" ? "correct" : "dim");
           el.querySelector(".optc").classList.add("show");
         });
-        reveal.innerHTML = cardsRefAprof(p);
-        reveal.classList.add("show");
+        const slot = document.getElementById("revslot");
+        slot.innerHTML = blocoAbas(p,"cur");
+        ligaAbas(slot);
         next.classList.add("show");
         atualizaHUD();
       } else {
-        // erro: marca e comenta só esta, em posição; permite tentar de novo
         S.erros++;
         if(!S.errados.includes(S.idx)) S.errados.push(S.idx);
         opt.classList.add("answered");
