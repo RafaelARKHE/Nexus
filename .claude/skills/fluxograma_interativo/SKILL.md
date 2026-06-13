@@ -81,7 +81,7 @@ Espelha os nomes do GERAR_SIMULADO para fixação por familiaridade:
    material** que sustenta a conduta correta (definição fechada,
    número/especificação técnica, sequência, classificação), transcrito quase
    literalmente. Quando a conduta não se apoiar em um dado fechado, descrever o
-   **conceito/princípio** que a sustenta em 2-3 frases — toda etapa precisa desta aba.
+   **conceito/princípio** que a sustenta — toda etapa precisa desta aba.
 2. **Indo além desta questão** — mesma definição do GERAR_SIMULADO: a **conexão**
    daquela decisão com outro conhecimento estudado, priorizando o contraste com o par
    mais confundível, a etapa anterior/posterior do mesmo processo, ou o cruzamento com
@@ -159,8 +159,7 @@ avaliação do pulso central: até 10 segundos").
 
 Diferente do simulado (onde a aba pode ser omitida), no fluxograma toda etapa precisa
 desta aba: quando a conduta não se apoiar em um dado fechado, descrever o
-conceito/princípio em 2-3 frases ("por que esta técnica, e não outra?") como
-conteúdo da aba.
+conceito/princípio ("por que esta técnica, e não outra?") como conteúdo da aba.
 
 Repetir o mesmo dado em passos diferentes que toquem no mesmo conceito reforça a
 fixação por repetição — não tratar como redundância a evitar.
