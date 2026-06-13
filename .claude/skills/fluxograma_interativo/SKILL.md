@@ -1,21 +1,21 @@
 ---
-name: gerar_estudo_de_caso
+name: fluxograma_interativo
 description: >
-  Sub-skill do fluxo de prova do sistema Nexus. Gera um artefato interativo de
-  estudos de caso em HTML para disciplinas cujo conteúdo é um PROCESSO com
-  ramificações (protocolos, fluxos de decisão, sequências obrigatórias) — ex:
-  APH/XABCDE, combate a incêndio, salvamento, procedimentos administrativos por
-  etapas. Acionada pela skill REVISAO_PROVA (opção dedicada a provas com processos)
-  ou diretamente quando o usuário pedir "gerar estudo de caso", "fazer fluxograma
-  interativo", "treinar o processo", "casos da VC0X". O aluno escolhe um caso e
-  conduz o processo passo a passo: cada acerto fixa a etapa no fluxo e revela a
-  próxima; a alternativa errada explica a armadilha sem avançar. Funciona offline
-  no Mac e iPhone via navegador, em tema escuro (padrão Nexus).
+  Sub-skill do fluxo de prova do sistema Nexus. Gera um fluxograma interativo em
+  HTML para disciplinas cujo conteúdo é um PROCESSO com ramificações (protocolos,
+  fluxos de decisão, sequências obrigatórias) — ex: APH/XABCDE, combate a incêndio,
+  salvamento, procedimentos administrativos por etapas. Acionada pela skill
+  REVISAO_PROVA (opção dedicada a provas com processos) ou diretamente quando o
+  usuário pedir "gerar fluxograma interativo", "treinar o processo", "fluxograma
+  da VC0X", "casos da VC0X". O aluno escolhe um caso e conduz o processo passo a
+  passo: cada acerto fixa a etapa no fluxo e revela a próxima; a alternativa
+  errada explica a armadilha sem avançar. Funciona offline no Mac e iPhone via
+  navegador, em tema escuro (padrão Nexus).
 ---
 
-# GERAR_ESTUDO_DE_CASO
+# FLUXOGRAMA_INTERATIVO
 
-Sub-skill geradora do artefato de **estudos de caso interativos** — treino ativo
+Sub-skill geradora do **fluxograma interativo** — treino ativo
 de um **processo decisório** (protocolo/fluxo), não apenas memorização de fatos.
 
 Use esta skill quando a matéria da prova é um **grande processo com ramificações**
@@ -27,9 +27,9 @@ GERAR_SIMULADO e GERAR_FLASHCARDS.
 
 ## Arquivo gerado
 
-`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/VC0X/estudo_de_caso_VC0X.html`
+`Nexus/Nexus_Obsidian/Periodo0N/0N_[SIGLA]/VC0X/fluxograma_VC0X.html`
 
-Frontmatter (em comentário HTML no topo): `tipo: estudo_caso`, `tema: escuro`.
+Frontmatter (em comentário HTML no topo): `tipo: fluxograma`, `tema: escuro`.
 
 ---
 
@@ -120,7 +120,7 @@ Motor genérico (reutilizável entre disciplinas):
 - nós já construídos ficam clicáveis para reabrir conduta + as 3 abas.
 
 > **Modelo de referência:** o primeiro artefato deste tipo é
-> `Periodo01/01_APHR/VC02/estudo_de_caso_VC02.html` (APH, VC02). Reusar seu motor e
+> `Periodo01/01_APHR/VC02/fluxograma_VC02.html` (APH, VC02). Reusar seu motor e
 > CSS como base; só o conteúdo de `GLOSSARIO` e `CASOS` muda por disciplina.
 
 ---
