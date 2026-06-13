@@ -2,7 +2,7 @@
 sistema: Nexus
 tipo: moc_administrativo
 criado_em: 05/06/2026
-atualizado_em: 05/06/2026
+atualizado_em: 13/06/2026
 ---
 
 # MOC — Administrativo
@@ -38,3 +38,4 @@ Ao receber um documento administrativo novo:
 | Arquivo | Conteúdo | Período referenciado |
 |---------|----------|----------------------|
 | Quadro_Instrucao_T16_08a14jun2026.jpeg | Programação semanal · período matutino e vespertino · disciplinas EC, FSV, DA I, DC, ANFI, TFM I, IM I, ESPADIM | 08 a 14/06/2026 |
+| Quadro_Instrucao_T16_15a21jun2026.jpeg | Programação semanal · período matutino e vespertino · disciplinas FOTOGRAFIA ETERNIZE, OAC, TFM I, FSAT, FSV, EC, FSAQ, ANFI · ensaio fotográfico e apresentação dos cadetes | 15 a 21/06/2026 |
