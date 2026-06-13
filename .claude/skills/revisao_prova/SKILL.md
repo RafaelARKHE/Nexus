@@ -60,10 +60,19 @@ Tenho prova de [DISCIPLINA] preparada. O que deseja gerar?
 2. GERAR_AUDIO       — roteiro de áudio (~30 min) para escuta no deslocamento
 3. GERAR_SIMULADO    — 15 questões comentadas e interativas em HTML
 4. GERAR_FLASHCARDS  — cartões de memorização interativos em HTML
-5. Todos
+5. GERAR_ESTUDO_DE_CASO — casos interativos que treinam o PROCESSO passo a passo
+                          (oferecer quando a matéria for um protocolo/fluxo de decisão)
+6. Todos
 
 Digite o número ou números separados por vírgula.
 ```
+
+> **Quando oferecer a opção 5:** sempre que o escopo da prova envolver um
+> **processo com ramificações** (protocolo, fluxo de decisão, sequência obrigatória —
+> ex: APH/XABCDE, combate a incêndio, salvamento, procedimento por etapas). É o
+> formato pedido para provas práticas que cobram o domínio de **todo o fluxo**, do
+> início ao desfecho. Para escopos puramente factuais/conceituais, manter o foco em
+> GERAR_SIMULADO e GERAR_FLASHCARDS.
 
 ### Passo 4 — Execução modular
 Aciona apenas as sub-skills escolhidas pelo usuário, em sequência:
@@ -71,6 +80,7 @@ Aciona apenas as sub-skills escolhidas pelo usuário, em sequência:
 2. GERAR_AUDIO
 3. GERAR_SIMULADO
 4. GERAR_FLASHCARDS
+5. GERAR_ESTUDO_DE_CASO (trabalha sobre o GERAR_REVISAO, como simulado e flashcards)
 
 ---
 
