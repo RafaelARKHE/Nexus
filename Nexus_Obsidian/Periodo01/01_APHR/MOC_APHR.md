@@ -86,7 +86,7 @@ atualizado_em: 12/06/2026
 | Roteiro de áudio (~42min) | `Periodo01/01_APHR/VC02/audio_VC02.txt` |
 | Simulado (15 questões comentadas) | `Periodo01/01_APHR/VC02/simulado_VC02.html` |
 | Flashcards | `Periodo01/01_APHR/VC02/flashcard_VC02.html` |
-| Estudos de caso interativos (8 casos · XABCDE completo · abas Para fixar/Indo além/Glossário) | `Periodo01/01_APHR/VC02/estudo_de_caso_VC02.html` |
+| Fluxograma interativo (8 casos · XABCDE completo · abas Para fixar/Indo além/Glossário) | `Periodo01/01_APHR/VC02/fluxograma_VC02.html` |
 
 ---
 

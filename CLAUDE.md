@@ -39,7 +39,7 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 │               ├── audio_VC0X.txt
 │               ├── simulado_VC0X.html
 │               ├── flashcard_VC0X.html
-│               └── estudo_de_caso_VC0X.html   ← provas com processo (XABCDE etc.)
+│               └── fluxograma_VC0X.html       ← provas com processo (XABCDE etc.)
 │
 └── Nexus_Materiais/            ← PDFs originais e binários gerados (fora do Obsidian)
     ├── Disciplinar/            ← Manual do Aluno (PDF) e prints originais de anotações
@@ -121,7 +121,7 @@ Nexus/                          ← Raiz do projeto (você está aqui)
 | `gerar_audio` | Selecionado em revisao_prova | Roteiro de áudio ~4.000 palavras / 30 min |
 | `gerar_simulado` | Selecionado em revisao_prova | 30 questões interativas em HTML |
 | `gerar_flashcards` | Selecionado em revisao_prova | Cartões de memorização interativos em HTML |
-| `gerar_estudo_de_caso` | Selecionado em revisao_prova (provas com processo) | Casos interativos em HTML que treinam o processo passo a passo (XABCDE e afins) — abas Para fixar / Indo além / Glossário, tema escuro |
+| `fluxograma_interativo` | Selecionado em revisao_prova (provas com processo) | Fluxograma interativo em HTML que treina o processo passo a passo (XABCDE e afins) — abas Para fixar / Indo além / Glossário, tema escuro |
 
 ### Camada de Raciocínio
 | Skill | Gatilho | Função |
@@ -191,7 +191,7 @@ Todo arquivo gerado pelo sistema deve começar com:
 ```yaml
 ---
 sistema: Nexus
-tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | estudo_caso | pensamento | apresentacao | disciplinar]
+tipo: [resumo | pontos_chave | revisao_prova | audio_prova | simulado | flashcard | fluxograma | pensamento | apresentacao | disciplinar]
 disciplina: [NOME_COMPLETO]        # não usado nos tipos pensamento e disciplinar
 sigla: [SIGLA]                     # não usado nos tipos pensamento e disciplinar
 periodo: Periodo0N

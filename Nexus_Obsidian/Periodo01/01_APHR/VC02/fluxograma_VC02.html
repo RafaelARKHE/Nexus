@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 sistema: Nexus
-tipo: estudo_caso
+tipo: fluxograma
 disciplina: APH e Resgate I
 sigla: APHR
 periodo: Periodo01
@@ -10,14 +10,14 @@ criado_em: 12/06/2026
 atualizado_em: 13/06/2026
 versao: 5.0
 tema: escuro (padrão Nexus)
-descricao: Estudos de caso interativos de APH (tema escuro). Cada caso percorre o XABCDE completo até o desfecho. Após escolher a resposta, abre-se um bloco de 3 abas espelhando o simulado: "Para fixar" (o CONCEITO do porquê daquela conduta), "Indo além desta questão" (conexão com outro conhecimento) e "Glossário" (significado dos termos técnicos e expansão das siglas usadas nas duas abas — gerado automaticamente). Motor data-driven.
+descricao: Fluxograma interativo de APH (tema escuro). Cada caso percorre o XABCDE completo até o desfecho. Após escolher a resposta, abre-se um bloco de 3 abas espelhando o simulado: "Para fixar" (o CONCEITO do porquê daquela conduta), "Indo além desta questão" (conexão com outro conhecimento) e "Glossário" (significado dos termos técnicos e expansão das siglas usadas nas duas abas — gerado automaticamente). Motor data-driven.
 historico: v1 fluxo único; v2 5 casos; v3 profundidade do simulado; v4 dark+glossário+XABCDE completo; v5 referência técnica reescrita como CONCEITO (não dados), 3 abas (Para fixar / Indo além / Glossário auto), explicações menos vagas.
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estudos de Caso — APH e Resgate I | VC02</title>
+<title>Fluxograma Interativo — APH e Resgate I | VC02</title>
 <style>
   :root{
     --bg:#1a1816; --surface:#252220; --elev:#2e2a27; --line:#3a352f;
@@ -137,7 +137,7 @@ historico: v1 fluxo único; v2 5 casos; v3 profundidade do simulado; v4 dark+glo
 <body>
 <div class="wrap">
   <header>
-    <h1>Estudos de Caso — APH I</h1>
+    <h1>Fluxograma Interativo — APH I</h1>
     <p>VC02 · conduza cada paciente pelo XABCDE completo até o desfecho. Ao escolher a resposta, abrem-se três abas: <b>Para fixar</b> (o porquê da conduta), <b>Indo além desta questão</b> (conexões) e <b>Glossário</b> (termos e siglas usados). A correta acende na própria posição e as demais são comentadas.</p>
   </header>
   <div id="app"></div>
@@ -271,7 +271,7 @@ const GLOSSARIO = [
 ];
 
 /* ============================================================
-   ESTUDOS DE CASO (data-driven)
+   FLUXOGRAMA (data-driven)
    passo: { etapa, pergunta, opcoes:[{t, ok, c}], fixar, alem }
    fixar = "Para fixar": CONCEITO do porquê da conduta.
    alem  = "Indo além desta questão": conexão com outro conhecimento.

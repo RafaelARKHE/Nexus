@@ -60,7 +60,7 @@ Tenho prova de [DISCIPLINA] preparada. O que deseja gerar?
 2. GERAR_AUDIO       — roteiro de áudio (~30 min) para escuta no deslocamento
 3. GERAR_SIMULADO    — 15 questões comentadas e interativas em HTML
 4. GERAR_FLASHCARDS  — cartões de memorização interativos em HTML
-5. GERAR_ESTUDO_DE_CASO — casos interativos que treinam o PROCESSO passo a passo
+5. FLUXOGRAMA_INTERATIVO — fluxograma interativo que treina o PROCESSO passo a passo
                           (oferecer quando a matéria for um protocolo/fluxo de decisão)
 6. Todos
 
@@ -80,7 +80,7 @@ Aciona apenas as sub-skills escolhidas pelo usuário, em sequência:
 2. GERAR_AUDIO
 3. GERAR_SIMULADO
 4. GERAR_FLASHCARDS
-5. GERAR_ESTUDO_DE_CASO (trabalha sobre o GERAR_REVISAO, como simulado e flashcards)
+5. FLUXOGRAMA_INTERATIVO (trabalha sobre o GERAR_REVISAO, como simulado e flashcards)
 
 ---
 
