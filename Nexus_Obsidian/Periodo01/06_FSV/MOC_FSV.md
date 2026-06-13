@@ -5,7 +5,7 @@ disciplina: Fundamentos do Salvamento Veicular
 sigla: FSV
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 09/06/2026
+atualizado_em: 13/06/2026
 ---
 
 # MOC — FSV | Fundamentos do Salvamento Veicular
@@ -25,6 +25,7 @@ atualizado_em: 09/06/2026
 | FSV CFO - Aula 01.pdf | Conceitos iniciais, Estatísticas, Segurança, FEAs, Anatomia Veicular | 06/06/2026 |
 | FSV CFO - Aula 02.pdf | Fases do Atendimento + Estabilização Veicular | 06/06/2026 |
 | FSV CFO - Aula 03.pdf | Considerações com a Vítima, Avaliação (XABCDE), Abordagem, Acesso e Extração | 09/06/2026 |
+| TTSV CFP MONTEIRO 2026.pdf | Material complementar (CFP) — Plano de Ação, Manejo de Vidros e Criação de Acesso, Catálogo de Técnicas de Desencarceramento, Veículos Híbridos e Elétricos | 13/06/2026 |
 
 ---
 
@@ -76,6 +77,22 @@ atualizado_em: 09/06/2026
 | 01 | Considerações com a Vítima e Avaliação — Hora de Ouro, XABCDE, Tempos e Planos | [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/01_consideracoes-e-avaliacao-da-vitima]] |
 | 02 | Abordagem da Vítima, Acesso ao Veículo e Extração | [[Periodo01/06_FSV/pontos_chave/06_Abordagem-e-Extracao/02_abordagem-acesso-e-extracao]] |
 
+### 07 — Técnicas de Desencarceramento
+> Origem: `TTSV CFP MONTEIRO 2026.pdf` (material complementar — CFP)
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Decisão da Técnica de Desencarceramento e Plano de Ação | [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/01_decisao-da-tecnica-e-plano-de-acao]] |
+| 02 | Manejo de Vidros e Criação de Acesso para Ferramentas Hidráulicas | [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/02_manejo-de-vidros-e-criacao-de-acesso]] |
+| 03 | Catálogo de Técnicas de Desencarceramento (17 técnicas em 6 grupos) | [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/03_catalogo-tecnicas-desencarceramento]] |
+
+### 08 — Veículos Híbridos e Elétricos
+> Origem: `TTSV CFP MONTEIRO 2026.pdf` (material complementar — CFP)
+
+| # | Assunto | Arquivo |
+|---|---|---|
+| 01 | Veículos Híbridos e Elétricos — Identificação, Riscos, Imobilização e Desabilitação | [[Periodo01/06_FSV/pontos_chave/08_Veiculos-Hibridos-Eletricos/01_veiculos-hibridos-eletricos]] |
+
 ---
 
 ## Conexões com outras disciplinas
@@ -100,4 +117,5 @@ atualizado_em: 09/06/2026
 - ✅ Aula 01 processada — 6 arquivos de pontos-chave + resumo
 - ✅ Aula 02 processada — 2 arquivos de pontos-chave + resumo atualizado
 - ✅ Aula 03 processada — 2 arquivos de pontos-chave + resumo atualizado
+- ✅ Material complementar (TTSV CFP Monteiro 2026) processado — 4 arquivos de pontos-chave (temas 07 e 08) + resumo atualizado
 - ✅ VC01 — todos os artefatos de prova gerados e atualizados com a Aula 03 (simulado ampliado para 20 questões)
