@@ -77,12 +77,15 @@ próxima; errar mostra a armadilha e mantém o aluno na mesma etapa. Ao final, u
 
 Espelha os nomes do GERAR_SIMULADO para fixação por familiaridade:
 
-1. **Para fixar** — o **CONCEITO do porquê** daquela conduta foi a correta (o
-   princípio que a sustenta), **não** uma lista de dados nem um glossário. Responde
-   "por que essa técnica, e não outra?".
-2. **Indo além desta questão** — a **conexão** daquela decisão com outro
-   conhecimento estudado (etapa anterior/posterior do mesmo processo, par conceitual
-   confundível, cruzamento com outra disciplina).
+1. **Para fixar** — mesma definição do GERAR_SIMULADO: o **dado preciso do
+   material** que sustenta a conduta correta (definição fechada,
+   número/especificação técnica, sequência, classificação), transcrito quase
+   literalmente. Quando a conduta não se apoiar em um dado fechado, descrever o
+   **conceito/princípio** que a sustenta em 2-3 frases — toda etapa precisa desta aba.
+2. **Indo além desta questão** — mesma definição do GERAR_SIMULADO: a **conexão**
+   daquela decisão com outro conhecimento estudado, priorizando o contraste com o par
+   mais confundível, a etapa anterior/posterior do mesmo processo, ou o cruzamento com
+   outra disciplina. Toda etapa precisa desta aba.
 3. **Glossário** — significado dos **termos técnicos** e **expansão das siglas**
    usados nas abas "Para fixar" e "Indo além". Esta aba é **gerada automaticamente**:
    um dicionário único (`GLOSSARIO`) é varrido contra o texto das duas primeiras
@@ -106,8 +109,9 @@ generalizar para qualquer disciplina trocando apenas os dados:
   `{ id, titulo, chamado, tags[], vinheta, passos[], desfecho }`.
 - Cada passo:
   `{ etapa, pergunta, opcoes:[{t, ok, c}], fixar, alem }`
-  onde `c` = comentário da alternativa, `fixar` = aba "Para fixar" (conceito),
-  `alem` = aba "Indo além desta questão".
+  onde `c` = comentário da alternativa, `fixar` = aba "Para fixar" (referência
+  técnica/dado fechado, ou conceito quando não houver dado), `alem` = aba "Indo além
+  desta questão" (conexão com etapa vizinha/par confundível/disciplina).
 - `ET` — mapa etapa→cor (badge/borda).
 
 Motor genérico (reutilizável entre disciplinas):
@@ -122,6 +126,9 @@ Motor genérico (reutilizável entre disciplinas):
 > **Modelo de referência:** o primeiro artefato deste tipo é
 > `Periodo01/01_APHR/VC02/fluxograma_VC02.html` (APH, VC02). Reusar seu motor e
 > CSS como base; só o conteúdo de `GLOSSARIO` e `CASOS` muda por disciplina.
+> Atenção: a aba "Para fixar" desse artefato foi escrita sob a definição anterior
+> (conceito apenas) — ao reusar como modelo, ajustar `fixar` para a definição atual
+> (referência técnica/dado fechado, conceito como exceção).
 
 ---
 
@@ -143,12 +150,36 @@ Motor genérico (reutilizável entre disciplinas):
   mais rápido). Evitar "está errada porque sim".
 
 ### Aba "Para fixar"
-- Conceito/princípio, em 2–3 frases. Responde "por que esta técnica?". Não listar
-  números soltos como cartão de dados — isso é papel do glossário/material de revisão.
+
+Mesma definição do GERAR_SIMULADO: priorizar o **dado preciso do material** que
+sustenta a conduta desta etapa — definição fechada, número/especificação técnica,
+sequência obrigatória, classificação. Transcrever quase literalmente do
+`revisao_VC0X.md` ou `pontos_chave/`, em formato de citação destacada (ex: "tempo de
+avaliação do pulso central: até 10 segundos").
+
+Diferente do simulado (onde a aba pode ser omitida), no fluxograma toda etapa precisa
+desta aba: quando a conduta não se apoiar em um dado fechado, descrever o
+conceito/princípio em 2-3 frases ("por que esta técnica, e não outra?") como
+conteúdo da aba.
+
+Repetir o mesmo dado em passos diferentes que toquem no mesmo conceito reforça a
+fixação por repetição — não tratar como redundância a evitar.
 
 ### Aba "Indo além desta questão"
-- Conexão com um conceito vizinho do mesmo escopo, ou com outra disciplina (campo
-  "Conexões com Outras Disciplinas" do `revisao_VC0X.md`, quando existir).
+
+Mesma definição do GERAR_SIMULADO: parágrafo curto que conecta a decisão desta etapa
+a um conhecimento vizinho do mesmo escopo — algo que não era exigido para acertar o
+passo, mas que é related e cai em prova. Priorizar conexões que:
+- contrastem a conduta desta etapa com seu par mais confundível (ex: via aérea por
+  edema × por queda da língua, choque hipovolêmico × neurogênico)
+- liguem esta etapa à etapa anterior/posterior do mesmo processo — natural no
+  fluxograma, já que o caso percorre o processo completo
+- apontem onde o tema se cruza com outra disciplina (campo "Conexões com Outras
+  Disciplinas" do `revisao_VC0X.md`, quando existir)
+
+Diferente do simulado (onde a aba pode ser omitida por falta de conexão natural), no
+fluxograma toda etapa precisa desta aba — a conexão com a etapa anterior/posterior do
+próprio processo sempre cobre esse caso.
 
 ### Glossário (dicionário)
 - Definições curtas e em linguagem simples; toda sigla expandida. Cobrir os termos

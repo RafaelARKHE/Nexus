@@ -3,9 +3,9 @@ name: gerar_simulado
 description: >
   Sub-skill do fluxo de prova do sistema Nexus. Gera simulado interativo em HTML
   com questões comentadas em formato de revisão — cada alternativa (certa ou errada)
-  recebe explicação própria, com cartão de referência técnica e parágrafo de
-  aprofundamento conectando o tema a assuntos vizinhos. Acionada pela skill
-  REVISAO_PROVA ou diretamente quando o usuário pedir "gerar simulado", "criar
+  recebe explicação própria, e o painel de revisão abre um bloco de 3 abas (Para
+  fixar / Indo além desta questão / Glossário, gerada automaticamente). Acionada pela
+  skill REVISAO_PROVA ou diretamente quando o usuário pedir "gerar simulado", "criar
   questões para prova", "simulado da VC0X". Funciona no Mac e iPhone via navegador.
 ---
 
@@ -88,10 +88,15 @@ indicar, quando houver questões-amostra):
   1. **Banner de resultado** — confirma acerto/erro e identifica a alternativa correta
   2. **Análise de cada alternativa** — comentário individual de todas as opções (não só da
      escolhida), com a correta e a escolhida destacadas visualmente
-  3. **Bloco "Para fixar"** *(quando houver dado técnico/definição que sustente a resposta)*
-     — cartão destacado com a definição exata, número, sequência ou especificação cobrada
-  4. **Bloco "Indo além desta questão"** *(quando houver conexão relevante)* — parágrafo
-     que liga o tema a um assunto vizinho do mesmo escopo
+  3. **Bloco de 3 abas** (espelha o FLUXOGRAMA_INTERATIVO, para fixação por familiaridade):
+     - **Para fixar** *(quando houver dado técnico/definição que sustente a resposta)* —
+       cartão destacado com a definição exata, número, sequência ou especificação cobrada
+     - **Indo além desta questão** *(quando houver conexão relevante)* — parágrafo que
+       liga o tema a um assunto vizinho do mesmo escopo
+     - **Glossário** *(gerada automaticamente)* — dicionário único (`GLOSSARIO`) varrido
+       contra o texto das duas abas anteriores, listando só os termos que de fato
+       aparecem nesta questão; se nenhum aparecer, exibir "Sem siglas ou termos técnicos
+       nesta questão"
 - Após a revisão, botão "Próxima questão"
 - Ao final: placar com total de acertos e percentual
 - Botão "Refazer simulado" embaralha questões e alternativas e reinicia
@@ -112,29 +117,39 @@ Padrão de redação:
 - Errada: "Errada. [O que a alternativa afirma de plausível] — mas [onde ela inverte,
   confunde ou generaliza indevidamente um conceito real do escopo]."
 
-### Bloco "Para fixar" (referência técnica)
+### Aba "Para fixar" (referência técnica)
 
-Usar sempre que a resposta se apoiar em um dado preciso do material — definição fechada,
-número/especificação técnica, sequência obrigatória, classificação. Transcrever o trecho
-quase literalmente do `revisao_VC0X.md` ou `pontos_chave/`, em formato de citação destacada.
-Repetir o mesmo texto-base em questões diferentes que toquem no mesmo dado reforça a fixação
-por repetição — não tratar como redundância a evitar.
+Mesma definição do FLUXOGRAMA_INTERATIVO. Usar sempre que a resposta se apoiar em um
+dado preciso do material — definição fechada, número/especificação técnica, sequência
+obrigatória, classificação. Transcrever o trecho quase literalmente do
+`revisao_VC0X.md` ou `pontos_chave/`, em formato de citação destacada. Repetir o mesmo
+texto-base em questões diferentes que toquem no mesmo dado reforça a fixação por
+repetição — não tratar como redundância a evitar.
 
-Omitir este bloco quando a questão for puramente interpretativa/situacional e não houver
+Omitir esta aba quando a questão for puramente interpretativa/situacional e não houver
 um dado fechado para destacar.
 
-### Bloco "Indo além desta questão" (aprofundamento)
+### Aba "Indo além desta questão" (aprofundamento)
 
-Parágrafo curto que conecta o tema da questão a um conceito vizinho do mesmo bloco de
-estudo — algo que não era exigido para acertar, mas que é related e cai em prova. Funciona
-como o "parágrafo extra" comum em gabaritos comentados de banca: a questão termina, mas a
-revisão continua um passo além. Priorizar conexões que:
+Mesma definição do FLUXOGRAMA_INTERATIVO. Parágrafo curto que conecta o tema da
+questão a um conceito vizinho do mesmo bloco de estudo — algo que não era exigido
+para acertar, mas que é related e cai em prova. Funciona como o "parágrafo extra"
+comum em gabaritos comentados de banca: a questão termina, mas a revisão continua um
+passo além. Priorizar conexões que:
 - contrastem o conceito cobrado com seu par mais confundível
 - liguem a etapa testada à etapa anterior/posterior do mesmo processo
 - apontem onde o tema se cruza com outra disciplina (campo "Conexões com Outras
   Disciplinas" do `revisao_VC0X.md`, quando existir)
 
 Omitir quando não houver conexão natural — não forçar uma ligação artificial.
+
+### Glossário (dicionário)
+
+Array `GLOSSARIO` (`{t, d}` — termo, definição com expansão de sigla), no mesmo
+formato do FLUXOGRAMA_INTERATIVO — reaproveitar o dicionário da disciplina quando já
+existir um (ex: `fluxograma_VC0X.html` da mesma avaliação) em vez de recriar do zero.
+Definições curtas e em linguagem simples; toda sigla expandida. Cobrir os termos que
+aparecem nas abas "Para fixar"/"Indo além" de qualquer questão do simulado.
 
 ### Distratores
 
@@ -176,25 +191,38 @@ Formal e objetiva — padrão de prova institucional. Comentários em tom de rev
 <body>
   <!-- Todo CSS e JS inline no mesmo arquivo -->
   <!-- Cada questão: opts com {text, correct, comment} + referencia? + aprofundamento? -->
-  <!-- Painel de revisão: banner + varredura de alternativas + blocos opcionais -->
+  <!-- Painel de revisão: banner + varredura de alternativas + bloco de 3 abas -->
+  <!-- (Para fixar / Indo além / Glossário automático via GLOSSARIO) -->
   <!-- Sem CDN, sem APIs externas — funciona offline -->
 </body>
 </html>
 ```
 
-Estrutura de dados de cada questão (`QUESTIONS_RAW`):
+Estrutura de dados (`GLOSSARIO` + `QUESTIONS_RAW`):
 
 ```js
-{
-  q: "enunciado",
-  opts: [
-    { text: "...", correct: true|false, comment: "Certa/Errada. ..." },
-    // 5 alternativas (múltipla escolha) ou 2 (Certo/Errado), cada uma com seu comentário
-  ],
-  referencia: "trecho técnico destacado (opcional)",
-  aprofundamento: "parágrafo de conexão com assunto vizinho (opcional)"
-}
+const GLOSSARIO = [
+  { t: "termo/sigla", d: "definição curta, com expansão da sigla" },
+  // fonte única da aba Glossário automática
+];
+
+const QUESTIONS_RAW = [
+  {
+    q: "enunciado",
+    opts: [
+      { text: "...", correct: true|false, comment: "Certa/Errada. ..." },
+      // 5 alternativas (múltipla escolha) ou 2 (Certo/Errado), cada uma com seu comentário
+    ],
+    referencia: "trecho técnico destacado (opcional) — conteúdo da aba 'Para fixar'",
+    aprofundamento: "parágrafo de conexão com assunto vizinho (opcional) — conteúdo da aba 'Indo além'"
+  },
+];
 ```
+
+Motor: a aba Glossário é calculada por varredura (`usaTermo`, mesma função do
+FLUXOGRAMA_INTERATIVO — fronteira de palavra, incluindo acentos `À-ÿ`, remove termo
+que é substring de outro presente no texto) sobre `referencia` + `aprofundamento` da
+questão.
 
 ---
 
@@ -204,5 +232,6 @@ Estrutura de dados de cada questão (`QUESTIONS_RAW`):
 - Todo CSS e JS inline no mesmo arquivo HTML
 - Depende do arquivo `revisao_VC0X.md` — não gerar sem ele
 - Nunca sobrescrever simulado existente da mesma VC — alertar o usuário
-- Não inventar dados técnicos para preencher o bloco "Para fixar" — se o material não tiver
-  um dado fechado para aquela questão, omitir o bloco
+- Não inventar dados técnicos para preencher a aba "Para fixar" — se o material não tiver
+  um dado fechado para aquela questão, omitir a aba
+- Sem chaves duplicadas no `GLOSSARIO`
