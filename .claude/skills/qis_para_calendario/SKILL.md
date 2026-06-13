@@ -81,7 +81,7 @@ atravesse INTERVALO ou ALMOÇO — sempre dividir em dois eventos separados.
 | TFM I      | TFM         | TFM I                                    | 11 (Tomato) |
 | IM I       | IM          | Instrução Militar I                      | 6 (Tangerine) |
 | FSV        | FSV         | Fundamentos de Salvamento Veicular       | 3 (Grape)   |
-| FSALT      | FSALT       | Fundamentos de Salvamento Terrestre      | 4 (Flamingo)|
+| FSAT       | FSAT        | Fundamentos de Salvamento Terrestre      | 4 (Flamingo)|
 | FSAL       | FSAL        | Fundamentos de Salvamento em Altura      | 4 (Flamingo)|
 | FSAQ       | FSAQ        | Fundamentos de Salvamento Aquático       | 4 (Flamingo)|
 | APHR       | APHR        | APH e Resgate I                          | 2 (Sage)    |

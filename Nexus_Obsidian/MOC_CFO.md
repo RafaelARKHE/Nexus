@@ -45,7 +45,7 @@ Base normativa: Livro IV do Código de Ética + Manual do Aluno CFO 2026.
 | 04      | DA     | Direito Administrativo I                  | [[Periodo01/04_DA/MOC_DA]]             | ✅ Unidades I, III e IV · 9 PK · 2 docs processados |
 | 03      | LBI    | Legislação Básica Institucional           | [[Periodo01/03_LBI/MOC_LBI]]           | ✅ CEDCBMPA (6 PK) · ✅ SAPO (5 PK) · ✅ Lei 8.388/2016 (6 PK) · ✅ Lei 11.060/2025 (4 PK) · ✅ Lei 5.251/1985 (5 PK) · 5 docs processados |
 | —       | FCIU   | Fundamentos do Combate ao Incêndio Urbano | —                                      | 🔲 sem material                                 |
-| —       | FSALT  | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
+| —       | FSAT   | Fundamentos de Salvamento Terrestre       | —                                      | 🔲 sem material                                 |
 | 06      | FSV    | Fundamentos de Salvamento Veicular        | [[Periodo01/06_FSV/MOC_FSV]]           | ✅ Aulas 01–03 · 10 PK · 6 temas · 3 docs processados |
 | —       | FSAL   | Fundamentos de Salvamento em Altura       | —                                      | 🔲 sem material                                 |
 | —       | FSAQ   | Fundamentos de Salvamento Aquático        | —                                      | 🔲 sem material                                 |
