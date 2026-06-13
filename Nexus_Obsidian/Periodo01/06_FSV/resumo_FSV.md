@@ -5,8 +5,8 @@ disciplina: Fundamentos do Salvamento Veicular
 sigla: FSV
 periodo: Periodo01
 criado_em: 06/06/2026
-atualizado_em: 09/06/2026
-versao: 1.2
+atualizado_em: 13/06/2026
+versao: 1.3
 moc_cfo: sim
 moc_materia: sim
 pensamentos_relacionados: []
@@ -479,5 +479,149 @@ Checklist antes/durante a extração:
 10. **Hora de ouro não tem duração fixa** — depende da gravidade das lesões
 11. **Reunião tripartida**: socorrista + comandante + técnicos — pode ocorrer mais de uma vez
 12. **TF2 → TF1**: objetivo após o plano de ação *(significado exato das siglas em figura — confirmar com a instrutora)*
+
+---
+
+## Material Complementar — Técnicas e Táticas do Salvamento Veicular (CFP Monteiro 2026)
+> Adicionado em: 13/06/2026 | Origem: TTSV CFP MONTEIRO 2026.pdf — Curso de Formação de Praças (CFP CBMPA 2026), Instrutor 2º SGT QBM Monteiro. Material de outro curso, com conteúdo diretamente aplicável ao FSV/CFO — complementa e detalha as Aulas 01–03.
+
+### Pré-requisitos
+- Aulas 01–03 (conceitos, FEAs, anatomia veicular, fases, estabilização, considerações com a vítima, avaliação, abordagem, acesso e extração)
+
+### Termos Técnicos
+
+| Termo | Definição |
+|---|---|
+| **Plano de Ação** | Escolha conjunta de técnica de desencarceramento + rota de extração — princípios: simplicidade, agilidade e adequação |
+| **Quebra controlada** | Técnica de fragmentação do para-brisas que preserva o controle dos fragmentos/manta, evitando estilhaços sobre a vítima |
+| **Grande porta** | Junção das aberturas das portas dianteira e traseira em uma única abertura lateral ampla |
+| **Terceira porta** | Abertura lateral adicional, criada entre as portas dianteira e traseira já existentes, ampliando a via de extração |
+| **"Tenda"** | Técnica de abertura lateral em veículo capotado — a lateral aberta forma um espaço de acesso triangular apoiado no solo |
+| **"Ostra"** | Técnica de abertura em veículo capotado que expõe simultaneamente os dois lados do habitáculo |
+| **Veículo convencional** | Propulsionado somente por motor de combustão interna (gasolina, álcool ou diesel) |
+| **Veículo elétrico** | Propulsionado somente por motor elétrico, com energia armazenada em baterias |
+| **Veículo híbrido** | Combina motor de combustão interna e motor elétrico, independentemente de como a combinação é feita |
+| **Chave de presença** | Dispositivo de partida por botão (sem chave física) — em veículos híbridos/elétricos deve ser posicionada a no mínimo 5 m do veículo durante a desabilitação |
+
+### Resumo
+
+#### 1. Decisão da Técnica de Desencarceramento e Plano de Ação
+
+**Técnicas de desencarceramento** = procedimentos/ações com FEAs para obter **acesso total** à vítima, retirando ferragens ou qualquer obstáculo que impeça a extração. A escolha certa visa possibilitar o acesso dos socorristas e criar uma via de extração — segurança, eficiência e especificidade são fundamentais.
+
+**Fatores observados para escolher a técnica:**
+- Condições de saúde, posição e nível de encarceramento da vítima
+- Tipo de veículo (2 ou 4 portas, sedan ou hatch)
+- Posição do veículo
+- Tempo disponível (saúde da vítima + condições/riscos do veículo)
+- Obstáculos internos e externos
+- Quantidade de vítimas no interior
+- Disponibilidade/tipo de ferramentas
+- Melhor via de extração para a vítima
+
+A escolha das técnicas de desencarceramento e extração é chamada de **Plano de Ação**, com 3 princípios: **simplicidade, agilidade e adequação**.
+
+#### 2. Manejo de Vidros e Criação de Acesso para Ferramentas Hidráulicas
+
+**Quebra controlada dos para-brisas:**
+
+| Tipo | Técnica |
+|---|---|
+| **Laminado** (dianteiro) | Quebra controlada — corte/fragmentação ao longo do contorno, preservando a manta plástica interna; evita estilhaços soltos sobre a vítima |
+| **Temperado** (laterais/traseiro) | Quebra após proteção da vítima — fragmenta em pequenos pedaços, exige cobertura prévia |
+
+**Criação de acesso para ferramentas hidráulicas** (preparação do ponto onde o alargador/cortador será inserido):
+
+| Ferramenta / Aplicação | Uso |
+|---|---|
+| **Halligan** | Alavancagem na porta — cria a primeira fresta de acesso |
+| **Alargador na janela** | Insere a ponta na fresta da janela como ponto de apoio inicial |
+| **Alargador próximo à fechadura** | Pressiona a região da fechadura para forçar abertura da porta |
+| **Alargador no para-lama** | Cria acesso pela lateral frontal (para-lama) |
+| **Alargador para pinçamento** | Pontas do alargador fecham "pinçando" para agarrar e dobrar uma estrutura |
+| **Alargador na tampa do motor** | Abertura forçada da tampa do motor |
+| **Alargador na tampa do porta-malas** | Abertura forçada da tampa do porta-malas |
+
+#### 3. Catálogo de Técnicas de Desencarceramento
+
+17 técnicas demonstradas, organizadas em 6 grupos:
+
+| Grupo | Técnicas |
+|---|---|
+| **Afastamentos** | Afastamento de Coluna · Afastamento de Teto · Afastamento de Pedal |
+| **Remoções** | Remoção de Bancos · Remoção de Portas |
+| **Ampliação de aberturas laterais** | Grande Porta · Terceira Porta · Rebatimento Lateral |
+| **Teto** | Rebatimento de Teto para Trás · para Frente · Parcial · Diagonal (corte da coluna B em "V") · Retirada de Teto |
+| **Painel/Volante** | Rebatimento de Painel · Elevação de Volante |
+| **Veículo capotado** | "Tenda" · "Ostra" |
+
+Detalhamento de cada técnica: [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/03_catalogo-tecnicas-desencarceramento]]
+
+**Regra crítica (Rebatimento de Teto):** sempre verificar a presença de **cilindros de airbag** e **barras de aço de reforço** antes de iniciar os cortes das colunas.
+
+**Regra crítica (Rebatimento de Painel / Elevação de Volante):** em ambas, deve-se **cortar a coluna "A"** antes — caso contrário, a deformação do painel pelo extensor pode comprimir ainda mais a vítima se a coluna "A" estiver íntegra.
+
+**Regra prática (Terceira Porta):** quanto maiores os cortes retos, maior a quebra de resistência e maior a facilidade de dobrar a terceira porta.
+
+#### 4. Veículos Híbridos e Elétricos
+
+**Conceitos:**
+
+| Tipo | Definição |
+|---|---|
+| **Convencional** | Somente motor de combustão interna (gasolina, álcool, diesel) |
+| **Elétrico** | Somente motor elétrico, energia armazenada em baterias |
+| **Híbrido** | Combina motor convencional + elétrico, independentemente de como a combinação é feita |
+
+**Identificação:**
+- Símbolos na tampa do motor ou na lataria externa
+- Presença de **cabos laranja** = alta voltagem
+- **Ausência de descarga** indica veículo elétrico, mas a **presença de descarga NÃO descarta** a possibilidade de ser híbrido
+
+**Risco principal:** o motor elétrico, mesmo ativo, emite ruído quase inaudível com o veículo parado → mitigação: **identificar, imobilizar e desligar**.
+
+**Riscos específicos:**
+a) movimentação do veículo
+b) choque elétrico
+c) incêndio
+d) explosão das baterias
+e) produtos perigosos
+
+**Imobilização:** calçar as rodas + acionar o freio de estacionamento + seletora de marchas em **"P" (park)** — toda a categoria é automática.
+
+**Atenção com estabilizadores de tração:** ao instalar no assoalho, os cabos de alta tensão (laranja) frequentemente passam por essa área — **nunca tocar/esmagar** contra a carroceria; evitar cortes próximos ao assoalho.
+
+**Desabilitação:**
+1. Desligar e retirar a chave (chave comum)
+2. Retirar a chave de presença (partida por botão) e posicioná-la a **no mínimo 5 m** do veículo
+3. Desconectar a bateria: **polo negativo primeiro, depois o positivo** — mesma sequência dos convencionais
+
+**Atuação do comandante:** providenciar ao menos **1 linha de proteção** com militares em EPI, para o caso de auto-ignição das baterias.
+
+**Técnicas de desencarceramento:** **as mesmas** utilizadas em veículos convencionais.
+
+Detalhamento completo: [[Periodo01/06_FSV/pontos_chave/08_Veiculos-Hibridos-Eletricos/01_veiculos-hibridos-eletricos]]
+
+### Conexões
+- [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/01_decisao-da-tecnica-e-plano-de-acao]]
+- [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/02_manejo-de-vidros-e-criacao-de-acesso]]
+- [[Periodo01/06_FSV/pontos_chave/07_Tecnicas-de-Desencarceramento/03_catalogo-tecnicas-desencarceramento]]
+- [[Periodo01/06_FSV/pontos_chave/08_Veiculos-Hibridos-Eletricos/01_veiculos-hibridos-eletricos]]
+- [[Periodo01/06_FSV/pontos_chave/04_Anatomia-Veicular/01_anatomia-veicular]] — colunas, vidros e bateria são a base das técnicas e do procedimento em elétricos/híbridos
+- [[Periodo01/06_FSV/pontos_chave/03_FEAs/01_feas-visao-geral]] — Halligan, alargador, extensor, cortador de pedal e serra-sabre aplicados nas técnicas
+
+### Pontos de Atenção
+1. **Plano de Ação = técnica + rota**, com 3 princípios: simplicidade, agilidade, adequação
+2. **Vidro laminado → quebra controlada** (preserva a manta) | **vidro temperado → quebra após proteção** (fragmenta em pedaços)
+3. **Rebatimento de teto**: checar airbags e barras de reforço ANTES de cortar colunas
+4. **Rebatimento de painel / elevação de volante**: cortar a coluna "A" PRIMEIRO
+5. **Terceira porta**: cortes retos maiores = mais fácil dobrar
+6. **17 técnicas em 6 grupos** — afastamentos, remoções, ampliação de aberturas laterais, teto, painel/volante, veículo capotado
+7. **Veículo elétrico**: ausência de descarga não descarta híbrido — verificar símbolos e cabos laranja
+8. **Cabos de alta tensão (laranja)**: nunca tocar/esmagar ao instalar estabilizadores no assoalho
+9. **Imobilização de elétricos/híbridos**: calço + freio de estacionamento + seletora em "P" (todos automáticos)
+10. **Chave de presença a 5 m do veículo** — distância mínima de segurança
+11. **Bateria de elétrico/híbrido**: negativo antes do positivo — mesma lógica do convencional, mas tensão muito maior
+12. **Técnicas de desencarceramento em elétricos/híbridos = idênticas às de convencionais** — o que muda são as precauções elétricas
 
 ---
