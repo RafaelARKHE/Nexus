@@ -7,6 +7,7 @@ periodo: Periodo01
 avaliacao: VC01
 escopo: Unidades I, III e IV — Generalidades e Princípios, Poderes Administrativos (incl. Poder de Polícia), Atos Administrativos
 criado_em: 06/06/2026
+atualizado_em: 08/06/2026
 versao: 1.0
 ---
 
